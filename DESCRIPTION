@@ -1,0 +1,25 @@
+Package: R4GoodPersonalFinances
+Title: Make Better Personal Finance Decisions
+Version: 0.0.0.9012
+Authors@R: 
+    person("Kamil", "Wais", , "kamil.wais@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-4062-055X"))
+Description: A collection of tools designed to assist in planning and making informed personal finance decisions, grounded in academic consensus. These tools help you calculate your optimal asset allocation, plan for retirement or financial independence, and estimate the optimal level of spending.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Suggests: 
+    testthat (>= 3.0.0),
+    vdiffr
+Config/testthat/edition: 3
+Config/testthat/parallel: true
+Imports: 
+    dplyr,
+    ggplot2,
+    glue,
+    scales,
+    ggrepel,
+    ggtext,
+    PrettyCols,
+    tidyr
