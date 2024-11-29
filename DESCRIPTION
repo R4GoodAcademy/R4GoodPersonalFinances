@@ -1,6 +1,6 @@
 Package: R4GoodPersonalFinances
 Title: Make Better Personal Finance Decisions
-Version: 0.0.0.9012
+Version: 0.0.0.9013
 Authors@R: 
     person("Kamil", "Wais", , "kamil.wais@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-4062-055X"))
