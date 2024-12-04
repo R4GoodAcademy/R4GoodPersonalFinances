@@ -1,10 +1,10 @@
 Package: R4GoodPersonalFinances
-Title: Make Better Personal Finance Decisions
+Title: Make Better Personal Financial Decisions 
 Version: 0.0.0.9013
 Authors@R: 
     person("Kamil", "Wais", , "kamil.wais@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-4062-055X"))
-Description: A collection of tools designed to assist in planning and making informed personal finance decisions, grounded in academic consensus. These tools help you calculate your optimal asset allocation, plan for retirement or financial independence, and estimate the optimal level of spending.
+Description: A set of tools designed to help you plan and make informed, data-driven decisions for your personal or household finances. These tools are selected carefully to align with academic consensus, bridging the gap between theoretical knowledge and practical application. They assist you in finding optimal asset allocation, preparing for retirement or financial independence, calculating optimal spending, and more.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
