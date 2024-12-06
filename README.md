@@ -1,20 +1,24 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# R4GoodPersonalFinances
-
-> Make Better Personal Financial Decisions
+# R4GoodPersonalFinances <img src="man/figures/logo.png" align="right" height="120" alt="" />
 
 <!-- badges: start -->
 <!-- badges: end -->
 
+> *Make Better Personal Financial Decisions*
+
 The `R4GoodPersonalFinances` R package is a set of tools designed to
 help you plan and make informed, data-driven decisions for your personal
-or household finances. These tools are selected carefully to align with
-academic consensus, bridging the gap between theoretical knowledge and
-practical application. They assist you in finding optimal asset
-allocation, preparing for retirement or financial independence,
-calculating optimal spending, and more.
+or household finances.  
+These tools are selected carefully to align with academic consensus,
+bridging the gap between theoretical knowledge and practical
+application. They assist you in:
+
+- finding optimal asset allocation,
+- preparing for retirement or financial independence,
+- calculating optimal spending,
+- and more.
 
 ## Installation
 
@@ -25,3 +29,14 @@ You can install the latest version of R4GoodPersonalFinances from
 # install.packages("pak")
 pak::pak("R4GoodAcademy/R4GoodPersonalFinances")
 ```
+
+## More information
+
+For more information, see
+[www.r4good.academy](https://www.r4good.academy/). The
+`R4GoodPersonalFinances` R package is part of the *R for Good Academy*
+project. You can find there free resources explaining in details
+concepts of personal finances implemented in this R package.
+
+> *Make Better Personal Financial Decisions* with the
+> `R4GoodPersonalFinances` R package!
