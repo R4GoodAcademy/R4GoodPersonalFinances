@@ -1,10 +1,44 @@
 #' Calculate optimal risky asset allocation
 #' 
-#' @param risky_asset_return_mean A numeric. The expected return of the risky asset.
-#' @param risky_asset_return_sd A numeric. The standard deviation of the returns of the risky asset.
-#' @param safe_asset_return A numeric. The expected return of the safe asset.
-#' @param risk_aversion A numeric. The risk aversion coefficient.
+#' Calculates the optimal allocation to the risky asset 
+#' using the Merton Share formula.
 #' 
+#' Can be used to calculate the optimal allocation to the risky asset
+#' for vectors of inputs.
+#' 
+#' @seealso 
+#' \itemize{
+#'   \item \href{https://www.r4good.academy/en/blog/optimal-asset-allocation/index.en.html#what-do-you-need-to-calculate-your-optimal-asset-allocation}{How to Determine Our Optimal Asset Allocation?}
+#' }
+#' 
+#' @param risky_asset_return_mean A numeric. 
+#' The expected (avarage) yearly return of the risky asset.
+#' @param risky_asset_return_sd A numeric. 
+#' The standard deviation of the yearly returns of the risky asset.
+#' @param safe_asset_return A numeric. 
+#' The expected yearly return of the safe asset.
+#' @param risk_aversion A numeric. 
+#' The risk aversion coefficient.
+#' 
+#' @returns A numeric. 
+#' The optimal allocation to the risky asset.
+#' In case of \code{\link{NaN}} (because of division by zero) 
+#' the optimal allocation to the risky asset is set to 0.
+#' 
+#' @examples
+#' calc_optimal_risky_asset_allocation(
+#'   risky_asset_return_mean = 0.05,
+#'   risky_asset_return_sd   = 0.15,
+#'   safe_asset_return       = 0.02,
+#'   risk_aversion           = 2
+#' )
+#' 
+#' calc_optimal_risky_asset_allocation(
+#'   risky_asset_return_mean = c(0.05, 0.06),
+#'   risky_asset_return_sd   = c(0.15, 0.16),
+#'   safe_asset_return       = 0.02,
+#'   risk_aversion           = 2
+#' )
 #' @export
 #' 
 calc_optimal_risky_asset_allocation <- function(risky_asset_return_mean,

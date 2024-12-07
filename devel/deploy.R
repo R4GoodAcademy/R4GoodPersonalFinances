@@ -1,6 +1,5 @@
 devtools::dev_sitrep()
 
-devtools::build_readme()
 
 renv::upgrade()
 renv::update()
@@ -13,3 +12,16 @@ devtools::build_readme()
 pkgdown::build_site(preview = FALSE)
 pkgdown::preview_site()
 
+spelling::spell_check_package()
+
+
+  rstudioapi::restartSession()
+  {
+    pak::local_install(upgrade = FALSE, ask = FALSE)
+    devtools::document()
+    devtools::load_all()
+    ?calc_optimal_risky_asset_allocation
+  }
+
+  rstudioapi::restartSession()
+  pkgdown::build_site(preview = FALSE)

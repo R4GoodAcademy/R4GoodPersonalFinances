@@ -4,7 +4,13 @@ Version: 0.0.0.9014
 Authors@R: 
     person("Kamil", "Wais", , "kamil.wais@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-4062-055X"))
-Description: A set of tools designed to help you plan and make informed, data-driven decisions for your personal or household finances. These tools are selected carefully to align with academic consensus, bridging the gap between theoretical knowledge and practical application. They assist you in finding optimal asset allocation, preparing for retirement or financial independence, calculating optimal spending, and more.
+Description: A set of tools designed to help you plan and make informed, 
+    data-driven decisions for your personal or household finances. 
+    These tools are selected carefully to align with academic consensus, 
+    bridging the gap between theoretical knowledge and practical application. 
+    They assist you in finding optimal asset allocation, 
+    preparing for retirement or financial independence, 
+    calculating optimal spending, and more.
 License: MIT + file LICENSE
 URL: https://www.r4good.academy/, https://github.com/R4GoodAcademy/R4GoodPersonalFinances
 BugReports: https://github.com/R4GoodAcademy/R4GoodPersonalFinances/issues
