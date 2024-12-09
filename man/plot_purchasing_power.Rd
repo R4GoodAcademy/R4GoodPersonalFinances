@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_purchasing_power.R
 \name{plot_purchasing_power}
 \alias{plot_purchasing_power}
-\title{Plotting changes to purchasing power over time}
+\title{Plotting changes to the purchasing power over time}
 \usage{
 plot_purchasing_power(
   x,
@@ -15,18 +15,30 @@ plot_purchasing_power(
 \arguments{
 \item{x}{A numeric. The initial amount of money.}
 
-\item{real_interest_rate}{A numeric. The yearly avarage real interest rate.
-The real interest rate is the interest rate after inflation.
-If negative (e.g. equal to the avarage yearly inflation rate)
-it can show deminishing purchasing power over time.}
+\item{real_interest_rate}{A numeric. The yearly real interest rate.}
 
 \item{years}{A numeric. The number of years.}
 
-\item{legend_title}{A character. Could be "Inflation rate" if real interest
-rate is negative.}
+\item{legend_title}{A character.}
 
 \item{seed}{A numeric. Seed passed to \code{geom_label_repel()}.}
 }
+\value{
+A \code{\link[ggplot2]{ggplot}} object.
+}
 \description{
-Plotting changes to purchasing power over time
+Plots the effect of real interest rates (positive or negative)
+on the purchasing power of savings over the span of 50 years (default).
+}
+\examples{
+plot_purchasing_power(
+  x = 10,
+  real_interest_rate = seq(-0.02, 0.04, by = 0.02)
+)
+
+}
+\seealso{
+\itemize{
+\item \href{https://www.r4good.academy/en/blog/optimal-asset-allocation/index.en.html#why-keeping-all-your-savings-in-cash-isnt-the-best-idea}{How to Determine Our Optimal Asset Allocation?}
+}
 }

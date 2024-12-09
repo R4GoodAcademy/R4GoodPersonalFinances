@@ -1,10 +1,25 @@
-#' Plotting changes to purchasing power over time
+#' Plotting changes to the purchasing power over time
+#' 
+#' Plots the effect of real interest rates (positive or negative) 
+#' on the purchasing power of savings over the span of 50 years (default).
+#' 
+#' @seealso 
+#' \itemize{
+#'   \item \href{https://www.r4good.academy/en/blog/optimal-asset-allocation/index.en.html#why-keeping-all-your-savings-in-cash-isnt-the-best-idea}{How to Determine Our Optimal Asset Allocation?}
+#' }
 #' 
 #' @inheritParams calc_purchasing_power
 #' 
-#' @param legend_title A character. Could be "Inflation rate" if real interest
-#' rate is negative.
+#' @param legend_title A character. 
 #' @param seed A numeric. Seed passed to \code{geom_label_repel()}.
+#' 
+#' @returns A \code{\link[ggplot2]{ggplot}} object.
+#' 
+#' @examples
+#' plot_purchasing_power(
+#'   x = 10,
+#'   real_interest_rate = seq(-0.02, 0.04, by = 0.02)
+#' )
 #' 
 #' @export
 plot_purchasing_power <- function(x, 

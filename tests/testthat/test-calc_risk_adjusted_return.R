@@ -68,3 +68,19 @@ test_that("calculating risk adjusted return for allocation vector", {
   
   vdiffr::expect_doppelganger("plot_ra3", plot_ra3)
 })
+
+test_that("both parameters cannot be NULL", {
+
+  calc_risk_adjusted_return(
+    safe_asset_return = 0.02,
+    risky_asset_return_mean = 0.04,
+    risky_asset_allocation = 0.5,
+    risk_aversion = 2
+  ) |> expect_error("cannot be NULL")
+    
+  calc_risk_adjusted_return(
+    safe_asset_return = 0.02,
+    risky_asset_return_sd = 0.20,
+    risky_asset_allocation = 0.5
+  ) |> expect_error("cannot be NULL")
+})
