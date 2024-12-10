@@ -13,8 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# R4GoodPersonalFinances <img src="man/figures/logo.png" align="right" height="120" alt="" />
-
+# R4GoodPersonalFinances <img src="man/figures/logo.png" align="right" height="250" alt="" class="logo-custom-package"/>
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -38,7 +37,7 @@ You can install the latest version of R4GoodPersonalFinances from [GitHub](https
 pak::pak("R4GoodAcademy/R4GoodPersonalFinances")
 ```
 
-## More information
+## More information  <img src="man/figures/r4ga-logo.png" align="right" height="200" alt="" class="logo-custom-academy" />
 
 For more information, see [www.r4good.academy](https://www.r4good.academy/).
 The `R4GoodPersonalFinances` R package is part of the *R for Good Academy* project. You can find there free resources explaining in details concepts of personal finances implemented in this R package. For example:

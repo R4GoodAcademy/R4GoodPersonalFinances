@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# R4GoodPersonalFinances <img src="man/figures/logo.png" align="right" height="120" alt="" />
+# R4GoodPersonalFinances <img src="man/figures/logo.png" align="right" height="250" alt="" class="logo-custom-package"/>
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -30,7 +30,7 @@ You can install the latest version of R4GoodPersonalFinances from
 pak::pak("R4GoodAcademy/R4GoodPersonalFinances")
 ```
 
-## More information
+## More information <img src="man/figures/r4ga-logo.png" align="right" height="200" alt="" class="logo-custom-academy" />
 
 For more information, see
 [www.r4good.academy](https://www.r4good.academy/). The
