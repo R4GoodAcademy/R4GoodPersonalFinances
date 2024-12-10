@@ -12,7 +12,7 @@
 #' }
 #' 
 #' @param risky_asset_return_mean A numeric. 
-#' The expected (avarage) yearly return of the risky asset.
+#' The expected (average) yearly return of the risky asset.
 #' @param risky_asset_return_sd A numeric. 
 #' The standard deviation of the yearly returns of the risky asset.
 #' @param safe_asset_return A numeric. 

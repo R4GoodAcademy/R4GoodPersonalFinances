@@ -17,7 +17,7 @@ calc_risk_adjusted_return(
 The expected yearly return of the safe asset.}
 
 \item{risky_asset_return_mean}{A numeric.
-The expected (avarage) yearly return of the risky asset.}
+The expected (average) yearly return of the risky asset.}
 
 \item{risky_asset_allocation}{A numeric.
 The allocation to the risky asset. Could be a vector.

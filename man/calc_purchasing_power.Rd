@@ -22,8 +22,8 @@ taking into account the real interest rate.
 }
 \details{
 The real interest rate is the interest rate after inflation.
-If negative (e.g. equal to the avarage yearly inflation rate)
-it can show deminishing purchasing power over time.
+If negative (e.g. equal to the average yearly inflation rate)
+it can show diminishing purchasing power over time.
 If positive, it can show increasing purchasing power over time,
 and effect of compounding interest on the purchasing power.
 }
