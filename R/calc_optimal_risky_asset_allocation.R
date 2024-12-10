@@ -8,7 +8,7 @@
 #' 
 #' @seealso 
 #' \itemize{
-#'   \item \href{https://www.r4good.academy/en/blog/optimal-asset-allocation/index.en.html#what-do-you-need-to-calculate-your-optimal-asset-allocation}{How to Determine Our Optimal Asset Allocation?}
+#'   \item [How to Determine Our Optimal Asset Allocation?](https://www.r4good.academy/en/blog/optimal-asset-allocation/index.en.html#what-do-you-need-to-calculate-your-optimal-asset-allocation)
 #' }
 #' 
 #' @param risky_asset_return_mean A numeric. 
@@ -22,7 +22,7 @@
 #' 
 #' @returns A numeric. 
 #' The optimal allocation to the risky asset.
-#' In case of \code{\link{NaN}} (because of division by zero) 
+#' In case of [NaN()] (because of division by zero) 
 #' the optimal allocation to the risky asset is set to 0.
 #' 
 #' @examples

@@ -24,7 +24,7 @@ plot_purchasing_power(
 \item{seed}{A numeric. Seed passed to \code{geom_label_repel()}.}
 }
 \value{
-A \code{\link[ggplot2]{ggplot}} object.
+A \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} object.
 }
 \description{
 Plots the effect of real interest rates (positive or negative)

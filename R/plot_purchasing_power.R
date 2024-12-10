@@ -5,15 +5,15 @@
 #' 
 #' @seealso 
 #' \itemize{
-#'   \item \href{https://www.r4good.academy/en/blog/optimal-asset-allocation/index.en.html#why-keeping-all-your-savings-in-cash-isnt-the-best-idea}{How to Determine Our Optimal Asset Allocation?}
+#'   \item [How to Determine Our Optimal Asset Allocation?](https://www.r4good.academy/en/blog/optimal-asset-allocation/index.en.html#why-keeping-all-your-savings-in-cash-isnt-the-best-idea)
 #' }
 #' 
 #' @inheritParams calc_purchasing_power
 #' 
 #' @param legend_title A character. 
-#' @param seed A numeric. Seed passed to \code{geom_label_repel()}.
+#' @param seed A numeric. Seed passed to `geom_label_repel()`.
 #' 
-#' @returns A \code{\link[ggplot2]{ggplot}} object.
+#' @returns A [ggplot2::ggplot()] object.
 #' 
 #' @examples
 #' plot_purchasing_power(

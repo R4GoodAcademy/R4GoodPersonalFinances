@@ -2,7 +2,7 @@
 #' 
 #' Wrapper functions for printing nicely formatted values.
 #' 
-#' @seealso \code{\link[scales]{dollar}} 
+#' @seealso [scales::dollar()] 
 #' 
 #' @inheritParams scales::dollar
 #' @inheritParams scales::percent
@@ -27,7 +27,7 @@ print_currency <- function(x,
       ...)
     }
     
-#' @seealso \code{\link[scales]{percent}}
+#' @seealso [scales::percent()]
 #' 
 #' @inheritParams scales::percent
 #' @inheritParams scales::dollar

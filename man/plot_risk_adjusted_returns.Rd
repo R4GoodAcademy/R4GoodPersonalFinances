@@ -30,7 +30,7 @@ The current allocation to the risky asset.
 For comparison with the optimal allocation.}
 }
 \value{
-A \code{\link[ggplot2]{ggplot}} object.
+A \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} object.
 }
 \description{
 Plots the risk adjusted returns for portfolios

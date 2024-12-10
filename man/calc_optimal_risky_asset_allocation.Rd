@@ -27,7 +27,7 @@ The risk aversion coefficient.}
 \value{
 A numeric.
 The optimal allocation to the risky asset.
-In case of \code{\link{NaN}} (because of division by zero)
+In case of \code{\link[=NaN]{NaN()}} (because of division by zero)
 the optimal allocation to the risky asset is set to 0.
 }
 \description{

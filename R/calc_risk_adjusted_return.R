@@ -7,13 +7,13 @@
 #' 
 #' @seealso 
 #' \itemize{
-#'   \item \href{https://www.r4good.academy/en/blog/optimal-asset-allocation/index.en.html#how-much-risk-is-enough}{How to Determine Our Optimal Asset Allocation?}
+#'   \item [How to Determine Our Optimal Asset Allocation?](https://www.r4good.academy/en/blog/optimal-asset-allocation/index.en.html#how-much-risk-is-enough)
 #' }
 #' 
 #' @param risky_asset_allocation A numeric. 
 #' The allocation to the risky asset. Could be a vector.
 #' If it is the optimal allocation then parameters
-#' \code{risky_asset_return_sd} and \code{risk_aversion}
+#' `risky_asset_return_sd` and `risk_aversion`
 #' can be omitted.
 #' 
 #' @returns A numeric. The risk adjusted return.

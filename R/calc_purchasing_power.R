@@ -11,7 +11,7 @@
 #' 
 #' @seealso 
 #' \itemize{
-#'   \item \href{https://www.r4good.academy/en/blog/optimal-asset-allocation/index.en.html#why-keeping-all-your-savings-in-cash-isnt-the-best-idea}{How to Determine Our Optimal Asset Allocation?}
+#'   \item [How to Determine Our Optimal Asset Allocation?](https://www.r4good.academy/en/blog/optimal-asset-allocation/index.en.html#why-keeping-all-your-savings-in-cash-isnt-the-best-idea)
 #' }
 #' 
 #' @param x A numeric. The initial amount of money.

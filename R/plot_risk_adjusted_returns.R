@@ -5,7 +5,7 @@
 #' 
 #' @seealso 
 #' \itemize{
-#'   \item \href{https://www.r4good.academy/en/blog/optimal-asset-allocation/index.en.html#how-much-risk-is-enough}{How to Determine Our Optimal Asset Allocation?}
+#'   \item [How to Determine Our Optimal Asset Allocation?](https://www.r4good.academy/en/blog/optimal-asset-allocation/index.en.html#how-much-risk-is-enough)
 #' }
 #' 
 #' @inheritParams calc_risk_adjusted_return
@@ -15,7 +15,7 @@
 #' The current allocation to the risky asset.
 #' For comparison with the optimal allocation.
 #' 
-#' @returns A \code{\link[ggplot2]{ggplot}} object.
+#' @returns A [ggplot2::ggplot()] object.
 #' 
 #' @examples
 #' plot_risk_adjusted_returns(

@@ -40,7 +40,7 @@ print_currency(2345678, suffix = " PLN")
 print_percent(0.52366)
 }
 \seealso{
-\code{\link[scales]{dollar}}
+\code{\link[scales:dollar_format]{scales::dollar()}}
 
-\code{\link[scales]{percent}}
+\code{\link[scales:percent_format]{scales::percent()}}
 }
