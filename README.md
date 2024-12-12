@@ -30,10 +30,10 @@ You can install the latest version of R4GoodPersonalFinances from
 pak::pak("R4GoodAcademy/R4GoodPersonalFinances")
 ```
 
-## Acknowledgements
+## Acknowledgments
 
 - Haghani V., White J. (2023) “The Missing Billionaires: A Guide to
-  Better Financial Decisions.” <ISBN:978-1-119-74791-8>.
+  Better Financial Decisions.” `ISBN:978-1-119-74791-8`.
 
 ## R for Good Academy <img src="man/figures/r4ga-logo.png" align="right" height="200" alt="" class="logo-custom-academy" />
 

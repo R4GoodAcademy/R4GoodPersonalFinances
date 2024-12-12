@@ -1,4 +1,4 @@
-# R4GoodPersonalFinances (development version)
+# R4GoodPersonalFinances 0.0.0.9000
 
 Initial release of the package includes functions designed to support the optimal allocation of your investment portfolio.
 

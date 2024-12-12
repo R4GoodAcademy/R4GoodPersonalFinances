@@ -1,40 +1,39 @@
 Package: R4GoodPersonalFinances
-Title: Make Better Financial Decisions 
+Title: Make Better Financial Decisions
 Version: 0.0.0.9014
 Authors@R: c(
-    person("Kamil", "Wais", 
-           email = "kamil.wais@gmail.com", 
-           role = c("aut", "cre", "cph", "fnd"),
+    person("Kamil", "Wais", , "kamil.wais@gmail.com", role = c("aut", "cre", "cph", "fnd"),
            comment = c(ORCID = "0000-0002-4062-055X")),
-    person("Olesia", "Wais", 
-           email = "olesia.wais@gmail.com", role = c("aut"),
-           comment = c(ORCID = "0000-0002-8741-8674")))
-Description: Make informed, data-driven decisions 
-    for your personal or household finances. 
-    Use tools and methods that are selected carefully 
-    to align with academic consensus, 
-    bridging the gap between theoretical knowledge and practical application. 
-    They assist you in finding optimal asset allocation, 
-    preparing for retirement or financial independence, 
-    calculating optimal spending, and more.
+    person("Olesia", "Wais", , "olesia.wais@gmail.com", role = "aut",
+           comment = c(ORCID = "0000-0002-8741-8674"))
+  )
+Description: Make informed, data-driven decisions for your personal or
+    household finances.  Use tools and methods that are selected carefully
+    to align with academic consensus, bridging the gap between theoretical
+    knowledge and practical application.  They assist you in finding
+    optimal asset allocation, preparing for retirement or financial
+    independence, calculating optimal spending, and more.
 License: MIT + file LICENSE
-URL: https://www.r4good.academy/, https://github.com/R4GoodAcademy/R4GoodPersonalFinances
+URL: https://www.r4good.academy/,
+    https://github.com/R4GoodAcademy/R4GoodPersonalFinances
 BugReports: https://github.com/R4GoodAcademy/R4GoodPersonalFinances/issues
-Encoding: UTF-8
-Language: en-US
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+Depends: 
+    R (>= 4.1.0)
+Imports: 
+    dplyr,
+    ggplot2,
+    ggrepel,
+    ggtext,
+    glue,
+    PrettyCols,
+    scales,
+    tidyr
 Suggests: 
     testthat (>= 3.0.0),
     vdiffr
 Config/testthat/edition: 3
 Config/testthat/parallel: true
-Imports: 
-    dplyr,
-    ggplot2,
-    glue,
-    scales,
-    ggrepel,
-    ggtext,
-    PrettyCols,
-    tidyr
+Encoding: UTF-8
+Language: en-US
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
