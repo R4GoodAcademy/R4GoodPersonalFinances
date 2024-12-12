@@ -1,12 +1,18 @@
 Package: R4GoodPersonalFinances
-Title: Make Better Personal Financial Decisions 
+Title: Make Better Financial Decisions 
 Version: 0.0.0.9014
-Authors@R: 
-    person("Kamil", "Wais", , "kamil.wais@gmail.com", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0002-4062-055X"))
-Description: A set of tools designed to help you plan and make informed, 
-    data-driven decisions for your personal or household finances. 
-    These tools are selected carefully to align with academic consensus, 
+Authors@R: c(
+    person("Kamil", "Wais", 
+           email = "kamil.wais@gmail.com", 
+           role = c("aut", "cre", "cph", "fnd"),
+           comment = c(ORCID = "0000-0002-4062-055X")),
+    person("Olesia", "Wais", 
+           email = "olesia.wais@gmail.com", role = c("aut"),
+           comment = c(ORCID = "0000-0002-8741-8674")))
+Description: Make informed, data-driven decisions 
+    for your personal or household finances. 
+    Use tools and methods that are selected carefully 
+    to align with academic consensus, 
     bridging the gap between theoretical knowledge and practical application. 
     They assist you in finding optimal asset allocation, 
     preparing for retirement or financial independence, 

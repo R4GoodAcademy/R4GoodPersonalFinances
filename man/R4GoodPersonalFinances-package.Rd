@@ -4,11 +4,11 @@
 \name{R4GoodPersonalFinances-package}
 \alias{R4GoodPersonalFinances}
 \alias{R4GoodPersonalFinances-package}
-\title{R4GoodPersonalFinances: Make Better Personal Financial Decisions}
+\title{R4GoodPersonalFinances: Make Better Financial Decisions}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-A set of tools designed to help you plan and make informed, data-driven decisions for your personal or household finances. These tools are selected carefully to align with academic consensus, bridging the gap between theoretical knowledge and practical application. They assist you in finding optimal asset allocation, preparing for retirement or financial independence, calculating optimal spending, and more.
+Make informed, data-driven decisions for your personal or household finances. Use tools and methods that are selected carefully to align with academic consensus, bridging the gap between theoretical knowledge and practical application. They assist you in finding optimal asset allocation, preparing for retirement or financial independence, calculating optimal spending, and more.
 }
 \seealso{
 Useful links:
@@ -20,7 +20,12 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Kamil Wais \email{kamil.wais@gmail.com} (\href{https://orcid.org/0000-0002-4062-055X}{ORCID})
+\strong{Maintainer}: Kamil Wais \email{kamil.wais@gmail.com} (\href{https://orcid.org/0000-0002-4062-055X}{ORCID}) [copyright holder, funder]
+
+Authors:
+\itemize{
+  \item Olesia Wais \email{olesia.wais@gmail.com} (\href{https://orcid.org/0000-0002-8741-8674}{ORCID})
+}
 
 }
 \keyword{internal}

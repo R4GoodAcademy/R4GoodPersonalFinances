@@ -58,5 +58,6 @@ calc_risk_adjusted_return(
 \seealso{
 \itemize{
 \item \href{https://www.r4good.academy/en/blog/optimal-asset-allocation/index.en.html#how-much-risk-is-enough}{How to Determine Our Optimal Asset Allocation?}
+\item Haghani V., White J. (2023) "The Missing Billionaires: A Guide to Better Financial Decisions." ISBN:978-1-119-74791-8.
 }
 }

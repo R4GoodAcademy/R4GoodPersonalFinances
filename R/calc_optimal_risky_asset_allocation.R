@@ -7,9 +7,8 @@
 #' for vectors of inputs.
 #' 
 #' @seealso 
-#' \itemize{
-#'   \item [How to Determine Our Optimal Asset Allocation?](https://www.r4good.academy/en/blog/optimal-asset-allocation/index.en.html#what-do-you-need-to-calculate-your-optimal-asset-allocation)
-#' }
+#' * [How to Determine Our Optimal Asset Allocation?](https://www.r4good.academy/en/blog/optimal-asset-allocation/index.en.html#what-do-you-need-to-calculate-your-optimal-asset-allocation)
+#' * Haghani V., White J. (2023) "The Missing Billionaires: A Guide to Better Financial Decisions." ISBN:978-1-119-74791-8.
 #' 
 #' @param risky_asset_return_mean A numeric. 
 #' The expected (average) yearly return of the risky asset.

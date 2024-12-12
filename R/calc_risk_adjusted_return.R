@@ -6,9 +6,8 @@
 #' @inheritParams calc_optimal_risky_asset_allocation
 #' 
 #' @seealso 
-#' \itemize{
-#'   \item [How to Determine Our Optimal Asset Allocation?](https://www.r4good.academy/en/blog/optimal-asset-allocation/index.en.html#how-much-risk-is-enough)
-#' }
+#' * [How to Determine Our Optimal Asset Allocation?](https://www.r4good.academy/en/blog/optimal-asset-allocation/index.en.html#how-much-risk-is-enough)
+#' * Haghani V., White J. (2023) "The Missing Billionaires: A Guide to Better Financial Decisions." ISBN:978-1-119-74791-8.
 #' 
 #' @param risky_asset_allocation A numeric. 
 #' The allocation to the risky asset. Could be a vector.
