@@ -14,6 +14,7 @@ Make informed, data-driven decisions for your personal or household finances. Us
 Useful links:
 \itemize{
   \item \url{https://www.r4good.academy/}
+  \item \url{https://r4goodacademy.github.io/R4GoodPersonalFinances/}
   \item \url{https://github.com/R4GoodAcademy/R4GoodPersonalFinances}
   \item Report bugs at \url{https://github.com/R4GoodAcademy/R4GoodPersonalFinances/issues}
 }
