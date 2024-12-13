@@ -1,27 +1,30 @@
-devtools::dev_sitrep()
-
-
 renv::upgrade()
 renv::update()
 
-usethis::use_version(which = "dev")
+devtools::dev_sitrep()
+
+usethis::use_version()
 # usethis::use_version(which = "patch")
 # usethis::use_version(which = "minor")
 
+rstudioapi::restartSession()
+# pak::local_install(upgrade = FALSE, ask = FALSE)
+
+devtools::document()
 devtools::build_readme()
 pkgdown::build_site(preview = FALSE)
 pkgdown::preview_site()
 
+roxygen2md::roxygen2md()
+
 spelling::spell_check_package()
+spelling::update_wordlist()
 
+citation("R4GoodPersonalFinances")
 
-  rstudioapi::restartSession()
-  {
-    pak::local_install(upgrade = FALSE, ask = FALSE)
-    devtools::document()
-    devtools::load_all()
-    ?calc_optimal_risky_asset_allocation
-  }
+urlchecker::url_check()
 
-  rstudioapi::restartSession()
-  pkgdown::build_site(preview = FALSE)
+usethis::use_tidy_description()
+
+devtools::test_coverage()
+
