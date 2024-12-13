@@ -28,3 +28,5 @@ usethis::use_tidy_description()
 
 devtools::test_coverage()
 
+usethis::use_github_action()
+
