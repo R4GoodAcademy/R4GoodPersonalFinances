@@ -63,7 +63,7 @@ plot_purchasing_power <- function(x,
       ggplot2::aes(
         label = paste0(
           "", real_interest_rate * 100, "%: ",
-          round(purchasing_power, 1)
+          print_currency(purchasing_power)
         )
       )
     ) +
@@ -78,9 +78,10 @@ plot_purchasing_power <- function(x,
           real_interest_rate == min(real_interest_rate)
         ),
       ggplot2::aes(
-        label = paste0(round(purchasing_power, 1))
+        label = print_currency(purchasing_power)
       )
     ) +
+    ggplot2::scale_y_continuous(labels = print_currency) +
     PrettyCols::scale_colour_pretty_d("Summer") +
     ggplot2::theme_minimal() +
     ggplot2::theme(
