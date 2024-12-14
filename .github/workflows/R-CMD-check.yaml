@@ -40,10 +40,16 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
-      - name: Install system dependencies
+      - name: Install system dependencies for magick (Ubuntu or macOS)
+        if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt-get update
           sudo apt-get install -y libmagick++-dev
+
+      - name: Install system dependencies for magick (macOS)
+        if: matrix.os == 'macos-latest'
+        run: |
+          brew install imagemagick
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
