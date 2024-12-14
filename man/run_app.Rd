@@ -4,13 +4,15 @@
 \alias{run_app}
 \title{Run a package app}
 \usage{
-run_app(which = "optimal-allocation")
+run_app(which = c("risk-adjusted-returns", "purchasing-power"))
 }
 \arguments{
 \item{which}{A character. The name of the app to run.
 Currently available:
 \itemize{
-\item \code{optimal-allocation} - Optimal Risky Asset Allocation
+\item \code{risk-adjusted-returns} - Plotting risk-adjusted returns for various allocations to the risky asset allows you to find the optimal allocation.
+\item \code{purchasing-power} - Plotting the effect of real interest rates
+(positive or negative) on the purchasing power of savings over time.
 }}
 }
 \description{
