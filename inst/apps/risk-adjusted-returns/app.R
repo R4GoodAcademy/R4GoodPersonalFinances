@@ -1,6 +1,6 @@
 ui <- 
   bslib::page_sidebar(
-    title = "Optimal Risky Asset Allocation",
+    title = "Risk-adjusted Returns & Optimal Risky Asset Allocation",
     sidebar = bslib::sidebar(
       width = 300,
       shiny::sliderInput(
@@ -42,28 +42,7 @@ ui <-
         step = 0.1,
         value = 2
       ),
-      shiny::div(style = "text-align: center;",
-      shiny::tags$a(
-        shiny::tags$img(
-          src = "figures/r4ga-logo.png",
-          height = "110px",
-          width = "110px",
-          alt = "R4Good.Academy"
-        ),
-        href = "https://r4good.academy/", 
-        target = "_blank"
-      ),
-      shiny::tags$a(
-        shiny::tags$img(
-          src = "figures/logo.png",
-          height = "110px",
-          width = "110px",
-          alt = "R4GoodPersonalFinances"
-        ),
-        href = "https://r4goodacademy.github.io/R4GoodPersonalFinances", 
-        target = "_blank"
-      )
-      )
+      sidebar_footer()
     ),
     
     bslib::card(
@@ -74,7 +53,7 @@ ui <-
 
 server <- function(input, output, session) {
 
-  shiny::addResourcePath("figures", system.file("man", "figures", package = "R4GoodPersonalFinances"))
+  add_sidebar_footer_resources()
 
   output$rar_plot <- shiny::renderPlot({
     
