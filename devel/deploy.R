@@ -1,5 +1,7 @@
+renv::status()
 renv::upgrade()
 renv::update()
+renv::snapshot()
 
 devtools::dev_sitrep()
 
