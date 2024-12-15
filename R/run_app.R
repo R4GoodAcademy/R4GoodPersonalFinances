@@ -36,15 +36,16 @@ run_app <- function(
     app <- apps[[which]]
     temp_path <- file.path(tempdir(), "app.R")
     writeLines(app, temp_path)
-    on.exit(unlink(temp_path), add = TRUE)
     app <- temp_path
+    shiny::shinyAppFile(app)
 
   } else {
+
     app <- system.file("apps", which, package = "R4GoodPersonalFinances")
+    shiny::runApp(
+      app,
+      display.mode = "normal"
+    )
   }
     
-  shiny::runApp(
-    app,
-    display.mode = "normal"
-  )
 }
