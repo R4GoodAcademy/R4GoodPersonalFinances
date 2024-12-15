@@ -2,7 +2,7 @@ ui <-
   bslib::page_sidebar(
     title = "Purchasing Power Over Time",
     sidebar = bslib::sidebar(
-      width = 300,
+      width = 250,
       shiny::numericInput(
         inputId = "x",
         label = "Initial capital",
@@ -52,21 +52,3 @@ ui <-
       )
     )
   )
-
-server <- function(input, output, session) {
-
-  shiny::observeEvent(input$res, {
-
-    plot_res <- input$res
-    output$purchasing_power_plot <- shiny::renderPlot({
-
-      plot_purchasing_power(
-        x = input$x ,
-        real_interest_rate = input$real_interest_rate / 100,
-        years = input$years
-      )
-    }, res = plot_res)
-  })
-}
-
-shiny::shinyApp(ui, server)

@@ -9,9 +9,7 @@
 #' 
 #' @param res A numeric. The initial resolution of the plots.
 #' 
-#' @param shinylive A logical. Should the app be run in `shinylive`?
-#' Default is `FALSE`. If `TRUE`, the app will use cached code
-#' without using filesystem.
+#' @param shinylive A logical. Whether to use `shinylive` for the app.
 #' 
 #' @export
 run_app <- function(
@@ -34,18 +32,24 @@ run_app <- function(
   if (shinylive) {
 
     app <- apps[[which]]
-    temp_path <- file.path(tempdir(), "app.R")
-    writeLines(app, temp_path)
-    app <- temp_path
-    shiny::shinyAppFile(app)
+    temp_dir <- tempdir()
+
+    temp_path_ui <- file.path(temp_dir, "ui.R")
+    writeLines(app$ui, temp_path_ui)
+
+    temp_path_server <- file.path(temp_dir, "server.R")
+    writeLines(app$server, temp_path_server)
+
+    ui     <- source(temp_path_ui,     local = TRUE)$value
+    server <- source(temp_path_server, local = TRUE)$value
+
+    shiny::shinyApp(ui = ui, server = server)
 
   } else {
 
-    app <- system.file("apps", which, package = "R4GoodPersonalFinances")
     shiny::runApp(
-      app,
+      system.file("apps", which, package = "R4GoodPersonalFinances"),
       display.mode = "normal"
     )
   }
-    
 }
