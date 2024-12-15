@@ -1,36 +1,36 @@
 sidebar_footer <- function(hex_size = "110px") {
+  
+  package_version <- utils::packageVersion("R4GoodPersonalFinances")
+  app_version <- apps$package_version
+
+  if (package_version == app_version) {
+    version_number <- as.character(package_version)
+  } else {
+    version_number <- paste0(
+      "(pkg version) ",
+      as.character(package_version), 
+      shiny::br(),
+      "(app version) ",
+      as.character(app_version)
+    )
+  }
 
   shiny::tagList(
     shiny::div(
-      style = 
-        "text-align: center; display: flex; justify-content: center; gap: 10px;",
+      style = "text-align: center; font-size: 11px;",
       shiny::tags$a(
-        shiny::tags$img(
-          src = R4GoodPersonalFinances:::figures$`r4ga-logo.png`,
-          height = hex_size,
-          width = hex_size,
-          alt = "R4Good.Academy",
-          style = "display: block; margin: 0; border: none;"
-        ),
+        "R4Good.Academy",
         href = "https://r4good.academy/",
         target = "_blank"
       ),
+      shiny::br(),
       shiny::tags$a(
-        shiny::tags$img(
-          src = R4GoodPersonalFinances:::figures$logo.png,
-          height = hex_size,
-          width = hex_size,
-          alt = "R4GoodPersonalFinances",
-          style = "display: block; margin: 0; border: none;"
-        ),
+        "R4GoodPersonalFinances",
         href = "https://r4goodacademy.github.io/R4GoodPersonalFinances",
         target = "_blank"
-      )
-    ),
-    shiny::p(
-      as.character(utils::packageVersion("R4GoodPersonalFinances")), 
-      style = 
-        "text-align: center; font-size: 9px; margin-top: -26px; padding: 0;"
+      ),
+      shiny::br(),
+      shiny::HTML(version_number)
     )
   )
 

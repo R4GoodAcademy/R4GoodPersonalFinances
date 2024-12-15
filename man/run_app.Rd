@@ -4,7 +4,11 @@
 \alias{run_app}
 \title{Run a package app}
 \usage{
-run_app(which = c("risk-adjusted-returns", "purchasing-power"), res = 120)
+run_app(
+  which = c("risk-adjusted-returns", "purchasing-power"),
+  res = 120,
+  shinylive = FALSE
+)
 }
 \arguments{
 \item{which}{A character. The name of the app to run.
@@ -16,6 +20,10 @@ Currently available:
 }}
 
 \item{res}{A numeric. The initial resolution of the plots.}
+
+\item{shinylive}{A logical. Should the app be run in \code{shinylive}?
+Default is \code{FALSE}. If \code{TRUE}, the app will use cached code
+without using filesystem.}
 }
 \description{
 Run a package app
