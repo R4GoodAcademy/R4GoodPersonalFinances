@@ -4,7 +4,7 @@
 \alias{run_app}
 \title{Run a package app}
 \usage{
-run_app(which = c("risk-adjusted-returns", "purchasing-power"))
+run_app(which = c("risk-adjusted-returns", "purchasing-power"), res = 120)
 }
 \arguments{
 \item{which}{A character. The name of the app to run.
@@ -14,6 +14,8 @@ Currently available:
 \item \code{purchasing-power} - Plotting the effect of real interest rates
 (positive or negative) on the purchasing power of savings over time.
 }}
+
+\item{res}{A numeric. The initial resolution of the plots.}
 }
 \description{
 Run a package app

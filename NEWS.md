@@ -1,3 +1,5 @@
+# R4GoodPersonalFinances (development version)
+
 # R4GoodPersonalFinances 0.0.0.9016
 
 Initial release of the package includes functions designed to 

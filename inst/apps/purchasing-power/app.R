@@ -37,21 +37,35 @@ ui <-
     
     bslib::card(
       max_height = "650px",
-      shiny::plotOutput("purchasing_power_plot")
+      full_screen = TRUE,
+      shiny::plotOutput("purchasing_power_plot"),
+      bslib::card_footer(
+        bslib::popover(
+          bsicons::bs_icon("gear"),
+          shiny::numericInput(
+            inputId = "res", 
+            value = getOption("R4GPF.plot_res", default = 120), 
+            label = "Plot resolution"
+          ),
+          title = "Settings"
+        )
+      )
     )
   )
 
 server <- function(input, output, session) {
 
-  add_sidebar_footer_resources()
+  shiny::observeEvent(input$res, {
 
-  output$purchasing_power_plot <- shiny::renderPlot({
+    plot_res <- input$res
+    output$purchasing_power_plot <- shiny::renderPlot({
 
-    plot_purchasing_power(
-      x = input$x ,
-      real_interest_rate = input$real_interest_rate / 100,
-      years = input$years
-    )
+      plot_purchasing_power(
+        x = input$x ,
+        real_interest_rate = input$real_interest_rate / 100,
+        years = input$years
+      )
+    }, res = plot_res)
   })
 }
 
