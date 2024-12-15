@@ -11,3 +11,4 @@
 ^pkgdown$
 ^.vscode$
 ^\.github$
+^data-raw$

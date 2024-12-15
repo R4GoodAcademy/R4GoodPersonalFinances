@@ -47,24 +47,39 @@ ui <-
     
     bslib::card(
       max_height = "650px",
-      shiny::plotOutput("rar_plot")
+      full_screen = TRUE,
+      shiny::plotOutput("rar_plot"),
+      bslib::card_footer(
+        bslib::popover(
+          bsicons::bs_icon("gear"),
+          shiny::numericInput(
+            inputId = "res", 
+            value = getOption("R4GPF.plot_res", default = 120), 
+            label = "Plot resolution"
+          ),
+          title = "Settings"
+        )
+      )
     )
   )
 
 server <- function(input, output, session) {
 
-  add_sidebar_footer_resources()
+  shiny::observeEvent(input$res, {
 
-  output$rar_plot <- shiny::renderPlot({
+    plot_res <- input$res
     
-    plot_risk_adjusted_returns(
-      current_risky_asset_allocation = 
-        input$current_risky_asset_allocation / 100,
-      safe_asset_return       = input$safe_asset_return / 100,
-      risky_asset_return_mean = input$risky_asset_return_mean / 100,
-      risky_asset_return_sd   = input$risky_asset_return_sd / 100,
-      risk_aversion           = input$risk_aversion
-    )
+    output$rar_plot <- shiny::renderPlot({
+      
+      plot_risk_adjusted_returns(
+        current_risky_asset_allocation = 
+          input$current_risky_asset_allocation / 100,
+        safe_asset_return       = input$safe_asset_return / 100,
+        risky_asset_return_mean = input$risky_asset_return_mean / 100,
+        risky_asset_return_sd   = input$risky_asset_return_sd / 100,
+        risk_aversion           = input$risk_aversion
+      )
+    }, res = plot_res)
   })
 }
 
