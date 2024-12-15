@@ -21,9 +21,7 @@ Currently available:
 
 \item{res}{A numeric. The initial resolution of the plots.}
 
-\item{shinylive}{A logical. Should the app be run in \code{shinylive}?
-Default is \code{FALSE}. If \code{TRUE}, the app will use cached code
-without using filesystem.}
+\item{shinylive}{A logical. Whether to use \code{shinylive} for the app.}
 }
 \description{
 Run a package app
