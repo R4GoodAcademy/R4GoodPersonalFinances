@@ -9,13 +9,18 @@
 #' 
 #' @param res A numeric. The initial resolution of the plots.
 #' 
+#' @param shinylive A logical. Should the app be run in `shinylive`?
+#' Default is `FALSE`. If `TRUE`, the app will use cached code
+#' without using filesystem.
+#' 
 #' @export
 run_app <- function(
   which = c(
     "risk-adjusted-returns",
     "purchasing-power"
   ),
-  res = 120
+  res = 120,
+  shinylive = FALSE
 ) {
 
   which <- match.arg(which)
@@ -26,8 +31,20 @@ run_app <- function(
     )
   )
 
+  if (shinylive) {
+
+    app <- apps[[which]]
+    temp_path <- file.path(tempdir(), "app.R")
+    writeLines(app, temp_path)
+    on.exit(unlink(temp_path), add = TRUE)
+    app <- temp_path
+
+  } else {
+    app <- system.file("apps", which, package = "R4GoodPersonalFinances")
+  }
+    
   shiny::runApp(
-    system.file("apps", which, package = "R4GoodPersonalFinances"), 
+    app,
     display.mode = "normal"
   )
 }
