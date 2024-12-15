@@ -28,7 +28,7 @@ sidebar_footer <- function(hex_size = "110px") {
       )
     ),
     shiny::p(
-      as.character(packageVersion("R4GoodPersonalFinances")), 
+      as.character(utils::packageVersion("R4GoodPersonalFinances")), 
       style = 
         "text-align: center; font-size: 9px; margin-top: -26px; padding: 0;"
     )
