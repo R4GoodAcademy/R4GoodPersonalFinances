@@ -63,9 +63,9 @@
 <text x='683.53' y='516.90' text-anchor='middle' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='9.79px' lengthAdjust='spacingAndGlyphs'>50</text>
 <text x='373.66' y='529.04' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='23.24px' lengthAdjust='spacingAndGlyphs'>Year</text>
 <text transform='translate(13.05,277.96) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='88.06px' lengthAdjust='spacingAndGlyphs'>Purchasing power</text>
-<text x='319.24' y='560.19' style='font-size: 11.00px; font-family: sans;' textLength='60.54px' lengthAdjust='spacingAndGlyphs'>Inflation rate</text>
-<line x1='386.98' y1='556.40' x2='400.81' y2='556.40' style='stroke-width: 1.49; stroke: #398DB2; stroke-linecap: butt;' />
-<text x='408.01' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='20.06px' lengthAdjust='spacingAndGlyphs'>-0.02</text>
+<text x='317.78' y='560.19' style='font-size: 11.00px; font-family: sans;' textLength='60.54px' lengthAdjust='spacingAndGlyphs'>Inflation rate</text>
+<line x1='385.52' y1='556.40' x2='399.34' y2='556.40' style='stroke-width: 1.49; stroke: #398DB2; stroke-linecap: butt;' />
+<text x='406.55' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='22.99px' lengthAdjust='spacingAndGlyphs'>-2.0%</text>
 <text x='32.79' y='30.35' style='font-size: 11.00px; fill: #999999; font-family: sans;' textLength='336.94px' lengthAdjust='spacingAndGlyphs'>Label at the end of the plotted line shows real interest rate for the line</text>
 <text x='32.79' y='42.23' style='font-size: 11.00px; fill: #999999; font-family: sans;' textLength='424.97px' lengthAdjust='spacingAndGlyphs'>and real value (purchasing power) after 50 years. The initial value now (at year 0) is 10.</text>
 <text x='32.79' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='172.43px' lengthAdjust='spacingAndGlyphs'>Purchasing Power Over Time</text>
