@@ -48,7 +48,7 @@ plot_purchasing_power <- function(x,
       ggplot2::aes(
         x     = year, 
         y     = purchasing_power, 
-        color = as.factor(real_interest_rate)
+        color = as.factor(print_percent(real_interest_rate))
       )
     ) + 
     ggplot2::geom_line(linewidth = 0.7) + 
