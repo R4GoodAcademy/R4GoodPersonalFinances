@@ -9,6 +9,8 @@ usethis::use_version()
 # usethis::use_version(which = "patch")
 # usethis::use_version(which = "minor")
 
+source("data-raw/internal.R")
+
 rstudioapi::restartSession()
 # pak::local_install(upgrade = FALSE, ask = FALSE)
 

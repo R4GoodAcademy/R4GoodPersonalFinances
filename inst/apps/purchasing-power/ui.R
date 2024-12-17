@@ -5,14 +5,14 @@ ui <-
       width = 250,
       shiny::numericInput(
         inputId = "x",
-        label = "Initial capital",
+        label = "Current value of money",
         step = 1,
         value = 10
       ),
       shiny::sliderInput(
         inputId = "real_interest_rate",
         label = "Real interest rate",
-        step = 0.5,
+        step = 0.1,
         post = "%",
         min = -10, 
         max = 10, 
@@ -27,10 +27,10 @@ ui <-
           playButton = NULL,
           pauseButton = NULL
         ),
-        step = 5,
+        step = 1,
         min = 1, 
         max = 100, 
-        value = 1
+        value = 50
       ),
       sidebar_footer()
     ),

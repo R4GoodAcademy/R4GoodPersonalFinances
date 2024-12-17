@@ -5,10 +5,10 @@ ui <-
       width = 250,
       shiny::sliderInput(
         inputId = "current_risky_asset_allocation",
-        label = "Current\nrisky asset allocation",
+        label = "Current risky asset allocation",
         step = 1,
         animate = shiny::animationOptions(
-          interval = 500,
+          interval = 700,
           loop = FALSE,
           playButton = NULL,
           pauseButton = NULL
@@ -16,29 +16,29 @@ ui <-
         post = "%",
         min = 0, 
         max = 100, 
-        value = 50
+        value = 0
       ),
       shiny::numericInput(
         inputId = "risky_asset_return_mean",
-        label = "Risky asset return mean (%)",
+        label = "Mean of yearly real returns of risky asset (%)",
         step = 0.1,
         value = 4
       ),
       shiny::numericInput(
         inputId = "risky_asset_return_sd",
-        label = "Risky asset return SD (%)",
+        label = "Standard deviation of yearly real returns of risky asset (%)",
         step = 0.1,
         value = 15
       ),
       shiny::numericInput(
         inputId = "safe_asset_return",
-        label = "Safe asset return (%)",
+        label = "Yearly real return of safe asset (%)",
         step = 0.1,
         value = 2
       ),
       shiny::numericInput(
         inputId = "risk_aversion",
-        label = "Risk aversion",
+        label = "Risk aversion (default = 2)",
         step = 0.1,
         value = 2
       ),
