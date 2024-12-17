@@ -15,3 +15,9 @@ NULL
     "To learn more, visit: https://www.r4good.academy/"
   )
 }
+
+ignore_unused_imports <- function() {
+   bsicons::bs_icon
+   bslib::card
+   shiny::a
+}

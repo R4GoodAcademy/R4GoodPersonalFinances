@@ -29,6 +29,7 @@ Imports:
     scales,
     tidyr,
     shiny,
+    bslib,
     bsicons
 Suggests: 
     testthat (>= 3.0.0),
