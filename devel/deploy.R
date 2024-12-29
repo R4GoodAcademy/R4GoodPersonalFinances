@@ -27,6 +27,7 @@ spelling::update_wordlist()
 citation("R4GoodPersonalFinances")
 
 urlchecker::url_check()
+urlchecker::url_update()
 
 usethis::use_tidy_description()
 

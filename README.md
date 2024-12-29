@@ -8,6 +8,12 @@
 [![R-CMD-check](https://github.com/R4GoodAcademy/R4GoodPersonalFinances/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/R4GoodAcademy/R4GoodPersonalFinances/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/R4GoodAcademy/R4GoodPersonalFinances/graph/badge.svg)](https://app.codecov.io/gh/R4GoodAcademy/R4GoodPersonalFinances)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/R4GoodPersonalFinances)](https://CRAN.R-project.org/package=R4GoodPersonalFinances)
+[![R4GoodPersonalFinances status
+badge](https://r4goodacademy.r-universe.dev/badges/R4GoodPersonalFinances)](https://r4goodacademy.r-universe.dev/R4GoodPersonalFinances)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://choosealicense.com/licenses/mit/)
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 <!-- badges: end -->
 
 > *Make Better Financial Decisions*
