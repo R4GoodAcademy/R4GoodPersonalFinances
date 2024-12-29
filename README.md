@@ -26,12 +26,30 @@ application. They assist you in:
 
 ## Installation
 
+### Installation from GitHub
+
 You can install the latest version of R4GoodPersonalFinances from
 [GitHub](https://github.com/R4GoodAcademy/R4GoodPersonalFinances) with:
 
 ``` r
 # install.packages("pak")
 pak::pak("R4GoodAcademy/R4GoodPersonalFinances")
+```
+
+### Installation from R-universe
+
+You can install the package from
+[R-universe](https://r4goodacademy.r-universe.dev/R4GoodPersonalFinances)
+also as `WebAssembly` (WASM) binaries for use in WebR applications:
+
+``` r
+install.packages(
+  "R4GoodPersonalFinances", 
+  repos = c(
+    "https://r4goodacademy.r-universe.dev", 
+    "https://cloud.r-project.org"
+  )
+)
 ```
 
 ## Acknowledgments
@@ -50,6 +68,9 @@ example:
 
 - [How to Determine Our Optimal Asset
   Allocation?](https://www.r4good.academy/en/blog/optimal-asset-allocation/index.en.html#what-do-you-need-to-calculate-your-optimal-asset-allocation)
+
+The official package documentation can be found here:  
+[r4goodacademy.github.io/R4GoodPersonalFinances](https://r4goodacademy.github.io/R4GoodPersonalFinances/)
 
 > *Make Better Financial Decisions* with the `R4GoodPersonalFinances` R
 > package!
