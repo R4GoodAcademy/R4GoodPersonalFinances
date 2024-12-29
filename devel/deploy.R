@@ -36,5 +36,19 @@ devtools::test_coverage()
 # usethis::use_github_action()
 # usethis::use_pkgdown_github_pages()
 
+
+citation <- readLines("inst/CITATION")
+citation
+current_year <- lubridate::year(Sys.Date())
+current_year <- 2025
+citation[5] <- glue::glue("  year     = {current_year},")
+citation[6] <- glue::glue("  note     = \"{sprintf(\"R package version %s, https://r4goodacademy.github.io/R4GoodPersonalFinances/\", as.character(packageVersion(\"R4GoodPersonalFinances\")))} \",")
+citation
+writeLines(citation, "inst/CITATION")
+devtools::load_all()
+citation('R4GoodPersonalFinances')
+
 usethis::use_cran_comments()
+
+devtools::check(remote = TRUE, manual = TRUE)
 

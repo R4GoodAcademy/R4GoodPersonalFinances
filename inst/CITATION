@@ -1,9 +1,8 @@
-package_version <- utils::packageDescription("R4GoodPersonalFinances")$Version
 bibentry(
   bibtype  = "Manual",
   title    = "R4GoodPersonalFinances: Make Better Financial Decisions",
   author   = c(person("Kamil", "Wais"), person("Olesia", "Wais")),
-  year     = 2024,
-  note     = sprintf("R package version %s, https://r4goodacademy.github.io/R4GoodPersonalFinances/", package_version),
+  year     = 2025,
+  note     = "R package version 0.1.0, https://r4goodacademy.github.io/R4GoodPersonalFinances/ ",
   url      = "https://www.r4good.academy/"
 )
