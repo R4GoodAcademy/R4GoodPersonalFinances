@@ -32,6 +32,11 @@ Applied to rescaled data.}
 
 \item{...}{Other arguments passed on to \code{\link[base:format]{base::format()}}.}
 }
+\value{
+A character. Formatted value.
+
+A character. Formatted value.
+}
 \description{
 Wrapper functions for printing nicely formatted values.
 }

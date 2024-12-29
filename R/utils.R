@@ -8,6 +8,8 @@
 #' @inheritParams scales::percent
 #' @rdname print_
 #' 
+#' @return A character. Formatted value.
+#' 
 #' @examples
 #' print_currency(2345678, suffix = " PLN")
 #' @export
@@ -32,6 +34,8 @@ print_currency <- function(x,
 #' @inheritParams scales::percent
 #' @inheritParams scales::dollar
 #' @rdname print_
+#' 
+#' @return A character. Formatted value.
 #' 
 #' @examples
 #' print_percent(0.52366)

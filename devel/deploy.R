@@ -35,3 +35,6 @@ devtools::test_coverage()
 
 # usethis::use_github_action()
 # usethis::use_pkgdown_github_pages()
+
+usethis::use_cran_comments()
+

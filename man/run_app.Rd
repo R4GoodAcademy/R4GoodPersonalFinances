@@ -23,6 +23,16 @@ Currently available:
 
 \item{shinylive}{A logical. Whether to use \code{shinylive} for the app.}
 }
+\value{
+A \code{\link[shiny:shinyApp]{shiny::shinyApp()}} object if \code{shinylive} is \code{TRUE}.
+Runs the app if \code{shinylive} is \code{FALSE} with \code{\link[shiny:runApp]{shiny::runApp()}}.
+}
 \description{
 Run a package app
+}
+\examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+run_app("risk-adjusted-returns")
+run_app("purchasing-power")
+\dontshow{\}) # examplesIf}
 }
