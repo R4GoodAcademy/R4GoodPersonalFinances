@@ -19,7 +19,7 @@ devtools::build_readme()
 pkgdown::build_site(preview = FALSE)
 pkgdown::preview_site()
 
-roxygen2md::roxygen2md()
+# roxygen2md::roxygen2md()
 
 spelling::spell_check_package()
 spelling::update_wordlist()
@@ -33,5 +33,5 @@ usethis::use_tidy_description()
 
 devtools::test_coverage()
 
-usethis::use_github_action()
-usethis::use_pkgdown_github_pages()
+# usethis::use_github_action()
+# usethis::use_pkgdown_github_pages()
