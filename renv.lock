@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.4.1",
+    "Version": "4.4.2",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -116,6 +116,21 @@
         "R"
       ],
       "Hash": "e1e1b9d75c37401117b636b7ae50827a"
+    },
+    "badgecreatr": {
+      "Package": "badgecreatr",
+      "Version": "0.2.0.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "badgecreatr",
+      "RemoteUsername": "rmhogervorst",
+      "RemoteSha": "7eb114d8ec7b2cf6ba73d3b383cb95309be98389",
+      "Requirements": [
+        "R",
+        "git2r"
+      ],
+      "Hash": "1068a29300b6a37143579f20bb964636"
     },
     "base64enc": {
       "Package": "base64enc",
@@ -798,6 +813,18 @@
       ],
       "Hash": "fbbbc48eba7a6626a08bb365e44b563b"
     },
+    "git2r": {
+      "Package": "git2r",
+      "Version": "0.35.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "graphics",
+        "utils"
+      ],
+      "Hash": "8828605664949b92d0bf3f931e7c431b"
+    },
     "gitcreds": {
       "Package": "gitcreds",
       "Version": "0.1.2",
@@ -1326,22 +1353,21 @@
     },
     "openssl": {
       "Package": "openssl",
-      "Version": "2.2.2",
+      "Version": "2.3.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "askpass"
       ],
-      "Hash": "d413e0fef796c9401a4419485f709ca1"
+      "Hash": "5bfe2927efa9f87766ca9605301ea48f"
     },
     "pillar": {
       "Package": "pillar",
-      "Version": "1.9.0",
+      "Version": "1.10.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "cli",
-        "fansi",
         "glue",
         "lifecycle",
         "rlang",
@@ -1349,7 +1375,7 @@
         "utils",
         "vctrs"
       ],
-      "Hash": "15da5a8412f317beeee6175fbc76f4bb"
+      "Hash": "101ca350beea21261a15ba169d7a8513"
     },
     "pkgbuild": {
       "Package": "pkgbuild",
