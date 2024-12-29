@@ -30,7 +30,7 @@
 
     <a class="navbar-brand me-2" href="index.html">R4GoodPersonalFinances</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9025</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,10 +75,27 @@ These tools are selected carefully to align with academic consensus, bridging th
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
+<div class="section level3">
+<h3 id="installation-from-github">Installation from GitHub<a class="anchor" aria-label="anchor" href="#installation-from-github"></a>
+</h3>
 <p>You can install the latest version of R4GoodPersonalFinances from <a href="https://github.com/R4GoodAcademy/R4GoodPersonalFinances" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"R4GoodAcademy/R4GoodPersonalFinances"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="installation-from-r-universe">Installation from R-universe<a class="anchor" aria-label="anchor" href="#installation-from-r-universe"></a>
+</h3>
+<p>You can install the package from <a href="https://r4goodacademy.r-universe.dev/R4GoodPersonalFinances" class="external-link">R-universe</a> also as <code>WebAssembly</code> (WASM) binaries for use in WebR applications:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span></span>
+<span>  <span class="st">"R4GoodPersonalFinances"</span>, </span>
+<span>  repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"https://r4goodacademy.r-universe.dev"</span>, </span>
+<span>    <span class="st">"https://cloud.r-project.org"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="acknowledgments">Acknowledgments<a class="anchor" aria-label="anchor" href="#acknowledgments"></a>
@@ -94,6 +111,7 @@ These tools are selected carefully to align with academic consensus, bridging th
 <ul>
 <li><a href="https://www.r4good.academy/en/blog/optimal-asset-allocation/index.en.html#what-do-you-need-to-calculate-your-optimal-asset-allocation" class="external-link">How to Determine Our Optimal Asset Allocation?</a></li>
 </ul>
+<p>The official package documentation can be found here:<br><a href="https://r4goodacademy.github.io/R4GoodPersonalFinances/">r4goodacademy.github.io/R4GoodPersonalFinances</a></p>
 <blockquote>
 <p><em>Make Better Financial Decisions</em> with the <code>R4GoodPersonalFinances</code> R package!</p>
 </blockquote>
@@ -136,6 +154,9 @@ These tools are selected carefully to align with academic consensus, bridging th
 <ul class="list-unstyled">
 <li><a href="https://github.com/R4GoodAcademy/R4GoodPersonalFinances/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/R4GoodAcademy/R4GoodPersonalFinances/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://app.codecov.io/gh/R4GoodAcademy/R4GoodPersonalFinances" class="external-link"><img src="https://codecov.io/gh/R4GoodAcademy/R4GoodPersonalFinances/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://r4goodacademy.r-universe.dev/R4GoodPersonalFinances" class="external-link"><img src="https://r4goodacademy.r-universe.dev/badges/R4GoodPersonalFinances" alt="R4GoodPersonalFinances status badge"></a></li>
+<li><a href="https://choosealicense.com/licenses/mit/" class="external-link"><img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="license"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="lifecycle"></a></li>
 </ul>
 </div>
 
