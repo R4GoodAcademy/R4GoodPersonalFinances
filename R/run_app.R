@@ -54,7 +54,10 @@ run_app <- function(
   } else {
 
     shiny::runApp(
-      system.file("apps", which, package = "R4GoodPersonalFinances"),
+      system.file(
+        "apps", which, 
+        package = "R4GoodPersonalFinances"
+      ),
       display.mode = "normal"
     )
   }

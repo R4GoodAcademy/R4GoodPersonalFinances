@@ -1,4 +1,4 @@
-sidebar_footer <- function(hex_size = "110px") {
+sidebar_footer <- function() {
   
   package_version <- utils::packageVersion("R4GoodPersonalFinances")
   app_version <- apps$package_version

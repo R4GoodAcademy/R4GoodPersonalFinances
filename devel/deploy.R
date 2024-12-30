@@ -9,7 +9,16 @@ usethis::use_version()
 # usethis::use_version(which = "patch")
 # usethis::use_version(which = "minor")
 
+pak::local_install(upgrade = FALSE)
 source("data-raw/internal.R")
+R4GoodPersonalFinances:::apps$package_version
+
+rstudioapi::restartSession()
+pak::local_install(upgrade = FALSE)
+R4GoodPersonalFinances:::apps$package_version
+R4GoodPersonalFinances::run_app(shinylive = TRUE)
+R4GoodPersonalFinances::run_app()
+R4GoodPersonalFinances::run_app(which = "purchasing-power")
 
 rstudioapi::restartSession()
 # pak::local_install(upgrade = FALSE, ask = FALSE)
@@ -23,8 +32,6 @@ pkgdown::preview_site()
 
 spelling::spell_check_package()
 spelling::update_wordlist()
-
-citation("R4GoodPersonalFinances")
 
 urlchecker::url_check()
 urlchecker::url_update()
@@ -51,4 +58,7 @@ citation('R4GoodPersonalFinances')
 usethis::use_cran_comments()
 
 devtools::check(remote = TRUE, manual = TRUE)
+devtools::check_win_devel()
 
+# devtools::submit_cran()
+# usethis::use_github_release()
