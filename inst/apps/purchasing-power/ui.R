@@ -32,7 +32,7 @@ ui <-
         max = 100, 
         value = 50
       ),
-      sidebar_footer()
+      asNamespace("R4GoodPersonalFinances")$sidebar_footer()
     ),
     
     bslib::card(

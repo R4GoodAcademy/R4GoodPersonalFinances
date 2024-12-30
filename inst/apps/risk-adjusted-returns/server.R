@@ -6,7 +6,7 @@ server <- function(input, output, session) {
     
     output$rar_plot <- shiny::renderPlot({
       
-      plot_risk_adjusted_returns(
+      asNamespace("R4GoodPersonalFinances")$plot_risk_adjusted_returns(
         current_risky_asset_allocation = 
           input$current_risky_asset_allocation / 100,
         safe_asset_return       = input$safe_asset_return / 100,
