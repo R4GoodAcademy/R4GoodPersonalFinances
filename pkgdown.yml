@@ -2,7 +2,7 @@ pandoc: 3.1.11
 pkgdown: 2.1.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2024-12-30T10:15Z
+last_built: 2024-12-30T10:32Z
 urls:
   reference: https://r4goodacademy.github.io/R4GoodPersonalFinances/reference
   article: https://r4goodacademy.github.io/R4GoodPersonalFinances/articles
