@@ -1,3 +1,9 @@
+# R4GoodPersonalFinances 0.1.1
+
+## Bugfixes
+
+* Fixed apps errors while executing locally.
+
 # R4GoodPersonalFinances 0.1.0
 
 Initial release of the package includes functions designed to 

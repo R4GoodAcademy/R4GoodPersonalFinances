@@ -42,7 +42,7 @@ ui <-
         step = 0.1,
         value = 2
       ),
-      sidebar_footer()
+      asNamespace("R4GoodPersonalFinances")$sidebar_footer()
     ),
     
     bslib::card(
