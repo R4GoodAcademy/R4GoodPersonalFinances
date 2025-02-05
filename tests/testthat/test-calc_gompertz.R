@@ -6,7 +6,7 @@ test_that("calibrating gompertz model parameters for males", {
   
   params <- 
     mortality_rates |> 
-      calc_gomperts_paramaters(current_age = 65)
+      calc_gompertz_paramaters(current_age = 65)
     
   expect_equal(head(params$mortality_rates$survival_rate, 1), 1)
   expect_equal(tail(params$mortality_rates$survival_rate, 1), 0)
@@ -29,7 +29,7 @@ test_that("calibrating gompertz model parameters for females", {
   
   params <- 
     mortality_rates |> 
-      calc_gomperts_paramaters(current_age = 65)
+      calc_gompertz_paramaters(current_age = 65)
     
   expect_equal(head(params$mortality_rates$survival_rate, 1), 1)
   expect_equal(tail(params$mortality_rates$survival_rate, 1), 0)

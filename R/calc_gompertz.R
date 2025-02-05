@@ -60,7 +60,7 @@ calc_gompertz_surv_prob <- function(
 }
 
 #' @export
-calc_gomperts_paramaters <- function(
+calc_gompertz_paramaters <- function(
   mortality_rates,
   current_age, 
   max_age = NULL
@@ -81,11 +81,9 @@ calc_gomperts_paramaters <- function(
     mortality_rates |> 
     dplyr::filter(probability_of_death == max(probability_of_death)) |> 
     dplyr::pull(age)
-
   
-  objective_fun <- function(x) {
-    sum(
-      (
+  gompertz_objective_fun <- function(x) {
+    sum((
         calc_gompertz_survival_probability(
           current_age = current_age, 
           target_age  = mortality_rates$age, 
@@ -93,12 +91,11 @@ calc_gomperts_paramaters <- function(
           mode        = mode, 
           dispersion  = x
         ) - mortality_rates$survival_rate
-      ) ^ 2
-    )
+      ) ^ 2)
   }
 
   dispersion = optimize(
-    objective_fun, 
+    gompertz_objective_fun, 
     interval = c(0, 100),
     maximum = FALSE
   )$minimum
