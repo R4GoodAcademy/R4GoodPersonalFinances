@@ -78,19 +78,17 @@
 <circle cx='666.40' cy='486.13' r='2.70' style='stroke-width: 0.75;' />
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-<line x1='70.72' y1='502.56' x2='654.72' y2='502.56' style='stroke-width: 0.75;' />
-<line x1='70.72' y1='502.56' x2='70.72' y2='509.76' style='stroke-width: 0.75;' />
-<line x1='187.52' y1='502.56' x2='187.52' y2='509.76' style='stroke-width: 0.75;' />
-<line x1='304.32' y1='502.56' x2='304.32' y2='509.76' style='stroke-width: 0.75;' />
-<line x1='421.12' y1='502.56' x2='421.12' y2='509.76' style='stroke-width: 0.75;' />
-<line x1='537.92' y1='502.56' x2='537.92' y2='509.76' style='stroke-width: 0.75;' />
-<line x1='654.72' y1='502.56' x2='654.72' y2='509.76' style='stroke-width: 0.75;' />
-<text x='70.72' y='528.48' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='187.52' y='528.48' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='13.35px' lengthAdjust='spacingAndGlyphs'>10</text>
-<text x='304.32' y='528.48' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='13.35px' lengthAdjust='spacingAndGlyphs'>20</text>
-<text x='421.12' y='528.48' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='13.35px' lengthAdjust='spacingAndGlyphs'>30</text>
-<text x='537.92' y='528.48' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='13.35px' lengthAdjust='spacingAndGlyphs'>40</text>
-<text x='654.72' y='528.48' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='13.35px' lengthAdjust='spacingAndGlyphs'>50</text>
+<line x1='140.80' y1='502.56' x2='608.00' y2='502.56' style='stroke-width: 0.75;' />
+<line x1='140.80' y1='502.56' x2='140.80' y2='509.76' style='stroke-width: 0.75;' />
+<line x1='257.60' y1='502.56' x2='257.60' y2='509.76' style='stroke-width: 0.75;' />
+<line x1='374.40' y1='502.56' x2='374.40' y2='509.76' style='stroke-width: 0.75;' />
+<line x1='491.20' y1='502.56' x2='491.20' y2='509.76' style='stroke-width: 0.75;' />
+<line x1='608.00' y1='502.56' x2='608.00' y2='509.76' style='stroke-width: 0.75;' />
+<text x='140.80' y='528.48' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='13.35px' lengthAdjust='spacingAndGlyphs'>70</text>
+<text x='257.60' y='528.48' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='13.35px' lengthAdjust='spacingAndGlyphs'>80</text>
+<text x='374.40' y='528.48' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='13.35px' lengthAdjust='spacingAndGlyphs'>90</text>
+<text x='491.20' y='528.48' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='20.02px' lengthAdjust='spacingAndGlyphs'>100</text>
+<text x='608.00' y='528.48' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='20.02px' lengthAdjust='spacingAndGlyphs'>110</text>
 <line x1='59.04' y1='486.13' x2='59.04' y2='129.88' style='stroke-width: 0.75;' />
 <line x1='59.04' y1='486.13' x2='51.84' y2='486.13' style='stroke-width: 0.75;' />
 <line x1='59.04' y1='397.07' x2='51.84' y2='397.07' style='stroke-width: 0.75;' />
@@ -103,7 +101,7 @@
 <text transform='translate(41.76,218.94) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='23.36px' lengthAdjust='spacingAndGlyphs'>0.03</text>
 <text transform='translate(41.76,129.88) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='23.36px' lengthAdjust='spacingAndGlyphs'>0.04</text>
 <polygon points='59.04,502.56 689.76,502.56 689.76,59.04 59.04,59.04 ' style='stroke-width: 0.75; fill: none;' />
-<text x='374.40' y='557.28' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='29.36px' lengthAdjust='spacingAndGlyphs'>Index</text>
+<text x='374.40' y='557.28' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='152.10px' lengthAdjust='spacingAndGlyphs'>params$mortality_rates$age</text>
 <text transform='translate(12.96,280.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='240.16px' lengthAdjust='spacingAndGlyphs'>params$mortality_rates$probability_of_death</text>
 </g>
 </svg>

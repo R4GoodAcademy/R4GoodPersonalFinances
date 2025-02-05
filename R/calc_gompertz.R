@@ -100,6 +100,19 @@ calc_gompertz_paramaters <- function(
     maximum = FALSE
   )$minimum
 
+  mortality_rates <- 
+    mortality_rates |>
+    dplyr::mutate(
+      survival_rate_gompertz = 
+        calc_gompertz_survival_probability(
+          current_age = current_age, 
+          target_age  = age, 
+          max_age     = max_age,
+          mode        = mode, 
+          dispersion  = dispersion
+        )
+    )
+
   list(
     mortality_rates = mortality_rates,
     mode            = mode,
