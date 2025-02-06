@@ -63,8 +63,7 @@ calc_gompertz_surv_prob <- function(
 #' @export
 calc_gompertz_paramaters <- function(
   mortality_rates,
-  current_age, 
-  max_age = NULL
+  current_age
 ) {
   
   mortality_rates <- 
@@ -84,22 +83,27 @@ calc_gompertz_paramaters <- function(
     dplyr::pull(age)
   
   gompertz_objective_fun <- function(x) {
+    dispersion <- x[1]
+    max_age    <- x[2]
+
     sum((
-        calc_gompertz_survival_probability(
-          current_age = current_age, 
-          target_age  = mortality_rates$age, 
-          max_age     = max_age,
-          mode        = mode, 
-          dispersion  = x
-        ) - mortality_rates$survival_rate
-      ) ^ 2)
+      calc_gompertz_survival_probability(
+        current_age = current_age, 
+        target_age  = mortality_rates$age, 
+        max_age     = max_age,
+        mode        = mode, 
+        dispersion  = dispersion
+      ) - mortality_rates$survival_rate
+    ) ^ 2)
   }
 
-  dispersion = optimize(
-    gompertz_objective_fun, 
-    interval = c(0, 100),
-    maximum = FALSE
-  )$minimum
+  results <- optim(
+    par = c(10, 100),
+    fn = gompertz_objective_fun
+  )
+
+  dispersion <- results$par[1]
+  max_age    <- results$par[2]
 
   list(
     data        = mortality_rates,
@@ -113,14 +117,13 @@ calc_gompertz_paramaters <- function(
 #' @export
 plot_gompertz_callibration <- function(
   params,
-  # current_age, 
   mode,
   dispersion,
   max_age
 ) {
 
-  if (missing(max_age)) max_age <- params$max_age
-  if (missing(mode)) mode <- params$mode
+  if (missing(max_age))    max_age    <- params$max_age
+  if (missing(mode))       mode       <- params$mode
   if (missing(dispersion)) dispersion <- params$dispersion
 
   data_to_plot <- 
@@ -142,6 +145,7 @@ plot_gompertz_callibration <- function(
   value_colour               <- "grey40"
   
   data_to_plot |> 
+     print(n = 1) |> 
     ggplot2::ggplot(
       ggplot2::aes(x = age)
     ) + 
@@ -168,12 +172,16 @@ plot_gompertz_callibration <- function(
     ) +
     ggplot2::labs(
       title    = "Gompertz Model Callibration",
-      subtitle = glue::glue("<span style='color: {real_survival_rate_col};'>**Life tables**</span> vs <span style='color: {gompertz_survival_rate_col};'>**Gompertz**</span> survival rates"),
+      subtitle = glue::glue("<span style='color: {real_survival_rate_col};'>**Life tables**</span> vs <span style='color: {gompertz_survival_rate_col};'>**Gompertz**</span> survival rates for 
+      {unique(params$data$sex)} in {unique(params$data$country)} as of 
+      {unique(params$data$year)}
+
+      "),
       y        = "Survival rate", 
       x        = "Age",
       caption = glue::glue(paste(
         "*Current age*: <span style='color: {value_colour};'>**{params$current_age}**</span>;",
-        "*Max age*: <span style='color: {value_colour};'>**{ifelse(is.null(max_age), 'NULL', max_age)}**</span>;",
+        "*Max age*: <span style='color: {value_colour};'>**{ifelse(is.null(max_age), 'NULL', round(max_age,1))}**</span>;",
         "*Mode*: <span style='color: {value_colour};'>**{mode}**</span>;",
         "*Dispersion*: <span style='color: {value_colour};'>**{round(dispersion,2)}**</span>.",
         ""

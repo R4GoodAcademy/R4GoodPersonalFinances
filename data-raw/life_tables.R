@@ -19,7 +19,7 @@ read_hmd_life_tables <- function(
       file.path(path, file), 
       skip = 2,
       col_types = readr::cols(
-        Year = readr::col_double(),
+        Year = readr::col_integer(),
         Age  = readr::col_character(),
         mx   = readr::col_double(),
         qx   = readr::col_double(),
@@ -51,13 +51,17 @@ read_hmd_life_tables <- function(
     dplyr::mutate( age = as.integer(age)) 
 }
 
+countries <- c("Poland", "USA")
+
 life_tables <- 
-  read_hmd_life_tables(path = "data-raw/poland") |> 
-  dplyr::mutate(country = "Poland") |> 
-  dplyr::select(country, dplyr::everything())
+  purrr::map_dfr(countries, function(country) {
+    read_hmd_life_tables(path = file.path("data-raw", tolower(country))) |> 
+    dplyr::mutate(country = !!country) |> 
+    dplyr::select(country, dplyr::everything())
+  })  
 
-
-life_tables
+life_tables |> 
+  dplyr::count(country)
 
 usethis::use_data(
   life_tables, 
