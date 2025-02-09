@@ -19,12 +19,8 @@ calc_retirement_ruin <- function(
     b     <- gompertz_dispersion
   
     mu <- nu + (0.5) * sigma^2 
-
     M1 <- calc_a(mu - sigma^2, x, m, b)
-  
-    M2 <- 
-      # (calc_a(mu - sigma^2, x, m, b)
-      (M1 - calc_a(2 * mu - 3 * sigma^2, x, m, b)) / (mu / 2 - sigma^2)
+    M2 <- (M1 - calc_a(2 * mu - 3 * sigma^2, x, m, b)) / (mu / 2 - sigma^2)
     
     alpha <- (2 * M2 - M1^2) / (M2 - M1^2)
     beta  <- (M2 - M1^2) / (M2 * M1)
