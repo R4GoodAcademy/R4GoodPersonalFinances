@@ -52,8 +52,11 @@ mortality_rates_males <-
     )
   ) |> 
   dplyr::mutate(
-    mortality_rate = mortality_rate / 1000
-  )
+    mortality_rate = mortality_rate / 1000,
+    sex            = "male",
+    country        = "USA",
+    year           = 2000
+  ) 
   
 mortality_rates_females <-
   tibble::tibble(
@@ -69,13 +72,17 @@ mortality_rates_females <-
     )
   ) |> 
   dplyr::mutate(
-    mortality_rate = mortality_rate / 1000
-  )
+    mortality_rate = mortality_rate / 1000,
+    sex            = "female",
+    country        = "USA",
+    year           = 2000
+  ) 
   
-test_mortality_rates <- list(
-  males   = mortality_rates_males,
-  females = mortality_rates_females
-)
+test_mortality_rates <- 
+  dplyr::bind_rows(
+    mortality_rates_males,
+    mortality_rates_females
+  )
 
 usethis::use_data(
   apps, 

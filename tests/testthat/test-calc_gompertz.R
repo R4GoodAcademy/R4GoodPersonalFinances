@@ -1,6 +1,28 @@
-test_that("calibrating gompertz model parameters for males", {
+test_that("calculate gompertz surival probability", {
 
-  mortality_rates <- test_mortality_rates$males
+  # Test based on: Milevsky, M. A., Robinson, C. (2000). Self-annuitization and ruin in retirement. North American Actuarial Journal, 4(4), p. 114.
+  
+  calc_gompertz_survival_probability(
+    current_age = 65,
+    target_age  = 85,
+    mode        = 80,
+    dispersion  = 10
+  ) |> expect_equal(0.2404, tolerance = 0.001)
+
+  calc_gompertz_survival_probability(
+    current_age = 75,
+    target_age  = 85,
+    mode        = 80,
+    dispersion  = 10
+  ) |> expect_equal(0.3527, tolerance = 0.001)  
+  
+})
+
+test_that("calibrating gompertz model for males on test data", {
+
+  mortality_rates <- 
+    test_mortality_rates |> 
+    dplyr::filter(sex == "male")
 
   expect_equal(tail(mortality_rates$mortality_rate, 1), 1)
   
@@ -8,15 +30,15 @@ test_that("calibrating gompertz model parameters for males", {
     mortality_rates |> 
       calc_gompertz_paramaters(current_age = 65)
     
-  expect_equal(head(params$mortality_rates$survival_rate, 1), 1)
-  expect_equal(tail(params$mortality_rates$survival_rate, 1), 0)
-  expect_equal(params$mortality_rates$probability_of_death |> sum(), 1)
+  expect_equal(head(params$data$survival_rate, 1), 1)
+  expect_equal(tail(params$data$survival_rate, 1), 0)
+  expect_equal(params$data$probability_of_death |> sum(), 1)
   
   pod_males <- 
     function() {
       plot(
-        x = params$mortality_rates$age,
-        y = params$mortality_rates$probability_of_death
+        x = params$data$age,
+        y = params$data$probability_of_death
       )
     }
   if (interactive()) print(pod_males())
@@ -25,23 +47,16 @@ test_that("calibrating gompertz model parameters for males", {
   expect_equal(params$mode, 86)
   expect_equal(params$dispersion, 10.48, tolerance = 0.01)
 
-  sr_males <- 
-    function() {
-      plot(
-        x = params$mortality_rates$age,
-        y = params$mortality_rates$survival_rate
-      )
-      lines(
-        x = params$mortality_rates$age,
-        y = params$mortality_rates$survival_rate_gompertz
-      )
-    }
-  if (interactive()) print(sr_males())
-  vdiffr::expect_doppelganger("sr_males", sr_males)
+  gc_males <- function()plot_gompertz_callibration(params = params)
+  if (interactive()) print(gc_males())
+  vdiffr::expect_doppelganger("gc_males", gc_males)
 })
-test_that("calibrating gompertz model parameters for females", {
+
+test_that("calibrating gompertz model for females on test data", {
   
-  mortality_rates <- test_mortality_rates$females
+  mortality_rates <- 
+    test_mortality_rates |> 
+    dplyr::filter(sex == "female")
   
   expect_equal(tail(mortality_rates$mortality_rate, 1), 1)
   
@@ -49,15 +64,15 @@ test_that("calibrating gompertz model parameters for females", {
     mortality_rates |> 
       calc_gompertz_paramaters(current_age = 65)
     
-  expect_equal(head(params$mortality_rates$survival_rate, 1), 1)
-  expect_equal(tail(params$mortality_rates$survival_rate, 1), 0)
-  expect_equal(params$mortality_rates$probability_of_death |> sum(), 1)
+  expect_equal(head(params$data$survival_rate, 1), 1)
+  expect_equal(tail(params$data$survival_rate, 1), 0)
+  expect_equal(params$data$probability_of_death |> sum(), 1)
 
   pod_females <- 
     function() {
       plot(
-        x = params$mortality_rates$age,
-        y = params$mortality_rates$probability_of_death
+        x = params$data$age,
+        y = params$data$probability_of_death
       )
     }
   if (interactive()) print(pod_females())
@@ -66,18 +81,30 @@ test_that("calibrating gompertz model parameters for females", {
   expect_equal(params$mode, 90)
   expect_equal(params$dispersion, 8.63, tolerance = 0.01)
   
-  sr_females <- 
-    function() {
-      plot(
-        x = params$mortality_rates$age,
-        y = params$mortality_rates$survival_rate
-      )
-      lines(
-        x = params$mortality_rates$age,
-        y = params$mortality_rates$survival_rate_gompertz
-      )
-    }
-  if (interactive()) print(sr_females())
-  vdiffr::expect_doppelganger("sr_females", sr_females)
+  gc_females <- function()plot_gompertz_callibration(params = params)
+  if (interactive()) print(gc_females())
+  vdiffr::expect_doppelganger("gc_females", gc_females)
 })
 
+test_that("calibrating gompertz model on HMD data", {
+  
+  mortality_rates <- 
+    life_tables |> 
+      dplyr::filter(
+    country == "USA" & 
+      sex     == "female"
+  ) |>
+    dplyr::filter(year == max(year)) 
+    
+  params <- 
+    mortality_rates |> 
+      calc_gompertz_paramaters(
+    estimate_max_age = TRUE,
+    current_age      = 0
+  ) 
+  
+  hmd <- function() plot_gompertz_callibration(params = params)
+  if (interactive()) print(hmd())
+  vdiffr::expect_doppelganger("hmd", hmd)
+
+})

@@ -101,7 +101,7 @@
 <text transform='translate(41.76,218.94) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='23.36px' lengthAdjust='spacingAndGlyphs'>0.03</text>
 <text transform='translate(41.76,129.88) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='23.36px' lengthAdjust='spacingAndGlyphs'>0.04</text>
 <polygon points='59.04,502.56 689.76,502.56 689.76,59.04 59.04,59.04 ' style='stroke-width: 0.75; fill: none;' />
-<text x='374.40' y='557.28' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='152.10px' lengthAdjust='spacingAndGlyphs'>params$mortality_rates$age</text>
-<text transform='translate(12.96,280.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='240.16px' lengthAdjust='spacingAndGlyphs'>params$mortality_rates$probability_of_death</text>
+<text x='374.40' y='557.28' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='96.75px' lengthAdjust='spacingAndGlyphs'>params$data$age</text>
+<text transform='translate(12.96,280.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='184.82px' lengthAdjust='spacingAndGlyphs'>params$data$probability_of_death</text>
 </g>
 </svg>

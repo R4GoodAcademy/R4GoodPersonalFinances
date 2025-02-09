@@ -63,9 +63,10 @@ calc_gompertz_surv_prob <- function(
 #' @export
 calc_gompertz_paramaters <- function(
   mortality_rates,
-  current_age
+  current_age,
+  estimate_max_age = FALSE
 ) {
-  
+
   mortality_rates <- 
     mortality_rates |>
     dplyr::filter(age >= !!current_age) |> 
@@ -83,8 +84,9 @@ calc_gompertz_paramaters <- function(
     dplyr::pull(age)
   
   gompertz_objective_fun <- function(x) {
+
     dispersion <- x[1]
-    max_age    <- x[2]
+    if (estimate_max_age) max_age <- x[2] else max_age <- NULL
 
     sum((
       calc_gompertz_survival_probability(
@@ -97,13 +99,32 @@ calc_gompertz_paramaters <- function(
     ) ^ 2)
   }
 
+if (estimate_max_age) {
+  par <- c(10, 100) 
+  lower = -Inf
+  upper = Inf
+  method = "Nelder-Mead"
+} else {
+  par <- c(10)
+  lower = 0
+  upper = 100
+  method = "Brent"
+}
+
   results <- optim(
-    par = c(10, 100),
-    fn = gompertz_objective_fun
+    par    = par,
+    lower  = lower, 
+    upper  = upper,
+    method = method,
+    fn     = gompertz_objective_fun
   )
 
   dispersion <- results$par[1]
-  max_age    <- results$par[2]
+  max_age    <- results$par[2] 
+
+  if (is.na(max_age) || is.null(max_age)) {
+    max_age <- NULL 
+  } 
 
   list(
     data        = mortality_rates,
@@ -145,7 +166,6 @@ plot_gompertz_callibration <- function(
   value_colour               <- "grey40"
   
   data_to_plot |> 
-     print(n = 1) |> 
     ggplot2::ggplot(
       ggplot2::aes(x = age)
     ) + 
