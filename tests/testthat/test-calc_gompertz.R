@@ -15,7 +15,21 @@ test_that("calculate gompertz surival probability", {
     mode        = 80,
     dispersion  = 10
   ) |> expect_equal(0.3527, tolerance = 0.001)  
-  
+
+  calc_gompertz_survival_probability(
+    current_age = 65,
+    target_age  = 85,
+    mode        = 81.95,
+    dispersion  = 10.6
+  ) |> expect_equal(0.3226, tolerance = 0.001)  
+
+  calc_gompertz_survival_probability(
+    current_age = 65,
+    target_age  = 85,
+    mode        = 87.8,
+    dispersion  = 9.5
+  ) |> expect_equal(0.5199, tolerance = 0.001)  
+
 })
 
 test_that("calibrating gompertz model for males on test data", {
