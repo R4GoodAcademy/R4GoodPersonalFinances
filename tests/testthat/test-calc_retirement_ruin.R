@@ -65,5 +65,6 @@ test_that("calculating gompertz retirement ruin probability", {
     portfolio_return_sd   = 0.15
   ) |> 
     expect_equal(0.1744054, tolerance = 0.00001)
+
 })
   

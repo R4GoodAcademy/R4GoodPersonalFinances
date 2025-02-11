@@ -61,7 +61,7 @@ test_that("calibrating gompertz model for males on test data", {
   expect_equal(params$mode, 86)
   expect_equal(params$dispersion, 10.48, tolerance = 0.01)
 
-  gc_males <- function()plot_gompertz_callibration(params = params)
+  gc_males <- function() plot_gompertz_callibration(params = params)
   if (interactive()) print(gc_males())
   vdiffr::expect_doppelganger("gc_males", gc_males)
 })
@@ -95,7 +95,7 @@ test_that("calibrating gompertz model for females on test data", {
   expect_equal(params$mode, 90)
   expect_equal(params$dispersion, 8.63, tolerance = 0.01)
   
-  gc_females <- function()plot_gompertz_callibration(params = params)
+  gc_females <- function() plot_gompertz_callibration(params = params)
   if (interactive()) print(gc_females())
   vdiffr::expect_doppelganger("gc_females", gc_females)
 })
