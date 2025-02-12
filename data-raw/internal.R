@@ -39,7 +39,7 @@ apps$package_version <- utils::packageVersion("R4GoodPersonalFinances")
 # Table 1: "Annuity 2000 Basic Table" in Johansen, Robert J. 1998. “Annuity 2000 Mortality Tables.” Transactions, Society of Actuaries, pp. 264-290. http://www.soa.org/library/research/transactions-reports-of-mortality-moribidity-and-experience/1990-99/1995/january/TSR9510.pdf.
 
 mortality_rates_males <-
-  tibble::tibble(
+  dplyr::tibble(
     age = 65:115,
     mortality_rate = c(
       10.993, 12.188, 13.572, 15.160, 16.946, 18.920, 21.071, 23.388, 25.871,
@@ -59,7 +59,7 @@ mortality_rates_males <-
   ) 
   
 mortality_rates_females <-
-  tibble::tibble(
+  dplyr::tibble(
     age = 65:115,
     mortality_rate = c(
       7.017, 7.734, 8.491, 9.288, 10.163, 11.165, 12.339, 13.734, 15.391,

@@ -225,7 +225,7 @@ calc_gompertz_joint_paramaters <- function(
 ) {
 
   survival_rates <- 
-    tibble::tibble(
+    dplyr::tibble(
       year = 0:(max_age - min(p1$age, p2$age)),
       p1 = calc_gompertz_survival_probability(
         current_age = p1$age, 
