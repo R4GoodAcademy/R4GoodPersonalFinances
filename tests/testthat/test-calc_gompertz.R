@@ -104,10 +104,10 @@ test_that("calibrating gompertz model on HMD data", {
   
   mortality_rates <- 
     life_tables |> 
-      dplyr::filter(
-    country == "USA" & 
+    dplyr::filter(
+      country == "USA" & 
       sex     == "female"
-  ) |>
+    ) |>
     dplyr::filter(year == max(year)) 
     
   params <- 
@@ -121,4 +121,33 @@ test_that("calibrating gompertz model on HMD data", {
   if (interactive()) print(hmd())
   vdiffr::expect_doppelganger("hmd", hmd)
 
+})
+
+test_that("calibrating joint gompertz model", {
+
+  params <- 
+    calc_gompertz_joint_paramaters(
+      p1 = list(
+        age        = 65,
+        mode       = 88,
+        dispersion = 10.65
+      ),
+      p2 = list(
+        age        = 65,
+        mode       = 91,
+        dispersion = 8.88
+      ),
+      max_age = 110
+    )
+  
+  js <- function() plot_joint_survival(params = params)
+  if (interactive()) print(js())
+  vdiffr::expect_doppelganger("js", js)
+
+  jsg <- function() plot_joint_survival(
+    params = params, 
+    include_gompertz = TRUE
+  )
+  if (interactive()) print(jsg())
+  vdiffr::expect_doppelganger("jsg", jsg)
 })

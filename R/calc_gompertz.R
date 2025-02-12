@@ -160,7 +160,7 @@ plot_gompertz_callibration <- function(
         )
     ) 
   
-  colours                    <-  PrettyCols::prettycols("Bold")
+  colours                    <- PrettyCols::prettycols("Bold")
   real_survival_rate_col     <- colours[4]
   gompertz_survival_rate_col <- colours[5]
   value_colour               <- "grey40"
@@ -207,4 +207,131 @@ plot_gompertz_callibration <- function(
         ""
       ))
     )
+}
+
+#' @export
+calc_gompertz_joint_paramaters <- function(
+  p1 = list(
+    age        = NULL,
+    mode       = NULL,
+    dispersion = NULL
+  ),
+  p2 = list(
+    age        = NULL,
+    mode       = NULL,
+    dispersion = NULL
+  ),
+  max_age = 120
+) {
+
+  survival_rates <- 
+    tibble::tibble(
+      year = 0:(max_age - min(p1$age, p2$age)),
+      p1 = calc_gompertz_survival_probability(
+        current_age = p1$age, 
+        target_age  = p1$age + year, 
+        mode        = p1$mode, 
+        dispersion  = p1$dispersion
+      ),
+      p2 = calc_gompertz_survival_probability(
+        current_age = p2$age, 
+        target_age  = p2$age + year, 
+        mode        = p2$mode, 
+        dispersion  = p2$dispersion
+      ),
+      joint = p1 + p2 - p1 * p2
+    ) 
+  
+  min_age <- min(p1$age, p2$age)
+
+  objective_fun <- function(params) {
+
+    mode       <- params[1]
+    dispersion <- params[2]
+    
+    approx_surv <- 
+      calc_gompertz_survival_probability(
+        current_age = min_age, 
+        target_age  = min_age + survival_rates$year,
+        mode        = mode, 
+        dispersion  = dispersion
+      )
+    
+    actual_surv <- survival_rates$joint
+    sum((approx_surv - actual_surv) ^ 2)
+  }
+  
+  init_params <- c(
+    mode       = mean(c(p1$mode, p2$mode)), 
+    dispersion = mean(c(p1$dispersion, p2$dispersion))
+  )
+  
+  params <- optim(
+    par = init_params, 
+    fn  = objective_fun
+  )
+
+  mode       <- params$par[["mode"]]
+  dispersion <- params$par[["dispersion"]]
+
+  survival_rates <- 
+    survival_rates |> 
+    dplyr::mutate(
+      gompertz = calc_gompertz_survival_probability(
+        current_age = min_age,
+        target_age  = min_age + year,
+        mode        = mode,
+        dispersion  = dispersion
+      )
+    )
+    
+  list(
+    data       = survival_rates,
+    mode       = mode,
+    dispersion = dispersion
+  )
+} 
+
+#' @export
+plot_joint_survival <- function(params, include_gompertz = FALSE) {
+
+  fixed_colors <- c(
+    "p1"  = PrettyCols::prettycols("Bold")[1],
+    "p2"  = PrettyCols::prettycols("Bold")[4],
+    "joint"  = PrettyCols::prettycols("Bold")[3],
+    "gompertz"  = PrettyCols::prettycols("Bold")[5]
+  )
+
+  cols <- c("p1", "p2", "joint")
+  if (include_gompertz) {
+    cols <- c(cols,  "gompertz")
+  }
+
+  params$data |> 
+    tidyr::pivot_longer(
+      cols = dplyr::all_of(cols),
+      names_to = "name",
+      values_to = "value"
+    ) |> 
+    ggplot2::ggplot(
+      ggplot2::aes(
+        x = year, 
+        y = value,
+        color = name
+      )
+    ) + 
+    ggplot2::geom_line() +
+    ggplot2::scale_y_continuous(
+      breaks = seq(0, 1, by = 0.1),
+      labels = scales::percent
+    ) +
+    ggplot2::theme_minimal() +
+    ggplot2::theme(legend.position = "bottom") +
+    ggplot2::labs(
+      title = "Survival Probability Comparison",
+      x = "Years from now",
+      y = "Survival probability",
+      color = NULL
+    ) + 
+    ggplot2::scale_color_manual(values = fixed_colors) 
 }

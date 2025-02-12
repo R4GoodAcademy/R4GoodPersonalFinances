@@ -1,6 +1,6 @@
 Package: R4GoodPersonalFinances
 Title: Make Better Financial Decisions
-Version: 0.1.1
+Version: 0.1.1.9001
 Authors@R: c(
     person("Kamil", "Wais", , "kamil.wais@gmail.com", role = c("aut", "cre", "cph", "fnd"),
            comment = c(ORCID = "0000-0002-4062-055X")),
@@ -42,3 +42,4 @@ Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+LazyData: true

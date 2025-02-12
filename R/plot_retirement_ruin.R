@@ -64,7 +64,8 @@ the_plot <-
     breaks = scales::breaks_extended(n = 10),
     labels = function(x) {
       paste0(
-        print_currency(x / 1000, suffix = "k"),
+        print_currency(x / 1000, suffix = "k", accuracy = 0.1
+      ),
         "<br><span style='color: grey60;'>(",
         print_currency(x / 1000 * 12, suffix = "k"),
         " / ",
