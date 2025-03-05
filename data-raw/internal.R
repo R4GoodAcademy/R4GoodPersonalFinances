@@ -1,39 +1,34 @@
+apps_folders <- c(
+  "risk-adjusted-returns",
+  "purchasing-power",
+  "retirement-ruin"
+)
+
 apps <- list()
 
-apps$`risk-adjusted-returns` <- list()
-apps$`risk-adjusted-returns`$ui <- 
-  readLines(
-    system.file(
-      "apps", "risk-adjusted-returns", "ui.R", 
-      package = "R4GoodPersonalFinances"
+for (app_folder in apps_folders) {
+
+  print(app_folder)
+
+  apps[[app_folder]] <- list()
+  apps[[app_folder]]$ui <- 
+    readLines(
+      system.file(
+        "apps", app_folder, "ui.R", 
+        package = "R4GoodPersonalFinances"
+      )
     )
-  )
-apps$`risk-adjusted-returns`$server <- 
-  readLines(
-    system.file(
-      "apps", "risk-adjusted-returns", "server.R", 
-      package = "R4GoodPersonalFinances"
+  apps[[app_folder]]$server <- 
+    readLines(
+      system.file(
+        "apps", app_folder, "server.R", 
+        package = "R4GoodPersonalFinances"
+      )
     )
-  )
-  
-apps$`purchasing-power` <- list()
-apps$`purchasing-power`$ui <-
-  readLines(
-    system.file(
-      "apps", "purchasing-power", "ui.R", 
-      package = "R4GoodPersonalFinances"
-    )
-  )
-apps$`purchasing-power`$server <-
-  readLines(
-    system.file(
-      "apps", "purchasing-power", "server.R", 
-      package = "R4GoodPersonalFinances"
-    )
-  )
+}
 
 apps$package_version <- utils::packageVersion("R4GoodPersonalFinances")
-
+apps
 
 
 # Table 1: "Annuity 2000 Basic Table" in Johansen, Robert J. 1998. “Annuity 2000 Mortality Tables.” Transactions, Society of Actuaries, pp. 264-290. http://www.soa.org/library/research/transactions-reports-of-mortality-moribidity-and-experience/1990-99/1995/january/TSR9510.pdf.
@@ -83,6 +78,9 @@ test_mortality_rates <-
     mortality_rates_males,
     mortality_rates_females
   )
+
+
+
 
 usethis::use_data(
   apps, 
