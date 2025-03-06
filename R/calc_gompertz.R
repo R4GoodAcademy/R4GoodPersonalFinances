@@ -1,5 +1,13 @@
-#' @export
+#' Calculating Gompertz survival probability
 #' 
+#' @param current_age Current age
+#' @param target_age Target age
+#' @param mode Mode of the Gompertz distribution
+#' @param dispersion Dispersion of the Gompertz distribution
+#' @param max_age Maximum age. Defaults to `NULL`.
+#' 
+#' @export
+
 calc_gompertz_survival_probability <- function(
   current_age, 
   target_age, 
@@ -59,9 +67,19 @@ calc_gompertz_surv_prob <- function(
   )
 }
 
-#' See Blanchet, David M., and Paul D. Kaplan. 2013. "Alpha, Beta, and Now... Gamma." Journal of Retirement 1 (2): 29-45. doi:10.3905/jor.2013.1.2.029.
+#' Calculating Gompertz model parameters
+#' 
+#' @param mortality_rates A data frame 
+#' with columns `mortality_rate` and `age`.
+#' Usually the output of [read_mortality_rates()] function or 
+#' filtered data from [life_tables] object.
+#' @param current_age A numeric. Current age.
+#' @param estimate_max_age A logical. Should the maximum age be estimated?
+#' 
+#' @references Blanchet, David M., and Paul D. Kaplan. 2013. "Alpha, Beta, and Now... Gamma." Journal of Retirement 1 (2): 29-45. \doi{10.3905/jor.2013.1.2.029}.
 #' @export
-calc_gompertz_paramaters <- function(
+
+calc_gompertz_parameters <- function(
   mortality_rates,
   current_age,
   estimate_max_age = FALSE
@@ -137,8 +155,16 @@ if (estimate_max_age) {
   )
 }
 
+#' Plotting the results of Gompertz model calibration
+#' 
+#' @param params A list returned by [calc_gompertz_parameters()] function.
+#' @param mode A numeric. The mode of the Gompertz model.
+#' @param dispersion A numeric. The dispersion of the Gompertz model.
+#' @param max_age A numeric. The maximum age of the Gompertz model.
+#' 
 #' @export
-plot_gompertz_callibration <- function(
+
+plot_gompertz_calibration <- function(
   params,
   mode,
   dispersion,
@@ -195,7 +221,7 @@ plot_gompertz_callibration <- function(
       plot.subtitle = ggtext::element_markdown(color = "grey60")
     ) +
     ggplot2::labs(
-      title    = "Gompertz Model Callibration",
+      title    = "Gompertz Model Calibration",
       subtitle = glue::glue("<span style='color: {real_survival_rate_col};'>**Life tables**</span> vs <span style='color: {gompertz_survival_rate_col};'>**Gompertz**</span> survival rates for 
       {unique(params$data$sex)} in {unique(params$data$country)} as of 
       {unique(params$data$year)}
@@ -213,8 +239,17 @@ plot_gompertz_callibration <- function(
     )
 }
 
+#' Calculating the Gompertz model parameters for joint survival 
+#' 
+#' @param p1 A list with `age`, `mode` and `dispersion` parameters
+#' for the first person (p1).
+#' @param p2 A list with `age`, `mode` and `dispersion` parameters
+#' for the second person (p2).
+#' @param max_age A numeric. The maximum age for the Gompertz model.
+#' 
 #' @export
-calc_gompertz_joint_paramaters <- function(
+
+calc_gompertz_joint_parameters <- function(
   p1 = list(
     age        = NULL,
     mode       = NULL,
@@ -298,7 +333,13 @@ calc_gompertz_joint_paramaters <- function(
   )
 } 
 
+#' Plotting the results of Gompertz model calibration for joint survival
+#' 
+#' @param params A list returned by [calc_gompertz_joint_parameters()] function.
+#' @param include_gompertz A logical. Should the Gompertz survival curve be included in the plot?
+#' 
 #' @export
+
 plot_joint_survival <- function(
   params, 
   include_gompertz = FALSE
