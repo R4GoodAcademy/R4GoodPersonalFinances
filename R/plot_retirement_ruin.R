@@ -1,4 +1,15 @@
+#' Plotting retirement ruin
+#' 
+#' @param portfolio_return_mean A numeric. Mean of portfolio returns.
+#' @param portfolio_return_sd A numeric. Standard deviation of portfolio returns.
+#' @param age A numeric. Current age.
+#' @param gompertz_mode A numeric. Gompertz mode.
+#' @param gompertz_dispersion A numeric. Gompertz dispersion.
+#' @param portfolio_value A numeric. Initial portfolio value.
+#' @param monthly_spendings A numeric. Monthly spendings.
+#' 
 #' @export
+
 plot_retirement_ruin <- function(
   portfolio_return_mean,
   portfolio_return_sd,

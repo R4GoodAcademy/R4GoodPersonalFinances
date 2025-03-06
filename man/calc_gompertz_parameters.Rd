@@ -13,7 +13,7 @@ calc_gompertz_parameters(
 \arguments{
 \item{mortality_rates}{A data frame
 with columns \code{mortality_rate} and \code{age}.
-Usually the output of \code{\link[=read_mortality_rates]{read_mortality_rates()}} function or
+Usually the output of \code{\link[=read_hmd_life_tables]{read_hmd_life_tables()}} function or
 filtered data from \link{life_tables} object.}
 
 \item{current_age}{A numeric. Current age.}

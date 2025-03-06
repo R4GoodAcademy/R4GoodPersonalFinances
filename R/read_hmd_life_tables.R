@@ -1,7 +1,12 @@
-# HMD. Human Mortality Database. Max Planck Institute for Demographic Research (Germany), University of California, Berkeley (USA), and French Institute for Demographic Studies (France). Available at www.mortality.org 
-
-
+#' Reading HMD life tables
+#' 
+#' @param path A character. Path to the folder with life tables.
+#' @param files A character. Names of files with life tables.
+#' 
+#' @references HMD. Human Mortality Database. Max Planck Institute for Demographic Research (Germany), University of California, Berkeley (USA), and French Institute for Demographic Studies (France). Available at www.mortality.org 
+#' 
 #' @export
+#' 
 read_hmd_life_tables <- function(
   path  = getwd(),
   files = c(

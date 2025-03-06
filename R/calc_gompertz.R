@@ -71,7 +71,7 @@ calc_gompertz_surv_prob <- function(
 #' 
 #' @param mortality_rates A data frame 
 #' with columns `mortality_rate` and `age`.
-#' Usually the output of [read_mortality_rates()] function or 
+#' Usually the output of [read_hmd_life_tables()] function or 
 #' filtered data from [life_tables] object.
 #' @param current_age A numeric. Current age.
 #' @param estimate_max_age A logical. Should the maximum age be estimated?

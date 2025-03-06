@@ -1,5 +1,20 @@
-# See: Milevsky, M.A. (2020). Retirement Income Recipes in R: From Ruin Probabilities to Intelligent Drawdowns. Use R! Series. https://doi.org/10.1007/978-3-030-51434-1
+#' Calculating retirement ruin probability
+#' 
+#' @param portfolio_return_mean A numeric. Mean of portfolio returns.
+#' @param portfolio_return_sd A numeric. Standard deviation of portfolio returns.
+#' @param age A numeric. Current age.
+#' @param gompertz_mode A numeric. Gompertz mode.
+#' @param gompertz_dispersion A numeric. Gompertz dispersion.
+#' @param portfolio_value A numeric. Initial portfolio value.
+#' @param monthly_spendings A numeric. Monthly spendings.
+#' @param yearly_spendings A numeric. Yearly spendings.
+#' @param spending_rate A numeric. Spending rate 
+#' (initial withdrawal rate).
+#' 
+#' @references Milevsky, M.A. (2020). Retirement Income Recipes in R: From Ruin Probabilities to Intelligent Drawdowns. Use R! Series. \doi{10.1007/978-3-030-51434-1}.
+#' 
 #' @export
+
 calc_retirement_ruin <- function(
   portfolio_return_mean,
   portfolio_return_sd,
