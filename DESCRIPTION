@@ -32,6 +32,10 @@ Imports:
     scales,
     shiny,
     tidyr,
+    readr,
+    fs,
+    purrr,
+    stringr,
     withr
 Suggests: 
     testthat (>= 3.0.0),

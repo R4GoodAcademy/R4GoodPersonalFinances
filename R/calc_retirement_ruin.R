@@ -25,7 +25,7 @@ calc_retirement_ruin <- function(
   alpha <- (2 * M2 - M1^2) / (M2 - M1^2)
   beta  <- (M2 - M1^2) / (M2 * M1)
 
-  pgamma(
+  stats::pgamma(
     q          = spending_rate,
     shape      = alpha,
     scale      = beta,
@@ -45,5 +45,5 @@ calc_incomplete_gamma <- function(a, c) {
     t^(a - 1) * exp(-t)
   }
 
-  integrate(integrand, c, Inf)$value
+  stats::integrate(integrand, c, Inf)$value
 }

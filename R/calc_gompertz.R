@@ -67,6 +67,8 @@ calc_gompertz_paramaters <- function(
   estimate_max_age = FALSE
 ) {
 
+  age <- mortality_rate <- survival_rate <- probability_of_death <- NULL
+
   mortality_rates <- 
     mortality_rates |>
     dplyr::filter(age >= !!current_age) |> 
@@ -111,7 +113,7 @@ if (estimate_max_age) {
   method = "Brent"
 }
 
-  results <- optim(
+  results <- stats::optim(
     par    = par,
     lower  = lower, 
     upper  = upper,
@@ -142,6 +144,8 @@ plot_gompertz_callibration <- function(
   dispersion,
   max_age
 ) {
+
+  age <- survival_rate <- survival_rate_gompertz <- NULL
 
   if (missing(max_age))    max_age    <- params$max_age
   if (missing(mode))       mode       <- params$mode
@@ -224,6 +228,8 @@ calc_gompertz_joint_paramaters <- function(
   max_age = 120
 ) {
 
+  year <- NULL
+
   survival_rates <- 
     dplyr::tibble(
       year = 0:(max_age - min(p1$age, p2$age)),
@@ -266,7 +272,7 @@ calc_gompertz_joint_paramaters <- function(
     dispersion = mean(c(p1$dispersion, p2$dispersion))
   )
   
-  params <- optim(
+  params <- stats::optim(
     par = init_params, 
     fn  = objective_fun
   )
@@ -293,7 +299,12 @@ calc_gompertz_joint_paramaters <- function(
 } 
 
 #' @export
-plot_joint_survival <- function(params, include_gompertz = FALSE) {
+plot_joint_survival <- function(
+  params, 
+  include_gompertz = FALSE
+) {
+
+  year <- value <- name <- NULL
 
   fixed_colors <- c(
     "p1"  = PrettyCols::prettycols("Bold")[1],
