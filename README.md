@@ -62,7 +62,7 @@ install.packages(
   Better Financial Decisions*. `ISBN:978-1-119-74791-8`.
 - Idzorek, Thomas M., and Paul D. Kaplan. (2024) *Lifetime Financial
   Advice: A Personalized Optimal Multilevel Approach*. CFA Institute
-  Research Foundation.
+  Research Foundation. `ISBN:978-1-952-92737-9`.
 - Milevsky, Moshe. (2020) *Retirement Income Recipes in R: From Ruin
   Probabilities to Intelligent Drawdowns*. Springer.
   `doi.org/10.1007/978-3-030-51434-1`.
