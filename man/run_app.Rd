@@ -35,5 +35,6 @@ Run a package app
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 run_app("risk-adjusted-returns")
 run_app("purchasing-power")
+run_app("retirement-ruin")
 \dontshow{\}) # examplesIf}
 }

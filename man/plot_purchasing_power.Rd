@@ -35,7 +35,6 @@ plot_purchasing_power(
   x = 10,
   real_interest_rate = seq(-0.02, 0.04, by = 0.02)
 )
-
 }
 \seealso{
 \itemize{

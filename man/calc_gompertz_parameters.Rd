@@ -31,6 +31,20 @@ A list containing:
 \description{
 Calculating Gompertz model parameters
 }
+\examples{
+mortality_rates <- 
+  dplyr::filter(
+    life_tables,
+    country == "USA" & 
+    sex     == "male" &
+    year    == 2022
+  )
+  
+calc_gompertz_parameters(
+  mortality_rates = mortality_rates,
+  current_age     = 65
+)
+}
 \references{
 Blanchet, David M., and Paul D. Kaplan. 2013. "Alpha, Beta, and Now... Gamma." Journal of Retirement 1 (2): 29-45. \doi{10.3905/jor.2013.1.2.029}.
 }

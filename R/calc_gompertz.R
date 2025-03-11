@@ -10,6 +10,13 @@
 #' to 'target_age' based on the Gompertz distribution 
 #' with the given parameters.
 #' 
+#' @examples
+#' calc_gompertz_survival_probability(
+#'   current_age = 65, 
+#'   target_age  = 85, 
+#'   mode        = 80, 
+#'   dispersion  = 10
+#' )
 #' @export
 
 calc_gompertz_survival_probability <- function(
@@ -88,6 +95,20 @@ calc_gompertz_surv_prob <- function(
 #'   \item{max_age}{The maximum age parameter}
 #' 
 #' @references Blanchet, David M., and Paul D. Kaplan. 2013. "Alpha, Beta, and Now... Gamma." Journal of Retirement 1 (2): 29-45. \doi{10.3905/jor.2013.1.2.029}.
+#' 
+#' @examples
+#' mortality_rates <- 
+#'   dplyr::filter(
+#'     life_tables,
+#'     country == "USA" & 
+#'     sex     == "male" &
+#'     year    == 2022
+#'   )
+#'   
+#' calc_gompertz_parameters(
+#'   mortality_rates = mortality_rates,
+#'   current_age     = 65
+#' )
 #' @export
 
 calc_gompertz_parameters <- function(
@@ -176,6 +197,21 @@ if (estimate_max_age) {
 #' @return A [ggplot2::ggplot()] object showing the comparison between
 #' actual survival rates from life tables and the fitted Gompertz model.
 #' 
+#' @examples
+#' mortality_rates <- 
+#'   dplyr::filter(
+#'     life_tables,
+#'     country == "USA" & 
+#'     sex     == "female" &
+#'     year    == 2022
+#'   )
+#'   
+#' params <- calc_gompertz_parameters(
+#'   mortality_rates = mortality_rates,
+#'   current_age     = 65
+#' )
+#' 
+#' plot_gompertz_calibration(params = params)
 #' @export
 
 plot_gompertz_calibration <- function(
@@ -265,7 +301,21 @@ plot_gompertz_calibration <- function(
 #'   \item{data}{A data frame with survival rates for 'p1', 'p2', 'joint' survival, and the fitted Gompertz model}
 #'   \item{mode}{The mode of the joint Gompertz distribution}
 #'   \item{dispersion}{The dispersion parameter of the joint Gompertz distribution}
-#' 
+#'   
+#' @examples
+#' calc_gompertz_joint_parameters(
+#'   p1 = list(
+#'     age        = 65,
+#'     mode       = 88,
+#'     dispersion = 10.65
+#'   ),
+#'   p2 = list(
+#'     age        = 60,
+#'     mode       = 91,
+#'     dispersion = 8.88
+#'   ),
+#'   max_age = 110
+#' )
 #' @export
 
 calc_gompertz_joint_parameters <- function(
@@ -360,6 +410,22 @@ calc_gompertz_joint_parameters <- function(
 #' @return A [ggplot2::ggplot()] object showing the survival probabilities
 #' for two individuals and their joint survival probability.
 #' 
+#' @examples
+#' params <- calc_gompertz_joint_parameters(
+#'   p1 = list(
+#'     age        = 65,
+#'     mode       = 88,
+#'     dispersion = 10.65
+#'   ),
+#'   p2 = list(
+#'     age        = 60,
+#'     mode       = 91,
+#'     dispersion = 8.88
+#'   ),
+#'   max_age = 110
+#' )
+#' 
+#' plot_joint_survival(params = params, include_gompertz = TRUE)
 #' @export
 
 plot_joint_survival <- function(

@@ -16,6 +16,16 @@
 #' 
 #' @references Milevsky, M.A. (2020). Retirement Income Recipes in R: From Ruin Probabilities to Intelligent Drawdowns. Use R! Series. \doi{10.1007/978-3-030-51434-1}.
 #' 
+#' @examples
+#' calc_retirement_ruin(
+#'   age                   = 65,
+#'   gompertz_mode         = 88,
+#'   gompertz_dispersion   = 10,
+#'   portfolio_value       = 1000000,
+#'   monthly_spendings     = 3000,  
+#'   portfolio_return_mean = 0.02,
+#'   portfolio_return_sd   = 0.15
+#' )
 #' @export
 
 calc_retirement_ruin <- function(

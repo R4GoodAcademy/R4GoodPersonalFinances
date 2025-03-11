@@ -38,3 +38,14 @@ it will be highlighted on the plot with annotations.
 \description{
 Plotting retirement ruin
 }
+\examples{
+plot_retirement_ruin(
+  portfolio_return_mean = 3.4,
+  portfolio_return_sd   = 0.15,
+  age                   = 65,
+  gompertz_mode         = 88,
+  gompertz_dispersion   = 10,
+  portfolio_value       = 1000000,
+  monthly_spendings     = 3000
+)
+}

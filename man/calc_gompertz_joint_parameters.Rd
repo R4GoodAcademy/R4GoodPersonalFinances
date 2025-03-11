@@ -28,3 +28,18 @@ A list containing:
 \description{
 Calculating the Gompertz model parameters for joint survival
 }
+\examples{
+calc_gompertz_joint_parameters(
+  p1 = list(
+    age        = 65,
+    mode       = 88,
+    dispersion = 10.65
+  ),
+  p2 = list(
+    age        = 60,
+    mode       = 91,
+    dispersion = 8.88
+  ),
+  max_age = 110
+)
+}

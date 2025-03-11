@@ -22,3 +22,19 @@ actual survival rates from life tables and the fitted Gompertz model.
 \description{
 Plotting the results of Gompertz model calibration
 }
+\examples{
+mortality_rates <- 
+  dplyr::filter(
+    life_tables,
+    country == "USA" & 
+    sex     == "female" &
+    year    == 2022
+  )
+  
+params <- calc_gompertz_parameters(
+  mortality_rates = mortality_rates,
+  current_age     = 65
+)
+
+plot_gompertz_calibration(params = params)
+}

@@ -12,6 +12,15 @@
 #' 
 #' @references HMD. Human Mortality Database. Max Planck Institute for Demographic Research (Germany), University of California, Berkeley (USA), and French Institute for Demographic Studies (France). Available at www.mortality.org 
 #' 
+#' @examples
+#' \dontrun{
+#' # Download 'txt' files 
+#' # ("mltper_1x1.txt", "fltper_1x1.txt", "bltper_1x1.txt") 
+#' # for a given country to the working directory
+#' # from https://www.mortality.org after registration.
+#' 
+#' read_hmd_life_tables(path = getwd())
+#' }
 #' @export
 #' 
 read_hmd_life_tables <- function(

@@ -31,3 +31,11 @@ with the given parameters.
 \description{
 Calculating Gompertz survival probability
 }
+\examples{
+calc_gompertz_survival_probability(
+  current_age = 65, 
+  target_age  = 85, 
+  mode        = 80, 
+  dispersion  = 10
+)
+}

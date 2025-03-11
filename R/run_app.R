@@ -18,6 +18,7 @@
 #' @examplesIf interactive()
 #' run_app("risk-adjusted-returns")
 #' run_app("purchasing-power")
+#' run_app("retirement-ruin")
 #' @export
 
 run_app <- function(
