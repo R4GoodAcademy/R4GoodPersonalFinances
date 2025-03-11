@@ -36,6 +36,10 @@ calc_retirement_ruin(
 \item{spending_rate}{A numeric. Spending rate
 (initial withdrawal rate).}
 }
+\value{
+A numeric. The probability of retirement ruin (between 0 and 1),
+representing the likelihood of running out of money during retirement.
+}
 \description{
 Calculating retirement ruin probability
 }

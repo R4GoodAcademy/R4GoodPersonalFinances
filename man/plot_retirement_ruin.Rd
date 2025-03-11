@@ -29,6 +29,12 @@ plot_retirement_ruin(
 
 \item{monthly_spendings}{A numeric. Monthly spendings.}
 }
+\value{
+A \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} object showing the probability of
+retirement ruin for different monthly spending levels.
+If a specific 'monthly_spendings' value is provided,
+it will be highlighted on the plot with annotations.
+}
 \description{
 Plotting retirement ruin
 }

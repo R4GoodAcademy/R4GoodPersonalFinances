@@ -11,6 +11,10 @@ plot_joint_survival(params, include_gompertz = FALSE)
 
 \item{include_gompertz}{A logical. Should the Gompertz survival curve be included in the plot?}
 }
+\value{
+A \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} object showing the survival probabilities
+for two individuals and their joint survival probability.
+}
 \description{
 Plotting the results of Gompertz model calibration for joint survival
 }

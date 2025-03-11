@@ -3,6 +3,13 @@
 #' @param path A character. Path to the folder with life tables.
 #' @param files A character. Names of files with life tables.
 #' 
+#' @return A data frame containing mortality data with columns:
+#'   \item{sex}{Character - sex ('male', 'female', or 'both')}
+#'   \item{year}{Integer - the year of the data}
+#'   \item{age}{Integer - age}
+#'   \item{mortality_rate}{Numeric - mortality rate}
+#'   \item{life_expectancy}{Numeric - life expectancy}
+#' 
 #' @references HMD. Human Mortality Database. Max Planck Institute for Demographic Research (Germany), University of California, Berkeley (USA), and French Institute for Demographic Studies (France). Available at www.mortality.org 
 #' 
 #' @export

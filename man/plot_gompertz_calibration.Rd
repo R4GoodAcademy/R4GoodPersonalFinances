@@ -15,6 +15,10 @@ plot_gompertz_calibration(params, mode, dispersion, max_age)
 
 \item{max_age}{A numeric. The maximum age of the Gompertz model.}
 }
+\value{
+A \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} object showing the comparison between
+actual survival rates from life tables and the fitted Gompertz model.
+}
 \description{
 Plotting the results of Gompertz model calibration
 }

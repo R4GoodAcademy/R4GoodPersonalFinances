@@ -19,6 +19,12 @@ for the second person (p2).}
 
 \item{max_age}{A numeric. The maximum age for the Gompertz model.}
 }
+\value{
+A list containing:
+\item{data}{A data frame with survival rates for 'p1', 'p2', 'joint' survival, and the fitted Gompertz model}
+\item{mode}{The mode of the joint Gompertz distribution}
+\item{dispersion}{The dispersion parameter of the joint Gompertz distribution}
+}
 \description{
 Calculating the Gompertz model parameters for joint survival
 }

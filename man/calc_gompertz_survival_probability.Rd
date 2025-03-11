@@ -23,6 +23,11 @@ calc_gompertz_survival_probability(
 
 \item{max_age}{Maximum age. Defaults to \code{NULL}.}
 }
+\value{
+A numeric. The probability of survival from 'current_age'
+to 'target_age' based on the Gompertz distribution
+with the given parameters.
+}
 \description{
 Calculating Gompertz survival probability
 }

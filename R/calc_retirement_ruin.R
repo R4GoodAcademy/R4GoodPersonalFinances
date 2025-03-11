@@ -11,6 +11,9 @@
 #' @param spending_rate A numeric. Spending rate 
 #' (initial withdrawal rate).
 #' 
+#' @return A numeric. The probability of retirement ruin (between 0 and 1),
+#' representing the likelihood of running out of money during retirement.
+#' 
 #' @references Milevsky, M.A. (2020). Retirement Income Recipes in R: From Ruin Probabilities to Intelligent Drawdowns. Use R! Series. \doi{10.1007/978-3-030-51434-1}.
 #' 
 #' @export

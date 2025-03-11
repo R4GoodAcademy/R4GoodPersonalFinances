@@ -8,6 +8,11 @@
 #' @param portfolio_value A numeric. Initial portfolio value.
 #' @param monthly_spendings A numeric. Monthly spendings.
 #' 
+#' @return A [ggplot2::ggplot()] object showing the probability of 
+#' retirement ruin for different monthly spending levels. 
+#' If a specific 'monthly_spendings' value is provided,
+#' it will be highlighted on the plot with annotations.
+#' 
 #' @export
 
 plot_retirement_ruin <- function(

@@ -6,6 +6,10 @@
 #' @param dispersion Dispersion of the Gompertz distribution
 #' @param max_age Maximum age. Defaults to `NULL`.
 #' 
+#' @returns A numeric. The probability of survival from 'current_age' 
+#' to 'target_age' based on the Gompertz distribution 
+#' with the given parameters.
+#' 
 #' @export
 
 calc_gompertz_survival_probability <- function(
@@ -75,6 +79,13 @@ calc_gompertz_surv_prob <- function(
 #' filtered data from [life_tables] object.
 #' @param current_age A numeric. Current age.
 #' @param estimate_max_age A logical. Should the maximum age be estimated?
+#' 
+#' @returns A list containing:
+#'   \item{data}{The input mortality rates data frame with additional columns like 'survival_rate' and 'probability_of_death'}
+#'   \item{mode}{The mode of the Gompertz distribution}
+#'   \item{dispersion}{The dispersion parameter of the Gompertz distribution}
+#'   \item{current_age}{The current age parameter}
+#'   \item{max_age}{The maximum age parameter}
 #' 
 #' @references Blanchet, David M., and Paul D. Kaplan. 2013. "Alpha, Beta, and Now... Gamma." Journal of Retirement 1 (2): 29-45. \doi{10.3905/jor.2013.1.2.029}.
 #' @export
@@ -162,6 +173,9 @@ if (estimate_max_age) {
 #' @param dispersion A numeric. The dispersion of the Gompertz model.
 #' @param max_age A numeric. The maximum age of the Gompertz model.
 #' 
+#' @return A [ggplot2::ggplot()] object showing the comparison between
+#' actual survival rates from life tables and the fitted Gompertz model.
+#' 
 #' @export
 
 plot_gompertz_calibration <- function(
@@ -246,6 +260,11 @@ plot_gompertz_calibration <- function(
 #' @param p2 A list with `age`, `mode` and `dispersion` parameters
 #' for the second person (p2).
 #' @param max_age A numeric. The maximum age for the Gompertz model.
+#' 
+#' @return A list containing:
+#'   \item{data}{A data frame with survival rates for 'p1', 'p2', 'joint' survival, and the fitted Gompertz model}
+#'   \item{mode}{The mode of the joint Gompertz distribution}
+#'   \item{dispersion}{The dispersion parameter of the joint Gompertz distribution}
 #' 
 #' @export
 
@@ -337,6 +356,9 @@ calc_gompertz_joint_parameters <- function(
 #' 
 #' @param params A list returned by [calc_gompertz_joint_parameters()] function.
 #' @param include_gompertz A logical. Should the Gompertz survival curve be included in the plot?
+#' 
+#' @return A [ggplot2::ggplot()] object showing the survival probabilities
+#' for two individuals and their joint survival probability.
 #' 
 #' @export
 

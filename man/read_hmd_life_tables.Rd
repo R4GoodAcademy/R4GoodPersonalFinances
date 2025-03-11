@@ -14,6 +14,14 @@ read_hmd_life_tables(
 
 \item{files}{A character. Names of files with life tables.}
 }
+\value{
+A data frame containing mortality data with columns:
+\item{sex}{Character - sex ('male', 'female', or 'both')}
+\item{year}{Integer - the year of the data}
+\item{age}{Integer - age}
+\item{mortality_rate}{Numeric - mortality rate}
+\item{life_expectancy}{Numeric - life expectancy}
+}
 \description{
 Reading HMD life tables
 }

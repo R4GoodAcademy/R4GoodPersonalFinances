@@ -20,6 +20,14 @@ filtered data from \link{life_tables} object.}
 
 \item{estimate_max_age}{A logical. Should the maximum age be estimated?}
 }
+\value{
+A list containing:
+\item{data}{The input mortality rates data frame with additional columns like 'survival_rate' and 'probability_of_death'}
+\item{mode}{The mode of the Gompertz distribution}
+\item{dispersion}{The dispersion parameter of the Gompertz distribution}
+\item{current_age}{The current age parameter}
+\item{max_age}{The maximum age parameter}
+}
 \description{
 Calculating Gompertz model parameters
 }
