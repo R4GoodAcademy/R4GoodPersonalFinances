@@ -5,6 +5,10 @@
 
 <!-- badges: start -->
 
+[!CRAN
+status](https://CRAN.R-project.org/package=R4GoodPersonalFinances)
+[![metacran
+downloads](https://cranlogs.r-pkg.org/badges/R4GoodPersonalFinances)](https://cran.r-project.org/package=R4GoodPersonalFinances)
 [![R-CMD-check](https://github.com/R4GoodAcademy/R4GoodPersonalFinances/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/R4GoodAcademy/R4GoodPersonalFinances/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/R4GoodAcademy/R4GoodPersonalFinances/graph/badge.svg)](https://app.codecov.io/gh/R4GoodAcademy/R4GoodPersonalFinances)
@@ -29,6 +33,16 @@ application. They assist you in:
 - and more.
 
 ## Installation
+
+### Installation from CRAN
+
+The latest stable version of the package released on CRAN can be
+installed with:
+
+``` r
+# install.packages("pak")
+pak::pak("R4GoodPersonalFinances")
+```
 
 ### Installation from GitHub
 
