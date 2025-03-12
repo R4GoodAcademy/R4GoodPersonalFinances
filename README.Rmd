@@ -66,10 +66,11 @@ install.packages(
 
 ## R for Good Academy  <img src="man/figures/r4ga-logo.png" align="right" height="200" alt="" class="logo-custom-academy" />
 
-For more information, see [www.r4good.academy](https://www.r4good.academy/).
+For more information, see [www.r4good.academy](https://www.r4good.academy/en/blog.html#category=R4GoodPersonalFinances).
 The `R4GoodPersonalFinances` R package is part of the *R for Good Academy* project. You can find there free resources explaining in details concepts of personal finances implemented in this R package. For example:
 
 * [How to Determine Our Optimal Asset Allocation?](https://www.r4good.academy/en/blog/optimal-asset-allocation/index.en.html#what-do-you-need-to-calculate-your-optimal-asset-allocation)
+* See more: [www.r4good.academy](https://www.r4good.academy/en/blog.html#category=R4GoodPersonalFinances)
 
 The official package documentation can be found here:  
 [r4goodacademy.github.io/R4GoodPersonalFinances](https://r4goodacademy.github.io/R4GoodPersonalFinances/)

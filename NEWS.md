@@ -1,3 +1,17 @@
+# R4GoodPersonalFinances 0.2.0
+
+This release provides functions for calculating probability of retirement ruin and functions for calibrating the underlying Gompertz model with the use of the mortality rates.
+
+## Major changes
+
+* Added `calc_retirement_ruin()` and `plot_retirement_ruin()` to calculate and visualize the probability of retirement ruin.
+* Added `retirement-ruin` option to `run_app()` function for
+running package new interactive app.
+* Added `calc_gompertz_survival_probability()` to calculate the probability of survival using the Gompertz model. 
+* Added `calc_gompertz_parameters()` to calculate the parameters of the Gompertz model based on mortality rates and `calc_gompertz_joint_parameters()` to calculate the parameters of the joint Gompertz model.
+* Added `plot_gompertz_calibration()` for visually checking the calibration of the Gompertz model and `plot_joint_survival()` for plotting the survival probabilities for two individuals and their joint survival probability.
+* Added `read_hmd_life_tables()` for reading the 'Human Mortality Database' (HMD) life tables files.
+
 # R4GoodPersonalFinances 0.1.1
 
 ## Bugfixes
