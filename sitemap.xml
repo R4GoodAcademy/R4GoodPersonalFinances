@@ -6,13 +6,22 @@
 <url><loc>https://r4goodacademy.github.io/R4GoodPersonalFinances/index.html</loc></url>
 <url><loc>https://r4goodacademy.github.io/R4GoodPersonalFinances/news/index.html</loc></url>
 <url><loc>https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/R4GoodPersonalFinances-package.html</loc></url>
+<url><loc>https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/calc_gompertz_joint_parameters.html</loc></url>
+<url><loc>https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/calc_gompertz_parameters.html</loc></url>
+<url><loc>https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/calc_gompertz_survival_probability.html</loc></url>
 <url><loc>https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/calc_optimal_risky_asset_allocation.html</loc></url>
 <url><loc>https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/calc_purchasing_power.html</loc></url>
+<url><loc>https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/calc_retirement_ruin.html</loc></url>
 <url><loc>https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/calc_risk_adjusted_return.html</loc></url>
 <url><loc>https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/index.html</loc></url>
+<url><loc>https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/life_tables.html</loc></url>
+<url><loc>https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/plot_gompertz_calibration.html</loc></url>
+<url><loc>https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/plot_joint_survival.html</loc></url>
 <url><loc>https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/plot_purchasing_power.html</loc></url>
+<url><loc>https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/plot_retirement_ruin.html</loc></url>
 <url><loc>https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/plot_risk_adjusted_returns.html</loc></url>
 <url><loc>https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/print_.html</loc></url>
+<url><loc>https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/read_hmd_life_tables.html</loc></url>
 <url><loc>https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/run_app.html</loc></url>
 </urlset>
 

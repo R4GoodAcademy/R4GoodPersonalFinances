@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">R4GoodPersonalFinances</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,9 +28,22 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/R4GoodAcademy/R4GoodPersonalFinances/blob/v0.1.1/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/R4GoodAcademy/R4GoodPersonalFinances/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.2.0" id="r4goodpersonalfinances-020">R4GoodPersonalFinances 0.2.0<a class="anchor" aria-label="anchor" href="#r4goodpersonalfinances-020"></a></h2>
+<p>This release provides functions for calculating probability of retirement ruin and functions for calibrating the underlying Gompertz model with the use of the mortality rates.</p>
+<div class="section level3">
+<h3 id="major-changes-0-2-0">Major changes<a class="anchor" aria-label="anchor" href="#major-changes-0-2-0"></a></h3>
+<ul><li>Added <code><a href="../reference/calc_retirement_ruin.html">calc_retirement_ruin()</a></code> and <code><a href="../reference/plot_retirement_ruin.html">plot_retirement_ruin()</a></code> to calculate and visualize the probability of retirement ruin.</li>
+<li>Added <code>retirement-ruin</code> option to <code><a href="../reference/run_app.html">run_app()</a></code> function for running package new interactive app.</li>
+<li>Added <code><a href="../reference/calc_gompertz_survival_probability.html">calc_gompertz_survival_probability()</a></code> to calculate the probability of survival using the Gompertz model.</li>
+<li>Added <code><a href="../reference/calc_gompertz_parameters.html">calc_gompertz_parameters()</a></code> to calculate the parameters of the Gompertz model based on mortality rates and <code><a href="../reference/calc_gompertz_joint_parameters.html">calc_gompertz_joint_parameters()</a></code> to calculate the parameters of the joint Gompertz model.</li>
+<li>Added <code><a href="../reference/plot_gompertz_calibration.html">plot_gompertz_calibration()</a></code> for visually checking the calibration of the Gompertz model and <code><a href="../reference/plot_joint_survival.html">plot_joint_survival()</a></code> for plotting the survival probabilities for two individuals and their joint survival probability.</li>
+<li>Added <code><a href="../reference/read_hmd_life_tables.html">read_hmd_life_tables()</a></code> for reading the ‘Human Mortality Database’ (HMD) life tables files.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.1" id="r4goodpersonalfinances-011">R4GoodPersonalFinances 0.1.1<a class="anchor" aria-label="anchor" href="#r4goodpersonalfinances-011"></a></h2>
 <div class="section level3">

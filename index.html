@@ -18,8 +18,8 @@
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="Make Better Financial Decisions">
-<meta name="description" content="Make informed, data-driven decisions for your personal or household finances. Use tools and methods that are selected carefully to align with academic consensus, bridging the gap between theoretical knowledge and practical application. They assist you in finding optimal asset allocation, preparing for retirement or financial independence, calculating optimal spending, and more.">
-<meta property="og:description" content="Make informed, data-driven decisions for your personal or household finances. Use tools and methods that are selected carefully to align with academic consensus, bridging the gap between theoretical knowledge and practical application. They assist you in finding optimal asset allocation, preparing for retirement or financial independence, calculating optimal spending, and more.">
+<meta name="description" content="Make informed, data-driven decisions for your personal or household finances. Use tools and methods that are selected carefully to align with academic consensus, bridging the gap between theoretical knowledge and practical application. They assist you in finding optimal asset allocation, preparing for retirement or financial independence, calculating optimal spending, and more. For more details see: Haghani V., White J. (2023, ISBN:978-1-119-74791-8), Idzorek T., Kaplan P. (2024, ISBN:9781952927379).">
+<meta property="og:description" content="Make informed, data-driven decisions for your personal or household finances. Use tools and methods that are selected carefully to align with academic consensus, bridging the gap between theoretical knowledge and practical application. They assist you in finding optimal asset allocation, preparing for retirement or financial independence, calculating optimal spending, and more. For more details see: Haghani V., White J. (2023, ISBN:978-1-119-74791-8), Idzorek T., Kaplan P. (2024, ISBN:9781952927379).">
 <meta property="og:image" content="https://r4goodacademy.github.io/R4GoodPersonalFinances/logo.png">
 </head>
 <body>
@@ -30,7 +30,7 @@
 
     <a class="navbar-brand me-2" href="index.html">R4GoodPersonalFinances</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,10 +76,18 @@ These tools are selected carefully to align with academic consensus, bridging th
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <div class="section level3">
+<h3 id="installation-from-cran">Installation from CRAN<a class="anchor" aria-label="anchor" href="#installation-from-cran"></a>
+</h3>
+<p>The latest stable version of the package released on CRAN can be installed with:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"R4GoodPersonalFinances"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
 <h3 id="installation-from-github">Installation from GitHub<a class="anchor" aria-label="anchor" href="#installation-from-github"></a>
 </h3>
 <p>You can install the latest version of R4GoodPersonalFinances from <a href="https://github.com/R4GoodAcademy/R4GoodPersonalFinances" class="external-link">GitHub</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"R4GoodAcademy/R4GoodPersonalFinances"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -87,7 +95,7 @@ These tools are selected carefully to align with academic consensus, bridging th
 <h3 id="installation-from-r-universe">Installation from R-universe<a class="anchor" aria-label="anchor" href="#installation-from-r-universe"></a>
 </h3>
 <p>You can install the package from <a href="https://r4goodacademy.r-universe.dev/R4GoodPersonalFinances" class="external-link">R-universe</a> also as <code>WebAssembly</code> (WASM) binaries for use in WebR applications:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span></span>
 <span>  <span class="st">"R4GoodPersonalFinances"</span>, </span>
 <span>  repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
@@ -101,15 +109,19 @@ These tools are selected carefully to align with academic consensus, bridging th
 <h2 id="acknowledgments">Acknowledgments<a class="anchor" aria-label="anchor" href="#acknowledgments"></a>
 </h2>
 <ul>
-<li>Haghani V., White J. (2023) “The Missing Billionaires: A Guide to Better Financial Decisions.” <code>ISBN:978-1-119-74791-8</code>.</li>
+<li>Haghani V., White J. (2023) <em>The Missing Billionaires: A Guide to Better Financial Decisions</em>. <code>ISBN:978-1-119-74791-8</code>.</li>
+<li>Idzorek, Thomas M., and Paul D. Kaplan. (2024) <em>Lifetime Financial Advice: A Personalized Optimal Multilevel Approach</em>. CFA Institute Research Foundation. <code>ISBN:978-1-952-92737-9</code>.</li>
+<li>Milevsky, Moshe. (2020) <em>Retirement Income Recipes in R: From Ruin Probabilities to Intelligent Drawdowns</em>. Springer. <code>doi.org/10.1007/978-3-030-51434-1</code>.</li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="r-for-good-academy-">R for Good Academy <img src="reference/figures/r4ga-logo.png" align="right" height="200" alt="" class="logo-custom-academy"><a class="anchor" aria-label="anchor" href="#r-for-good-academy-"></a>
 </h2>
-<p>For more information, see <a href="https://www.r4good.academy/" class="external-link">www.r4good.academy</a>. The <code>R4GoodPersonalFinances</code> R package is part of the <em>R for Good Academy</em> project. You can find there free resources explaining in details concepts of personal finances implemented in this R package. For example:</p>
+<p>For more information, see <a href="https://www.r4good.academy/en/blog.html#category=R4GoodPersonalFinances" class="external-link">www.r4good.academy</a>. The <code>R4GoodPersonalFinances</code> R package is part of the <em>R for Good Academy</em> project. You can find there free resources explaining in details concepts of personal finances implemented in this R package. For example:</p>
 <ul>
 <li><a href="https://www.r4good.academy/en/blog/optimal-asset-allocation/index.en.html#what-do-you-need-to-calculate-your-optimal-asset-allocation" class="external-link">How to Determine Our Optimal Asset Allocation?</a></li>
+<li>See more: <a href="https://www.r4good.academy/en/blog.html#category=R4GoodPersonalFinances" class="external-link">www.r4good.academy</a>
+</li>
 </ul>
 <p>The official package documentation can be found here:<br><a href="https://r4goodacademy.github.io/R4GoodPersonalFinances/">r4goodacademy.github.io/R4GoodPersonalFinances</a></p>
 <blockquote>
@@ -152,6 +164,7 @@ These tools are selected carefully to align with academic consensus, bridging th
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
+<li><a href="https://cran.r-project.org/package=R4GoodPersonalFinances" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/R4GoodPersonalFinances" alt="metacran downloads"></a></li>
 <li><a href="https://github.com/R4GoodAcademy/R4GoodPersonalFinances/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/R4GoodAcademy/R4GoodPersonalFinances/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://app.codecov.io/gh/R4GoodAcademy/R4GoodPersonalFinances" class="external-link"><img src="https://codecov.io/gh/R4GoodAcademy/R4GoodPersonalFinances/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://r4goodacademy.r-universe.dev/R4GoodPersonalFinances" class="external-link"><img src="https://r4goodacademy.r-universe.dev/badges/R4GoodPersonalFinances" alt="R4GoodPersonalFinances status badge"></a></li>
