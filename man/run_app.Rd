@@ -5,7 +5,7 @@
 \title{Run a package app}
 \usage{
 run_app(
-  which = c("risk-adjusted-returns", "purchasing-power"),
+  which = c("risk-adjusted-returns", "purchasing-power", "retirement-ruin"),
   res = 120,
   shinylive = FALSE
 )
@@ -17,6 +17,7 @@ Currently available:
 \item \code{risk-adjusted-returns} - Plotting risk-adjusted returns for various allocations to the risky asset allows you to find the optimal allocation.
 \item \code{purchasing-power} - Plotting the effect of real interest rates
 (positive or negative) on the purchasing power of savings over time.
+\item \code{retirement-ruin} - Plotting the probability of retirement ruin.
 }}
 
 \item{res}{A numeric. The initial resolution of the plots.}
@@ -34,5 +35,6 @@ Run a package app
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 run_app("risk-adjusted-returns")
 run_app("purchasing-power")
+run_app("retirement-ruin")
 \dontshow{\}) # examplesIf}
 }

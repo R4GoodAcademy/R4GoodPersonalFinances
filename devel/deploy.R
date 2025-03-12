@@ -21,6 +21,9 @@ R4GoodPersonalFinances:::apps$package_version
 R4GoodPersonalFinances::run_app(shinylive = TRUE)
 R4GoodPersonalFinances::run_app()
 R4GoodPersonalFinances::run_app(which = "purchasing-power")
+R4GoodPersonalFinances::run_app("retirement-ruin", shinylive = TRUE)
+R4GoodPersonalFinances::run_app("purchasing-power", shinylive = TRUE)
+R4GoodPersonalFinances::run_app("risk-adjusted-returns", shinylive = TRUE)
 
 devtools::document()
 devtools::build_readme()
@@ -33,9 +36,9 @@ spelling::spell_check_package()
 spelling::update_wordlist()
 
 urlchecker::url_check()
-urlchecker::url_update()
+# urlchecker::url_update()
 
-usethis::use_tidy_description()
+# usethis::use_tidy_description()
 
 devtools::test_coverage()
 
@@ -58,3 +61,8 @@ usethis::use_cran_comments()
 
 devtools::check(remote = TRUE, manual = TRUE)
 
+# usethis::use_release_issue()
+
+R4GoodPersonalFinances:::apps$package_version == packageVersion("R4GoodPersonalFinances")
+
+devtools::dev_sitrep()

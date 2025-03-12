@@ -3,6 +3,6 @@ bibentry(
   title    = "R4GoodPersonalFinances: Make Better Financial Decisions",
   author   = c(person("Kamil", "Wais"), person("Olesia", "Wais")),
   year     = 2025,
-  note     = "R package version 0.1.1, https://r4goodacademy.github.io/R4GoodPersonalFinances/ ",
+  note     = "R package version 0.2.0, https://r4goodacademy.github.io/R4GoodPersonalFinances/ ",
   url      = "https://www.r4good.academy/"
 )

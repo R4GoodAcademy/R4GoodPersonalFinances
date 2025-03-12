@@ -6,6 +6,7 @@
 #' * `risk-adjusted-returns` - Plotting risk-adjusted returns for various allocations to the risky asset allows you to find the optimal allocation.
 #' * `purchasing-power` - Plotting the effect of real interest rates 
 #' (positive or negative) on the purchasing power of savings over time.
+#' * `retirement-ruin` - Plotting the probability of retirement ruin.
 #' 
 #' @param res A numeric. The initial resolution of the plots.
 #' 
@@ -17,11 +18,14 @@
 #' @examplesIf interactive()
 #' run_app("risk-adjusted-returns")
 #' run_app("purchasing-power")
+#' run_app("retirement-ruin")
 #' @export
+
 run_app <- function(
   which = c(
     "risk-adjusted-returns",
-    "purchasing-power"
+    "purchasing-power",
+    "retirement-ruin"
   ),
   res = 120,
   shinylive = FALSE

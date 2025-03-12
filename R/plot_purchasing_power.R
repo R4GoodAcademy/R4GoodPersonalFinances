@@ -18,8 +18,8 @@
 #'   x = 10,
 #'   real_interest_rate = seq(-0.02, 0.04, by = 0.02)
 #' )
-#' 
 #' @export
+
 plot_purchasing_power <- function(x, 
                                   real_interest_rate, 
                                   years = 50,

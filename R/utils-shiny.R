@@ -1,7 +1,7 @@
-sidebar_footer <- function() {
-  
-  package_version <- utils::packageVersion("R4GoodPersonalFinances")
-  app_version <- apps$package_version
+sidebar_footer <- function(
+  package_version = utils::packageVersion("R4GoodPersonalFinances"),
+  app_version     = apps$package_version
+) {
 
   if (package_version == app_version) {
     version_number <- as.character(package_version)

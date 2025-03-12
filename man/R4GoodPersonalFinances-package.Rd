@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Make informed, data-driven decisions for your personal or household finances. Use tools and methods that are selected carefully to align with academic consensus, bridging the gap between theoretical knowledge and practical application. They assist you in finding optimal asset allocation, preparing for retirement or financial independence, calculating optimal spending, and more.
+Make informed, data-driven decisions for your personal or household finances. Use tools and methods that are selected carefully to align with academic consensus, bridging the gap between theoretical knowledge and practical application. They assist you in finding optimal asset allocation, preparing for retirement or financial independence, calculating optimal spending, and more. For more details see: Haghani V., White J. (2023, ISBN:978-1-119-74791-8), Idzorek T., Kaplan P. (2024, ISBN:9781952927379).
 }
 \seealso{
 Useful links:
