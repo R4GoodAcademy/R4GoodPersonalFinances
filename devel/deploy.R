@@ -66,3 +66,10 @@ devtools::check(remote = TRUE, manual = TRUE)
 R4GoodPersonalFinances:::apps$package_version == packageVersion("R4GoodPersonalFinances")
 
 devtools::dev_sitrep()
+
+
+devtools::check_win_devel()
+devtools::submit_cran()
+
+usethis::use_github_release()
+usethis::use_dev_version(push = TRUE)
