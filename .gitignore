@@ -5,3 +5,4 @@ README.html
 
 /.quarto/
 devel/sandbox_ignored.R
+devel/gitignored/
