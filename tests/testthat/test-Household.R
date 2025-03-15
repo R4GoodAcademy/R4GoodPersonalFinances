@@ -50,13 +50,32 @@ test_that("calculating household max lifespan", {
   
   h <- Household$new()
 
-  h$calc_max_lifespan()
+  expect_error(
+    h$calc_max_lifespan(current_date = "2020-07-15")
+  )
   
   h$add_member(
     HouseholdMember$new(
+      name       = "test_member_older",  
       birth_date = "1980-07-15"
-    )
+    )  
+  )  
+  expect_equal(
+    h$calc_max_lifespan(current_date = "2020-07-15"),
+    60
   )
+  h$add_member(
+    HouseholdMember$new(
+      name       = "test_member_younger",  
+      birth_date = "1990-07-15"
+    )
+  )  
 
-  h$calc_max_lifespan()
+
+  expect_equal(
+    h$calc_max_lifespan(current_date = "2020-07-15"),
+    70
+  )  
 })
+
+

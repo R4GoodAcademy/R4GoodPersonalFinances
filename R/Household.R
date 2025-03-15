@@ -30,8 +30,24 @@ Household <- R6::R6Class(
         )
     },
 
-    calc_max_lifespan = function() {}
+    calc_max_lifespan = function(current_date) {
+      
+      current_date <- lubridate::as_date(current_date)
 
+      if (length(private$.household_members) == 0) {
+        cli::cli_abort(c(
+          "No members in the household:",
+          "x" = "There are no members added to the household!"
+        ))
+      }
+
+      private$.household_members |> 
+        purrr::map_dbl(function(household_member) {
+          household_member$calc_max_lifespan(current_date = current_date)
+        }) |> 
+        max() |> 
+        ceiling()
+    }
   ),
 
   active = list(
