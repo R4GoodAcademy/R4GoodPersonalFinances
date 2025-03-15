@@ -1,0 +1,64 @@
+test_that("generating household timeline", {
+  
+  h <- Household$new()
+
+  h$add_member(
+    HouseholdMember$new(
+      name       = "older",  
+      birth_date = "1980-02-15"
+    )  
+  )  
+  h$add_member(
+    HouseholdMember$new(
+      name       = "younger",  
+      birth_date = "1990-07-15"
+    )
+  )  
+
+  test_current_date <- "2020-07-15"
+
+  timeline <- 
+    generate_household_timeline(
+      household    = h, 
+      current_date = test_current_date
+    ) 
+  
+  if (interactive()) timeline |> print()
+  if (interactive()) tail(timeline, 3) |> print()
+
+  expect_equal(
+    NROW(timeline), 
+    h$calc_max_lifespan(current_date = test_current_date) + 1
+  )
+
+  expect_equal(min(timeline$index), 0)
+  expect_equal(
+    max(timeline$index), 
+    h$calc_max_lifespan(current_date = test_current_date)
+  )
+
+  expect_equal(min(timeline$years_left), 0)
+  expect_equal(
+    timeline$years_left[1], 
+    h$calc_max_lifespan(current_date = test_current_date) 
+  )
+
+  expect_equal(
+    range(timeline$year),
+    c(
+      lubridate::year(test_current_date), 
+      lubridate::year(test_current_date) + 
+        h$calc_max_lifespan(current_date = test_current_date)
+    )
+  )
+
+  expect_true(
+    tibble::is_tibble(timeline$hm)
+  )
+  expect_equal(
+    names(timeline$hm),
+    h$get_members() |> names()
+  )
+  expect_true(timeline$hm[[1]]$age |> is.numeric())
+  expect_true(timeline$hm[[2]]$age |> is.numeric())
+})
