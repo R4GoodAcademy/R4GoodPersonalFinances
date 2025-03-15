@@ -64,14 +64,13 @@ test_that("calculating household max lifespan", {
     h$calc_max_lifespan(current_date = "2020-07-15"),
     60
   )
+
   h$add_member(
     HouseholdMember$new(
       name       = "test_member_younger",  
       birth_date = "1990-07-15"
     )
   )  
-
-
   expect_equal(
     h$calc_max_lifespan(current_date = "2020-07-15"),
     70

@@ -77,5 +77,3 @@ test_that("calculating max lifespan", {
     hm$calc_max_lifespan(current_date = test_current_date)
   )
 })
-
-test_that("", {})
