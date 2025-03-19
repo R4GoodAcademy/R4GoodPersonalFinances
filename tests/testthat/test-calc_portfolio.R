@@ -75,6 +75,8 @@ test_that("calculating portfolio standard deviation", {
     0.87, 1.00, 0.37,
     0.21, 0.37, 1.00
   )
+  test_asset_correlations <- test_asset_correlations |> as.matrix()
+  
   if (interactive()) print(test_asset_correlations)
   
   portfolio_sd <- calc_portfolio_sd(
