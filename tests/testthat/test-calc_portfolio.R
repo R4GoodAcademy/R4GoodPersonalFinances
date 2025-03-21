@@ -110,6 +110,3 @@ test_that("calculating portfolio standard deviation", {
   )
 
 })
-
-
-  

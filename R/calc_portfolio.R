@@ -21,16 +21,23 @@ calc_portfolio_sd <- function(
 
   weights <- matrix(weights, nrow = 1)
 
-  standard_deviations <- diag(standard_deviations)
-
-  correlations <- as.matrix(correlations)
-
-  covariances <- 
-    standard_deviations %*% correlations %*% standard_deviations
-
+  covariances <- calc_covariance_matrix(
+    correlations        = correlations,
+    standard_deviations = standard_deviations
+  )
+  
   portfolio_variance <- weights %*% covariances %*% t(weights)
 
   as.numeric(sqrt(portfolio_variance))
 }
 
-  
+calc_covariance_matrix <- function(correlations, standard_deviations) {
+
+  correlations        <- as.matrix(correlations)
+  standard_deviations <- diag(standard_deviations)
+
+  covariances <- 
+    standard_deviations %*% correlations %*% standard_deviations
+
+  covariances
+}
