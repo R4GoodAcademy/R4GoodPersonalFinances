@@ -12,8 +12,7 @@ calc_optimal_allocations <- function(
     
   objective_function <- function(params) {
     
-    allocations <- params
-
+    allocations     <- params
     expected_return <- t(allocations) %*% expected_returns
     variance        <- t(allocations) %*% covariance_matrix %*% allocations
 
@@ -23,49 +22,51 @@ calc_optimal_allocations <- function(
       risk_tolerance  = risk_tolerance
     )
 
-    expected_utility
+    -expected_utility
   }
   
   assets_number       <- length(expected_returns)
+
+  # Equality constraint: sum(allocations) = 1
+  equality_constraint <- function(allocations) {
+    return(sum(allocations) - 1)
+  }
+
+  # Jacobian of the equality constraint
+  equality_jacobian <- function(allocations) {
+    return(rep(1, assets_number))
+  }
+
+  # Inequality constraint: allocation_i >= 0
+  inequality_constraint <- function(allocations) {
+    return(allocations)
+  }
+
+  # Jacobian of the inequality constraint
+  inequality_jacobian <- function(allocations) {
+    return(diag(assets_number))
+  }
+
   initial_allocations <- rep(1/assets_number, assets_number)
-  tolerance           <- 1e-9
 
-  
-  # Equality constraint: 
-    # sum(allocations) = 1 with tolerance
-    # Represented as two inequality constraints:
-    # 1. sum(allocations) >= 1 - tolerance
-    # 2. sum(allocations) <= 1 + tolerance =>
-    # -sum(allocations) >= -(1 + tolerance)  
-  # Inequality constraint: 
-    # allocation_i >= 0
-    # Represented as:
-    # diag(assets_number) %*% allocations >= rep(0, assets_number)
+  # Set lower bounds for allocations (non-negativity)
+  lower_bounds <- rep(0, assets_number)
 
-  ui <- rbind(
-    rep(1,  assets_number), # sum(allocations) >= 1 - tolerance
-    rep(-1, assets_number), # -sum(allocations) >= -(1 + tolerance)
-    diag(assets_number)     # allocation_i >= 0
-  )
-  ci <- c(
-    1 - tolerance, 
-    -(1 + tolerance), 
-    rep(0, assets_number)
+  optimization_result <- nloptr(
+    x0          = initial_allocations,
+    eval_f      = objective_function,
+    opts        = list(
+      algorithm = "NLOPT_LN_COBYLA", 
+      xtol_rel  = 1e-15,
+      ftol_rel  = 1e-15,
+      maxeval   = 10000 
+    ),
+    eval_g_eq   = equality_constraint,
+    lb          = lower_bounds
   )
 
-  optimization_result <- constrOptim(
-    theta   = initial_allocations,
-    f       = objective_function,
-    grad    = NULL, 
-    ui      = ui,
-    ci      = ci,
-    control = list(
-      fnscale = -1, 
-      reltol  = 1e-15
-    )
-  )
-  
-  optimal_allocations <- optimization_result$par
+  optimal_allocations <- optimization_result$solution
+  names(optimal_allocations) <- names(expected_returns) 
   optimal_allocations
 }
 

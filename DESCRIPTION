@@ -39,7 +39,8 @@ Imports:
     fs,
     purrr,
     stringr,
-    withr
+    withr,
+    nloptr
 Suggests: 
     spelling,
     testthat (>= 3.0.0),
