@@ -47,12 +47,12 @@ calc_optimal_allocations <- function(
     return(diag(assets_number))
   }
 
-  initial_allocations <- rep(1/assets_number, assets_number)
+  initial_allocations <- rep(1 / assets_number, assets_number)
 
   # Set lower bounds for allocations (non-negativity)
   lower_bounds <- rep(0, assets_number)
 
-  optimization_result <- nloptr(
+  optimization_result <- nloptr::nloptr(
     x0          = initial_allocations,
     eval_f      = objective_function,
     opts        = list(

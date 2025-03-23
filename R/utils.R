@@ -45,9 +45,14 @@ print_percent <- function(x,
                           accuracy = 0.1,
                           ...) {
   
-  scales::percent(x = x,
-                  accuracy = accuracy,
-                  ...)
+  percents <- scales::percent(
+    x = x,
+    accuracy = accuracy,
+    ...
+  )
+
+  names(percents) <- names(x)
+  percents
 }
 
 generate_test_asset_returns <- function(n = 3) {
@@ -61,6 +66,13 @@ generate_test_asset_returns <- function(n = 3) {
         "InternationalStocks", 0.0504,           0.1718,
         "Bonds",               0.0275,           0.0562
       )
+
+    test_asset_correlations <- tibble::tribble(
+      ~DomesticStocks, ~InternationalStocks, ~Bonds,
+      1.00,            0.87,                 0.21,
+      0.87,            1.00,                 0.37,
+      0.21,            0.37,                 1.00
+    )
     
   } else if (n == 2) {
     
@@ -70,27 +82,53 @@ generate_test_asset_returns <- function(n = 3) {
         "GlobalStocks",          0.0449,           0.15,
         "InflationIndexedBonds", 0.02,             0.0
       )
-  }
-
-  if (n == 3) {
-
-    test_asset_correlations <- tibble::tribble(
-      ~DomesticStocks, ~InternationalStocks, ~Bonds,
-      1.00,            0.87,                 0.21,
-      0.87,            1.00,                 0.37,
-      0.21,            0.37,                 1.00
-    )
-  } else if (n == 2) {
     
     test_asset_correlations <- tibble::tribble(
       ~GlobalStocks, ~InflationIndexedBonds,
       1.00,          0, 
       0,             1.00
     )
+  } else if (n == 9) {
+
+    test_asset_returns <- 
+      tibble::tribble(
+        ~asset_class,           ~expected_return, ~standard_deviation, 
+        "USLargeCapStocks",     0.0468,           0.1542,
+        "USMidSmallCapStocks",  0.0501,           0.1795, 
+        "GlobalDMxUSStocks",    0.0505,           0.1671, 
+        "EmergingMarketStocks", 0.0540,           0.2142,
+        "USBonds",              0.0269,           0.0379,
+        "InflationLinkedBonds", 0.0288,           0.0581,
+        "MuniBonds",            0.0190,           0.03138274,
+        "GlobalBondsxUS",       0.0329,           0.0833,
+        "Cash",                 0.0250,           0.0055
+      )
+    
+      test_asset_returns <- 
+        test_asset_returns |> 
+        dplyr::mutate(
+          capital_gains    = c(0.0349, 0.0387, 0.0336, 0.0388, rep(0, 5)),
+          income           = expected_return - capital_gains,
+          turnover         = c(0.3300, 0.3652, 0.1800, 0.3300, rep(1, 5)),
+          cost_basis       = c(0.9364, 0.9393, 0.8750, 0.9301, rep(1, 5)),
+          income_qualified = c(0.9762, 0.9032, 0.7998, 0.7387, rep(0, 5)),
+          capital_gains_long_term = 
+            c(0.9502, 0.9032, 0.8951, 0.9023, rep(0, 5)),
+          initial_value    = rep(1000, 9),
+          investment_years = rep(20, 9),
+          preliquidation_value = 
+            c(2089.66, 2176.72, 2195.17, 2291.34, 1377.24, 
+              1408.12, 1457.38, 1477.76, 1346.86)
+        )
+    
+      test_asset_correlations <- 
+        diag(rep(1, length(test_asset_returns$expected_return)))
   }
 
-  test_asset_correlations <- as.matrix(test_asset_correlations)
-  rownames(test_asset_correlations) <- colnames(test_asset_correlations)
+  if (!is.null(test_asset_correlations)) {
+    test_asset_correlations <- as.matrix(test_asset_correlations)
+    rownames(test_asset_correlations) <- colnames(test_asset_correlations)
+  }
 
   list(
     returns      = test_asset_returns,
