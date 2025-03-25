@@ -182,22 +182,38 @@ calc_optimal_portfolio <- function(
 
   if (is.null(effective_tax_rates)) {
     
-    names(optimal_allocations) <- asset_names
-    return(optimal_allocations)
+    allocations <- 
+      tibble::tibble(
+        total = optimal_allocations
+      )
+
+  } else {
+    
+    optimal_taxable_allocations <- 
+      get_allocations_taxable(optimal_allocations)
+    
+    optimal_taxadvantaged_allocations <- 
+      get_allocations_taxadvantaged(optimal_allocations)
+    
+    allocations <-
+      tibble::tibble(
+        taxable_accounts       = optimal_taxable_allocations,
+        taxadvantaged_accounts = optimal_taxadvantaged_allocations
+      ) |>
+        dplyr::mutate(
+          total = taxable_accounts + taxadvantaged_accounts
+        )
   }
 
-  optimal_taxable_allocations <- 
-    get_allocations_taxable(optimal_allocations)
-  names(optimal_taxable_allocations) <- asset_names
+  if (!is.null(asset_names)) {
 
-  optimal_taxadvantaged_allocations <- 
-    get_allocations_taxadvantaged(optimal_allocations)
-  names(optimal_taxadvantaged_allocations) <- asset_names
+    allocations <-
+      allocations |> 
+      dplyr::mutate(asset_class = asset_names) |> 
+      dplyr::select(asset_class, dplyr::everything())
+  }
 
-  list(
-    taxable_accounts       = optimal_taxable_allocations,
-    taxadvantaged_accounts = optimal_taxadvantaged_allocations
-  )
+  allocations
 }
 
 calc_expected_utility <- function(
