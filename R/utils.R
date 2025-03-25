@@ -113,12 +113,7 @@ generate_test_asset_returns <- function(n = 3) {
           cost_basis       = c(0.9364, 0.9393, 0.8750, 0.9301, rep(1, 5)),
           income_qualified = c(0.9762, 0.9032, 0.7998, 0.7387, rep(0, 5)),
           capital_gains_long_term = 
-            c(0.9502, 0.9032, 0.8951, 0.9023, rep(0, 5)),
-          initial_value    = rep(1000, 9),
-          investment_years = rep(20, 9),
-          preliquidation_value = 
-            c(2089.66, 2176.72, 2195.17, 2291.34, 1377.24, 
-              1408.12, 1457.38, 1477.76, 1346.86)
+            c(0.9502, 0.9032, 0.8951, 0.9023, rep(0, 5))
         )
     
       test_asset_correlations <- 
