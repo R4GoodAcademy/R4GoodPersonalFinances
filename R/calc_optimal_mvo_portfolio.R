@@ -1,4 +1,4 @@
-calc_optimal_allocations <- function(
+calc_optimal_mvo_portfolio <- function(
   risk_tolerance,
   expected_returns,
   standard_deviations,

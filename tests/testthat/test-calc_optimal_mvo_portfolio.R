@@ -29,7 +29,7 @@ test_that("calculating optimal allocations for 2 assets", {
   if (interactive()) print(test_asset_correlations)
 
   optimal_allocations <- 
-    calc_optimal_allocations(
+    calc_optimal_mvo_portfolio(
     risk_tolerance      = 0.50,
     expected_returns    = test_asset_returns$expected_return,
     standard_deviations = test_asset_returns$standard_deviation,
@@ -53,7 +53,7 @@ test_that("calculating optimal allocations for 3 assets", {
   if (interactive()) print(test_asset_correlations)
 
   optimal_allocations <- 
-    calc_optimal_allocations(
+    calc_optimal_mvo_portfolio(
     risk_tolerance      = 0.35,
     expected_returns    = test_asset_returns$expected_return,
     standard_deviations = test_asset_returns$standard_deviation,
@@ -77,7 +77,7 @@ test_that("calculating optimal allocations for 9 assets", {
   if (interactive()) print(test_asset_correlations)
 
   optimal_allocations <- 
-    calc_optimal_allocations(
+    calc_optimal_mvo_portfolio(
     risk_tolerance      = 0.35,
     expected_returns    = test_asset_returns$expected_return,
     standard_deviations = test_asset_returns$standard_deviation,
