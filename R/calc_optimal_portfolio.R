@@ -250,45 +250,45 @@ get_allocations_taxadvantaged <- function(params) {
   params[(length(params)/2 + 1):length(params)]
 }
 
-calc_mvo_portfolio_expected_return <- function(...) {
+calc_mvo_portfolio_expected_return <- function(
+  params,
+  expected_returns,
+  ...
+) {
 
-  args             <- list(...)
-  allocations      <- args$params
-  expected_returns <- args$expected_returns
+  allocations <- params
 
   t(allocations) %*% expected_returns
 }
 
-calc_joint_portfolio_expected_return <- function(...) {
+calc_joint_portfolio_expected_return <- function(
+  params,
+  expected_returns,
+  tax_matrix,
+  ...
+) {
 
-  args                      <- list(...)
-  params                    <- args$params
   allocations_taxable       <- get_allocations_taxable(params)
   allocations_taxadvantaged <- get_allocations_taxadvantaged(params)
-
-  expected_returns <- args$expected_returns
-  tax_matrix       <- args$tax_matrix
 
   t(tax_matrix %*% allocations_taxable + allocations_taxadvantaged) %*% 
   expected_returns
-
-
 }
 
-calc_joint_networth_portfolio_expected_return <- function(...) {
+calc_joint_networth_portfolio_expected_return <- function(
+  params,
+  expected_returns,
+  tax_matrix,
+  financial_wealth_frac,
+  human_capital_frac,
+  human_capital_weights,
+  liabilities_frac,
+  liabilities_weights,
+  ...
+) {
 
-  args                      <- list(...)
-  params                    <- args$params
   allocations_taxable       <- get_allocations_taxable(params)
   allocations_taxadvantaged <- get_allocations_taxadvantaged(params)
-
-  expected_returns      <- args$expected_returns
-  tax_matrix            <- args$tax_matrix
-  financial_wealth_frac <- args$financial_wealth_frac
-  human_capital_frac    <- args$human_capital_frac
-  human_capital_weights <- args$human_capital_weights
-  liabilities_frac      <- args$liabilities_frac
-  liabilities_weights   <- args$liabilities_weights
 
   financial_wealth_frac * 
     t(tax_matrix %*% allocations_taxable + allocations_taxadvantaged) %*%
@@ -297,43 +297,46 @@ calc_joint_networth_portfolio_expected_return <- function(...) {
     liabilities_frac * t(liabilities_weights) %*% expected_returns
 }
 
-calc_mvo_portfolio_variance <- function(...) {
-  
-  args              <- list(...)
-  allocations       <- args$params
-  covariance_matrix <- args$covariance_matrix
+calc_mvo_portfolio_variance <- function(
+  params,
+  covariance_matrix,
+  ...
+) {
 
+  allocations <- params
+  
   t(allocations) %*% covariance_matrix %*% allocations
 }
 
-calc_joint_portfolio_variance <- function(...) {
+calc_joint_portfolio_variance <- function(
+  params,
+  covariance_matrix,
+  tax_matrix,
+  ...
+) {
   
-  args                      <- list(...)
-  params                    <- args$params
   allocations_taxable       <- get_allocations_taxable(params)
   allocations_taxadvantaged <- get_allocations_taxadvantaged(params)
-  covariance_matrix         <- args$covariance_matrix
-  tax_matrix                <- args$tax_matrix
 
   t(tax_matrix %*% allocations_taxable + allocations_taxadvantaged) %*% 
     covariance_matrix %*% 
     (tax_matrix %*% allocations_taxable + allocations_taxadvantaged)
 }
 
-calc_joint_networth_portfolio_variance <- function(...) {
+calc_joint_networth_portfolio_variance <- function(
+  params,
+  covariance_matrix,
+  tax_matrix,
+  financial_wealth_frac,
+  human_capital_frac,
+  human_capital_weights,
+  liabilities_frac,
+  liabilities_weights,
+  ...
+) {
   
-  args                      <- list(...)
-  params                    <- args$params
   allocations_taxable       <- get_allocations_taxable(params)
   allocations_taxadvantaged <- get_allocations_taxadvantaged(params)
-
-  covariance_matrix     <- args$covariance_matrix
-  tax_matrix            <- args$tax_matrix
-  financial_wealth_frac <- args$financial_wealth_frac
-  human_capital_frac    <- args$human_capital_frac
-  human_capital_weights <- args$human_capital_weights
-  liabilities_frac      <- args$liabilities_frac
-  liabilities_weights   <- args$liabilities_weights
 
   financial_wealth_frac^2 * (
     t(tax_matrix %*% allocations_taxable + allocations_taxadvantaged) %*%
