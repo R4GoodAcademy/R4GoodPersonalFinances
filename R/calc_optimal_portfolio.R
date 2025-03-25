@@ -226,6 +226,14 @@ calc_expected_utility <- function(
   as.numeric(expected_utility)
 }
 
+get_allocations_taxable <- function(params) {
+  params[1:(length(params)/2)]
+}
+
+get_allocations_taxadvantaged <- function(params) {
+  params[(length(params)/2 + 1):length(params)]
+}
+
 calc_mvo_portfolio_expected_return <- function(...) {
 
   args             <- list(...)
