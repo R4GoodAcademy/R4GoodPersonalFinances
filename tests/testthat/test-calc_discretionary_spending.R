@@ -55,8 +55,8 @@ test_that("calculating discretionary spending with unknown discount rate", {
       liabilities = 1392064,
       liabilities_weights = weights$liabilities,
       human_capital_weights = weights$human_capital,
-      human_capital = human_capital,
-      risk_tolerance = risk_tolerance
+      human_capital = 2767689,
+      risk_tolerance = 0.35
     ),
     49288.5931
   )
