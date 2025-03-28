@@ -3,7 +3,7 @@ calc_portfolio_expected_return <- function(
   returns
 ) {
 
-  stopifnot(sum(weights) == 1)
+  stopifnot(sum(weights) - 1 < 1e-10)
   stopifnot(length(weights) == length(returns))
 
   sum(weights * returns)

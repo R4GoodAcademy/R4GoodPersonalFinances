@@ -15,8 +15,8 @@ calc_effective_tax_rate <- function(
         (1 - blended_tax_rate_income) * income + 
           capital_gains - 
           turnover * (1 + capital_gains - cost_basis) * blended_tax_rate_capital_gains,
-      initial_value        = rep(1000, 9),
-      investment_years     = rep(20, 9),
+      initial_value        = rep(1000, NROW(pretax_data)),
+      investment_years     = rep(20, NROW(pretax_data)),
       preliquidation_value = 
         initial_value * 
           (1 + preliquidation_aftertax_expected_return)^investment_years,

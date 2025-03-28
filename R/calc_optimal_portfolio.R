@@ -25,6 +25,8 @@ calc_optimal_portfolio <- function(
   if (!is.null(effective_tax_rates)) {
     tax_matrix <- diag(1 - effective_tax_rates)
   }
+
+  final_results <- new.env()
     
   objective_function <- function(params) {
 
@@ -55,46 +57,41 @@ calc_optimal_portfolio <- function(
     }
     
     if (!is.null(effective_tax_rates) && !is.null(financial_wealth)) {
-
-      financial_wealth_prime <- 
-        financial_wealth + income - discretionary_consumption - 
-        nondiscretionary_consumption - life_insurance_premium
-
-      human_capital_prime <- human_capital - income
-
-      liabilities_prime <- 
-        liabilities - nondiscretionary_consumption - life_insurance_premium
-
-      net_worth <- financial_wealth + human_capital - liabilities
-      net_worth_prime <- 
-        financial_wealth_prime + human_capital_prime - liabilities_prime
-
-      financial_wealth_frac <- financial_wealth_prime / net_worth_prime
-      human_capital_frac    <- human_capital_prime / net_worth_prime
-      liabilities_frac      <- liabilities_prime / net_worth_prime
-      
+          
       expected_return <- calc_joint_networth_portfolio_expected_return(
-        params                = params,
-        expected_returns      = expected_returns,
-        tax_matrix            = tax_matrix,
-        financial_wealth_frac = financial_wealth_frac,
-        human_capital_frac    = human_capital_frac,
-        human_capital_weights = human_capital_weights,
-        liabilities_frac      = liabilities_frac,
-        liabilities_weights   = liabilities_weights
+        params                       = params,
+        expected_returns             = expected_returns,
+        tax_matrix                   = tax_matrix,
+        human_capital_weights        = human_capital_weights,
+        liabilities_weights          = liabilities_weights,
+        financial_wealth             = financial_wealth,
+        human_capital                = human_capital,
+        liabilities                  = liabilities,
+        nondiscretionary_consumption = nondiscretionary_consumption,
+        discretionary_consumption    = discretionary_consumption,
+        income                       = income,
+        life_insurance_premium       = life_insurance_premium
       )
+
       variance <- calc_joint_networth_portfolio_variance(
-        params                = params,
-        covariance_matrix     = covariance_matrix,
-        tax_matrix            = tax_matrix,
-        financial_wealth_frac = financial_wealth_frac,
-        human_capital_frac    = human_capital_frac,
-        human_capital_weights = human_capital_weights,
-        liabilities_frac      = liabilities_frac,
-        liabilities_weights   = liabilities_weights
+        params                       = params,
+        covariance_matrix            = covariance_matrix,
+        tax_matrix                   = tax_matrix,
+        human_capital_weights        = human_capital_weights,
+        liabilities_weights          = liabilities_weights,
+        financial_wealth             = financial_wealth,
+        human_capital                = human_capital,
+        liabilities                  = liabilities,
+        nondiscretionary_consumption = nondiscretionary_consumption,
+        discretionary_consumption    = discretionary_consumption,
+        income                       = income,
+        life_insurance_premium       = life_insurance_premium
       )
     }
-    
+
+    final_results$expected_return <- expected_return
+    final_results$variance        <- variance
+
     expected_utility <- calc_expected_utility(
       expected_return = expected_return,
       variance        = variance,
@@ -213,7 +210,12 @@ calc_optimal_portfolio <- function(
       dplyr::select(asset_class, dplyr::everything())
   }
 
-  allocations
+  list(
+    allocations        = allocations,
+    expected_return    = as.numeric(final_results$expected_return),
+    variance           = as.numeric(final_results$variance),
+    standard_deviation = sqrt(as.numeric(final_results$variance))
+  )
 }
 
 calc_expected_utility <- function(
@@ -279,22 +281,44 @@ calc_joint_networth_portfolio_expected_return <- function(
   params,
   expected_returns,
   tax_matrix,
-  financial_wealth_frac,
-  human_capital_frac,
   human_capital_weights,
-  liabilities_frac,
   liabilities_weights,
+  financial_wealth,
+  human_capital,
+  liabilities,
+  nondiscretionary_consumption,
+  discretionary_consumption = 0,
+  life_insurance_premium,
+  income,
   ...
 ) {
+
+  
+  networth_fractions <- calc_networth_fractions(
+    financial_wealth             = financial_wealth,
+    human_capital                = human_capital,
+    liabilities                  = liabilities,
+    nondiscretionary_consumption = nondiscretionary_consumption,
+    discretionary_consumption    = discretionary_consumption,
+    income                       = income,
+    life_insurance_premium       = life_insurance_premium
+  )
+
+  human_capital_frac    <- networth_fractions$human_capital
+  financial_wealth_frac <- networth_fractions$financial_wealth
+  liabilities_frac      <- networth_fractions$liabilities
 
   allocations_taxable       <- get_allocations_taxable(params)
   allocations_taxadvantaged <- get_allocations_taxadvantaged(params)
 
-  financial_wealth_frac * 
+  expected_return <- 
+    financial_wealth_frac * 
     t(tax_matrix %*% allocations_taxable + allocations_taxadvantaged) %*%
     expected_returns + 
     human_capital_frac * t(human_capital_weights) %*% expected_returns - 
     liabilities_frac * t(liabilities_weights) %*% expected_returns
+
+  as.numeric(expected_return)
 }
 
 calc_mvo_portfolio_variance <- function(
@@ -332,34 +356,93 @@ calc_joint_networth_portfolio_variance <- function(
   human_capital_weights,
   liabilities_frac,
   liabilities_weights,
+  financial_wealth,
+  human_capital,
+  liabilities,
+  nondiscretionary_consumption,
+  discretionary_consumption = 0,
+  life_insurance_premium,
+  income,
   ...
 ) {
   
+  networth_fractions <- calc_networth_fractions(
+    financial_wealth             = financial_wealth,
+    human_capital                = human_capital,
+    liabilities                  = liabilities,
+    nondiscretionary_consumption = nondiscretionary_consumption,
+    discretionary_consumption    = discretionary_consumption,
+    income                       = income,
+    life_insurance_premium       = life_insurance_premium
+  )
+
+  human_capital_frac    <- networth_fractions$human_capital
+  financial_wealth_frac <- networth_fractions$financial_wealth
+  liabilities_frac      <- networth_fractions$liabilities
+
+
   allocations_taxable       <- get_allocations_taxable(params)
   allocations_taxadvantaged <- get_allocations_taxadvantaged(params)
 
-  financial_wealth_frac^2 * (
-    t(tax_matrix %*% allocations_taxable + allocations_taxadvantaged) %*%
-    covariance_matrix %*%
-    (tax_matrix %*% allocations_taxable + allocations_taxadvantaged)
-  ) + 
-  2 * financial_wealth_frac * t(
-    human_capital_frac * (
-      covariance_matrix %*% human_capital_weights
+  variance <- 
+    financial_wealth_frac^2 * (
+      t(tax_matrix %*% allocations_taxable + allocations_taxadvantaged) %*%
+      covariance_matrix %*%
+      (tax_matrix %*% allocations_taxable + allocations_taxadvantaged)
+    ) + 
+    2 * financial_wealth_frac * t(
+      human_capital_frac * (
+        covariance_matrix %*% human_capital_weights
+      ) - 
+      liabilities_frac * (
+        covariance_matrix %*% liabilities_weights
+      )
+    ) %*% (
+      tax_matrix %*% allocations_taxable + allocations_taxadvantaged
+    ) +
+    human_capital_frac^2 * (
+      t(human_capital_weights) %*% covariance_matrix %*% human_capital_weights
+    ) +
+    liabilities_frac^2 * (
+      t(liabilities_weights) %*% covariance_matrix %*% liabilities_weights
     ) - 
-    liabilities_frac * (
-      covariance_matrix %*% liabilities_weights
+    2 * human_capital_frac * liabilities_frac * (
+      t(human_capital_weights) %*% covariance_matrix %*% liabilities_weights
     )
-  ) %*% (
-    tax_matrix %*% allocations_taxable + allocations_taxadvantaged
-  ) +
-  human_capital_frac^2 * (
-    t(human_capital_weights) %*% covariance_matrix %*% human_capital_weights
-  ) +
-  liabilities_frac^2 * (
-    t(liabilities_weights) %*% covariance_matrix %*% liabilities_weights
-  ) - 
-  2 * human_capital_frac * liabilities_frac * (
-    t(human_capital_weights) %*% covariance_matrix %*% liabilities_weights
+
+  as.numeric(variance)
+}
+
+calc_networth_fractions <- function(
+  financial_wealth,
+  human_capital,
+  liabilities,
+  nondiscretionary_consumption,
+  discretionary_consumption,
+  income,
+  life_insurance_premium
+) {
+
+  financial_wealth_prime <- 
+    financial_wealth + income - discretionary_consumption - 
+      nondiscretionary_consumption - life_insurance_premium
+    
+  human_capital_prime <- 
+    human_capital - income
+  
+  liabilities_prime <- 
+    liabilities - nondiscretionary_consumption - life_insurance_premium
+    
+  net_worth_prime <- 
+    financial_wealth_prime + human_capital_prime - liabilities_prime
+
+  financial_wealth_frac <- financial_wealth_prime / net_worth_prime
+  human_capital_frac    <- human_capital_prime / net_worth_prime
+  liabilities_frac      <- liabilities_prime / net_worth_prime
+
+  list(
+    financial_wealth = financial_wealth_frac,
+    human_capital    = human_capital_frac,
+    liabilities      = liabilities_frac
   )
 }

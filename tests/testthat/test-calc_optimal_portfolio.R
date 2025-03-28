@@ -30,12 +30,12 @@ test_that("calculating optimal MVO allocations for 2 assets", {
 
   optimal_allocations <- 
     calc_optimal_portfolio(
-    risk_tolerance      = 0.50,
-    expected_returns    = test_asset_returns$expected_return,
-    standard_deviations = test_asset_returns$standard_deviation,
-    correlations        = test_asset_correlations,
-    asset_names         = test_asset_returns$asset_class
-  ) 
+      risk_tolerance      = 0.50,
+      expected_returns    = test_asset_returns$expected_return,
+      standard_deviations = test_asset_returns$standard_deviation,
+      correlations        = test_asset_correlations,
+      asset_names         = test_asset_returns$asset_class
+   )$allocations
   if (interactive()) print(optimal_allocations)
 
   expect_equal(
@@ -59,7 +59,7 @@ test_that("calculating optimal MVO allocations for 3 assets", {
     expected_returns    = test_asset_returns$expected_return,
     standard_deviations = test_asset_returns$standard_deviation,
     correlations        = test_asset_correlations
-  ) 
+  )$allocations 
   if (interactive()) print(optimal_allocations)
 
   expect_equal(
@@ -79,11 +79,11 @@ test_that("calculating optimal MVO allocations for 9 assets", {
 
   optimal_allocations <- 
     calc_optimal_portfolio(
-    risk_tolerance      = 0.35,
-    expected_returns    = test_asset_returns$expected_return,
-    standard_deviations = test_asset_returns$standard_deviation,
-    correlations        = test_asset_correlations
-  ) 
+      risk_tolerance      = 0.35,
+      expected_returns    = test_asset_returns$expected_return,
+      standard_deviations = test_asset_returns$standard_deviation,
+      correlations        = test_asset_correlations
+    )$allocations  
   if (interactive()) print(optimal_allocations)
 
   expect_equal(
@@ -128,7 +128,7 @@ test_that("calculating optimal joint portfolio allocations", {
     correlations        = test_asset_correlations,
     effective_tax_rates = effective_tax_rates,
     in_taxable_accounts = fraction_in_taxable_accounts
-  ) 
+  )$allocations 
   expect_equal(
     ignore_attr = TRUE,
     round(optimal_joint_portfolio$taxable_accounts, 3),
@@ -213,7 +213,7 @@ test_that("calculating optimal joint net-worth portfolio allocations", {
     human_capital_weights = weights$human_capital,
     liabilities_weights = weights$liabilities
     # asset_names = returns$asset_class
-  ) 
+  )$allocations  
   if (interactive())
     optimal_joint_networth_portfolio |> 
     purrr::map(function(x) {
