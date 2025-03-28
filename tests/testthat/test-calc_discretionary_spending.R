@@ -28,11 +28,13 @@ test_that("calculating discretionary spending with unknown discount rate", {
 
     weights <- 
       test_asset_returns$returns |> 
-  dplyr::select(asset_class) |> 
-  dplyr::mutate(
-    human_capital = c(0.0936, 0.0468, 0.0468, 0, 0.3746, 0.3746, 0, 0, 0.0635),
-    liabilities = c(0.1263, 0, 0, 0, 0.3368, 0.3789, 0, 0, 0.1581)
-  )
+      dplyr::select(asset_class) |> 
+      dplyr::mutate(
+        human_capital = 
+          c(0.0936, 0.0468, 0.0468, 0, 0.3746, 0.3746, 0, 0, 0.0635),
+        liabilities = 
+          c(0.1263, 0, 0, 0, 0.3368, 0.3789, 0, 0, 0.1581)
+      )
 
   expect_equal(
     calc_discretionary_spending(
