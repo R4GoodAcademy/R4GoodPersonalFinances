@@ -48,12 +48,14 @@ test_that("calculating age", {
 
   test_birth_date   <- "1980-07-15"
   test_current_date <- 
-    c("2020-07-15", "2025-01-01", "2080-07-15", "2080-07-16")
-  
+    c("2020-07-15", "2025-01-01", "2080-07-15", 
+      "2080-07-16", "2081-07-11", "2081-07-18")
+
   hm <- HouseholdMember$new(
     name       = "test_name",
     birth_date = test_birth_date
   )
+  expect_equal(hm$max_age, 100)
   
   expect_snapshot_value(
     style = "json2",

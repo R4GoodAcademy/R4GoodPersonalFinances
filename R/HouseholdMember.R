@@ -27,15 +27,16 @@ HouseholdMember <- R6::R6Class(
       age <- current_date - private$.birth_date
       age <- lubridate::time_length(age, unit = "years")
       
-      age[age > max_age] <- NA
+      age[floor(age) > max_age] <- NA
       age
     },
     
     calc_max_lifespan = function(current_date) {
       
       current_date <- lubridate::as_date(current_date)
-      
-      self$max_age - self$calc_age(current_date)
+      max_years_left <- self$max_age - self$calc_age(current_date)
+      max_years_left[max_years_left < 0] <- 0
+      max_years_left
     }
 
   ),
