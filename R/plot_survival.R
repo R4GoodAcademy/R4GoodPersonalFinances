@@ -1,0 +1,79 @@
+#' @export
+
+plot_survival <- function(
+  household, 
+  current_date = Sys.Date()
+) {
+
+  current_date   <- lubridate::as_date(current_date)
+  members        <- household$get_members()
+  members_params <- purrr::map(members, function(member) {
+    list(
+      name       = member$get_name(),
+      age        = member$calc_age(current_date = current_date) |> round(0),
+      mode       = member$mode,
+      dispersion = member$dispersion
+    )
+  })
+
+  data_to_plot <- 
+    household$calc_survival(current_date = current_date)$data
+
+  bold_colors     <- PrettyCols::prettycols("Bold")
+  num_individual  <- length(members_params)
+  required_colors <- num_individual + 2 
+  
+  all_colors <- bold_colors[1:required_colors]
+  individual_names <- names(members_params)
+  individual_colors <- all_colors[1:num_individual]
+  names(individual_colors) <- individual_names
+
+  fixed_colors <- c(
+    individual_colors,
+    "joint"    = all_colors[num_individual + 1],
+    "gompertz" = all_colors[num_individual + 2]
+  )
+
+  cols <- c(names(members_params), "joint", "gompertz")
+
+  data_to_plot_long <- 
+    data_to_plot |> 
+    tidyr::pivot_longer(
+      cols = dplyr::all_of(cols),
+      names_to = "name",
+      values_to = "value"
+    ) |> 
+    dplyr::mutate(
+      type = dplyr::case_when(
+        name %in% c("joint", "gompertz") ~ "at_least_one",
+        name %in% names(members_params) ~ "individual"
+      )
+    )
+  
+  data_to_plot_long|> 
+    ggplot2::ggplot(
+      ggplot2::aes(
+        x     = year, 
+        y     = value,
+        color = name
+      )
+    ) + 
+    ggplot2::geom_line(ggplot2::aes(linetype = type)) + 
+    ggplot2::scale_y_continuous(
+      breaks = seq(0, 1, by = 0.1),
+      labels = scales::percent
+    ) +
+    ggplot2::theme_minimal() +
+    ggplot2::theme(legend.position = "bottom") +
+    ggplot2::labs(
+      title = "Survival Probability of Household and Household Members",
+      x = "Years from now",
+      y = "Survival probability",
+      color = NULL
+    )  + 
+    ggplot2::scale_color_manual(values = fixed_colors) +
+    ggplot2::scale_linetype_manual(
+      values = c("at_least_one" = "dashed", "individual" = "solid"), 
+      guide = "none"
+    ) 
+}

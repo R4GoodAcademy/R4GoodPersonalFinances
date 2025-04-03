@@ -5,10 +5,14 @@ HouseholdMember <- R6::R6Class(
 
     initialize = function(
       name,
-      birth_date
+      birth_date,
+      mode       = NULL,
+      dispersion = NULL
     ) {
       private$.name       <- name
       private$.birth_date <- lubridate::as_date(birth_date)
+      private$.mode       <- mode
+      private$.dispersion <- dispersion
     },
 
     get_name = function() {
@@ -43,8 +47,8 @@ HouseholdMember <- R6::R6Class(
       
       current_date <- lubridate::as_date(current_date)
       age          <- self$calc_age(current_date = current_date)
-      mode         <- self$gompertz_mode
-      dispersion   <- self$gompertz_dispersion
+      mode         <- self$mode
+      dispersion   <- self$dispersion
       
       calc_gompertz_survival_probability(
         current_age = age,
@@ -67,19 +71,19 @@ HouseholdMember <- R6::R6Class(
       }
     },
 
-    gompertz_mode = function(value) {
+    mode = function(value) {
       if (missing(value)) {
-        private$.gompertz_mode
+        private$.mode
       } else {
-        private$.gompertz_mode <- value
+        private$.mode <- value
       }
     },
 
-    gompertz_dispersion = function(value) {
+    dispersion = function(value) {
       if (missing(value)) {
-        private$.gompertz_dispersion
+        private$.dispersion
       } else {
-        private$.gompertz_dispersion <- value
+        private$.dispersion <- value
       }
     }
   ),
@@ -90,8 +94,8 @@ HouseholdMember <- R6::R6Class(
 
     .name                = NULL,
     .birth_date          = NULL,
-    .gompertz_mode       = NULL,
-    .gompertz_dispersion = NULL
+    .mode       = NULL,
+    .dispersion = NULL
 
   )
 )

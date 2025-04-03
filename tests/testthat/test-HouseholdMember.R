@@ -89,14 +89,14 @@ test_that("setting gompertz parameters", {
     name       = "test_name",
     birth_date = test_birth_date
   )
-  expect_null(hm$gompertz_mode)
-  expect_null(hm$gompertz_dispersion)
+  expect_null(hm$mode)
+  expect_null(hm$dispersion)
 
-  hm$gompertz_mode <- 88
-  expect_equal(hm$gompertz_mode, 88)
+  hm$mode <- 88
+  expect_equal(hm$mode, 88)
 
-  hm$gompertz_dispersion <- 10
-  expect_equal(hm$gompertz_dispersion, 10)
+  hm$dispersion <- 10
+  expect_equal(hm$dispersion, 10)
 })
 
 test_that("calculating gompertz survival probability", {
@@ -108,8 +108,8 @@ test_that("calculating gompertz survival probability", {
     name       = "test_name",
     birth_date = test_birth_date
   )
-  hm$gompertz_mode       <- 80
-  hm$gompertz_dispersion <- 10
+  hm$mode       <- 80
+  hm$dispersion <- 10
   
   expect_equal(
     hm$calc_survival_probability(

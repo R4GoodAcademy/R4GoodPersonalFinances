@@ -4,15 +4,15 @@ test_that("simulating a scenario", {
     name       = "older",  
     birth_date = "1980-02-15"
   )  
-  older_member$gompertz_mode       <- 80
-  older_member$gompertz_dispersion <- 10
+  older_member$mode       <- 80
+  older_member$dispersion <- 10
 
   younger_member <- HouseholdMember$new(
     name       = "younger",  
     birth_date = "1990-07-15"
   )
-  younger_member$gompertz_mode       <- 85
-  younger_member$gompertz_dispersion <- 9
+  younger_member$mode       <- 85
+  younger_member$dispersion <- 9
 
   household <- Household$new()
   household$add_member(older_member)  

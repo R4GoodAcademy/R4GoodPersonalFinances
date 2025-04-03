@@ -198,8 +198,8 @@ test_that("calculating joint Gompertz parameters for 1 member", {
     name       = "test_name",
     birth_date = test_birth_date
   )
-  hm$gompertz_mode       <- 80
-  hm$gompertz_dispersion <- 10
+  hm$mode       <- 80
+  hm$dispersion <- 10
 
   household <- Household$new()
   household$add_member(hm)
@@ -229,8 +229,8 @@ test_that("calculating joint Gompertz parameters for 2 members", {
     65, 
     tolerance = 0.01
   )
-  hm1$gompertz_mode       <- 88
-  hm1$gompertz_dispersion <- 10.65
+  hm1$mode       <- 88
+  hm1$dispersion <- 10.65
 
   hm2 <- 
     HouseholdMember$new(
@@ -242,8 +242,8 @@ test_that("calculating joint Gompertz parameters for 2 members", {
     65, 
     tolerance = 0.01
   )
-  hm2$gompertz_mode       <- 91
-  hm2$gompertz_dispersion <- 8.88
+  hm2$mode       <- 91
+  hm2$dispersion <- 8.88
 
   household <- Household$new()
   household$add_member(hm1)
@@ -274,8 +274,8 @@ test_that("calculating joint Gompertz parameters for 3 members", {
     65, 
     tolerance = 0.01
   )
-  hm1$gompertz_mode       <- 88
-  hm1$gompertz_dispersion <- 10.65
+  hm1$mode       <- 88
+  hm1$dispersion <- 10.65
 
   hm2 <- 
     HouseholdMember$new(
@@ -287,8 +287,8 @@ test_that("calculating joint Gompertz parameters for 3 members", {
     65, 
     tolerance = 0.01
   )
-  hm2$gompertz_mode       <- 91
-  hm2$gompertz_dispersion <- 8.88
+  hm2$mode       <- 91
+  hm2$dispersion <- 8.88
 
   hm3 <- 
     HouseholdMember$new(
@@ -300,8 +300,8 @@ test_that("calculating joint Gompertz parameters for 3 members", {
     65, 
     tolerance = 0.01
   )
-  hm3$gompertz_mode       <- 95
-  hm3$gompertz_dispersion <- 8.88
+  hm3$mode       <- 95
+  hm3$dispersion <- 8.88
 
   household <- Household$new()
   household$add_member(hm1)

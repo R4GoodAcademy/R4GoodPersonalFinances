@@ -66,8 +66,8 @@ Household <- R6::R6Class(
         list(
           name       = member$get_name(),
           age        = member$calc_age(current_date = current_date) |> round(0),
-          mode       = member$gompertz_mode,
-          dispersion = member$gompertz_dispersion
+          mode       = member$mode,
+          dispersion = member$dispersion
         )
         
       })
