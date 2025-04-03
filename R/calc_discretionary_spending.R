@@ -56,8 +56,6 @@ calc_discretionary_spending <- function(
       income                       = income
     )
     
-    print(print_percent(portfolio_expected_return))
-    
     portfolio_variance <- calc_joint_networth_portfolio_variance(
       params = params,
       covariance_matrix =  calc_covariance_matrix(
@@ -103,7 +101,8 @@ calc_discretionary_spending <- function(
     discount_rate                 = discount_rate
   )
 
-  net_worth / delta
+  discretionary_spending <- net_worth / delta
+  discretionary_spending
 }
 
 calc_growth_rate <- function(

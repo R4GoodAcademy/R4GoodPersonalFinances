@@ -139,6 +139,16 @@ test_that("calibrating joint gompertz model", {
       ),
       max_age = 110
     )
+  if (interactive()) print(params)
+
+  expect_equal(
+    params$mode, 
+    94.764246
+  )
+  expect_equal(
+    params$dispersion, 
+    6.18133077
+  )
   
   js <- function() plot_joint_survival(params = params)
   if (interactive()) print(js())

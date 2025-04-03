@@ -76,6 +76,47 @@ test_that("calculating max lifespan", {
 
   expect_snapshot_value(
     style = "json2",
-    hm$calc_max_lifespan(current_date = test_current_date)
+    hm$get_lifespan(current_date = test_current_date)
+  )
+})
+
+test_that("setting gompertz parameters", {
+  
+  test_birth_date   <- "1980-07-15"
+  test_current_date <- "2020-07-15"
+  
+  hm <- HouseholdMember$new(
+    name       = "test_name",
+    birth_date = test_birth_date
+  )
+  expect_null(hm$gompertz_mode)
+  expect_null(hm$gompertz_dispersion)
+
+  hm$gompertz_mode <- 88
+  expect_equal(hm$gompertz_mode, 88)
+
+  hm$gompertz_dispersion <- 10
+  expect_equal(hm$gompertz_dispersion, 10)
+})
+
+test_that("calculating gompertz survival probability", {
+
+  test_birth_date   <- "1955-07-15"
+  test_current_date <- "2020-07-15"
+  
+  hm <- HouseholdMember$new(
+    name       = "test_name",
+    birth_date = test_birth_date
+  )
+  hm$gompertz_mode       <- 80
+  hm$gompertz_dispersion <- 10
+  
+  expect_equal(
+    hm$calc_survival_probability(
+      target_age   = 85,
+      current_date = test_current_date
+    ),
+    0.2404, 
+    tolerance = 0.001
   )
 })

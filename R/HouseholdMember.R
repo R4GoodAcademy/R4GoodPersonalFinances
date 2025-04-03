@@ -31,12 +31,28 @@ HouseholdMember <- R6::R6Class(
       age
     },
     
-    calc_max_lifespan = function(current_date) {
+    get_lifespan = function(current_date) {
       
       current_date <- lubridate::as_date(current_date)
       max_years_left <- self$max_age - self$calc_age(current_date)
       max_years_left[max_years_left < 0] <- 0
       max_years_left
+    },
+
+    calc_survival_probability = function(target_age, current_date) {
+      
+      current_date <- lubridate::as_date(current_date)
+      age          <- self$calc_age(current_date = current_date)
+      mode         <- self$gompertz_mode
+      dispersion   <- self$gompertz_dispersion
+      
+      calc_gompertz_survival_probability(
+        current_age = age,
+        target_age  = target_age,
+        mode        = mode,
+        dispersion  = dispersion
+      )
+      
     }
 
   ),
@@ -49,14 +65,33 @@ HouseholdMember <- R6::R6Class(
       } else {
         private$.max_age <- value
       }
+    },
+
+    gompertz_mode = function(value) {
+      if (missing(value)) {
+        private$.gompertz_mode
+      } else {
+        private$.gompertz_mode <- value
+      }
+    },
+
+    gompertz_dispersion = function(value) {
+      if (missing(value)) {
+        private$.gompertz_dispersion
+      } else {
+        private$.gompertz_dispersion <- value
+      }
     }
   ),
 
   private = list(
 
-    .name       = NULL,
-    .birth_date = NULL,
-    .max_age    = 100
+    .max_age             = 100,
+
+    .name                = NULL,
+    .birth_date          = NULL,
+    .gompertz_mode       = NULL,
+    .gompertz_dispersion = NULL
 
   )
 )

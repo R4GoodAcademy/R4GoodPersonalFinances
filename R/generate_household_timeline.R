@@ -1,7 +1,7 @@
 generate_household_timeline <- function(household, current_date) {
 
   current_date <- lubridate::as_date(current_date)
-  max_lifespan <- household$calc_max_lifespan(current_date = current_date)
+  max_lifespan <- household$get_lifespan(current_date = current_date)
 
 
   timeline <-
@@ -17,10 +17,10 @@ generate_household_timeline <- function(household, current_date) {
     purrr::map(function(member) {
       
       tibble::tibble(
-        age = member$calc_age(current_date = timeline$date)
-
+        age = 
+          member$calc_age(current_date = timeline$date) |> 
+            round(0)
       )
-      
     }) |> 
     tibble::as_tibble()
   

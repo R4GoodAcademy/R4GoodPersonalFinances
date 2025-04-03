@@ -1,4 +1,4 @@
-test_that("generating cashflows", {
+test_that("generating cashflow streams", {
 
   h <- Household$new()
   h$add_member(
@@ -37,9 +37,14 @@ test_that("generating cashflows", {
     timeline = timeline,
     triggers = test_triggers
   ) 
+  if (interactive()) 
+    timeline |> 
+      dplyr::bind_cols(cashflows) |>
+      print(width = Inf, n = Inf)
+  
   expect_equal(
     sum(cashflows$income1),
-    16400
+    16700
   )
   expect_equal(
     sum(cashflows$income2),

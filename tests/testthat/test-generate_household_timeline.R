@@ -28,19 +28,19 @@ test_that("generating household timeline", {
 
   expect_equal(
     NROW(timeline), 
-    h$calc_max_lifespan(current_date = test_current_date) + 1
+    h$get_lifespan(current_date = test_current_date) + 1
   )
 
   expect_equal(min(timeline$index), 0)
   expect_equal(
     max(timeline$index), 
-    h$calc_max_lifespan(current_date = test_current_date)
+    h$get_lifespan(current_date = test_current_date)
   )
 
   expect_equal(min(timeline$years_left), 0)
   expect_equal(
     timeline$years_left[1], 
-    h$calc_max_lifespan(current_date = test_current_date) 
+    h$get_lifespan(current_date = test_current_date) 
   )
 
   expect_equal(
@@ -48,7 +48,7 @@ test_that("generating household timeline", {
     c(
       lubridate::year(test_current_date), 
       lubridate::year(test_current_date) + 
-        h$calc_max_lifespan(current_date = test_current_date)
+        h$get_lifespan(current_date = test_current_date)
     )
   )
 
