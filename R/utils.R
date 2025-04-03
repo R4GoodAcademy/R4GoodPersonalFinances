@@ -76,18 +76,47 @@ generate_test_asset_returns <- function(n = 3) {
     
   } else if (n == 2) {
     
-    test_asset_returns <- 
+    portfolio <- 
+      # tibble::tribble(
+      #   ~asset_class,            ~expected_return, ~standard_deviation,
+      #   "GlobalStocks",          0.0449,           0.15,
+      #   "InflationIndexedBonds", 0.02,             0.0
+      # )
       tibble::tribble(
-        ~asset_class,            ~expected_return, ~standard_deviation,
-        "GlobalStocks",          0.0449,           0.15,
-        "InflationIndexedBonds", 0.02,             0.0
+        ~name,        ~expected_return, ~standard_deviation, ~effective_tax_rates, 
+        "GlobalStock", 0.0449,          0.15,                0.19,
+        "EDOBonds",    0.02,            0,                   0.19,
+      ) |> 
+      dplyr::mutate(
+        accounts = tibble::tribble(
+          ~taxable, ~taxadvantaged,
+          200000,   50000,
+          100000,   25000,
+        ),
+        weights = tibble::tribble(
+          ~human_capital, ~liabilities, 
+          0.5,            0.5,          
+          0.5,            0.5,          
+        )
       )
-    
-    test_asset_correlations <- tibble::tribble(
-      ~GlobalStocks, ~InflationIndexedBonds,
-      1.00,          0, 
-      0,             1.00
+      portfolio <- 
+      portfolio |> 
+        dplyr::mutate(
+      correlations = {
+        matrix <- diag(1, NROW(portfolio), NROW(portfolio)) 
+        colnames(matrix) <- portfolio$name
+        rownames(matrix) <- portfolio$name
+        matrix
+      }
     )
+    
+    test_asset_returns      <- portfolio
+    test_asset_correlations <- portfolio$correlations
+    # test_asset_correlations <- tibble::tribble(
+    #   ~GlobalStocks, ~InflationIndexedBonds,
+    #   1.00,          0, 
+    #   0,             1.00
+    # )
   } else if (n == 9) {
 
     test_asset_returns <- 
