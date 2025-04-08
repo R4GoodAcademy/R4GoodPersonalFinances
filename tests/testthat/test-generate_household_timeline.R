@@ -2,18 +2,19 @@ test_that("generating household timeline", {
   
   h <- Household$new()
 
-  h$add_member(
+  older_member <- 
     HouseholdMember$new(
       name       = "older",  
       birth_date = "1980-02-15"
     )  
-  )  
-  h$add_member(
-    HouseholdMember$new(
-      name       = "younger",  
-      birth_date = "1990-07-15"
-    )
-  )  
+  h$add_member(older_member)  
+  
+  younger_member <- 
+  HouseholdMember$new(
+    name       = "younger",  
+    birth_date = "1990-07-15"
+  )
+  h$add_member(younger_member)  
 
   test_current_date <- "2020-07-15"
 
@@ -23,7 +24,7 @@ test_that("generating household timeline", {
       current_date = test_current_date
     ) 
   
-  if (interactive()) timeline |> print()
+  if (interactive()) timeline |> print(width = Inf)
   if (interactive()) tail(timeline, 3) |> print()
 
   expect_equal(
@@ -61,4 +62,42 @@ test_that("generating household timeline", {
   )
   expect_true(timeline$hm[[1]]$age |> is.numeric())
   expect_true(timeline$hm[[2]]$age |> is.numeric())
+})
+
+test_that("generating household timeline with flags", {
+  
+  h <- Household$new()
+
+  older_member <- 
+    HouseholdMember$new(
+      name       = "older",  
+      birth_date = "1980-02-15"
+    )  
+  older_member$set_age_flag("retirement", 45)
+  older_member$set_age_flag("social_security", 47)
+  h$add_member(older_member)  
+  
+  younger_member <- 
+  HouseholdMember$new(
+    name       = "younger",  
+    birth_date = "1990-07-15"
+  )
+  younger_member$set_age_flag("retirement", 35)
+  younger_member$set_age_flag("kid", 35, years = 2)
+  h$add_member(younger_member)  
+
+  test_current_date <- "2020-07-15"
+
+  timeline <- 
+    generate_household_timeline(
+      household    = h, 
+      current_date = test_current_date
+    ) 
+  
+  if (interactive()) timeline |> print(width = Inf)
+  
+  expect_true(is.logical(timeline$hm[[1]]$flags$retirement))
+  expect_true(is.logical(timeline$hm[[1]]$flags$social_security))
+  
+  expect_true(is.logical(timeline$hm[[2]]$flags$retirement))
 })

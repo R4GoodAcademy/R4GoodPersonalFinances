@@ -16,14 +16,32 @@ generate_household_timeline <- function(household, current_date) {
     household$get_members() |> 
     purrr::map(function(member) {
       
-      tibble::tibble(
-        age = 
-          member$calc_age(current_date = timeline$date) |> 
-            round(0)
-      )
+      member_specific <- 
+        tibble::tibble(
+          age = member$calc_age(current_date = timeline$date) |>  round(0)
+        ) 
+      
+      flags <- member$get_age_flags()
+      if (length(flags) > 0) {
+        
+        flags <- 
+          names(flags) |> 
+          purrr::map(function(flag_name) {
+            member_specific$age >= flags[[flag_name]]$start_age &
+            member_specific$age <= flags[[flag_name]]$end_age
+          }) |> 
+          purrr::set_names(names(flags)) |> 
+          tibble::as_tibble()
+          
+        member_specific <-
+          member_specific |>
+          dplyr::mutate(flags = flags)
+      }
+
+      member_specific
     }) |> 
     tibble::as_tibble()
-  
+
   timeline |> 
     dplyr::mutate(hm = members)
 }

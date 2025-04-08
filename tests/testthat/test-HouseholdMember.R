@@ -120,3 +120,30 @@ test_that("calculating gompertz survival probability", {
     tolerance = 0.001
   )
 })
+
+test_that("setting age flag", {
+
+  test_birth_date <- "1955-07-15"
+  
+  hm <- HouseholdMember$new(
+    name       = "test_name",
+    birth_date = test_birth_date
+  )
+
+  expect_true(is.list(hm$get_age_flags()))
+  expect_equal(NROW(hm$get_age_flags()), 0)
+  
+  hm$set_age_flag("retirement", 65)
+  expect_equal(hm$get_age_flags()$retirement$start_age, 65)
+  expect_equal(hm$get_age_flags()$retirement$end_age, Inf)
+
+  hm$set_age_flag("social_security", 70)
+  expect_equal(hm$get_age_flags()$social_security$start_age, 70)
+  expect_equal(hm$get_age_flags()$social_security$end_age, Inf)
+
+  hm$set_age_flag("kid", 20, years = 20)
+  expect_equal(hm$get_age_flags()$kid$start_age, 20)
+  expect_equal(hm$get_age_flags()$kid$end_age, 40 - 1)
+
+  expect_equal(NROW(hm$get_age_flags()), 3)
+})
