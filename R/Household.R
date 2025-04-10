@@ -20,14 +20,12 @@ Household <- R6::R6Class(
         ))
       }
 
-      new_household_member <- list(household_member)
-      names(new_household_member) <- household_member$get_name()
+      self$set_member(member = household_member)
+    },
 
-      private$.household_members <-
-        append(
-          private$.household_members,
-          new_household_member
-        )
+    set_member = function(member) {
+
+      private$.household_members[[member$get_name()]] <- member
     },
 
     set_lifespan = function(value) {
@@ -223,7 +221,16 @@ Household <- R6::R6Class(
     .lifespan                          = NULL,
     .risk_tolerance                    = 0.5,
     .consumption_impatience_preference = 0.04,
-    .smooth_consumption_preference     = 1
+    .smooth_consumption_preference     = 1,
+    
+    deep_clone = function(name, value) {
+
+      if (name != ".household_members") return(value)
+        
+      purrr::map(value, function(item) {
+        item$clone(deep = TRUE)
+      })
+    }
 
   )
 )

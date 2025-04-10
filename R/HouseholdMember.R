@@ -58,22 +58,22 @@ HouseholdMember <- R6::R6Class(
       )
     },
 
-    get_age_flags = function() {
-      private$.age_flags
+    get_flags = function() {
+      private$.flags
     },
 
-    set_age_flag = function(
+    set_flag = function(
       flag, 
       start_age, 
       end_age = Inf,
-      years   = NULL
+      years   = Inf
     ) {
 
-      if (!is.null(years)) {
+      if (!is.infinite(years)) {
         end_age <- start_age + years - 1
       }
 
-      private$.age_flags[[flag]] <- list(
+      private$.flags[[flag]] <- list(
         start_age = start_age,
         end_age   = end_age
       )
@@ -115,7 +115,7 @@ HouseholdMember <- R6::R6Class(
     .birth_date = NULL,
     .mode       = NULL,
     .dispersion = NULL,
-    .age_flags  = list()
+    .flags      = list()
 
   )
 )

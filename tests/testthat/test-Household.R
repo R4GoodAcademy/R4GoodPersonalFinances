@@ -51,7 +51,6 @@ test_that("calculating household max lifespan", {
   h <- Household$new()
 
   expect_error(
-    # h$get_lifespan(current_date = "2020-07-15")
     h$get_lifespan(current_date = "2020-07-15")
   )
   
@@ -62,7 +61,6 @@ test_that("calculating household max lifespan", {
     )  
   )  
   expect_equal(
-    # h$get_lifespan(current_date = "2020-07-15"),
     h$get_lifespan(current_date = "2020-07-15"),
     60
   )
@@ -74,7 +72,6 @@ test_that("calculating household max lifespan", {
     )
   )  
   expect_equal(
-    # h$get_lifespan(current_date = "2020-07-15"),
     h$get_lifespan(current_date = "2020-07-15"),
     70
   )  
@@ -356,5 +353,33 @@ test_that("getting min_age - age of the youngest member", {
     household$get_min_age(current_date = test_current_date),
     45,
     tolerance = 0.01
+  )
+})
+
+test_that("cloning works", {
+
+  test_birth_date   <- "1955-07-15"
+  hm <- HouseholdMember$new(
+    name       = "test_name",
+    birth_date = test_birth_date
+  )
+  hm$set_flag("retirement", 65)
+
+  household <- Household$new()
+  household$add_member(hm)
+  expect_equal(
+    household$get_members()$test_name$get_flags()$retirement$start_age,
+    65
+  )
+
+  cloned_household <- household$clone(deep = TRUE)
+  cloned_household$get_members()$test_name$set_flag("retirement", 100)
+  expect_equal(
+    cloned_household$get_members()$test_name$get_flags()$retirement$start_age,
+    100
+  )
+  expect_equal(
+    household$get_members()$test_name$get_flags()$retirement$start_age,
+    65
   )
 })

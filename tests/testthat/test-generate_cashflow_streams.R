@@ -4,13 +4,17 @@ test_that("generating cashflow streams", {
   h$add_member(
     HouseholdMember$new(
       name       = "older",  
-      birth_date = "1980-02-15"
+      birth_date = "1980-02-15",
+      mode       = 80,
+      dispersion = 10
     )  
   )  
   h$add_member(
     HouseholdMember$new(
       name       = "younger",  
-      birth_date = "1990-07-15"
+      birth_date = "1990-07-15",
+      mode       = 85,
+      dispersion = 9
     )
   )  
 

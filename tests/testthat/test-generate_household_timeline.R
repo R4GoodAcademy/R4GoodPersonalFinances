@@ -5,18 +5,24 @@ test_that("generating household timeline", {
   older_member <- 
     HouseholdMember$new(
       name       = "older",  
-      birth_date = "1980-02-15"
+      birth_date = "1980-02-15",
+      mode       = 80,
+      dispersion = 10
     )  
   h$add_member(older_member)  
   
   younger_member <- 
   HouseholdMember$new(
     name       = "younger",  
-    birth_date = "1990-07-15"
+    birth_date = "1990-07-15",
+    mode       = 85,
+    dispersion = 9
   )
   h$add_member(younger_member)  
 
   test_current_date <- "2020-07-15"
+
+  h$calc_survival(current_date = test_current_date)
 
   timeline <- 
     generate_household_timeline(
@@ -71,19 +77,23 @@ test_that("generating household timeline with flags", {
   older_member <- 
     HouseholdMember$new(
       name       = "older",  
-      birth_date = "1980-02-15"
+      birth_date = "1980-02-15",
+      mode       = 80,
+      dispersion = 10
     )  
-  older_member$set_age_flag("retirement", 45)
-  older_member$set_age_flag("social_security", 47)
+  older_member$set_flag("retirement", 45)
+  older_member$set_flag("social_security", 47)
   h$add_member(older_member)  
   
   younger_member <- 
   HouseholdMember$new(
     name       = "younger",  
-    birth_date = "1990-07-15"
+    birth_date = "1990-07-15",
+    mode       = 85,
+    dispersion = 9
   )
-  younger_member$set_age_flag("retirement", 35)
-  younger_member$set_age_flag("kid", 35, years = 2)
+  younger_member$set_flag("retirement", 35)
+  younger_member$set_flag("kid", 35, years = 2)
   h$add_member(younger_member)  
 
   test_current_date <- "2020-07-15"
@@ -101,3 +111,4 @@ test_that("generating household timeline with flags", {
   
   expect_true(is.logical(timeline$hm[[2]]$flags$retirement))
 })
+

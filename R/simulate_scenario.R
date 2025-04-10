@@ -190,5 +190,18 @@ simulate_scenario <- function(
     }
   }
 
-  scenario
+  scenario |> 
+    dplyr::mutate(
+      time_value_discount = 
+        1 / (
+          (1 + household$consumption_impatience_preference)^(index - 0)
+        ),
+      discretionary_spending_utility = 
+        calc_utility(
+          x = discretionary_spending, 
+          parameter = household$smooth_consumption_preference
+        ),
+      discretionary_spending_utility_weighted = 
+        survival_prob * time_value_discount * discretionary_spending_utility
+    )
 }
