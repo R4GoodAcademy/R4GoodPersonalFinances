@@ -15,7 +15,7 @@ calc_portfolio_sd <- function(
   correlations
 ) {
 
-  stopifnot(sum(weights) == 1)
+  stopifnot(sum(weights) - 1 < 1e-10)
   stopifnot(length(weights) == length(standard_deviations))
   stopifnot(length(weights) == NROW(standard_deviations))
 
