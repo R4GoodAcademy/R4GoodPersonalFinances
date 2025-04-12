@@ -55,6 +55,13 @@ print_percent <- function(x,
   percents
 }
 
+normalize <- function(x, min = 0, max = 1) {
+
+  (x - min(x, na.rm = TRUE)) /
+    (max(x, na.rm = TRUE) - min(x, na.rm = TRUE)) * (max - (min)) + (min)
+}
+
+
 generate_test_asset_returns <- function(n = 3) {
   
   if (n == 3) {

@@ -116,55 +116,55 @@ plot_expected_spending <- function(
         "non-discretionary" = colors[5]
       )      
     ) +
-      ggplot2::labs(
-        title = glue::glue("Expected Spending"),
-        subtitle =  ifelse(
-          "scenario" %in% names(scenario),
-          glue::glue(
-            "Scenario: <strong>'{unique(scenario$scenario)}'</strong>"
-          ),
-          ""
+    ggplot2::labs(
+      title = glue::glue("Expected Spending"),
+      subtitle =  ifelse(
+        "scenario" %in% names(scenario),
+        glue::glue(
+          "Scenario: <strong>'{unique(scenario$scenario)}'</strong>"
         ),
-        caption = glue::glue(paste0(
-          "Total current spending: ",
-          "<strong>",
-          print_currency(total_current_spending, accuracy = 1),
+        ""
+      ),
+      caption = glue::glue(paste0(
+        "Total current spending: ",
+        "<strong>",
+        print_currency(total_current_spending, accuracy = 1),
+        "</strong>",
+        ".<br>",
+        "Current spending: ",
+        paste0(
+          names(current_year_spending), 
+          "= <strong>", 
+          print_currency(current_year_spending, accuracy = 1), 
           "</strong>",
-          ".<br>",
-          "Current spending: ",
-          paste0(
-            names(current_year_spending), 
-            "= <strong>", 
-            print_currency(current_year_spending, accuracy = 1), 
-            "</strong>",
-            collapse = " & "
-          ),
-          ".<br>",
-          "Median spending: ",
-          paste0(
-            names(median_spending), 
-            "= <strong>", 
-            print_currency(median_spending, accuracy = 1), 
-            "</strong>",
-            collapse = " & "
-          ),
-          ".<br>"
-        )),
-        x     = "Year index",
-        y     = glue::glue("Spending {period}"),
-      ) +
-      ggplot2::scale_y_continuous(
-        labels = print_currency
-      ) +
-      ggplot2::scale_x_continuous() +
-      ggplot2::theme_minimal() +
-      ggplot2::theme(
-        panel.grid.minor = ggplot2::element_blank(),
-        plot.caption = 
-          ggtext::element_markdown(
-            color = "grey60", 
-            size  = 10
-          ),
-        plot.subtitle = ggtext::element_markdown(color = "grey60")
-      )
+          collapse = " & "
+        ),
+        ".<br>",
+        "Median spending: ",
+        paste0(
+          names(median_spending), 
+          "= <strong>", 
+          print_currency(median_spending, accuracy = 1), 
+          "</strong>",
+          collapse = " & "
+        ),
+        ".<br>"
+      )),
+      x     = "Year index",
+      y     = glue::glue("Spending {period}"),
+    ) +
+    ggplot2::scale_y_continuous(
+      labels = print_currency
+    ) +
+    ggplot2::scale_x_continuous() +
+    ggplot2::theme_minimal() +
+    ggplot2::theme(
+      panel.grid.minor = ggplot2::element_blank(),
+      plot.caption = 
+        ggtext::element_markdown(
+          color = "grey60", 
+          size  = 10
+        ),
+      plot.subtitle = ggtext::element_markdown(color = "grey60")
+    )
 }

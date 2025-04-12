@@ -99,11 +99,11 @@ simulate_scenario <- function(
     scenario |>
     dplyr::mutate(
       human_capital = calc_present_value(
-        cashflow = total_income,
+        cashflow      = total_income,
         discount_rate = human_capital_discount_rate
       ),
       liabilities = calc_present_value(
-        cashflow = nondiscretionary_spending,
+        cashflow      = nondiscretionary_spending,
         discount_rate = liabilities_discount_rate
       ),
       financial_wealth       = NA_real_,
@@ -111,6 +111,10 @@ simulate_scenario <- function(
       total_spending         = NA_real_,
       financial_wealth_end   = NA_real_,
       risk_tolerance         = household$risk_tolerance,
+      smooth_consumption_preference = 
+        household$smooth_consumption_preference,
+      consumption_impatience_preference = 
+        household$consumption_impatience_preference
     ) 
 
   n_rows <- NROW(scenario)
@@ -141,7 +145,7 @@ simulate_scenario <- function(
         income                       = scenario[i, ]$total_income,
         risk_tolerance               = scenario[i, ]$risk_tolerance,
         consumption_impatience_preference = 
-          household$consumption_impatience_preference,
+        scenario[i, ]$consumption_impatience_preference,
         smooth_consumption_preference     = 
           household$smooth_consumption_preference,
         current_age = 
@@ -188,12 +192,12 @@ simulate_scenario <- function(
     dplyr::mutate(
       time_value_discount = 
         1 / (
-          (1 + household$consumption_impatience_preference)^(index - 0)
+          (1 + consumption_impatience_preference)^(index - 0)
         ),
       discretionary_spending_utility = 
         calc_utility(
           x         = discretionary_spending, 
-          parameter = household$smooth_consumption_preference
+          parameter = smooth_consumption_preference
         ),
       discretionary_spending_utility_weighted = 
         survival_prob * time_value_discount * discretionary_spending_utility
