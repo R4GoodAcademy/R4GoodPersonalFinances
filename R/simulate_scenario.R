@@ -71,24 +71,18 @@ simulate_scenario <- function(
       )
   } 
 
-  print(portfolio, width = Inf)
-
   portfolio_expected_return <- 
     calc_portfolio_expected_return(
       weights = portfolio$weights$financial_wealth,
       returns = portfolio$expected_return
     )
   
-  portfolio_expected_return |> print_percent() |> print()
-
   portfolio_standard_deviation <- 
     calc_portfolio_sd(
       weights             = portfolio$weights$financial_wealth,
       standard_deviations = portfolio$standard_deviation,
       correlations        = portfolio$correlations
     )
-  
-  portfolio_standard_deviation |> print_percent() |> print()
   
   human_capital_discount_rate <- 
     calc_portfolio_expected_return(
@@ -198,7 +192,7 @@ simulate_scenario <- function(
         ),
       discretionary_spending_utility = 
         calc_utility(
-          x = discretionary_spending, 
+          x         = discretionary_spending, 
           parameter = household$smooth_consumption_preference
         ),
       discretionary_spending_utility_weighted = 
