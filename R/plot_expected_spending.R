@@ -101,14 +101,6 @@ plot_expected_spending <- function(
       )
     ) +
     ggplot2::geom_area() +
-    ggplot2::annotate(
-      "text", 
-      x = 0, 
-      y = total_current_spending, 
-      label = glue::glue("{print_currency(total_current_spending / 1000, accuracy = 0.1, suffix = 'k')}"),
-      vjust = -1
-
-    ) +
     ggplot2::guides(fill = ggplot2::guide_legend(title = "Spending type")) +
     ggplot2::scale_fill_manual(
       values = c(

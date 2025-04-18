@@ -1,3 +1,5 @@
+#' @export
+
 plot_scenarios <- function(
   scenarios,
   period = c("yearly", "monthly")
@@ -28,7 +30,8 @@ plot_scenarios <- function(
   ordered_scenario_levels <- 
     discretionary_spending_metrics |>
     dplyr::arrange(utility_normalized) |> 
-    dplyr::pull(scenario) 
+    dplyr::pull(scenario) |> 
+    unique()
     
   discretionary_spending_metrics_long <- 
     discretionary_spending_metrics |> 
@@ -81,6 +84,9 @@ plot_scenarios <- function(
       ggplot2::theme_minimal() +
       ggplot2::labs(
         title = glue::glue("Scenario Metrics for Discretionary Spending"),
+        subtitle = glue::glue(
+          "Spending period: <strong>{period}</strong>"
+        ),
         x     = "Scenario",
         y     = "Discretionary spending",
       ) +
