@@ -42,7 +42,29 @@ calc_optimal_asset_allocation <- function(
     life_insurance_premium       = 0,
     human_capital_weights = portfolio$weights$human_capital,
     liabilities_weights   = portfolio$weights$liabilities,
-    asset_names           = portfolio$asset_class
+    asset_names           = portfolio$name
   ) 
-  optimal_joint_networth_portfolio
+
+  current_allocation <- 
+    portfolio$accounts / sum(portfolio$accounts)
+
+  current_allocation <- 
+    current_allocation |> 
+    dplyr::mutate(
+      total = rowSums(current_allocation)
+    )
+
+  portfolio <-
+    portfolio |>
+    dplyr::mutate(
+      allocations = tibble::tibble(
+        name = optimal_joint_networth_portfolio$allocations$asset_class,
+        optimal = 
+          optimal_joint_networth_portfolio$allocations |> 
+            dplyr::select(-asset_class),
+        current = current_allocation |> dplyr::as_tibble()
+      )
+    )
+  
+  portfolio
 }

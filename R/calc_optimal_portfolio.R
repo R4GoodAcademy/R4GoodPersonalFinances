@@ -194,11 +194,11 @@ calc_optimal_portfolio <- function(
     
     allocations <-
       tibble::tibble(
-        taxable_accounts       = optimal_taxable_allocations,
-        taxadvantaged_accounts = optimal_taxadvantaged_allocations
+        taxable       = optimal_taxable_allocations,
+        taxadvantaged = optimal_taxadvantaged_allocations
       ) |>
         dplyr::mutate(
-          total = taxable_accounts + taxadvantaged_accounts
+          total = taxable + taxadvantaged
         )
   }
 

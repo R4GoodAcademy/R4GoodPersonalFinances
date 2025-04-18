@@ -84,11 +84,6 @@ generate_test_asset_returns <- function(n = 3) {
   } else if (n == 2) {
     
     portfolio <- 
-      # tibble::tribble(
-      #   ~asset_class,            ~expected_return, ~standard_deviation,
-      #   "GlobalStocks",          0.0449,           0.15,
-      #   "InflationIndexedBonds", 0.02,             0.0
-      # )
       tibble::tribble(
         ~name,        ~expected_return, ~standard_deviation, ~effective_tax_rates, 
         "GlobalStock", 0.0449,          0.15,                0.19,
@@ -107,28 +102,24 @@ generate_test_asset_returns <- function(n = 3) {
         )
       )
       portfolio <- 
-      portfolio |> 
+        portfolio |> 
         dplyr::mutate(
-      correlations = {
-        matrix <- diag(1, NROW(portfolio), NROW(portfolio)) 
-        colnames(matrix) <- portfolio$name
-        rownames(matrix) <- portfolio$name
-        matrix
-      }
-    )
+          correlations = {
+            matrix <- diag(1, NROW(portfolio), NROW(portfolio)) 
+            colnames(matrix) <- portfolio$name
+            rownames(matrix) <- portfolio$name
+            matrix
+          }
+        )
     
     test_asset_returns      <- portfolio
     test_asset_correlations <- portfolio$correlations
-    # test_asset_correlations <- tibble::tribble(
-    #   ~GlobalStocks, ~InflationIndexedBonds,
-    #   1.00,          0, 
-    #   0,             1.00
-    # )
+
   } else if (n == 9) {
 
     test_asset_returns <- 
       tibble::tribble(
-        ~asset_class,           ~expected_return, ~standard_deviation, 
+        ~name,                  ~expected_return, ~standard_deviation, 
         "USLargeCapStocks",     0.0468,           0.1542,
         "USMidSmallCapStocks",  0.0501,           0.1795, 
         "GlobalDMxUSStocks",    0.0505,           0.1671, 
@@ -150,10 +141,28 @@ generate_test_asset_returns <- function(n = 3) {
           income_qualified = c(0.9762, 0.9032, 0.7998, 0.7387, rep(0, 5)),
           capital_gains_long_term = 
             c(0.9502, 0.9032, 0.8951, 0.9023, rep(0, 5))
-        )
+        )|> 
+        dplyr::mutate(
+          accounts = tibble::tibble(
+            taxable       = rep(1000, n), 
+            taxadvantaged = rep(1000, n)
+          ),
+          weights = tibble::tibble(
+            human_capital = 1 / n, 
+            liabilities   = 1 / n, 
+          )
+        ) 
     
       test_asset_correlations <- 
         diag(rep(1, length(test_asset_returns$expected_return)))
+    
+      test_asset_returns <- 
+        test_asset_returns |> 
+        dplyr::mutate(
+          correlations = test_asset_correlations,
+          effective_tax_rates = 0.19
+        ) 
+        
   }
 
   if (!is.null(test_asset_correlations)) {

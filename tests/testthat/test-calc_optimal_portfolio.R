@@ -34,7 +34,7 @@ test_that("calculating optimal MVO allocations for 2 assets", {
       expected_returns    = test_asset_returns$expected_return,
       standard_deviations = test_asset_returns$standard_deviation,
       correlations        = test_asset_correlations,
-      asset_names         = test_asset_returns$asset_class
+      asset_names         = test_asset_returns$name
    )$allocations
   if (interactive()) print(optimal_allocations)
 
@@ -131,18 +131,18 @@ test_that("calculating optimal joint portfolio allocations", {
   )$allocations 
   expect_equal(
     ignore_attr = TRUE,
-    round(optimal_joint_portfolio$taxable_accounts, 3),
+    round(optimal_joint_portfolio$taxable, 3),
     c(0.271, 0.248, 0.292, 0.112, 0, 0, 0, 0, 0)
   )
   expect_equal(
     ignore_attr = TRUE,
-    round(optimal_joint_portfolio$taxadvantaged_accounts, 3),
+    round(optimal_joint_portfolio$taxadvantaged, 3),
     c(0, 0, 0, 0.076, 0, 0, 0, 0, 0)
   )
 
   expect_equal(
-    sum(optimal_joint_portfolio$taxable_accounts) + 
-      sum(optimal_joint_portfolio$taxadvantaged_accounts), 
+    sum(optimal_joint_portfolio$taxable) + 
+      sum(optimal_joint_portfolio$taxadvantaged), 
     1
   )
 })
@@ -177,7 +177,7 @@ test_that("calculating optimal joint net-worth portfolio allocations", {
     
   weights <- 
     test_asset_returns |> 
-    dplyr::select(asset_class) |> 
+    dplyr::select(name) |> 
     dplyr::mutate(
       human_capital = c(0.0936, 0.0468, 0.0468, 0, 0.3746, 0.3746, 0, 0, 0.0635),
       liabilities = c(0.1263, 0, 0, 0, 0.3368, 0.3789, 0, 0, 0.1581)
@@ -212,7 +212,6 @@ test_that("calculating optimal joint net-worth portfolio allocations", {
     life_insurance_premium = life_insurance_premium,
     human_capital_weights = weights$human_capital,
     liabilities_weights = weights$liabilities
-    # asset_names = returns$asset_class
   )$allocations  
   if (interactive())
     optimal_joint_networth_portfolio |> 
@@ -222,7 +221,7 @@ test_that("calculating optimal joint net-worth portfolio allocations", {
   
   expect_equal(
     optimal_joint_networth_portfolio |> 
-      dplyr::select(taxable_accounts, taxadvantaged_accounts) |>
+      dplyr::select(taxable, taxadvantaged) |>
       purrr::map(function(x) sum(x)) |> 
       as.numeric() |> 
       sum(), 
@@ -236,11 +235,11 @@ test_that("calculating optimal joint net-worth portfolio allocations", {
     c(0.924, 0.076, 1)
   )
   expect_equal(
-    round(optimal_joint_networth_portfolio$taxable_accounts, 3),
+    round(optimal_joint_networth_portfolio$taxable, 3),
     c(0.132, 0.021, 0.151, 0.620, rep(0, 5))
   )
   expect_equal(
-    round(optimal_joint_networth_portfolio$taxadvantaged_accounts, 3),
+    round(optimal_joint_networth_portfolio$taxadvantaged, 3),
     c(0, 0, 0.0, 0.076, rep(0, 4), 0)
   )
 })
