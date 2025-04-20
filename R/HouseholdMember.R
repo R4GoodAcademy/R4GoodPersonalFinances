@@ -23,7 +23,7 @@ HouseholdMember <- R6::R6Class(
       private$.birth_date
     },
 
-    calc_age = function(current_date) {
+    calc_age = function(current_date = get_current_date()) {
 
       current_date <- lubridate::as_date(current_date)
       max_age      <- private$.max_age
@@ -35,7 +35,7 @@ HouseholdMember <- R6::R6Class(
       age
     },
     
-    get_lifespan = function(current_date) {
+    get_lifespan = function(current_date = get_current_date()) {
       
       current_date <- lubridate::as_date(current_date)
       max_years_left <- self$max_age - self$calc_age(current_date)
@@ -43,7 +43,10 @@ HouseholdMember <- R6::R6Class(
       max_years_left
     },
 
-    calc_survival_probability = function(target_age, current_date) {
+    calc_survival_probability = function(
+      target_age, 
+      current_date = get_current_date()
+    ) {
       
       current_date <- lubridate::as_date(current_date)
       age          <- self$calc_age(current_date = current_date)

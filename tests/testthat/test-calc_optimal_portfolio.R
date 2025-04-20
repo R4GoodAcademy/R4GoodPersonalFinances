@@ -102,11 +102,11 @@ test_that("calculating optimal joint portfolio allocations", {
   if (interactive()) print(test_asset_correlations)
     
   effective_tax_rates <- calc_effective_tax_rate(
-    pretax_data              = test_asset_returns,
+    portfolio                = test_asset_returns,
     tax_rate_ltcg            = 0.20,
     tax_rate_ordinary_income = 0.40
   )
-  effective_tax_rates <- effective_tax_rates$effective_tax_rate
+  effective_tax_rates <- effective_tax_rates$aftertax$effective_tax_rate
   effective_tax_rates[7] <- 0
   expect_equal(
     round(effective_tax_rates, 4),
@@ -156,11 +156,11 @@ test_that("calculating optimal joint net-worth portfolio allocations", {
   if (interactive()) print(test_asset_correlations)
     
   effective_tax_rates <- calc_effective_tax_rate(
-    pretax_data              = test_asset_returns,
+    portfolio               = test_asset_returns,
     tax_rate_ltcg            = 0.20,
     tax_rate_ordinary_income = 0.40
   )
-  effective_tax_rates <- effective_tax_rates$effective_tax_rate
+  effective_tax_rates <- effective_tax_rates$aftertax$effective_tax_rate
   effective_tax_rates[7] <- 0
   expect_equal(
     round(effective_tax_rates, 4),

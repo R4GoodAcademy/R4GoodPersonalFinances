@@ -32,7 +32,7 @@ Household <- R6::R6Class(
       private$.lifespan <- value
     },
 
-    get_lifespan = function(current_date) {
+    get_lifespan = function(current_date = get_current_date()) {
       
       current_date <- lubridate::as_date(current_date)
 
@@ -55,7 +55,7 @@ Household <- R6::R6Class(
         ceiling()
     },
 
-    calc_survival = function(current_date) {
+    calc_survival = function(current_date = get_current_date()) {
 
       current_date       <- lubridate::as_date(current_date)
       household_lifespan <- self$get_lifespan(current_date = current_date)
@@ -65,7 +65,8 @@ Household <- R6::R6Class(
           name       = member$get_name(),
           age        = member$calc_age(current_date = current_date) |> round(0),
           mode       = member$mode,
-          dispersion = member$dispersion
+          dispersion = member$dispersion,
+          max_age    = member$max_age
         )
         
       })
@@ -92,7 +93,8 @@ Household <- R6::R6Class(
                 current_age = member$age, 
                 target_age  = member$age + year, 
                 mode        = member$mode, 
-                dispersion  = member$dispersion
+                dispersion  = member$dispersion,
+                max_age     = member$max_age
               )
           )
       }
@@ -156,13 +158,14 @@ Household <- R6::R6Class(
         )
         
       list(
-        data       = survival_rates,
-        mode       = mode,
-        dispersion = dispersion
+        data        = survival_rates,
+        mode        = mode,
+        dispersion  = dispersion,
+        current_age = min_age
       )
     },
 
-    get_min_age = function(current_date) {
+    get_min_age = function(current_date = get_current_date()) {
 
       current_date <- lubridate::as_date(current_date)
       

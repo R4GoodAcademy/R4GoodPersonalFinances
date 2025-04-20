@@ -46,7 +46,8 @@ test_that("calculating discretionary spending with unknown discount rate", {
       income = 75000,
       nondiscretionary_consumption = 40000,
       life_insurance_premium = 0,
-      effective_tax_rates = test_asset_returns$returns$effective_tax_rate,
+      effective_tax_rates = 
+        test_asset_returns$returns$aftertax$effective_tax_rate,
       consumption_impatience_preference = 0.02,
       smooth_consumption_preference = 0.50,
       current_age = 25,

@@ -1,7 +1,7 @@
 simulate_scenario <- function(
   household,
   portfolio,
-  current_date
+  current_date = get_current_date()
 ) {
 
   current_date <- lubridate::as_date(current_date)
@@ -135,7 +135,7 @@ simulate_scenario <- function(
         liabilities_weights          = portfolio$weights$liabilities,
         expected_returns             = portfolio$expected_return,
         standard_deviations          = portfolio$standard_deviation,
-        effective_tax_rates          = portfolio$effective_tax_rates,
+        effective_tax_rates          = portfolio$aftertax$effective_tax_rate,
         correlations                 = portfolio$correlations,
 
         financial_wealth             = scenario[i, ]$financial_wealth,

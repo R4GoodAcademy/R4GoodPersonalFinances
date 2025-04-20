@@ -19,15 +19,36 @@ print_currency <- function(x,
   big.mark = ",",
   accuracy = NULL,
   prefix = NULL,
-  ...) {
-    
-    scales::dollar(x = x, 
-      prefix = prefix, 
-      suffix = suffix,
-      big.mark = big.mark,
-      accuracy = accuracy,
-      ...)
-    }
+  ...
+) {
+  
+  if (is.list(x)) {
+    return(
+      purrr::map(
+        x, 
+        print_currency, 
+        suffix   = suffix, 
+        big.mark = big.mark,
+        accuracy = accuracy,
+        prefix   = prefix,
+        ...
+      )
+    )
+  }
+
+  if (!is.numeric(x)) {
+    return(x)
+  }
+  
+  scales::dollar(
+    x        = x, 
+    prefix   = prefix, 
+    suffix   = suffix,
+    big.mark = big.mark,
+    accuracy = accuracy,
+    ...
+  )
+}
     
 #' @seealso [scales::percent()]
 #' 
@@ -45,6 +66,16 @@ print_percent <- function(x,
                           accuracy = 0.1,
                           ...) {
   
+  if (is.list(x)) {
+    return(
+      purrr::map(x, print_percent, accuracy = accuracy, ...)
+    )
+  }
+
+  if (!is.numeric(x)) {
+    return(x)
+  }
+  
   percents <- scales::percent(
     x = x,
     accuracy = accuracy,
@@ -53,6 +84,12 @@ print_percent <- function(x,
 
   names(percents) <- names(x)
   percents
+}
+
+#' @export
+get_current_date <- function() {
+  current_data <- getOption("R4GPF.current_date", default = Sys.Date())
+  lubridate::as_date(current_data)
 }
 
 normalize <- function(x, min = 0, max = 1) {
@@ -85,9 +122,9 @@ generate_test_asset_returns <- function(n = 3) {
     
     portfolio <- 
       tibble::tribble(
-        ~name,        ~expected_return, ~standard_deviation, ~effective_tax_rates, 
-        "GlobalStock", 0.0449,          0.15,                0.19,
-        "EDOBonds",    0.02,            0,                   0.19,
+        ~name,        ~expected_return, ~standard_deviation, 
+        "GlobalStock", 0.0449,          0.15,                
+        "EDOBonds",    0.02,            0,                  
       ) |> 
       dplyr::mutate(
         accounts = tibble::tribble(
@@ -109,7 +146,10 @@ generate_test_asset_returns <- function(n = 3) {
             colnames(matrix) <- portfolio$name
             rownames(matrix) <- portfolio$name
             matrix
-          }
+          },
+          aftertax = tibble::tibble(
+            effective_tax_rate = rep(0.19, NROW(portfolio))
+          )
         )
     
     test_asset_returns      <- portfolio
@@ -134,13 +174,15 @@ generate_test_asset_returns <- function(n = 3) {
       test_asset_returns <- 
         test_asset_returns |> 
         dplyr::mutate(
-          capital_gains    = c(0.0349, 0.0387, 0.0336, 0.0388, rep(0, 5)),
-          income           = expected_return - capital_gains,
-          turnover         = c(0.3300, 0.3652, 0.1800, 0.3300, rep(1, 5)),
-          cost_basis       = c(0.9364, 0.9393, 0.8750, 0.9301, rep(1, 5)),
-          income_qualified = c(0.9762, 0.9032, 0.7998, 0.7387, rep(0, 5)),
-          capital_gains_long_term = 
-            c(0.9502, 0.9032, 0.8951, 0.9023, rep(0, 5))
+          pretax = tibble::tibble(
+            capital_gains    = c(0.0349, 0.0387, 0.0336, 0.0388, rep(0, 5)),
+            income           = expected_return - capital_gains,
+            turnover         = c(0.3300, 0.3652, 0.1800, 0.3300, rep(1, 5)),
+            cost_basis       = c(0.9364, 0.9393, 0.8750, 0.9301, rep(1, 5)),
+            income_qualified = c(0.9762, 0.9032, 0.7998, 0.7387, rep(0, 5)),
+            capital_gains_long_term = 
+              c(0.9502, 0.9032, 0.8951, 0.9023, rep(0, 5))
+          )
         )|> 
         dplyr::mutate(
           accounts = tibble::tibble(

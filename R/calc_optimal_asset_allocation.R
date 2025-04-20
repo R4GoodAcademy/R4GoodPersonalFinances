@@ -21,28 +21,26 @@ calc_optimal_asset_allocation <- function(
   fraction_in_taxable_accounts <- 
     sum(portfolio$accounts$taxable) / sum(portfolio$accounts)
   
-  discretionary_spending <- 
-    scenario$discretionary_spending[1]
-  income <- 
-    scenario$total_income[1]
+  discretionary_spending <- scenario$discretionary_spending[1]
+  income                 <- scenario$total_income[1]
   
   optimal_joint_networth_portfolio <- calc_optimal_portfolio(
-    risk_tolerance      = household$risk_tolerance,
-    expected_returns    = portfolio$expected_return,
-    standard_deviations = portfolio$standard_deviation,
-    correlations        = portfolio$correlations,
-    effective_tax_rates = portfolio$effective_tax_rates,
-    in_taxable_accounts = fraction_in_taxable_accounts,
-    financial_wealth    = financial_wealth,
-    human_capital       = human_capital,
-    liabilities         = liabilities,
+    risk_tolerance               = household$risk_tolerance,
+    expected_returns             = portfolio$expected_return,
+    standard_deviations          = portfolio$standard_deviation,
+    correlations                 = portfolio$correlations,
+    effective_tax_rates          = portfolio$aftertax$effective_tax_rate,
+    in_taxable_accounts          = fraction_in_taxable_accounts,
+    financial_wealth             = financial_wealth,
+    human_capital                = human_capital,
+    liabilities                  = liabilities,
     nondiscretionary_consumption = nondiscretionary_consumption,
     discretionary_consumption    = discretionary_spending,
     income                       = income,
     life_insurance_premium       = 0,
-    human_capital_weights = portfolio$weights$human_capital,
-    liabilities_weights   = portfolio$weights$liabilities,
-    asset_names           = portfolio$name
+    human_capital_weights        = portfolio$weights$human_capital,
+    liabilities_weights          = portfolio$weights$liabilities,
+    asset_names                  = portfolio$name
   ) 
 
   current_allocation <- 
@@ -50,9 +48,7 @@ calc_optimal_asset_allocation <- function(
 
   current_allocation <- 
     current_allocation |> 
-    dplyr::mutate(
-      total = rowSums(current_allocation)
-    )
+    dplyr::mutate(total = rowSums(current_allocation))
 
   portfolio <-
     portfolio |>
@@ -62,7 +58,9 @@ calc_optimal_asset_allocation <- function(
         optimal = 
           optimal_joint_networth_portfolio$allocations |> 
             dplyr::select(-asset_class),
-        current = current_allocation |> dplyr::as_tibble()
+        current = 
+          current_allocation |> 
+          dplyr::as_tibble()
       )
     )
   

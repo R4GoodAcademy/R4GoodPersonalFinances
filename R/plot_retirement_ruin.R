@@ -94,7 +94,7 @@ the_plot <-
       ),
         "<br><span style='color: grey60;'>(",
         print_currency(x / 1000 * 12, suffix = "k"),
-        " / ",
+        "/",
         print_percent(x * 12 / portfolio_value),
         ")</span>"
       )

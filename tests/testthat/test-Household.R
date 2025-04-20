@@ -202,13 +202,13 @@ test_that("calculating joint Gompertz parameters for 1 member", {
   household$add_member(hm)
   
   survival <- household$calc_survival(current_date = test_current_date)
-  expect_equal(survival$mode, 80)
-  expect_equal(survival$dispersion, 10)
+  expect_equal(survival$mode |> round(), 80)
+  expect_equal(survival$dispersion |> round(), 10)
   expect_equal(
     survival$data |> 
     dplyr::filter(year == 85 - 65) |> 
     dplyr::pull(gompertz),
-    0.2404, 
+    0.2396, 
     tolerance = 0.001
   )
 })
@@ -250,11 +250,11 @@ test_that("calculating joint Gompertz parameters for 2 members", {
   params <- household$calc_survival(current_date = test_current_date) 
   expect_equal(
     params$mode, 
-    94.764246
+    93.22423
   )
   expect_equal(
     params$dispersion, 
-    6.18133077
+    5.38006535
   )
 })
 
@@ -314,11 +314,11 @@ test_that("calculating joint Gompertz parameters for 3 members", {
 
   expect_equal(
     params$mode, 
-    98.703280
+    95.691272
   )
   expect_equal(
     params$dispersion, 
-    5.1515211
+    3.8796684
   )
 })
 

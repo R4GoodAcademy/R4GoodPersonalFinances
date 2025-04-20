@@ -64,7 +64,10 @@ plot_survival <- function(
       labels = scales::percent
     ) +
     ggplot2::theme_minimal() +
-    ggplot2::theme(legend.position = "bottom") +
+    ggplot2::theme(
+      legend.position = "bottom",
+      panel.grid.minor = ggplot2::element_blank()
+    ) +
     ggplot2::labs(
       title = "Survival Probability of Household and Household Members",
       x = "Years from now",
