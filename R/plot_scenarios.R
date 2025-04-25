@@ -10,7 +10,7 @@ plot_scenarios <- function(
   
   discretionary_spending_metrics <- 
     scenarios |> 
-    dplyr::group_by(scenario) |> 
+    dplyr::group_by(scenario_id) |> 
     dplyr::summarise(
       utility  = sum(discretionary_spending_utility_weighted),
       constant = calc_inverse_utility(
@@ -30,19 +30,19 @@ plot_scenarios <- function(
   ordered_scenario_levels <- 
     discretionary_spending_metrics |>
     dplyr::arrange(utility_normalized) |> 
-    dplyr::pull(scenario) |> 
+    dplyr::pull(scenario_id) |> 
     unique()
     
   discretionary_spending_metrics_long <- 
     discretionary_spending_metrics |> 
     dplyr::select(-utility) |> 
     tidyr::pivot_longer(
-      cols      = -"scenario",
+      cols      = -"scenario_id",
       names_to  = "metric",
       values_to = "value"
     ) |> 
     dplyr::mutate(
-      scenario = factor(scenario, levels = ordered_scenario_levels)
+      scenario_id = factor(scenario_id, levels = ordered_scenario_levels)
     ) 
   
     colors <- PrettyCols::prettycols("Bold")
@@ -50,7 +50,7 @@ plot_scenarios <- function(
     discretionary_spending_metrics_long |>
       ggplot2::ggplot(
         ggplot2::aes(
-          x     = scenario, 
+          x     = scenario_id, 
           y     = value, 
           color = metric,
           group = metric

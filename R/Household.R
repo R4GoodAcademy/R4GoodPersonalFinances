@@ -60,7 +60,23 @@ Household <- R6::R6Class(
       current_date       <- lubridate::as_date(current_date)
       household_lifespan <- self$get_lifespan(current_date = current_date)
       members            <- self$get_members()
+
       members_params <- purrr::map(members, function(member) {
+
+        if (is.null(member$mode)) {
+          cli::cli_abort(c(
+            "Missing Gompertz mode parameter for member: {member$get_name()}"
+          ))
+        }
+
+        if (is.null(member$dispersion)) {
+          cli::cli_abort(c(
+            "Missing Gompertz dispersion parameter for member: {
+              member$get_name()
+            }"
+          ))
+        }
+
         list(
           name       = member$get_name(),
           age        = member$calc_age(current_date = current_date) |> round(0),
@@ -68,7 +84,6 @@ Household <- R6::R6Class(
           dispersion = member$dispersion,
           max_age    = member$max_age
         )
-        
       })
 
       survival_rates <- 

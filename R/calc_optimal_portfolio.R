@@ -14,7 +14,8 @@ calc_optimal_portfolio <- function(
   nondiscretionary_consumption = NULL,
   discretionary_consumption    = NULL,
   income                       = NULL,
-  life_insurance_premium       = NULL
+  life_insurance_premium       = NULL,
+  initial_allocation           = NULL
 ) {
 
   covariance_matrix <- calc_covariance_matrix(
@@ -157,13 +158,16 @@ calc_optimal_portfolio <- function(
     }
   }
 
-  initial_allocations <- rep(1 / total_assets, total_assets)
+
+  if (is.null(initial_allocation)) {
+    initial_allocation <- rep(1 / total_assets, total_assets)
+  }
 
   # Set lower bounds for allocations (non-negativity)
   lower_bounds <- rep(0, total_assets)
 
   optimization_result <- nloptr::nloptr(
-    x0          = initial_allocations,
+    x0          = initial_allocation,
     eval_f      = objective_function,
     opts        = list(
       algorithm = "NLOPT_LN_COBYLA", 

@@ -44,9 +44,9 @@ test_that("plotting scenarios metrics", {
       end_age   = Inf
     ) |> 
     dplyr::mutate(
-      scenario = start_age
+      scenario_id = start_age
     ) |> 
-    tidyr::nest(flags = -scenario)
+    tidyr::nest(flags = -scenario_id)
   
   test_current_date <- "2020-07-15"
 

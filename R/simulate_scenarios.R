@@ -5,14 +5,14 @@ simulate_scenarios <- function(
   current_date
 ) {
 
-  unique(scenarios_parameters$scenario) |> 
+  unique(scenarios_parameters$scenario_id) |> 
     purrr::map(function(scenario_id) {
 
       cli::cli_h1("Simulating scenario: {.value {scenario_id}}")
       
       scenario_params <- 
         scenarios_parameters |> 
-        dplyr::filter(scenario == scenario_id)
+        dplyr::filter(scenario_id == !!scenario_id)
         
       scenario_flags   <- scenario_params$flags[[1]]
       cloned_household <- household$clone(deep = TRUE)
@@ -28,13 +28,13 @@ simulate_scenarios <- function(
       simulate_scenario(
         household    = cloned_household,
         portfolio    = portfolio,
-        current_date = current_date
-      ) |> 
-        dplyr::mutate(scenario = scenario_id)
+        current_date = current_date,
+        scenario_id  = scenario_id
+      ) 
 
     }) |> 
     purrr::list_rbind() |> 
     dplyr::select(
-      scenario, index, dplyr::everything()
+      scenario_id, index, dplyr::everything()
     )
 }

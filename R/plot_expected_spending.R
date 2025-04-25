@@ -83,11 +83,18 @@ plot_expected_spending <- function(
     data_to_plot |> 
     dplyr::group_by(type) |>
     dplyr::summarise(
-      median_spending = median(spending)
+      median_spending = median(spending),
+      max_spending    = max(spending)
     )
   
   median_spending <- summarized_data$median_spending
   names(median_spending) <- 
+    glue::glue( 
+      "<span style='color: {type_colors[current_year$type]};'>**{current_year$type}**</span>"
+    )
+  
+  max_spending <- summarized_data$max_spending
+  names(max_spending) <- 
     glue::glue( 
       "<span style='color: {type_colors[current_year$type]};'>**{current_year$type}**</span>"
     )
@@ -110,33 +117,42 @@ plot_expected_spending <- function(
     ) +
     ggplot2::labs(
       title = glue::glue("Expected Spending"),
-      subtitle =  ifelse(
-        "scenario" %in% names(scenario),
-        glue::glue(
-          "Scenario: <strong>'{unique(scenario$scenario)}'</strong>"
+      subtitle = glue::glue(paste0(
+        ifelse(
+          "scenario" %in% names(scenario),
+          glue::glue(
+            "Scenario: <strong>'{unique(scenario$scenario)}'</strong><br>"
+          ),
+          ""
         ),
-        ""
-      ),
-      caption = glue::glue(paste0(
-        "Total current spending: ",
-        "<strong>",
-        print_currency(total_current_spending, accuracy = 1),
-        "</strong>",
-        ".<br>",
         "Current spending: ",
         paste0(
-          names(current_year_spending), 
-          "= <strong>", 
-          print_currency(current_year_spending, accuracy = 1), 
-          "</strong>",
-          collapse = " & "
+          "<strong>", 
+          glue::glue(
+            "<span style='color: {type_colors[current_year$type]};'>{print_currency(current_year_spending, accuracy = 1)}</span>"
+          ),
+          "</strong> ",
+          collapse = " + "
         ),
-        ".<br>",
+        " = <strong>",
+        print_currency(total_current_spending, accuracy = 1),
+        "</strong>"
+      )),
+      caption = glue::glue(paste0(
         "Median spending: ",
         paste0(
           names(median_spending), 
           "= <strong>", 
           print_currency(median_spending, accuracy = 1), 
+          "</strong>",
+          collapse = " & "
+        ),
+        ".<br>",
+        "Max spending: ",
+        paste0(
+          names(max_spending), 
+          "= <strong>", 
+          print_currency(max_spending, accuracy = 1), 
           "</strong>",
           collapse = " & "
         ),

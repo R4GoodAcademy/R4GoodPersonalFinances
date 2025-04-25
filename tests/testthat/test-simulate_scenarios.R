@@ -44,9 +44,9 @@ test_that("simulating multiple scenarios", {
       end_age   = Inf
     ) |> 
     dplyr::mutate(
-      scenario = start_age
+      scenario_id = start_age
     ) |> 
-    tidyr::nest(flags = -scenario)
+    tidyr::nest(flags = -scenario_id)
   
   if (interactive()) print(scenarios_parameters)
   if (interactive()) scenarios_parameters |> tidyr::unnest(flags) |> print()
@@ -62,11 +62,11 @@ test_that("simulating multiple scenarios", {
     )
   
   expect_equal(
-    unique(scenarios$scenario),
+    unique(scenarios$scenario_id),
     start_ages
   )
   expect_equal(
-    scenarios |> dplyr::count(scenario) |> dplyr::pull(n),
+    scenarios |> dplyr::count(scenario_id) |> dplyr::pull(n),
     rep(
       household$get_lifespan(current_date = test_current_date) + 1, 
       NROW(scenarios_parameters)
@@ -74,7 +74,7 @@ test_that("simulating multiple scenarios", {
   )
   expect_snapshot(
     scenarios |> 
-      dplyr::group_by(scenario) |> 
+      dplyr::group_by(scenario_id) |> 
       dplyr::summarise(total_income = sum(total_income)) 
   )
 })

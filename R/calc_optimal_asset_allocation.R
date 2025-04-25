@@ -1,7 +1,7 @@
 calc_optimal_asset_allocation <- function(
   household,
   portfolio,
-  current_date
+  current_date = get_current_date()
 ) {
 
   scenario <- 
@@ -30,6 +30,7 @@ calc_optimal_asset_allocation <- function(
     standard_deviations          = portfolio$standard_deviation,
     correlations                 = portfolio$correlations,
     effective_tax_rates          = portfolio$aftertax$effective_tax_rate,
+    # TODO: in_taxable_accounts can change?
     in_taxable_accounts          = fraction_in_taxable_accounts,
     financial_wealth             = financial_wealth,
     human_capital                = human_capital,
@@ -37,6 +38,7 @@ calc_optimal_asset_allocation <- function(
     nondiscretionary_consumption = nondiscretionary_consumption,
     discretionary_consumption    = discretionary_spending,
     income                       = income,
+    # TODO: life_insurance_premium
     life_insurance_premium       = 0,
     human_capital_weights        = portfolio$weights$human_capital,
     liabilities_weights          = portfolio$weights$liabilities,
