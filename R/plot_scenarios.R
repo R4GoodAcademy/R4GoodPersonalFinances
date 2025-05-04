@@ -24,54 +24,60 @@ plot_scenarios <- function(
   
   monte_carlo_scenarios <-
     scenarios |> 
-    dplyr::filter(sample != 0) |> 
-    dplyr::mutate(
-      negative_discretionary_spending = 
-        dplyr::if_else(
-          discretionary_spending < 0,
-          abs(discretionary_spending),
-          0
-        ),
-      positive_discretionary_spending = 
-        dplyr::if_else(
-          discretionary_spending >= 0,
-          discretionary_spending,
-          0
-        )
-      ) |> 
-    dplyr::group_by(scenario_id, sample) |> 
-    dplyr::summarise(
-      utility = 
-        sum(discretionary_spending_utility_weighted),
-      constant = 
-        calc_inverse_utility(
-          utility = 
-            sum(discretionary_spending_utility_weighted) / 
-            sum(survival_prob * time_value_discount),
-          parameter = unique(smooth_consumption_preference)
-        ),
-      positive_discretionary_spending = mean(positive_discretionary_spending),
-      negative_discretionary_spending = mean(negative_discretionary_spending),
-      risk_tolerance = unique(risk_tolerance)
-    ) |> 
-    dplyr::group_by(scenario_id) |> 
-    dplyr::summarise(
-      utility         = median(utility),
-      constant = 
-        calc_inverse_utility(
-          mean(
-            calc_utility(
-            constant,
-            parameter = unique(risk_tolerance)
-            )
+    dplyr::filter(sample != 0) 
+  
+  if (NROW(monte_carlo_scenarios) > 0) {
+  
+    monte_carlo_scenarios <-
+      monte_carlo_scenarios |> 
+      dplyr::mutate(
+        negative_discretionary_spending = 
+          dplyr::if_else(
+            discretionary_spending < 0,
+            abs(discretionary_spending),
+            0
           ),
-          parameter = unique(risk_tolerance)
-        ) / period_factor,
-      positive_discretionary_spending = 
-        median(positive_discretionary_spending) / period_factor,
-      negative_discretionary_spending = 
-        median(negative_discretionary_spending) / period_factor
-    ) 
+        positive_discretionary_spending = 
+          dplyr::if_else(
+            discretionary_spending >= 0,
+            discretionary_spending,
+            0
+          )
+        ) |> 
+      dplyr::group_by(scenario_id, sample) |> 
+      dplyr::summarise(
+        utility = 
+          sum(discretionary_spending_utility_weighted),
+        constant = 
+          calc_inverse_utility(
+            utility = 
+              sum(discretionary_spending_utility_weighted) / 
+              sum(survival_prob * time_value_discount),
+            parameter = unique(smooth_consumption_preference)
+          ),
+        positive_discretionary_spending = mean(positive_discretionary_spending),
+        negative_discretionary_spending = mean(negative_discretionary_spending),
+        risk_tolerance = unique(risk_tolerance)
+      ) |> 
+      dplyr::group_by(scenario_id) |> 
+      dplyr::summarise(
+        utility         = median(utility),
+        constant = 
+          calc_inverse_utility(
+            mean(
+              calc_utility(
+              constant,
+              parameter = unique(risk_tolerance)
+              )
+            ),
+            parameter = unique(risk_tolerance)
+          ) / period_factor,
+        positive_discretionary_spending = 
+          median(positive_discretionary_spending) / period_factor,
+        negative_discretionary_spending = 
+          median(negative_discretionary_spending) / period_factor
+      ) 
+  }
   
   expected_returns_scenario <- 
     expected_returns_scenario |> 
@@ -79,24 +85,51 @@ plot_scenarios <- function(
         utility_normalized_expected = 
           normalize(
             utility_expected, 
-            min = min(constant_expected, monte_carlo_scenarios$constant), 
-            max = max(constant_expected, monte_carlo_scenarios$constant)
+            min = min(
+              constant_expected, 
+              ifelse(
+                NROW(monte_carlo_scenarios) == 0,
+                NA, 
+                monte_carlo_scenarios$constant
+              ),
+              na.rm = TRUE
+            ), 
+            max = max(
+              constant_expected, 
+              ifelse(
+                NROW(monte_carlo_scenarios) == 0,
+                NA, 
+                monte_carlo_scenarios$constant
+              ),
+              na.rm = TRUE
+            )
           )
       )
   
-  monte_carlo_scenarios <- 
-    monte_carlo_scenarios |> 
+  if (NROW(monte_carlo_scenarios) > 0) {
+    monte_carlo_scenarios <- 
+      monte_carlo_scenarios |> 
       dplyr::mutate(
-        utility_normalized = normalize(
-          utility, 
-          min = min(constant, expected_returns_scenario$constant_expected), 
-          max = max(constant, expected_returns_scenario$constant_expected)
-        )
+        utility_normalized = 
+          normalize(
+            utility, 
+            min = min(
+              constant, 
+              expected_returns_scenario$constant_expected,
+              na.rm = TRUE
+            ), 
+            max = max(
+              constant, 
+              expected_returns_scenario$constant_expected,
+              na.rm = TRUE
+            )
+          )
       )
+  }
 
   ordered_scenario_levels <- 
-    monte_carlo_scenarios |>
-    dplyr::arrange(utility_normalized) |> 
+    expected_returns_scenario |>
+    dplyr::arrange(utility_normalized_expected) |> 
     dplyr::pull(scenario_id) |> 
     unique()
 
@@ -107,28 +140,33 @@ plot_scenarios <- function(
       cols      = -"scenario_id",
       names_to  = "metric",
       values_to = "value"
-    ) 
-    
-  monte_carlo_scenarios_long <- 
-    monte_carlo_scenarios |> 
-    dplyr::select(-utility) |> 
-    tidyr::pivot_longer(
-      cols      = -"scenario_id",
-      names_to  = "metric",
-      values_to = "value"
     ) |> 
-    dplyr::mutate(
-      scenario_id = factor(scenario_id, levels = ordered_scenario_levels)
-    ) 
-  
+      dplyr::mutate(
+        scenario_id = factor(scenario_id, levels = ordered_scenario_levels)
+      ) 
+    
+  if (NROW(monte_carlo_scenarios) > 0) {
+    
+    monte_carlo_scenarios_long <- 
+      monte_carlo_scenarios |> 
+      dplyr::select(-utility) |> 
+      tidyr::pivot_longer(
+        cols      = -"scenario_id",
+        names_to  = "metric",
+        values_to = "value"
+      ) |> 
+      dplyr::mutate(
+        scenario_id = factor(scenario_id, levels = ordered_scenario_levels)
+      ) 
+  }
+    
   colors <- 
     grDevices::colorRampPalette(
       rev(PrettyCols::prettycols("Bold"))
-    )(
-      length(unique(monte_carlo_scenarios_long$metric)) + 2
-    )
+    )(4 + 2)
 
-  monte_carlo_scenarios_long |>
+  to_plot <- 
+    expected_returns_scenario_long |>
     ggplot2::ggplot(
       ggplot2::aes(
         x     = scenario_id, 
@@ -136,9 +174,6 @@ plot_scenarios <- function(
         color = metric,
         group = metric
       )
-    ) +
-    ggplot2::geom_line(
-      linetype = "dotted"
     ) +
     ggplot2::geom_line(
       data    = expected_returns_scenario_long,
@@ -152,7 +187,6 @@ plot_scenarios <- function(
       data = expected_returns_scenario_long,
       size = 2
     ) +
-    ggplot2::geom_point(size = 2) +
     ggrepel::geom_text_repel(
       data = 
         expected_returns_scenario_long |> 
@@ -209,4 +243,20 @@ plot_scenarios <- function(
         ),
       plot.subtitle = ggtext::element_markdown(color = "grey60")
     )
+
+    if (NROW(monte_carlo_scenarios) > 0) {
+      
+      to_plot <- 
+        to_plot +
+        ggplot2::geom_line(
+          data    = monte_carlo_scenarios_long,
+          linetype = "dotted"
+        ) +
+        ggplot2::geom_point(
+          data = monte_carlo_scenarios_long,
+          size = 2
+        )
+    }
+    
+  to_plot
 }

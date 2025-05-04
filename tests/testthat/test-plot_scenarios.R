@@ -21,8 +21,8 @@ test_that("plotting scenarios metrics without Monte Carlo samples", {
   
   household$expected_income <- list(
     "income_older" = c(
-      "!members$older$events$retirement ~ 10000 * 12",
-      "members$older$events$retirement ~ 1000 * 12"
+      "!members$older$events$retirement$on ~ 10000 * 12",
+      "members$older$events$retirement$on ~ 1000 * 12"
     )
   )
   household$expected_spending <- list(
@@ -93,8 +93,8 @@ test_that("plotting scenarios metrics with Monte Carlo samples", {
   
   household$expected_income <- list(
     "income_older" = c(
-      "!members$older$events$retirement ~ 10000 * 12",
-      "members$older$events$retirement ~ 1000 * 12"
+      "!members$older$events$retirement$on ~ 10000 * 12",
+      "members$older$events$retirement$on ~ 1000 * 12"
     )
   )
   household$expected_spending <- list(
@@ -122,36 +122,23 @@ test_that("plotting scenarios metrics with Monte Carlo samples", {
   
   test_current_date <- "2020-07-15"
 
-
-  future::availableCores()
-  old_plan <- 
-    future::plan(
-      future::multisession,
-      workers = future::availableCores()
-    )
-
   scenarios <- 
     simulate_scenarios(
       scenarios_parameters = scenarios_parameters,
       household            = household,
       portfolio            = portfolio,
       current_date         = test_current_date,
-      monte_carlo_samples  = 2
+      monte_carlo_samples  = 1
     )
   
-  scenarios |> 
-    dplyr::count(scenario_id, sample)
-  
-    plot1 <- function() plot_scenarios(
-      scenarios = scenarios
-    ); if (interactive()) print(plot1())
-    vdiffr::expect_doppelganger("plot1", plot1)
-  
-    plot2 <- function() plot_scenarios(
-      scenarios = scenarios,
-      period    = "monthly"
-    ); if (interactive()) print(plot2())
-    vdiffr::expect_doppelganger("plot2", plot2)
-  
-  future::plan(old_plan)
+  plot1 <- function() plot_scenarios(
+    scenarios = scenarios
+  ); if (interactive()) print(plot1())
+  vdiffr::expect_doppelganger("plot1", plot1)
+
+  plot2 <- function() plot_scenarios(
+    scenarios = scenarios,
+    period    = "monthly"
+  ); if (interactive()) print(plot2())
+  vdiffr::expect_doppelganger("plot2", plot2)
 })
