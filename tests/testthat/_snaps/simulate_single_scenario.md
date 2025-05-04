@@ -1,4 +1,4 @@
-# simulating single scenario with events helper functions - direct access
+# simulating single scenario with event
 
     Code
       scenario$income$income_older
@@ -9,7 +9,7 @@
       [46] 3000 3000 3000 3000 3000 3000 3000 3000 3000 3000 3000 3000 3000 3000 3000
       [61] 3000
 
-# simulating single scenario with events helper functions - is_on function
+# simulating single scenario with event and id_on helper functions
 
     Code
       scenario$income$income_older

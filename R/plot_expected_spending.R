@@ -4,7 +4,9 @@ plot_expected_spending <- function(
   discretionary_spending_position = c("top", "bottom")
 ) {
   
-  stopifnot(scenario$scenario_id %>% unique() %>% length() == 1)
+  stopifnot(
+    length(unique(scenario$scenario_id)) == 1
+  )
 
   type          <- c("discretionary", "non-discretionary")
   period        <- rlang::arg_match(period)

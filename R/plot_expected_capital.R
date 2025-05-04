@@ -25,6 +25,7 @@ plot_expected_capital <- function(
   )
 
   scenario |> 
+    dplyr::filter(sample == 0) |>
     dplyr::select(
       index,
       financial_wealth, 
