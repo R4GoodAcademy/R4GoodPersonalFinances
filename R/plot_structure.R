@@ -1,8 +1,8 @@
 plot_structure <- function(
   scenario,
-  period  = c("yearly", "monthly"),
+  period       = c("yearly", "monthly"),
   structure_of = c("spending", "income"),
-  y_limit = c(NA, NA)
+  y_limit      = c(NA, NA)
 ) {
 
   period        <- rlang::arg_match(period)
@@ -61,7 +61,12 @@ plot_structure <- function(
   ) +
   ggplot2::scale_y_continuous(
     labels = print_currency,
-    breaks = pretty(data_to_plot$amount, n = 10, min.n = 10)
+    breaks = 
+      seq(
+        from = 0, 
+        to   = ceiling(max(data_to_plot$amount) / 1000) * 1000, 
+        by   = 1000
+      )
   ) +
   ggplot2::coord_cartesian(ylim = c(y_limit[1], y_limit[2]))
  

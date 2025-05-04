@@ -24,7 +24,12 @@ plot_future_spending <- function(
   } 
 
   if (type == "discretionary") {
-    return(plot_simulated_spending(scenario, period = period))
+    return(
+      plot_simulated_spending(
+        scenario, 
+        period = period
+      )
+    )
   } 
 
   if (type == "non-discretionary") {

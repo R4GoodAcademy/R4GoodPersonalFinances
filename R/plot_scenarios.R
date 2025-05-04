@@ -178,17 +178,17 @@ plot_scenarios <- function(
       values = colors,
       labels = c(
         "negative_discretionary_spending" = 
-          "median of means of missing founds\nin Monte Carlo samples",
+          "median of means\nof missing founds\nin Monte Carlo samples",
         "positive_discretionary_spending" = 
-          "median of means of discretionary spending\nin Monte Carlo samples",
+          "median of means\nof discretionary spending\nin Monte Carlo samples",
         "constant" = 
-          "constant (certainty equivalent) discretionary spending\n in Monte Carlo samples",
+          "constant (certainty equivalent)\ndiscretionary spending\n in Monte Carlo samples",
         "constant_expected" = 
-          "constant (certainty equivalent) discretionary spending\n based on expected returns",
+          "constant (certainty equivalent)\ndiscretionary spending\n based on expected returns",
         "utility_normalized_expected" = 
-          "normalized median utility of spending\nbased on expected returns",
+          "normalized median utility\nof discretionary spending\nbased on expected returns",
         "utility_normalized" = 
-          "normalized median utility of spending\nin Monte Carlo samples"
+          "normalized median utility\nof discretionary spending\nin Monte Carlo samples"
       )
     ) +
     ggplot2::theme_minimal() +
