@@ -1,13 +1,14 @@
 #' @export
 plot_expected_allocation <- function(
   scenario,
-  account_type = c("total", "taxable", "taxadvantaged")
+  accounts = c("all", "taxable", "taxadvantaged")
 ) {
 
-  account_type <- rlang::arg_match(account_type)
+  accounts     <- rlang::arg_match(accounts)
+  account_type <- ifelse(accounts == "all", "total", accounts)
   
   data_to_plot <- 
-    scenario$allocation |> 
+    scenario$portfolio$allocation |> 
     dplyr::bind_rows(.id = "index") |> 
     dplyr::mutate(index = as.integer(index) - 1) |>
     dplyr::select(

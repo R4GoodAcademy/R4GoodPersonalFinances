@@ -49,14 +49,14 @@ test_that("plotting expected allocation", {
   vdiffr::expect_doppelganger("plot1", plot1)
 
   plot2 <- function() plot_expected_allocation(
-    scenario     = scenario,
-    account_type = "taxable"
+    scenario = scenario,
+    accounts = "taxable"
   ); if (interactive()) print(plot2())
   vdiffr::expect_doppelganger("plot2", plot2)
 
   plot3 <- function() plot_expected_allocation(
-    scenario     = scenario,
-    account_type = "taxadvantaged"
+    scenario = scenario,
+    accounts = "taxadvantaged"
   ); if (interactive()) print(plot3())
   vdiffr::expect_doppelganger("plot3", plot3)
 })
