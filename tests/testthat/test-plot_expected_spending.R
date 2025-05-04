@@ -12,13 +12,13 @@ test_that("plotting expected spending", {
   
   household$expected_income <- list(
     "income_older" = c(
-      "hm$older$age >= 44 & hm$older$age < 55 ~ 1000",
-      "hm$older$age >= 55 ~ 3000"
+      "members$older$age >= 44 & members$older$age < 55 ~ 1000",
+      "members$older$age >= 55 ~ 3000"
     )
   )
   household$expected_spending <- list(
     "spending1" = c(
-      "hm$older$age >= 65 ~ 3000",
+      "members$older$age >= 65 ~ 3000",
       "TRUE ~ 6000"
     )
   )

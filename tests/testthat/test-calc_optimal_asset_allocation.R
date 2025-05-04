@@ -12,8 +12,8 @@ test_that("calculating optimal asset allocation", {
   
   household$expected_income <- list(
     "income_older" = c(
-      "hm$older$age < 60 ~ 40000",
-      "hm$older$age >= 60 ~ 20000"
+      "members$older$age < 60 ~ 40000",
+      "members$older$age >= 60 ~ 20000"
     )
   )
   household$expected_spending <- list(

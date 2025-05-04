@@ -60,14 +60,14 @@ test_that("generating household timeline", {
   )
 
   expect_true(
-    tibble::is_tibble(timeline$hm)
+    tibble::is_tibble(timeline$members)
   )
   expect_equal(
-    names(timeline$hm),
+    names(timeline$members),
     h$get_members() |> names()
   )
-  expect_true(timeline$hm[[1]]$age |> is.numeric())
-  expect_true(timeline$hm[[2]]$age |> is.numeric())
+  expect_true(timeline$members[[1]]$age |> is.numeric())
+  expect_true(timeline$members[[2]]$age |> is.numeric())
 })
 
 test_that("generating household timeline with events", {
@@ -103,13 +103,10 @@ test_that("generating household timeline with events", {
       household    = h, 
       current_date = test_current_date
     ) 
-  
   if (interactive()) timeline |> print(width = Inf)
   
-  older_member$get_events()
+  expect_true(is.logical(timeline$members[[1]]$events$retirement))
+  expect_true(is.logical(timeline$members[[1]]$events$social_security))
   
-  expect_true(is.logical(timeline$hm[[1]]$events$retirement))
-  expect_true(is.logical(timeline$hm[[1]]$events$social_security))
-  
-  expect_true(is.logical(timeline$hm[[2]]$events$retirement))
+  expect_true(is.logical(timeline$members[[2]]$events$retirement))
 })

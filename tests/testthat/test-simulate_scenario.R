@@ -20,11 +20,11 @@ test_that("simulating a default scenario with expected returns", {
   
   household$expected_income <- list(
     "income_older" = c(
-      "hm$older$age >= 44 & hm$older$age < 46 ~ 100",
-      "hm$older$age >= 46 ~ 300"
+      "members$older$age >= 44 & members$older$age < 46 ~ 100",
+      "members$older$age >= 46 ~ 300"
     ),
     "income_younger" = c(
-      "hm$younger$age >= 34 ~ 200"
+      "members$younger$age >= 34 ~ 200"
     )
   )
   household$expected_spending <- list(
@@ -49,7 +49,7 @@ test_that("simulating a default scenario with expected returns", {
       current_date = test_current_date
     )
   
-  expect_true(tibble::is_tibble(scenario$hm))
+  expect_true(tibble::is_tibble(scenario$members))
   expect_true(tibble::is_tibble(scenario$income))
   expect_true(tibble::is_tibble(scenario$spending))
   
@@ -85,8 +85,8 @@ test_that("simulating a scenario with Monte Carlo samples", {
   
   household$expected_income <- list(
     "income_older" = c(
-      "hm$older$age >= 44 & hm$older$age < 46 ~ 100",
-      "hm$older$age >= 46 ~ 300"
+      "members$older$age >= 44 & members$older$age < 46 ~ 100",
+      "members$older$age >= 46 ~ 300"
     )
   )
   household$expected_spending <- list(

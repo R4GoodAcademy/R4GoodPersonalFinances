@@ -2,26 +2,26 @@ test_that("setting birth date", {
 
   test_birth_date <- "1980-07-15"
   
-  hm <- HouseholdMember$new(
+  members <- HouseholdMember$new(
     name       = "test_name",
     birth_date = test_birth_date
   )
   
   expect_true(
-    inherits(hm, "HouseholdMember")
+    inherits(members, "HouseholdMember")
   )
   
   expect_true(
-    inherits(hm$get_birth_date(), "Date")
+    inherits(members$get_birth_date(), "Date")
   )
   
   expect_equal(
-    as.character(hm$get_birth_date()), 
+    as.character(members$get_birth_date()), 
     test_birth_date
   )
 
   expect_equal(
-    hm$get_name(),
+    members$get_name(),
     "test_name"
   )
 })
@@ -31,15 +31,15 @@ test_that("setting max age", {
   test_birth_date <- "1980-07-15"
   test_max_age    <- 120
 
-  hm <- HouseholdMember$new(
+  members <- HouseholdMember$new(
     name       = "test_name",
     birth_date = test_birth_date
   )
-  expect_equal(hm$max_age, 100)
+  expect_equal(members$max_age, 100)
 
-  hm$max_age <- test_max_age
+  members$max_age <- test_max_age
   expect_equal(
-    hm$max_age,
+    members$max_age,
     test_max_age
   )
 })
@@ -51,15 +51,15 @@ test_that("calculating age", {
     c("2020-07-15", "2025-01-01", "2080-07-15", 
       "2080-07-16", "2081-07-11", "2081-07-18")
 
-  hm <- HouseholdMember$new(
+  members <- HouseholdMember$new(
     name       = "test_name",
     birth_date = test_birth_date
   )
-  expect_equal(hm$max_age, 100)
+  expect_equal(members$max_age, 100)
   
   expect_snapshot_value(
     style = "json2",
-    hm$calc_age(current_date = test_current_date)
+    members$calc_age(current_date = test_current_date)
   )
 })
 
@@ -69,14 +69,14 @@ test_that("calculating max lifespan", {
   test_current_date <- 
     c("2020-07-15", "2025-01-01", "2080-07-15", "2080-07-16")
   
-  hm <- HouseholdMember$new(
+  members <- HouseholdMember$new(
     name       = "test_name",
     birth_date = test_birth_date
   )
 
   expect_snapshot_value(
     style = "json2",
-    hm$get_lifespan(current_date = test_current_date)
+    members$get_lifespan(current_date = test_current_date)
   )
 })
 
@@ -85,18 +85,18 @@ test_that("setting gompertz parameters", {
   test_birth_date   <- "1980-07-15"
   test_current_date <- "2020-07-15"
   
-  hm <- HouseholdMember$new(
+  members <- HouseholdMember$new(
     name       = "test_name",
     birth_date = test_birth_date
   )
-  expect_null(hm$mode)
-  expect_null(hm$dispersion)
+  expect_null(members$mode)
+  expect_null(members$dispersion)
 
-  hm$mode <- 88
-  expect_equal(hm$mode, 88)
+  members$mode <- 88
+  expect_equal(members$mode, 88)
 
-  hm$dispersion <- 10
-  expect_equal(hm$dispersion, 10)
+  members$dispersion <- 10
+  expect_equal(members$dispersion, 10)
 })
 
 test_that("calculating gompertz survival probability", {
@@ -104,15 +104,15 @@ test_that("calculating gompertz survival probability", {
   test_birth_date   <- "1955-07-15"
   test_current_date <- "2020-07-15"
   
-  hm <- HouseholdMember$new(
+  members <- HouseholdMember$new(
     name       = "test_name",
     birth_date = test_birth_date
   )
-  hm$mode       <- 80
-  hm$dispersion <- 10
+  members$mode       <- 80
+  members$dispersion <- 10
   
   expect_equal(
-    hm$calc_survival_probability(
+    members$calc_survival_probability(
       target_age   = 85,
       current_date = test_current_date
     ),
@@ -125,41 +125,41 @@ test_that("setting age event", {
   
   test_birth_date <- "1955-07-15"
   
-  hm <- HouseholdMember$new(
+  members <- HouseholdMember$new(
     name       = "test_name",
     birth_date = test_birth_date
   )
 
-  expect_true(is.list(hm$get_events()))
-  expect_equal(NROW(hm$get_events()), 0)
+  expect_true(is.list(members$get_events()))
+  expect_equal(NROW(members$get_events()), 0)
   
-  hm$set_event("retirement", 65)
-  expect_equal(hm$get_events()$retirement$start_age, 65)
-  expect_equal(hm$get_events()$retirement$end_age, Inf)
+  members$set_event("retirement", 65)
+  expect_equal(members$get_events()$retirement$start_age, 65)
+  expect_equal(members$get_events()$retirement$end_age, Inf)
   
-  hm$set_event("social_security", 70)
-  expect_equal(hm$get_events()$social_security$start_age, 70)
-  expect_equal(hm$get_events()$social_security$end_age, Inf)
+  members$set_event("social_security", 70)
+  expect_equal(members$get_events()$social_security$start_age, 70)
+  expect_equal(members$get_events()$social_security$end_age, Inf)
   
-  hm$set_event("kid", 20, years = 20)
-  expect_equal(hm$get_events()$kid$start_age, 20)
-  expect_equal(hm$get_events()$kid$end_age, 40 - 1)
+  members$set_event("kid", 20, years = 20)
+  expect_equal(members$get_events()$kid$start_age, 20)
+  expect_equal(members$get_events()$kid$end_age, 40 - 1)
   
-  expect_equal(NROW(hm$get_events()), 3)
+  expect_equal(NROW(members$get_events()), 3)
 })
 
 test_that("cloning works", {
 
   test_birth_date <- "1955-07-15"
-  hm <- HouseholdMember$new(
+  members <- HouseholdMember$new(
     name       = "test_name",
     birth_date = test_birth_date
   )
   
-  hm$set_event("retirement", 65)
-  expect_equal(hm$get_events()$retirement$start_age, 65)
+  members$set_event("retirement", 65)
+  expect_equal(members$get_events()$retirement$start_age, 65)
   
-  cloned_hm <- hm$clone(deep = TRUE)
+  cloned_hm <- members$clone(deep = TRUE)
   cloned_hm$set_event("retirement", 100)
   expect_equal(cloned_hm$get_events()$retirement$start_age, 100)
 })

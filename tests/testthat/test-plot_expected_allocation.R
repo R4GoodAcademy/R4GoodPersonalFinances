@@ -20,11 +20,11 @@ test_that("plotting expected allocation", {
   
   household$expected_income <- list(
     "income_older" = c(
-      "hm$older$age < 60 ~ 40000",
-      "hm$older$age >= 60 ~ 20000"
+      "members$older$age < 60 ~ 40000",
+      "members$older$age >= 60 ~ 20000"
     ),
     "income_younger" = c(
-      "hm$younger$age < 50 ~ 40000"
+      "members$younger$age < 50 ~ 40000"
     )
   )
   household$expected_spending <- list(

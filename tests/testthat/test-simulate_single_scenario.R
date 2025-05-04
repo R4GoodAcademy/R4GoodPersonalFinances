@@ -12,7 +12,7 @@ test_that("simulating single scenario with expected returns", {
   
   household$expected_income <- list(
     "income_older" = c(
-      "hm$older$age >= 46 ~ 3000"
+      "members$older$age >= 46 ~ 3000"
     )
   )
   household$expected_spending <- list(
@@ -56,7 +56,7 @@ test_that("simulating single scenario with random returns", {
   
   household$expected_income <- list(
     "income_older" = c(
-      "hm$older$age >= 46 ~ 3000"
+      "members$older$age >= 46 ~ 3000"
     )
   )
   household$expected_spending <- list(

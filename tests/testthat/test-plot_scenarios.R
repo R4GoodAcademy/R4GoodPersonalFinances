@@ -21,8 +21,8 @@ test_that("plotting scenarios metrics without Monte Carlo samples", {
   
   household$expected_income <- list(
     "income_older" = c(
-      "!hm$older$events$retirement ~ 10000 * 12",
-      "hm$older$events$retirement ~ 1000 * 12"
+      "!members$older$events$retirement ~ 10000 * 12",
+      "members$older$events$retirement ~ 1000 * 12"
     )
   )
   household$expected_spending <- list(
@@ -93,8 +93,8 @@ test_that("plotting scenarios metrics with Monte Carlo samples", {
   
   household$expected_income <- list(
     "income_older" = c(
-      "!hm$older$events$retirement ~ 10000 * 12",
-      "hm$older$events$retirement ~ 1000 * 12"
+      "!members$older$events$retirement ~ 10000 * 12",
+      "members$older$events$retirement ~ 1000 * 12"
     )
   )
   household$expected_spending <- list(

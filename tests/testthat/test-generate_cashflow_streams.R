@@ -28,12 +28,12 @@ test_that("generating cashflow streams", {
   
   test_triggers <- list(
     "income1" = c(
-      "hm$older$age >= 44 & hm$older$age < 46 ~ 100",
-      "hm$older$age >= 46 ~ 300"
+      "members$older$age >= 44 & members$older$age < 46 ~ 100",
+      "members$older$age >= 46 ~ 300"
     ),
     "income2" = c(
-      "hm$younger$age >= 34 & hm$younger$age < 36 ~ 44",
-      "hm$younger$age >= 36 ~ 55"
+      "members$younger$age >= 34 & members$younger$age < 36 ~ 44",
+      "members$younger$age >= 36 ~ 55"
     )
   )
   

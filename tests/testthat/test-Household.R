@@ -107,12 +107,12 @@ test_that("setting planned income", {
 
   household$expected_income <- list(
     "income1" = c(
-      "hm$older$age >= 44 & hm$older$age < 46 ~ 100",
-      "hm$older$age >= 46 ~ 300"
+      "members$older$age >= 44 & members$older$age < 46 ~ 100",
+      "members$older$age >= 46 ~ 300"
     ),
     "income2" = c(
-      "hm$younger$age >= 34 & hm$younger$age < 36 ~ 44",
-      "hm$younger$age >= 36 ~ 55"
+      "members$younger$age >= 34 & members$younger$age < 36 ~ 44",
+      "members$younger$age >= 36 ~ 55"
     )
   )
   expect_equal(
@@ -145,12 +145,12 @@ test_that("setting planned non-discretionary spending", {
 
   household$expected_spending <- list(
     "spending1" = c(
-      "hm$older$age >= 44 & hm$older$age < 46 ~ 100",
-      "hm$older$age >= 46 ~ 300"
+      "members$older$age >= 44 & members$older$age < 46 ~ 100",
+      "members$older$age >= 46 ~ 300"
     ),
     "spending2" = c(
-      "hm$younger$age >= 34 & hm$younger$age < 36 ~ 44",
-      "hm$younger$age >= 36 ~ 55"
+      "members$younger$age >= 34 & members$younger$age < 36 ~ 44",
+      "members$younger$age >= 36 ~ 55"
     )
   )
   expect_equal(
@@ -191,15 +191,15 @@ test_that("calculating joint Gompertz parameters for 1 member", {
   test_birth_date   <- "1955-07-15"
   test_current_date <- "2020-07-15"
   
-  hm <- HouseholdMember$new(
+  members <- HouseholdMember$new(
     name       = "test_name",
     birth_date = test_birth_date
   )
-  hm$mode       <- 80
-  hm$dispersion <- 10
+  members$mode       <- 80
+  members$dispersion <- 10
 
   household <- Household$new()
-  household$add_member(hm)
+  household$add_member(members)
   
   survival <- household$calc_survival(current_date = test_current_date)
   expect_equal(survival$mode |> round(), 80)
@@ -359,14 +359,14 @@ test_that("getting min_age - age of the youngest member", {
 test_that("cloning works", {
 
   test_birth_date   <- "1955-07-15"
-  hm <- HouseholdMember$new(
+  members <- HouseholdMember$new(
     name       = "test_name",
     birth_date = test_birth_date
   )
-  hm$set_event("retirement", 65)
+  members$set_event("retirement", 65)
 
   household <- Household$new()
-  household$add_member(hm)
+  household$add_member(members)
   expect_equal(
     household$get_members()$test_name$get_events()$retirement$start_age,
     65
