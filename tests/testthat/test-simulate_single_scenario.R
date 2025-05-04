@@ -23,12 +23,17 @@ test_that("simulating single scenario with expected returns", {
   test_current_date <- "2020-07-15"
   portfolio <- generate_test_asset_returns(2)$returns
 
-  scenario <- 
-    simulate_single_scenario(
-      household = household,
-      portfolio = portfolio,
-      current_date = test_current_date
-    )
+  results <- microbenchmark::microbenchmark(
+    scenario <- 
+      simulate_single_scenario(
+        household    = household,
+        portfolio    = portfolio,
+        current_date = test_current_date
+      ),
+    times = ifelse(interactive(), 1, 10)
+  )
+
+  if (interactive()) print(results)
   
   expect_equal(
     ignore_attr = TRUE,

@@ -104,6 +104,13 @@ simulate_single_scenario <- function(
       consumption_impatience_preference = 
         household$consumption_impatience_preference
     ) 
+  
+  household_survival <- household$calc_survival(current_date = current_date)
+  household_min_age  <- household$get_min_age(  current_date = current_date)
+
+  max_age             <- household_min_age + max(scenario$index)
+  gompertz_mode       <- household_survival$mode
+  gompertz_dispersion <- household_survival$dispersion
 
   n_rows <- NROW(scenario)
 
@@ -140,8 +147,6 @@ simulate_single_scenario <- function(
       scenario[i, ]$human_capital -
       scenario[i, ]$liabilities
 
-    household_survival <- household$calc_survival(current_date = current_date)
-
     discretionary_spending <- 
       calc_discretionary_spending(
         allocations_taxable          = weights$taxable,
@@ -159,17 +164,14 @@ simulate_single_scenario <- function(
         income                       = scenario[i, ]$total_income,
         risk_tolerance               = scenario[i, ]$risk_tolerance,
         consumption_impatience_preference = 
-        scenario[i, ]$consumption_impatience_preference,
+          scenario[i, ]$consumption_impatience_preference,
         smooth_consumption_preference     = 
-          household$smooth_consumption_preference,
+          scenario[i, ]$smooth_consumption_preference,
         current_age = 
-          household$get_min_age(current_date = current_date) + 
-            scenario[i, ]$index,
-        max_age = 
-          household$get_min_age(current_date = current_date) + 
-            max(scenario$index),
-        gompertz_mode       = household_survival$mode,
-        gompertz_dispersion = household_survival$dispersion,
+          household_min_age + scenario[i, ]$index,
+        max_age = max_age,
+        gompertz_mode = gompertz_mode,
+        gompertz_dispersion = gompertz_dispersion,
         # TODO: life_insurance_premium
         life_insurance_premium = 0
       )
