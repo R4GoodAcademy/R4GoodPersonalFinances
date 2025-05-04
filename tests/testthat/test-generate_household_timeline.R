@@ -105,8 +105,8 @@ test_that("generating household timeline with events", {
     ) 
   if (interactive()) timeline |> print(width = Inf)
   
-  expect_true(is.logical(timeline$members[[1]]$events$retirement))
-  expect_true(is.logical(timeline$members[[1]]$events$social_security))
+  expect_true(is.logical(timeline$members[[1]]$events$retirement$on))
+  expect_true(is.logical(timeline$members[[1]]$events$social_security$on))
   
-  expect_true(is.logical(timeline$members[[2]]$events$retirement))
+  expect_true(is.logical(timeline$members[[2]]$events$retirement$on))
 })

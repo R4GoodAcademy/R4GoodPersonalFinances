@@ -31,21 +31,30 @@ generate_household_timeline <- function(
         events <- 
           names(events) |> 
           purrr::map(function(event_name) {
-            member_specific$age >= events[[event_name]]$start_age &
-            member_specific$age <= events[[event_name]]$end_age
+            
+            on <- 
+              member_specific$age >= events[[event_name]]$start_age &
+              member_specific$age <= events[[event_name]]$end_age
+
+            tibble::tibble(
+              on        = on,
+              off       = !on,
+              start_age = events[[event_name]]$start_age,
+              end_age   = events[[event_name]]$end_age,
+              years     = end_age - start_age + 1
+            ) 
           }) |> 
           purrr::set_names(names(events)) |> 
-          tibble::as_tibble()
-          
+          tibble::as_tibble() 
+
         member_specific <- 
           member_specific |>
           dplyr::mutate(events = events)
       }
-
       member_specific
     }) |> 
     tibble::as_tibble()
 
   timeline |> 
-    dplyr::mutate(hm = members)
+    dplyr::mutate(members = members)
 }

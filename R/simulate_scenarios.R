@@ -35,7 +35,7 @@ simulate_scenarios <- function(
 
       for (i in NROW(scenario_events)) {
         household_cloned$get_members()[[scenario_events[i, ]$member]]$set_event(
-          event      = scenario_events[i, ]$event,  
+          event     = scenario_events[i, ]$event,  
           start_age = scenario_events[i, ]$start_age, 
           end_age   = scenario_events[i, ]$end_age,
           years     = scenario_events[i, ]$years)
