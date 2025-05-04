@@ -163,3 +163,18 @@ test_that("cloning works", {
   cloned_hm$set_flag("retirement", 100)
   expect_equal(cloned_hm$get_flags()$retirement$start_age, 100)
 })
+
+test_that("calculating life expectancy", {
+
+  member <- HouseholdMember$new(
+    name       = "Isabela",
+    birth_date = Sys.Date() - lubridate::years(25),
+    mode       = 91,
+    dispersion = 8.88
+  )
+
+  expect_equal(
+    round(member$calc_life_expectancy()), 
+    86
+  )
+})

@@ -43,6 +43,16 @@ HouseholdMember <- R6::R6Class(
       max_years_left
     },
 
+    calc_life_expectancy = function(current_date = get_current_date()) {
+      
+      current_date <- lubridate::as_date(current_date)
+      calc_life_expectancy(
+        current_age = self$calc_age(current_date),
+        mode        = self$mode,
+        dispersion  = self$dispersion
+      )
+    },
+
     calc_survival_probability = function(
       target_age, 
       current_date = get_current_date()
