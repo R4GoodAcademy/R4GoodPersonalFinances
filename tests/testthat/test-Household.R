@@ -363,23 +363,23 @@ test_that("cloning works", {
     name       = "test_name",
     birth_date = test_birth_date
   )
-  hm$set_flag("retirement", 65)
+  hm$set_event("retirement", 65)
 
   household <- Household$new()
   household$add_member(hm)
   expect_equal(
-    household$get_members()$test_name$get_flags()$retirement$start_age,
+    household$get_members()$test_name$get_events()$retirement$start_age,
     65
   )
 
   cloned_household <- household$clone(deep = TRUE)
-  cloned_household$get_members()$test_name$set_flag("retirement", 100)
+  cloned_household$get_members()$test_name$set_event("retirement", 100)
   expect_equal(
-    cloned_household$get_members()$test_name$get_flags()$retirement$start_age,
+    cloned_household$get_members()$test_name$get_events()$retirement$start_age,
     100
   )
   expect_equal(
-    household$get_members()$test_name$get_flags()$retirement$start_age,
+    household$get_members()$test_name$get_events()$retirement$start_age,
     65
   )
 })

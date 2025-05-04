@@ -121,7 +121,7 @@ test_that("calculating gompertz survival probability", {
   )
 })
 
-test_that("setting age flag", {
+test_that("setting age event", {
   
   test_birth_date <- "1955-07-15"
   
@@ -129,23 +129,23 @@ test_that("setting age flag", {
     name       = "test_name",
     birth_date = test_birth_date
   )
+
+  expect_true(is.list(hm$get_events()))
+  expect_equal(NROW(hm$get_events()), 0)
   
-  expect_true(is.list(hm$get_flags()))
-  expect_equal(NROW(hm$get_flags()), 0)
+  hm$set_event("retirement", 65)
+  expect_equal(hm$get_events()$retirement$start_age, 65)
+  expect_equal(hm$get_events()$retirement$end_age, Inf)
   
-  hm$set_flag("retirement", 65)
-  expect_equal(hm$get_flags()$retirement$start_age, 65)
-  expect_equal(hm$get_flags()$retirement$end_age, Inf)
+  hm$set_event("social_security", 70)
+  expect_equal(hm$get_events()$social_security$start_age, 70)
+  expect_equal(hm$get_events()$social_security$end_age, Inf)
   
-  hm$set_flag("social_security", 70)
-  expect_equal(hm$get_flags()$social_security$start_age, 70)
-  expect_equal(hm$get_flags()$social_security$end_age, Inf)
+  hm$set_event("kid", 20, years = 20)
+  expect_equal(hm$get_events()$kid$start_age, 20)
+  expect_equal(hm$get_events()$kid$end_age, 40 - 1)
   
-  hm$set_flag("kid", 20, years = 20)
-  expect_equal(hm$get_flags()$kid$start_age, 20)
-  expect_equal(hm$get_flags()$kid$end_age, 40 - 1)
-  
-  expect_equal(NROW(hm$get_flags()), 3)
+  expect_equal(NROW(hm$get_events()), 3)
 })
 
 test_that("cloning works", {
@@ -156,12 +156,12 @@ test_that("cloning works", {
     birth_date = test_birth_date
   )
   
-  hm$set_flag("retirement", 65)
-  expect_equal(hm$get_flags()$retirement$start_age, 65)
+  hm$set_event("retirement", 65)
+  expect_equal(hm$get_events()$retirement$start_age, 65)
   
   cloned_hm <- hm$clone(deep = TRUE)
-  cloned_hm$set_flag("retirement", 100)
-  expect_equal(cloned_hm$get_flags()$retirement$start_age, 100)
+  cloned_hm$set_event("retirement", 100)
+  expect_equal(cloned_hm$get_events()$retirement$start_age, 100)
 })
 
 test_that("calculating life expectancy", {

@@ -30,15 +30,15 @@ simulate_scenarios <- function(
         scenarios_parameters |> 
         dplyr::filter(scenario_id == !!scenario_id)
         
-      scenario_flags   <- scenario_params$flags[[1]]
+      scenario_events   <- scenario_params$events[[1]]
       household_cloned <- household$clone(deep = TRUE)
 
-      for (i in NROW(scenario_flags)) {
-        household_cloned$get_members()[[scenario_flags[i, ]$member]]$set_flag(
-          flag      = scenario_flags[i, ]$flag,  
-          start_age = scenario_flags[i, ]$start_age, 
-          end_age   = scenario_flags[i, ]$end_age,
-          years     = scenario_flags[i, ]$years)
+      for (i in NROW(scenario_events)) {
+        household_cloned$get_members()[[scenario_events[i, ]$member]]$set_event(
+          event      = scenario_events[i, ]$event,  
+          start_age = scenario_events[i, ]$start_age, 
+          end_age   = scenario_events[i, ]$end_age,
+          years     = scenario_events[i, ]$years)
       }
         
       simulate_scenario(

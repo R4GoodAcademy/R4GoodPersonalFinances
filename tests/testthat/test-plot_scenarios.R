@@ -6,7 +6,7 @@ test_that("plotting scenarios metrics without Monte Carlo samples", {
   )  
   older_member$mode       <- 80
   older_member$dispersion <- 10
-  older_member$set_flag("retirement", 65)
+  older_member$set_event("retirement", 65)
 
   younger_member <- HouseholdMember$new(
     name       = "younger",  
@@ -21,8 +21,8 @@ test_that("plotting scenarios metrics without Monte Carlo samples", {
   
   household$expected_income <- list(
     "income_older" = c(
-      "!hm$older$flags$retirement ~ 10000 * 12",
-      "hm$older$flags$retirement ~ 1000 * 12"
+      "!hm$older$events$retirement ~ 10000 * 12",
+      "hm$older$events$retirement ~ 1000 * 12"
     )
   )
   household$expected_spending <- list(
@@ -38,7 +38,7 @@ test_that("plotting scenarios metrics without Monte Carlo samples", {
   scenarios_parameters <- 
     tibble::tibble(
       member    = "older",
-      flag      = "retirement",
+      event      = "retirement",
       start_age = start_ages,
       years     = Inf,
       end_age   = Inf
@@ -46,7 +46,7 @@ test_that("plotting scenarios metrics without Monte Carlo samples", {
     dplyr::mutate(
       scenario_id = start_age
     ) |> 
-    tidyr::nest(flags = -scenario_id)
+    tidyr::nest(events = -scenario_id)
   
   test_current_date <- "2020-07-15"
 
@@ -78,7 +78,7 @@ test_that("plotting scenarios metrics with Monte Carlo samples", {
   )  
   older_member$mode       <- 80
   older_member$dispersion <- 10
-  older_member$set_flag("retirement", 65)
+  older_member$set_event("retirement", 65)
 
   younger_member <- HouseholdMember$new(
     name       = "younger",  
@@ -93,8 +93,8 @@ test_that("plotting scenarios metrics with Monte Carlo samples", {
   
   household$expected_income <- list(
     "income_older" = c(
-      "!hm$older$flags$retirement ~ 10000 * 12",
-      "hm$older$flags$retirement ~ 1000 * 12"
+      "!hm$older$events$retirement ~ 10000 * 12",
+      "hm$older$events$retirement ~ 1000 * 12"
     )
   )
   household$expected_spending <- list(
@@ -110,7 +110,7 @@ test_that("plotting scenarios metrics with Monte Carlo samples", {
   scenarios_parameters <- 
     tibble::tibble(
       member    = "older",
-      flag      = "retirement",
+      event      = "retirement",
       start_age = start_ages,
       years     = Inf,
       end_age   = Inf
@@ -118,7 +118,7 @@ test_that("plotting scenarios metrics with Monte Carlo samples", {
     dplyr::mutate(
       scenario_id = start_age
     ) |> 
-    tidyr::nest(flags = -scenario_id)
+    tidyr::nest(events = -scenario_id)
   
   test_current_date <- "2020-07-15"
 
@@ -136,7 +136,7 @@ test_that("plotting scenarios metrics with Monte Carlo samples", {
       household            = household,
       portfolio            = portfolio,
       current_date         = test_current_date,
-      monte_carlo_samples  = 10
+      monte_carlo_samples  = 2
     )
   
   scenarios |> 

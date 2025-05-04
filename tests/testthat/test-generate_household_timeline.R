@@ -70,7 +70,7 @@ test_that("generating household timeline", {
   expect_true(timeline$hm[[2]]$age |> is.numeric())
 })
 
-test_that("generating household timeline with flags", {
+test_that("generating household timeline with events", {
   
   h <- Household$new()
 
@@ -81,8 +81,8 @@ test_that("generating household timeline with flags", {
       mode       = 80,
       dispersion = 10
     )  
-  older_member$set_flag("retirement", 45)
-  older_member$set_flag("social_security", 47)
+  older_member$set_event("retirement", 45)
+  older_member$set_event("social_security", 47)
   h$add_member(older_member)  
   
   younger_member <- 
@@ -92,8 +92,8 @@ test_that("generating household timeline with flags", {
     mode       = 85,
     dispersion = 9
   )
-  younger_member$set_flag("retirement", 35)
-  younger_member$set_flag("kid", 35, years = 2)
+  younger_member$set_event("retirement", 35)
+  younger_member$set_event("kid", 35, years = 2)
   h$add_member(younger_member)  
 
   test_current_date <- "2020-07-15"
@@ -106,9 +106,10 @@ test_that("generating household timeline with flags", {
   
   if (interactive()) timeline |> print(width = Inf)
   
-  expect_true(is.logical(timeline$hm[[1]]$flags$retirement))
-  expect_true(is.logical(timeline$hm[[1]]$flags$social_security))
+  older_member$get_events()
   
-  expect_true(is.logical(timeline$hm[[2]]$flags$retirement))
+  expect_true(is.logical(timeline$hm[[1]]$events$retirement))
+  expect_true(is.logical(timeline$hm[[1]]$events$social_security))
+  
+  expect_true(is.logical(timeline$hm[[2]]$events$retirement))
 })
-

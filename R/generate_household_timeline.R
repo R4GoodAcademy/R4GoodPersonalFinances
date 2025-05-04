@@ -25,21 +25,21 @@ generate_household_timeline <- function(
           age = member$calc_age(current_date = timeline$date) |>  round(0)
         ) 
       
-      flags <- member$get_flags()
-      if (length(flags) > 0) {
+      events <- member$get_events()
+      if (length(events) > 0) {
         
-        flags <- 
-          names(flags) |> 
-          purrr::map(function(flag_name) {
-            member_specific$age >= flags[[flag_name]]$start_age &
-            member_specific$age <= flags[[flag_name]]$end_age
+        events <- 
+          names(events) |> 
+          purrr::map(function(event_name) {
+            member_specific$age >= events[[event_name]]$start_age &
+            member_specific$age <= events[[event_name]]$end_age
           }) |> 
-          purrr::set_names(names(flags)) |> 
+          purrr::set_names(names(events)) |> 
           tibble::as_tibble()
           
-        member_specific <-
+        member_specific <- 
           member_specific |>
-          dplyr::mutate(flags = flags)
+          dplyr::mutate(events = events)
       }
 
       member_specific

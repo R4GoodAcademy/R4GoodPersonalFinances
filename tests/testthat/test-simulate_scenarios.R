@@ -6,7 +6,7 @@ test_that("simulating multiple scenarios", {
   )  
   older_member$mode       <- 80
   older_member$dispersion <- 10
-  older_member$set_flag("retirement", 65)
+  older_member$set_event("retirement", 65)
 
   younger_member <- HouseholdMember$new(
     name       = "younger",  
@@ -21,8 +21,8 @@ test_that("simulating multiple scenarios", {
   
   household$expected_income <- list(
     "income_older" = c(
-      "!hm$older$flags$retirement ~ 10000 * 12",
-      "hm$older$flags$retirement ~ 1000 * 12"
+      "!hm$older$events$retirement ~ 10000 * 12",
+      "hm$older$events$retirement ~ 1000 * 12"
     )
   )
   household$expected_spending <- list(
@@ -38,7 +38,7 @@ test_that("simulating multiple scenarios", {
   scenarios_parameters <- 
     tibble::tibble(
       member    = "older",
-      flag      = "retirement",
+      event      = "retirement",
       start_age = start_ages,
       years     = Inf,
       end_age   = Inf
@@ -46,10 +46,10 @@ test_that("simulating multiple scenarios", {
     dplyr::mutate(
       scenario_id = start_age
     ) |> 
-    tidyr::nest(flags = -scenario_id)
+    tidyr::nest(events = -scenario_id)
   
   if (interactive()) print(scenarios_parameters)
-  if (interactive()) scenarios_parameters |> tidyr::unnest(flags) |> print()
+  if (interactive()) scenarios_parameters |> tidyr::unnest(events) |> print()
     
   test_current_date <- "2020-07-15"
 
