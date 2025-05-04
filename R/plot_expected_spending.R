@@ -1,11 +1,12 @@
 plot_expected_spending <- function(
   scenario, 
   period                          = c("yearly", "monthly"),
-  type                            = c("discretionary", "non-discretionary"),
   discretionary_spending_position = c("top", "bottom")
 ) {
+  
+  stopifnot(scenario$scenario_id %>% unique() %>% length() == 1)
 
-  type          <- rlang::arg_match(type, multiple = TRUE)
+  type          <- c("discretionary", "non-discretionary")
   period        <- rlang::arg_match(period)
   period_factor <- if (period == "yearly") 1 else 12
 
@@ -28,14 +29,16 @@ plot_expected_spending <- function(
   
   data_to_plot <- 
     scenario |>
+    dplyr::filter(sample == 0) |> 
     dplyr::select(
+      sample,
       index, 
       discretionary_spending, 
       nondiscretionary_spending
     ) |>
     tidyr::pivot_longer(
       cols = c(
-        discretionary_spending, 
+        discretionary_spending,
         nondiscretionary_spending
       ),
       names_to  = "type",
@@ -84,9 +87,10 @@ plot_expected_spending <- function(
     dplyr::group_by(type) |>
     dplyr::summarise(
       median_spending = median(spending),
-      max_spending    = max(spending)
+      max_spending    = max(spending),
+      min_spending    = min(spending)
     )
-  
+
   median_spending <- summarized_data$median_spending
   names(median_spending) <- 
     glue::glue( 
@@ -98,17 +102,27 @@ plot_expected_spending <- function(
     glue::glue( 
       "<span style='color: {type_colors[current_year$type]};'>**{current_year$type}**</span>"
     )
-    
+  
+  min_spending <- summarized_data$min_spending
+  names(min_spending) <- 
+    glue::glue( 
+      "<span style='color: {type_colors[current_year$type]};'>**{current_year$type}**</span>"
+    )
+  
   data_to_plot |> 
     ggplot2::ggplot(
       ggplot2::aes(
         x    = index, 
-        y    = spending, 
-        fill = type
+        y    = spending
+        
       )
     ) +
-    ggplot2::geom_area() +
-    ggplot2::guides(fill = ggplot2::guide_legend(title = "Spending type")) +
+    ggplot2::geom_area(
+      ggplot2::aes(fill = type)
+    ) +
+    ggplot2::guides(
+      fill = ggplot2::guide_legend(title = "Spending type")
+    ) +
     ggplot2::scale_fill_manual(
       values = c(
         "discretionary"     = colors[4], 
@@ -156,7 +170,15 @@ plot_expected_spending <- function(
           "</strong>",
           collapse = " & "
         ),
-        ".<br>"
+        ".<br>",
+        "Min spending: ",
+        paste0(
+          names(min_spending), 
+          "= <strong>", 
+          print_currency(min_spending, accuracy = 1), 
+          "</strong>",
+          collapse = " & "
+        )
       )),
       x     = "Year index",
       y     = glue::glue("Spending {period}"),

@@ -51,18 +51,4 @@ test_that("plotting expected spending", {
   )
   if (interactive()) print(es3())
   vdiffr::expect_doppelganger("es3", es3)
-
-  es4 <- function() plot_expected_spending(
-    scenario, 
-    type = "non-discretionary"
-  )
-  if (interactive()) print(es4())
-  vdiffr::expect_doppelganger("es4", es4)
-
-  es5 <- function() plot_expected_spending(
-    scenario, 
-    type = "discretionary"
-  )
-  if (interactive()) print(es5())
-  vdiffr::expect_doppelganger("es5", es5)
 })
