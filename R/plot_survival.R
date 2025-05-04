@@ -2,7 +2,7 @@
 
 plot_survival <- function(
   household, 
-  current_date = Sys.Date()
+  current_date = get_current_date()
 ) {
 
   current_date   <- lubridate::as_date(current_date)
