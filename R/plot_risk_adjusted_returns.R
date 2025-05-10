@@ -79,7 +79,7 @@ plot_risk_adjusted_returns <- function(
         ggplot2::aes(
           x = 0,
           y = safe_asset_return,
-          label = print_percent(safe_asset_return)
+          label = format_percent(safe_asset_return)
         ),
         color = safe_asset_return_color
       ) +
@@ -87,7 +87,7 @@ plot_risk_adjusted_returns <- function(
         ggplot2::aes(
           x = optimal_risky_asset_allocation,
           y = y_limit_min,
-          label = print_percent(optimal_risky_asset_allocation)
+          label = format_percent(optimal_risky_asset_allocation)
         ),
         color = optimal_allocation_colour
       ) +
@@ -95,7 +95,7 @@ plot_risk_adjusted_returns <- function(
         ggplot2::aes(
           x = 0,
           y = max(risk_adjusted_returns),
-          label = print_percent(max(risk_adjusted_returns))
+          label = format_percent(max(risk_adjusted_returns))
         ),
         color = optimal_allocation_colour
       ) 
@@ -148,9 +148,9 @@ plot_risk_adjusted_returns <- function(
       x = "Risky Asset Allocation",
       y = "Risk Adjusted Returns",
       caption = glue::glue(paste(
-        "*Safe asset return*: <span style='color: {value_colour};'>**{print_percent(safe_asset_return)}**</span>;",
-        "*Risky asset return*: <span style='color: {value_colour};'>**{print_percent(risky_asset_return_mean)}**</span>;",
-        "*Risky asset sd*: <span style='color: {value_colour};'>**{print_percent(risky_asset_return_sd)}**</span>;",
+        "*Safe asset return*: <span style='color: {value_colour};'>**{format_percent(safe_asset_return)}**</span>;",
+        "*Risky asset return*: <span style='color: {value_colour};'>**{format_percent(risky_asset_return_mean)}**</span>;",
+        "*Risky asset sd*: <span style='color: {value_colour};'>**{format_percent(risky_asset_return_sd)}**</span>;",
         "*Risk aversion*: <span style='color: {value_colour};'>**{risk_aversion}**</span>."
       ))
     ) +
@@ -216,7 +216,7 @@ plot_risk_adjusted_returns <- function(
         ggplot2::aes(
           x     = 1,
           y     = current_risk_adjusted_return,
-          label = print_percent(current_risk_adjusted_return)
+          label = format_percent(current_risk_adjusted_return)
         ),
         color = current_risky_asset_allocation_colour
       ) +
@@ -224,7 +224,7 @@ plot_risk_adjusted_returns <- function(
         ggplot2::aes(
           x     = current_risky_asset_allocation,
           y     = y_limit_min + 0.002,
-          label = print_percent(current_risky_asset_allocation)
+          label = format_percent(current_risky_asset_allocation)
         ),
         color = current_risky_asset_allocation_colour
       ) +

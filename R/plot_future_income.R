@@ -1,3 +1,4 @@
+#' @export
 plot_future_income <- function(
   scenario,
   period  = c("yearly", "monthly"),

@@ -6,18 +6,34 @@ simulate_scenario <- function(
   current_date        = get_current_date(),
   monte_carlo_samples = NULL,
   seeds               = NULL,
-  handlers            = progressr::handler_tkprogressbar(),
-  debug               = FALSE
+  use_cache           = FALSE,
+  progress_handler    = progressr::handler_txtprogressbar(),
+  debug               = FALSE,
+  ...
 ) {
 
   cli::cli_h3("Simulating scenario: {.field {scenario_id}}")
   cli::cli_alert_info("Current date: {.field {current_date}}")
 
+  if (use_cache) {
+
+    cli::cli_alert_info("Caching is enabled!")
+
+    memoised_functions       <- .pkg_env$memoised
+    simulate_single_scenario <- memoised_functions$simulate_single_scenario
+    
+  } else {
+
+    cli::cli_alert_warning(cli::col_yellow("Caching is NOT enabled."))
+
+  }
+
+
   cli::cli_progress_step(
-    "Simulating sample {.field {0}} based on expected returns",
+    "Simulating a scenario based on expected returns (sample_id=={.field {0}})",
     class = ".alert"
   )
-
+  
   scenario <- 
     simulate_single_scenario(
       household      = household,
@@ -26,7 +42,8 @@ simulate_scenario <- function(
       current_date   = current_date,
       random_returns = FALSE,
       seed           = NULL,
-      debug          = debug
+      debug          = debug,
+      ...
     ) |> 
       dplyr::mutate(sample = 0) |> 
       dplyr::select(
@@ -48,7 +65,7 @@ simulate_scenario <- function(
   )
 
   progressr::with_progress(
-    handlers = handlers,
+    handlers = progress_handler,
     expr     = {
 
       progress_bar <- progressr::progressor(steps = n_samples)
@@ -69,7 +86,8 @@ simulate_scenario <- function(
             current_date   = current_date,
             random_returns = TRUE,
             seed           = seeds[sample_id],
-            debug          = debug
+            debug          = debug,
+            ...
           ) |> 
             dplyr::mutate(sample = sample_id)
         }, 

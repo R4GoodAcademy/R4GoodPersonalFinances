@@ -132,7 +132,7 @@ test_that("calculating optimal joint portfolio allocations", {
   expect_equal(
     ignore_attr = TRUE,
     round(optimal_joint_portfolio$taxable, 3),
-    c(0.271, 0.248, 0.292, 0.112, 0, 0, 0, 0, 0)
+    c(0.271, 0.248, 0.293, 0.112, 0, 0, 0, 0, 0)
   )
   expect_equal(
     ignore_attr = TRUE,
@@ -216,7 +216,7 @@ test_that("calculating optimal joint net-worth portfolio allocations", {
   if (interactive())
     optimal_joint_networth_portfolio |> 
     purrr::map(function(x) {
-      x |> print_percent()
+      x |> format_percent()
     })
   
   expect_equal(

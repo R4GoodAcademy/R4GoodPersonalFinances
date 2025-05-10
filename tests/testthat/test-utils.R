@@ -1,10 +1,10 @@
 test_that("printing percent", {
 
-  print_percent(0.52366) |> expect_snapshot()
-  print_percent(0.52366, accuracy = 0.01) |> expect_snapshot()
-  print_percent(list(a = 0.52366, b = 0.23456, c = "test")) |> 
+  format_percent(0.52366) |> expect_snapshot()
+  format_percent(0.52366, accuracy = 0.01) |> expect_snapshot()
+  format_percent(list(a = 0.52366, b = 0.23456, c = "test")) |> 
     expect_snapshot()
-  print_percent(
+  format_percent(
     list(
       a = 0.52366, 
       b = 0.23456, 
@@ -21,14 +21,14 @@ test_that("printing percent", {
 
 test_that("printing currency", {
 
-  print_currency(234) |> expect_snapshot()
-  print_currency(234, prefix = "$") |> expect_snapshot()
-  print_currency(234, suffix = " PLN") |> expect_snapshot()
-  print_currency(1234567.123456) |> expect_snapshot()
-  print_currency(1234567.123456, accuracy = 0.01) |> expect_snapshot()
-  print_currency(list(a = 234, b = 1234567.123456, c = "test")) |> 
+  format_currency(234) |> expect_snapshot()
+  format_currency(234, prefix = "$") |> expect_snapshot()
+  format_currency(234, suffix = " PLN") |> expect_snapshot()
+  format_currency(1234567.123456) |> expect_snapshot()
+  format_currency(1234567.123456, accuracy = 0.01) |> expect_snapshot()
+  format_currency(list(a = 234, b = 1234567.123456, c = "test")) |> 
     expect_snapshot()
-  print_currency(
+  format_currency(
     list(
       a = 234, 
       b = 1234567.123456, 
@@ -41,6 +41,30 @@ test_that("printing currency", {
     accuracy = 0.01
   ) |> 
     expect_snapshot()
+})
+
+test_that("printing currency with padding", {
+
+  expect_equal(
+    format_currency(234),
+    "234"
+  )
+  expect_equal(
+    format_currency(234, min_length = 6),
+    "   234"
+  )
+  expect_equal(
+    format_currency(2343, min_length = 6),
+    " 2,343"
+  )
+  expect_equal(
+    format_currency(2343, min_length = 7),
+    "  2,343"
+  )
+  expect_equal(
+    format_currency(0, min_length = 6),
+    "     0"
+  )
 })
 
 test_that("getting default current date", {

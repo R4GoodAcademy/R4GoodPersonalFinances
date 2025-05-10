@@ -21,7 +21,7 @@ test_that("calculating present value", {
     rep(10000, 20),
     rep(0, 10)
   )
-  if (interactive()) print_currency(test_cashflow) 
+  if (interactive()) format_currency(test_cashflow) 
   
   pv <- calc_present_value(
     cashflow      = test_cashflow,

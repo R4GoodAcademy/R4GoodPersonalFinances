@@ -1,21 +1,21 @@
 # printing percent
 
     Code
-      print_percent(0.52366)
+      format_percent(0.52366)
     Output
       [1] "52.4%"
 
 ---
 
     Code
-      print_percent(0.52366, accuracy = 0.01)
+      format_percent(0.52366, accuracy = 0.01)
     Output
       [1] "52.37%"
 
 ---
 
     Code
-      print_percent(list(a = 0.52366, b = 0.23456, c = "test"))
+      format_percent(list(a = 0.52366, b = 0.23456, c = "test"))
     Output
       $a
       [1] "52.4%"
@@ -30,7 +30,7 @@
 ---
 
     Code
-      print_percent(list(a = 0.52366, b = 0.23456, c = "test", d = list(a = 0.52366,
+      format_percent(list(a = 0.52366, b = 0.23456, c = "test", d = list(a = 0.52366,
         b = 0.23456, c = "test")), accuracy = 0.01)
     Output
       $a
@@ -57,42 +57,42 @@
 # printing currency
 
     Code
-      print_currency(234)
+      format_currency(234)
     Output
       [1] "234"
 
 ---
 
     Code
-      print_currency(234, prefix = "$")
+      format_currency(234, prefix = "$")
     Output
       [1] "$234"
 
 ---
 
     Code
-      print_currency(234, suffix = " PLN")
+      format_currency(234, suffix = " PLN")
     Output
       [1] "234 PLN"
 
 ---
 
     Code
-      print_currency(1234567.123456)
+      format_currency(1234567.123456)
     Output
       [1] "1,234,567"
 
 ---
 
     Code
-      print_currency(1234567.123456, accuracy = 0.01)
+      format_currency(1234567.123456, accuracy = 0.01)
     Output
       [1] "1,234,567.12"
 
 ---
 
     Code
-      print_currency(list(a = 234, b = 1234567.123456, c = "test"))
+      format_currency(list(a = 234, b = 1234567.123456, c = "test"))
     Output
       $a
       [1] "234"
@@ -107,7 +107,7 @@
 ---
 
     Code
-      print_currency(list(a = 234, b = 1234567.123456, c = "test", d = list(a = 234,
+      format_currency(list(a = 234, b = 1234567.123456, c = "test", d = list(a = 234,
         b = 1234567.123456, c = "test")), accuracy = 0.01)
     Output
       $a

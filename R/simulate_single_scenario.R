@@ -4,6 +4,7 @@ simulate_single_scenario <- function(
   scenario_id    = "default",
   current_date   = get_current_date(),
   random_returns = FALSE,
+  maxeval        = 2000,
   seed           = NULL,
   debug          = FALSE
 ) {
@@ -210,15 +211,15 @@ simulate_single_scenario <- function(
         human_capital_weights        = portfolio$weights$human_capital,
         liabilities_weights          = portfolio$weights$liabilities,
         asset_names                  = portfolio$name,
-
-        initial_allocation = initial_allocation
+        initial_allocation           = initial_allocation,
+        maxeval                      = maxeval
         ),
 
         error = function(e) {
           if (debug) {
             cli::cli_alert_warning(
               cli::col_yellow(
-                "{e}Optimal allocation not found for year index {i}. 
+                "{e}Optimal allocation not found for year index {i} / {n_rows}. 
                 Using optimal allocation from previous period..."
               )
             )

@@ -205,7 +205,7 @@ plot_scenarios <- function(
       show.legend = FALSE
     ) +
     ggplot2::scale_y_continuous(
-      labels = print_currency,
+      labels = format_currency,
       breaks = scales::breaks_extended(n = 10)
     ) +
     ggplot2::scale_color_manual(

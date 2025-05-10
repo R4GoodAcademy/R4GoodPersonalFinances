@@ -6,19 +6,21 @@
 #' 
 #' @inheritParams scales::dollar
 #' @inheritParams scales::percent
-#' @rdname print_
+#' @rdname format
 #' 
 #' @return A character. Formatted value.
 #' 
 #' @examples
-#' print_currency(2345678, suffix = " PLN")
+#' format_currency(2345678, suffix = " PLN")
 #' @export
 
-print_currency <- function(x, 
-  suffix = "",
+format_currency <- function(
+  x, 
+  suffix   = "",
   big.mark = ",",
   accuracy = NULL,
-  prefix = NULL,
+  prefix   = NULL,
+  min_length = NULL, 
   ...
 ) {
   
@@ -26,11 +28,12 @@ print_currency <- function(x,
     return(
       purrr::map(
         x, 
-        print_currency, 
+        format_currency, 
         suffix   = suffix, 
         big.mark = big.mark,
         accuracy = accuracy,
         prefix   = prefix,
+        min_length = min_length,
         ...
       )
     )
@@ -39,36 +42,52 @@ print_currency <- function(x,
   if (!is.numeric(x)) {
     return(x)
   }
+
+  formatted_value <- 
+    scales::dollar(
+      x        = x, 
+      prefix   = prefix, 
+      suffix   = suffix,
+      big.mark = big.mark,
+      accuracy = accuracy,
+      ...
+    )
+
+  if (is.null(min_length)) {
+    return(formatted_value)
+  }
+
+  padding <- min_length - nchar(formatted_value)
   
-  scales::dollar(
-    x        = x, 
-    prefix   = prefix, 
-    suffix   = suffix,
-    big.mark = big.mark,
-    accuracy = accuracy,
-    ...
-  )
+  formatted_value <- 
+    stringr::str_pad(
+      formatted_value,
+      width = nchar(formatted_value) + padding,
+      side = "left"
+    )
+  
+  formatted_value
 }
     
 #' @seealso [scales::percent()]
 #' 
 #' @inheritParams scales::percent
 #' @inheritParams scales::dollar
-#' @rdname print_
+#' @rdname format
 #' 
 #' @return A character. Formatted value.
 #' 
 #' @examples
-#' print_percent(0.52366)
+#' format_percent(0.52366)
 #' @export
 
-print_percent <- function(x, 
+format_percent <- function(x, 
                           accuracy = 0.1,
                           ...) {
   
   if (is.list(x)) {
     return(
-      purrr::map(x, print_percent, accuracy = accuracy, ...)
+      purrr::map(x, format_percent, accuracy = accuracy, ...)
     )
   }
 
@@ -217,4 +236,42 @@ generate_test_asset_returns <- function(n = 3) {
     correlations = test_asset_correlations
   )
 
+}
+
+#' @export
+get_cache_info <- function() {
+
+  list(
+    path  = .pkg_env$cache_directory,
+    files = .pkg_env$cache$size()
+  )
+}
+
+#' @export
+reset_cache <- function() {
+
+  .pkg_env$cache$reset()
+}
+
+#' @export
+set_cache <- function(
+  path = file.path(getwd(), ".cache")
+) {
+
+  .pkg_env$cache_directory <- path
+
+  .pkg_env$cache <- 
+    cachem::cache_disk(
+      dir        = .pkg_env$cache_directory,
+      prune_rate = 100000
+    )
+  
+  .pkg_env$memoised$simulate_single_scenario <- 
+    memoise::memoise(
+      f         = simulate_single_scenario,
+      cache     = .pkg_env$cache,
+      omit_args = c("debug", "verbose", "auto_parallel")
+    )
+
+  invisible(.pkg_env$cache_directory)
 }

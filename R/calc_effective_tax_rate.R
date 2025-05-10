@@ -1,3 +1,4 @@
+#' @export
 calc_effective_tax_rate <- function(
   portfolio,
   tax_rate_ltcg,

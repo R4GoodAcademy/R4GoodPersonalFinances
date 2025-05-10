@@ -1,3 +1,4 @@
+#' @export
 plot_optimal_portfolio <- function(
   portfolio
 ) {
@@ -54,7 +55,7 @@ plot_optimal_portfolio <- function(
     ggplot2::theme(axis.text.y = ggplot2::element_text(size = 8)) + 
     ggplot2::geom_text(
       ggplot2::aes(
-        label = ifelse(allocation < 0.001, "", print_percent(allocation))
+        label = ifelse(allocation < 0.001, "", format_percent(allocation))
       ),
       position = ggplot2::position_stack(vjust = 0.5),
       size = 3
@@ -64,7 +65,7 @@ plot_optimal_portfolio <- function(
       ggplot2::aes(
         x = portfolio,
         y = total_allocation,
-        label = print_percent(total_allocation)
+        label = format_percent(total_allocation)
       ),
       inherit.aes = FALSE,
       hjust = 0.5,

@@ -15,7 +15,8 @@ calc_optimal_portfolio <- function(
   discretionary_consumption    = NULL,
   income                       = NULL,
   life_insurance_premium       = NULL,
-  initial_allocation           = NULL
+  initial_allocation           = NULL,
+  maxeval                      = 2000
 ) {
 
   covariance_matrix <- calc_covariance_matrix(
@@ -173,7 +174,7 @@ calc_optimal_portfolio <- function(
       algorithm = "NLOPT_LN_COBYLA", 
       xtol_rel  = 1e-15,
       ftol_rel  = 1e-15,
-      maxeval   = 10000 
+      maxeval   = maxeval
     ),
     eval_g_eq   = equality_constraint,
     lb          = lower_bounds

@@ -3,7 +3,7 @@ plot_future_spending <- function(
   scenario,
   period                          = c("yearly", "monthly"),
   type                            = c("discretionary", "non-discretionary"),
-  discretionary_spending_position = c("top", "bottom"),
+  discretionary_spending_position = c("bottom", "top"),
   y_limit                         = c(NA, NA)
 ) {
   
@@ -176,7 +176,7 @@ plot_simulated_spending <- function(
       breaks = seq(0, max(scenario$index), by = 10)
     ) +
     ggplot2::scale_y_continuous(
-      labels = print_currency,
+      labels = format_currency,
       breaks = seq(
         round(min(quantile_data$min) / 1000) * 1000, 
         round(max(quantile_data$max) / 1000) * 1000, 

@@ -1,3 +1,4 @@
+#' @export
 HouseholdMember <- R6::R6Class(
   classname = "HouseholdMember",
 

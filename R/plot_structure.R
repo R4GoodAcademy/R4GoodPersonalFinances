@@ -41,33 +41,38 @@ plot_structure <- function(
       ggplot2::aes(x = index, y = amount, fill = category)
     ) +
     ggplot2::geom_col(position = "stack", color = NA, alpha = 0.8, width = 1) +
-  PrettyCols::scale_fill_pretty_d(
-    palette   = scale_fill,
-    direction = scale_direction,
-    name      = structure_of
-  ) +
-  ggplot2::theme_minimal() +
-  ggplot2::theme(
-    plot.caption  = ggplot2::element_text(color = "grey60"),
-    plot.subtitle = ggplot2::element_text(color = "grey60")
-  ) +
-  ggplot2::labs(
-    title    = glue::glue("Structure of {structure_of}"),
-    x        = "Year index",
-    y        = glue::glue("Amount ({period})")
-  ) +
-  ggplot2::scale_x_continuous(
-    breaks = seq(0, max(scenario$index), by = 10)
-  ) +
-  ggplot2::scale_y_continuous(
-    labels = print_currency,
-    breaks = 
-      seq(
-        from = 0, 
-        to   = ceiling(max(data_to_plot$amount) / 1000) * 1000, 
-        by   = 1000
-      )
-  ) +
-  ggplot2::coord_cartesian(ylim = c(y_limit[1], y_limit[2]))
+    PrettyCols::scale_fill_pretty_d(
+      palette   = scale_fill,
+      direction = scale_direction,
+      name      = structure_of
+    ) +
+    ggplot2::theme_minimal() +
+    ggplot2::theme(
+      plot.caption  = ggplot2::element_text(color = "grey60"),
+      plot.subtitle = ggplot2::element_text(color = "grey60")
+    ) +
+    ggplot2::labs(
+      title    = glue::glue("Structure of {structure_of}"),
+      x        = "Year index",
+      y        = glue::glue("Amount ({period})")
+    ) +
+    ggplot2::scale_x_continuous(
+      breaks = seq(0, max(scenario$index), by = 10)
+    ) +
+    ggplot2::scale_y_continuous(
+      labels = format_currency,
+      breaks = 
+        seq(
+          from = 0, 
+          to   = ceiling(max(
+            data_to_plot |> 
+              dplyr::group_by(category) |>
+              dplyr::summarise(amount = sum(amount)) |>
+              dplyr::pull(amount)
+          ) / 1000) * 1000, 
+          by   = 1000
+        )
+    ) +
+    ggplot2::coord_cartesian(ylim = c(y_limit[1], y_limit[2]))
  
 }

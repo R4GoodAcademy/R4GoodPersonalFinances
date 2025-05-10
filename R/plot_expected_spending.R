@@ -1,7 +1,7 @@
 plot_expected_spending <- function(
   scenario, 
   period                          = c("yearly", "monthly"),
-  discretionary_spending_position = c("top", "bottom")
+  discretionary_spending_position = c("bottom", "top")
 ) {
   
   stopifnot(
@@ -81,7 +81,7 @@ plot_expected_spending <- function(
   current_year_spending <- current_year$spending
   names(current_year_spending) <- 
     glue::glue( 
-      "<span style='color: {type_colors[current_year$type]};'>**{current_year$type}**</span> "
+      "<span style='color: {type_colors[as.character(current_year$type)]};'>**{as.character(current_year$type)}**</span> "
     )
     
   summarized_data <-
@@ -94,22 +94,36 @@ plot_expected_spending <- function(
     )
 
   median_spending <- summarized_data$median_spending
-  names(median_spending) <- 
-    glue::glue( 
-      "<span style='color: {type_colors[current_year$type]};'>**{current_year$type}**</span>"
-    )
+  original_names_median <- as.character(summarized_data$type)
+  colored_names_median <- glue::glue(
+    "<span style='color: {type_colors[original_names_median]};'>**{original_names_median}**</span>"
+  )
+  names(median_spending) <- colored_names_median
   
   max_spending <- summarized_data$max_spending
-  names(max_spending) <- 
-    glue::glue( 
-      "<span style='color: {type_colors[current_year$type]};'>**{current_year$type}**</span>"
-    )
+  original_names_max <- as.character(summarized_data$type)
+  colored_names_max <- glue::glue(
+    "<span style='color: {type_colors[original_names_max]};'>**{original_names_max}**</span>"
+  )
+  names(max_spending) <- colored_names_max
   
   min_spending <- summarized_data$min_spending
-  names(min_spending) <- 
-    glue::glue( 
-      "<span style='color: {type_colors[current_year$type]};'>**{current_year$type}**</span>"
-    )
+  original_names_min <- as.character(summarized_data$type)
+  colored_names_min <- glue::glue(
+    "<span style='color: {type_colors[original_names_min]};'>**{original_names_min}**</span>"
+  )
+  names(min_spending) <- colored_names_min
+
+  max_y <- 
+    ceiling(max(
+      data_to_plot |> 
+        dplyr::group_by(index) |>
+        dplyr::summarise(spending = sum(spending)) |>
+        dplyr::pull(spending) |> 
+        max()
+    ) / 1000) * 1000 
+
+  min_length <- max(nchar(max_y)) + 2
   
   data_to_plot |> 
     ggplot2::ggplot(
@@ -131,6 +145,15 @@ plot_expected_spending <- function(
         "non-discretionary" = colors[5]
       )      
     ) +
+    ggplot2::scale_y_continuous(
+      labels = format_currency,
+      breaks = 
+        seq(
+          from = 0, 
+          to   = max_y, 
+          by   = 1000
+        )
+    ) +
     ggplot2::labs(
       title = glue::glue("Expected Spending"),
       subtitle = glue::glue(paste0(
@@ -145,48 +168,62 @@ plot_expected_spending <- function(
         paste0(
           "<strong>", 
           glue::glue(
-            "<span style='color: {type_colors[current_year$type]};'>{print_currency(current_year_spending, accuracy = 1)}</span>"
+            "<span style='color: {type_colors[as.character(current_year$type)]};'>{format_currency(current_year_spending, accuracy = 1)}</span>"
           ),
           "</strong> ",
           collapse = " + "
         ),
         " = <strong>",
-        print_currency(total_current_spending, accuracy = 1),
+        format_currency(
+          total_current_spending, 
+          accuracy = 1,
+          min_length = min_length
+        ),
         "</strong>"
       )),
       caption = glue::glue(paste0(
         "Median spending: ",
         paste0(
           names(median_spending), 
-          "= <strong>", 
-          print_currency(median_spending, accuracy = 1), 
+          "=<strong>", 
+          format_currency(
+            median_spending, 
+            accuracy = 1,
+            min_length  = min_length
+          ), 
           "</strong>",
           collapse = " & "
         ),
-        ".<br>",
+        "<br>",
         "Max spending: ",
         paste0(
           names(max_spending), 
-          "= <strong>", 
-          print_currency(max_spending, accuracy = 1), 
+          "=<strong>", 
+          format_currency(
+            max_spending, 
+            accuracy = 1,
+            min_length  = min_length
+          ), 
           "</strong>",
           collapse = " & "
         ),
-        ".<br>",
+        "<br>",
         "Min spending: ",
         paste0(
           names(min_spending), 
-          "= <strong>", 
-          print_currency(min_spending, accuracy = 1), 
+          "=<strong>", 
+          format_currency(
+            min_spending, 
+            accuracy = 1,
+            min_length  = min_length
+          ), 
           "</strong>",
           collapse = " & "
-        )
+        ), 
+        ""
       )),
       x     = "Year index",
       y     = glue::glue("Spending {period}"),
-    ) +
-    ggplot2::scale_y_continuous(
-      labels = print_currency
     ) +
     ggplot2::scale_x_continuous() +
     ggplot2::theme_minimal() +

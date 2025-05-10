@@ -364,7 +364,6 @@ test_that("cloning works", {
     birth_date = test_birth_date
   )
   members$set_event("retirement", 65)
-
   household <- Household$new()
   household$add_member(members)
   expect_equal(
@@ -372,7 +371,21 @@ test_that("cloning works", {
     65
   )
 
-  cloned_household <- household$clone(deep = TRUE)
+  household_hash <- rlang::hash(household)
+  expect_equal(
+    rlang::hash(household), 
+    household_hash
+  )
+
+  test_path <- file.path(tempdir(), "household.rds")
+  saveRDS(household, test_path)
+  household_bis <- readRDS(test_path)
+  expect_equal(
+    rlang::hash(household_bis), 
+    household_hash
+  )
+
+  cloned_household <- household_bis$clone(deep = TRUE)
   cloned_household$get_members()$test_name$set_event("retirement", 100)
   expect_equal(
     cloned_household$get_members()$test_name$get_events()$retirement$start_age,
@@ -381,5 +394,9 @@ test_that("cloning works", {
   expect_equal(
     household$get_members()$test_name$get_events()$retirement$start_age,
     65
+  )
+  expect_equal(
+    rlang::hash(household), 
+    household_hash
   )
 })

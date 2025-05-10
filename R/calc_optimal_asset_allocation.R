@@ -1,3 +1,4 @@
+#' @export
 calc_optimal_asset_allocation <- function(
   household,
   portfolio,

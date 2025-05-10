@@ -59,7 +59,7 @@ plot_expected_capital <- function(
       position = "identity"
     ) +
     ggplot2::scale_y_continuous(
-      labels = print_currency
+      labels = format_currency
     ) +
     ggplot2::scale_color_manual(
       values = color_values,

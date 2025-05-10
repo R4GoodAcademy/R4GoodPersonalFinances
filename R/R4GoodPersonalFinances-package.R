@@ -5,6 +5,13 @@
 ## usethis namespace: end
 NULL
 
+.pkg_env <- new.env(parent = emptyenv())
+.pkg_env$memoised <- list()
+
+.onLoad <- function(libname, pkgname) {
+  set_cache(path = file.path(tempdir(), ".cache"))
+}
+
 .onAttach <- function(libname, pkgname) {
 
   pkg_version <- utils::packageVersion(pkgname)
@@ -27,6 +34,7 @@ NULL
   packageStartupMessage(
     "... and Make Better Financial Decisions!"
   )
+
 }
 
 ignore_unused_imports <- function() {

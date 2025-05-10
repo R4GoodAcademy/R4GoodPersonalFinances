@@ -48,7 +48,7 @@ plot_purchasing_power <- function(x,
       ggplot2::aes(
         x     = year, 
         y     = purchasing_power, 
-        color = as.factor(print_percent(real_interest_rate))
+        color = as.factor(format_percent(real_interest_rate))
       )
     ) + 
     ggplot2::geom_line(linewidth = 0.7) + 
@@ -63,7 +63,7 @@ plot_purchasing_power <- function(x,
       ggplot2::aes(
         label = paste0(
           "", real_interest_rate * 100, "%: ",
-          print_currency(purchasing_power)
+          format_currency(purchasing_power)
         )
       )
     ) +
@@ -78,10 +78,10 @@ plot_purchasing_power <- function(x,
           real_interest_rate == min(real_interest_rate)
         ),
       ggplot2::aes(
-        label = print_currency(purchasing_power)
+        label = format_currency(purchasing_power)
       )
     ) +
-    ggplot2::scale_y_continuous(labels = print_currency) +
+    ggplot2::scale_y_continuous(labels = format_currency) +
     PrettyCols::scale_colour_pretty_d("Summer") +
     ggplot2::theme_minimal() +
     ggplot2::theme(
