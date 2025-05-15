@@ -7,10 +7,11 @@ simulate_scenario <- function(
   monte_carlo_samples = NULL,
   seeds               = NULL,
   use_cache           = FALSE,
-  progress_handler    = progressr::handler_txtprogressbar(),
   debug               = FALSE,
   ...
 ) {
+  
+  progress_handler <- progressr::handler_tkprogressbar()
 
   cli::cli_h3("Simulating scenario: {.field {scenario_id}}")
   cli::cli_alert_info("Current date: {.field {current_date}}")
