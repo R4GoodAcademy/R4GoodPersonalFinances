@@ -33,7 +33,10 @@ plot_expected_allocation <- function(
       ) +
     ggplot2::geom_area() +
     ggplot2::scale_fill_manual(values = colors) +
-    ggplot2::scale_x_continuous() +
+    ggplot2::scale_x_continuous(
+      breaks = seq(0, max(scenario$index), by = 10),
+      labels = function(breaks) paste_labels(breaks, scenario = scenario)
+    ) +
     ggplot2::scale_y_continuous(labels = scales::percent) + 
     ggplot2::theme_minimal() +
     ggplot2::theme(
@@ -49,9 +52,9 @@ plot_expected_allocation <- function(
       plot.subtitle = ggtext::element_markdown(color = "grey60")
     ) +
     ggplot2::labs(
-      x        = "Year index", 
-      y        = "Allocation",
-      title    = glue::glue(paste0(
+      x = paste_year_index_axis_label(),
+      y = "Allocation",
+      title = glue::glue(paste0(
         "Optimal Asset Allocation Over Time",
         ifelse(
           account_type != "total",
@@ -59,8 +62,6 @@ plot_expected_allocation <- function(
           ""
         )
       )), 
-      subtitle = glue::glue(paste0(
-        "Scenario: <strong>'{unique(scenario$scenario_id)}'</strong><br>"
-      ))
+      subtitle = paste_scenario_id(scenario)
     )
 }

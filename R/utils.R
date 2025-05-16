@@ -275,3 +275,48 @@ set_cache <- function(
 
   invisible(.pkg_env$cache_directory)
 }
+
+paste_labels <- function(breaks, scenario) {
+  
+  members_age <-
+    names(scenario$members) |>
+      purrr::map(function(member_name) {
+    
+    scenario[scenario$index %in% breaks,
+    ]$members[[member_name]]$age |>
+      unique()
+  }) |>
+    purrr::set_names(names(scenario$members))
+  
+  max_length <- max(purrr::map_int(members_age, length))
+  
+  ages <- purrr::map_chr(seq_len(max_length), function(i) {
+    member_strings <- purrr::imap_chr(members_age, function(age_vec, name) {
+      if (length(age_vec) >= i && !is.na(age_vec[i])) {
+        paste0(abbreviate(name, minlength = 999), " (", age_vec[i], ")")
+      } else {
+        ""
+      }
+    })
+    paste0(member_strings, collapse = "\n")
+  })
+  
+  paste0(breaks, "\n", ages)
+}
+
+paste_year_index_axis_label <- function() {
+  "Year index / household member (age)"
+}
+
+paste_scenario_id <- function(scenario) {
+  
+  if ("scenario_id" %in% names(scenario)) {
+    glue::glue(
+      "Scenario: <strong style='color: grey50;'>{
+      unique(scenario$scenario_id)
+      }</strong>. "
+    )
+  } else {
+    ""
+  }
+}

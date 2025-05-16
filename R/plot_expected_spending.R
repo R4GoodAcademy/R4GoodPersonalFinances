@@ -157,13 +157,7 @@ plot_expected_spending <- function(
     ggplot2::labs(
       title = glue::glue("Expected Spending"),
       subtitle = glue::glue(paste0(
-        ifelse(
-          "scenario" %in% names(scenario),
-          glue::glue(
-            "Scenario: <strong>'{unique(scenario$scenario)}'</strong><br>"
-          ),
-          ""
-        ),
+        paste_scenario_id(scenario),
         "Current spending: ",
         paste0(
           "<strong>", 
@@ -222,10 +216,14 @@ plot_expected_spending <- function(
         ), 
         ""
       )),
-      x     = "Year index",
-      y     = glue::glue("Spending {period}"),
+      x = paste_year_index_axis_label(),
+      y = glue::glue("Spending {period}"),
     ) +
-    ggplot2::scale_x_continuous() +
+    ggplot2::scale_x_continuous(
+      breaks = seq(0, max(scenario$index), by = 10),
+      labels = 
+        function(breaks) paste_labels(breaks, scenario = scenario)
+    ) +
     ggplot2::theme_minimal() +
     ggplot2::theme(
       panel.grid.minor = ggplot2::element_blank(),

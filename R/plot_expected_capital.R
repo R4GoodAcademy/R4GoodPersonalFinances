@@ -4,12 +4,6 @@ plot_expected_capital <- function(
   scenario
 ) {
 
-  if (!"scenario" %in% names(scenario)) {
-    scenario_id <- NULL
-  } else {
-    scenario_id <- unique(scenario$scenario)
-  }
-
   colors <- PrettyCols::prettycols("Bold")
   color_values <- c(
     "financial_wealth" = colors[1],
@@ -70,14 +64,17 @@ plot_expected_capital <- function(
       labels = color_labels
     ) +
     ggplot2::theme_minimal() +
+    ggplot2::scale_x_continuous(
+      breaks = seq(0, max(scenario$index), by = 10),
+      labels = 
+        function(breaks) paste_labels(breaks, scenario = scenario)
+    ) +
     ggplot2::labs(
       title = glue::glue(
         "Expected Financial and Human Capital over Household Life Cycle"
       ),
-      subtitle = ifelse(is.null(scenario_id), "", glue::glue(
-        "Scenario: <strong>{scenario_id}</strong>"
-      )),
-      x = "Year index",
+      subtitle = paste_scenario_id(scenario),
+      x = paste_year_index_axis_label(),
       y = "Amount",
     ) +
     ggplot2::theme(

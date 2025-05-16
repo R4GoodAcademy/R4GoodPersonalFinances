@@ -110,3 +110,45 @@ test_that("generating household timeline with events", {
   
   expect_true(is.logical(timeline$members[[2]]$events$retirement$on))
 })
+
+test_that("pasting index year labels", {
+
+  h <- Household$new()
+
+  older_member <- 
+    HouseholdMember$new(
+      name       = "older",  
+      birth_date = "1980-02-15",
+      mode       = 80,
+      dispersion = 10
+    )  
+  older_member$set_event("retirement", 45)
+  older_member$set_event("social_security", 47)
+  h$add_member(older_member)  
+  
+  younger_member <- 
+  HouseholdMember$new(
+    name       = "younger",  
+    birth_date = "1990-07-15",
+    mode       = 85,
+    dispersion = 9
+  )
+  younger_member$set_event("retirement", 35)
+  younger_member$set_event("kid", 35, years = 2)
+  h$add_member(younger_member)  
+
+  test_current_date <- "2020-07-15"
+
+  timeline <- 
+    generate_household_timeline(
+      household    = h, 
+      current_date = test_current_date
+    ) 
+
+  expect_snapshot(
+    paste_labels(
+      0:10,
+      scenario = timeline
+    )
+  )
+})

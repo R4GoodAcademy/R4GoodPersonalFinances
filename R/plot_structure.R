@@ -48,16 +48,18 @@ plot_structure <- function(
     ) +
     ggplot2::theme_minimal() +
     ggplot2::theme(
-      plot.caption  = ggplot2::element_text(color = "grey60"),
-      plot.subtitle = ggplot2::element_text(color = "grey60")
+      plot.caption  = ggtext::element_markdown(color = "grey60"),
+      plot.subtitle = ggtext::element_markdown(color = "grey60")
     ) +
     ggplot2::labs(
       title    = glue::glue("Structure of {structure_of}"),
-      x        = "Year index",
-      y        = glue::glue("Amount ({period})")
+      subtitle = paste_scenario_id(scenario),
+      x = paste_year_index_axis_label(),
+      y = glue::glue("Amount ({period})")
     ) +
     ggplot2::scale_x_continuous(
-      breaks = seq(0, max(scenario$index), by = 10)
+      breaks = seq(0, max(scenario$index), by = 10),
+      labels = function(breaks) paste_labels(breaks, scenario = scenario)
     ) +
     ggplot2::scale_y_continuous(
       labels = format_currency,
