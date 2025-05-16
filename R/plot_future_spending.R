@@ -7,8 +7,8 @@ plot_future_spending <- function(
   y_limit                         = c(NA, NA)
 ) {
   
-  period        <- rlang::arg_match(period)
-  type          <- rlang::arg_match(type, multiple = TRUE)
+  period <- rlang::arg_match(period)
+  type   <- rlang::arg_match(type, multiple = TRUE)
 
   discretionary_spending_position <- 
     rlang::arg_match(discretionary_spending_position)
@@ -53,6 +53,14 @@ plot_simulated_spending <- function(
   min_alpha     <- 0.15
   period        <- rlang::arg_match(period)
   period_factor <- if (period == "yearly") 1 else 12
+
+  
+  if (length(unique(scenario$sample)) <= 1) {
+    cli::cli_abort(
+      call = NULL,
+      "Plotting Monte Carlo samples requires more than one sample."
+    )
+  }
 
   quantile_min <- 
     scenario |>
@@ -133,8 +141,8 @@ plot_simulated_spending <- function(
     ggplot2::theme_minimal() +
     ggplot2::theme(
       panel.grid.minor.y = ggplot2::element_blank(),
-      plot.caption       = ggplot2::element_text(color = "grey60"),
-      plot.subtitle      = ggplot2::element_text(color = "grey60")
+      plot.caption       = ggtext::element_markdown(color = "grey60"),
+      plot.subtitle      = ggtext::element_markdown(color = "grey60")
     ) +
     ggplot2::geom_line(
       data = dplyr::filter(scenario, sample == 0),
@@ -165,15 +173,17 @@ plot_simulated_spending <- function(
     ) +
     ggplot2::labs(
       title = "Future Simulated Discretionary Spending",
-      subtitle = glue::glue(
+      subtitle = glue::glue(paste0(
+        paste_scenario_id(scenario),
         "Based on {max(scenario$sample)} Monte Carlo samples."
-      ),
-      caption = "Yellow dashed line shows discretionary spending based on portfolio expected returns.\nSolid teal line shows median of discretionary spending in Monte Carlo samples.\nTeal bands show middle six decile groups of spending without top 2 and bottom 2 deciles.",
+      )),
+      caption = "Yellow dashed line shows discretionary spending based on portfolio expected returns.<br>Solid teal line shows median of discretionary spending in Monte Carlo samples.<br>Teal bands show middle six decile groups of spending without top 2 and bottom 2 deciles.",
       x = "Year Index",
       y = glue::glue("Amount ({period})"),
     ) +
     ggplot2::scale_x_continuous(
-      breaks = seq(0, max(scenario$index), by = 10)
+      breaks = seq(0, max(scenario$index), by = 10),
+      labels = function(breaks) paste_labels(breaks, scenario = scenario)
     ) +
     ggplot2::scale_y_continuous(
       labels = format_currency,
