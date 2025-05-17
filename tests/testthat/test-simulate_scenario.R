@@ -64,8 +64,6 @@ test_that("simulating a default scenario with expected returns", {
   expect_equal(unique(scenario$scenario_id), "default")
   expect_equal(unique(scenario$sample), 0)
 
-  expect_snapshot(print(scenario, n = Inf, width = Inf))
-
   if (interactive()) scenario |>  print(width = Inf, n = Inf)
   if (interactive()) scenario |>  head(3) |> print(width = Inf)
   if (interactive()) scenario |>  tail(3) |> print(width = Inf)

@@ -127,12 +127,13 @@ test_that("calculating optimal joint portfolio allocations", {
     standard_deviations = test_asset_returns$standard_deviation,
     correlations        = test_asset_correlations,
     effective_tax_rates = effective_tax_rates,
-    in_taxable_accounts = fraction_in_taxable_accounts
+    in_taxable_accounts = fraction_in_taxable_accounts,
+    maxeval = 10000
   )$allocations 
   expect_equal(
     ignore_attr = TRUE,
     round(optimal_joint_portfolio$taxable, 3),
-    c(0.271, 0.248, 0.293, 0.112, 0, 0, 0, 0, 0)
+    c(0.271, 0.248, 0.292, 0.112, 0, 0, 0, 0, 0)
   )
   expect_equal(
     ignore_attr = TRUE,

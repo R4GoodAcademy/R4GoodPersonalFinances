@@ -13,7 +13,11 @@ simulate_scenario <- function(
   
   index <- NULL
 
-  progress_handler <- progressr::handler_tkprogressbar()
+  if (capabilities("tcltk") && requireNamespace("tcltk", quietly = TRUE)) {
+    progress_handler <- progressr::handler_tkprogressbar()
+  } else {
+    progress_handler <- progressr::handler_cli()
+  }
 
   cli::cli_h3("Simulating scenario: {.field {scenario_id}}")
   cli::cli_alert_info("Current date: {.field {current_date}}")

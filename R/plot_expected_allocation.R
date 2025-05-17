@@ -15,7 +15,7 @@ plot_expected_allocation <- function(
     dplyr::select(
       index, 
       asset, 
-      allocation = account_type
+      allocation = dplyr::all_of(account_type)
     )
   
   colors <- 

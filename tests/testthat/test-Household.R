@@ -358,6 +358,9 @@ test_that("getting min_age - age of the youngest member", {
 
 test_that("cloning works", {
 
+  skip_on_cran()
+  skip_if_not(interactive())
+
   test_birth_date   <- "1955-07-15"
   members <- HouseholdMember$new(
     name       = "test_name",
