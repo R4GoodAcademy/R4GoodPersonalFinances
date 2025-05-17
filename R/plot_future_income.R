@@ -1,8 +1,8 @@
 #' @export
 plot_future_income <- function(
   scenario,
-  period  = c("yearly", "monthly"),
-  y_limit = c(NA, NA)
+  period   = c("yearly", "monthly"),
+  y_limits = c(NA, NA)
 ) {
 
   period <- rlang::arg_match(period)
@@ -11,7 +11,8 @@ plot_future_income <- function(
     plot_structure(
       scenario, 
       structure_of = "income",
-      period       = period
+      period       = period,
+      y_limits     = y_limits
     )
   )
 }

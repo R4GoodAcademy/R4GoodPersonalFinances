@@ -1,7 +1,8 @@
 plot_expected_spending <- function(
   scenario, 
   period                          = c("yearly", "monthly"),
-  discretionary_spending_position = c("bottom", "top")
+  discretionary_spending_position = c("bottom", "top"),
+  y_limits                        = c(NA, NA)
 ) {
   
   stopifnot(
@@ -233,5 +234,6 @@ plot_expected_spending <- function(
           size  = 10
         ),
       plot.subtitle = ggtext::element_markdown(color = "grey60")
-    )
+    ) +
+    ggplot2::coord_cartesian(ylim = c(y_limits[1], y_limits[2]))
 }

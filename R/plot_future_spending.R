@@ -4,7 +4,7 @@ plot_future_spending <- function(
   period                          = c("yearly", "monthly"),
   type                            = c("discretionary", "non-discretionary"),
   discretionary_spending_position = c("bottom", "top"),
-  y_limit                         = c(NA, NA)
+  y_limits                        = c(NA, NA)
 ) {
   
   period <- rlang::arg_match(period)
@@ -18,7 +18,8 @@ plot_future_spending <- function(
       plot_expected_spending(
         scenario, 
         period = period,
-        discretionary_spending_position = discretionary_spending_position
+        discretionary_spending_position = discretionary_spending_position,
+        y_limits = y_limits
       )
     )
   } 
@@ -27,7 +28,8 @@ plot_future_spending <- function(
     return(
       plot_simulated_spending(
         scenario, 
-        period = period
+        period   = period,
+        y_limits = y_limits
       )
     )
   } 
@@ -46,8 +48,8 @@ plot_future_spending <- function(
 
 plot_simulated_spending <- function(
   scenario,
-  period  = c("yearly", "monthly"),
-  y_limit = c(NA, NA)
+  period   = c("yearly", "monthly"),
+  y_limits = c(NA, NA)
 ) {
   
   min_alpha     <- 0.15
@@ -110,6 +112,22 @@ plot_simulated_spending <- function(
     )  |> dplyr::filter(
       !quantile_group %in% c(1, 2, 9, 10)
     )   
+
+  y_max <- max(abs(min(quantile_data$min)), abs(max(quantile_data$max)))
+  if (y_max > 10000) {
+    y_breaks_factor <- 10000
+  } else if (y_max > 1000) {
+    y_breaks_factor <- 1000
+  } else {  
+    y_breaks_factor <- 100
+  }
+  
+  y_breaks <- 
+    seq(
+      round(min(quantile_data$min) / y_breaks_factor) * y_breaks_factor, 
+      round(max(quantile_data$max) / y_breaks_factor) * y_breaks_factor, 
+      by = y_breaks_factor
+    )
 
   group_names <- sort(unique(quantile_data$quantile_group))
   n_groups    <- length(group_names)
@@ -187,14 +205,10 @@ plot_simulated_spending <- function(
     ) +
     ggplot2::scale_y_continuous(
       labels = format_currency,
-      breaks = seq(
-        round(min(quantile_data$min) / 1000) * 1000, 
-        round(max(quantile_data$max) / 1000) * 1000, 
-        by = 1000
-      ),
+      breaks = y_breaks,
       expand = c(0, NA)
     ) + 
-    ggplot2::coord_cartesian(ylim = c(y_limit[1], y_limit[2])) 
+    ggplot2::coord_cartesian(ylim = c(y_limits[1], y_limits[2])) 
 
   plot
 }

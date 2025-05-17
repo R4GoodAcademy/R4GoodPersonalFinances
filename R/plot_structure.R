@@ -2,13 +2,12 @@ plot_structure <- function(
   scenario,
   period       = c("yearly", "monthly"),
   structure_of = c("spending", "income"),
-  y_limit      = c(NA, NA)
+  y_limits      = c(NA, NA)
 ) {
 
   period        <- rlang::arg_match(period)
   period_factor <- if (period == "yearly") 1 else 12
-
-  structure_of <- rlang::arg_match(structure_of)
+  structure_of  <- rlang::arg_match(structure_of)
 
   data_to_plot <-
     scenario |> 
@@ -26,7 +25,29 @@ plot_structure <- function(
     dplyr::group_by(category) |>
     dplyr::mutate(presence_count = sum(amount > 0)) |>
     dplyr::ungroup() |>
-    dplyr::mutate(category = factor(category, levels = unique(category[order(presence_count)])))
+    dplyr::mutate(category = factor(category, levels = unique(category[order(presence_count)]))) |> 
+    dplyr::mutate(amount = amount / period_factor)
+
+  y_max <- 
+    data_to_plot |> 
+      dplyr::pull(amount) |> 
+      max()
+
+  if (y_max > 10000) {
+    y_max_factor <- 10000
+  } else if (y_max > 1000) {
+    y_max_factor <- 1000
+  } else {
+    y_max_factor <- 100
+  }
+
+  y_breaks <- 
+  seq(
+    from = 0, 
+    to   = ceiling(y_max / y_max_factor) * y_max_factor, 
+    by   = y_max_factor
+  )
+  print(y_breaks)
 
   scale_fill <- 
     switch(
@@ -63,18 +84,8 @@ plot_structure <- function(
     ) +
     ggplot2::scale_y_continuous(
       labels = format_currency,
-      breaks = 
-        seq(
-          from = 0, 
-          to   = ceiling(max(
-            data_to_plot |> 
-              dplyr::group_by(category) |>
-              dplyr::summarise(amount = sum(amount)) |>
-              dplyr::pull(amount)
-          ) / 1000) * 1000, 
-          by   = 1000
-        )
+      breaks = y_breaks
     ) +
-    ggplot2::coord_cartesian(ylim = c(y_limit[1], y_limit[2]))
+    ggplot2::coord_cartesian(ylim = c(y_limits[1], y_limits[2]))
  
 }
