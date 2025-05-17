@@ -7,10 +7,10 @@
 \usage{
 format_currency(
   x,
+  prefix = "",
   suffix = "",
   big.mark = ",",
   accuracy = NULL,
-  prefix = NULL,
   min_length = NULL,
   ...
 )
@@ -20,7 +20,11 @@ format_percent(x, accuracy = 0.1, ...)
 \arguments{
 \item{x}{A numeric vector}
 
-\item{big.mark}{Character used between every 3 digits to separate thousands.}
+\item{prefix, suffix}{Symbols to display before and after value.}
+
+\item{big.mark}{Character used between every 3 digits to separate thousands.
+The default (\code{NULL}) retrieves the setting from the
+\link[scales:number_options]{number options}.}
 
 \item{accuracy}{A number to round to. Use (e.g.) \code{0.01} to show 2 decimal
 places of precision. If \code{NULL}, the default, uses a heuristic that should
@@ -28,8 +32,6 @@ ensure breaks have the minimum number of digits needed to show the
 difference between adjacent values.
 
 Applied to rescaled data.}
-
-\item{prefix, suffix}{Symbols to display before and after value.}
 
 \item{...}{Other arguments passed on to \code{\link[base:format]{base::format()}}.}
 }

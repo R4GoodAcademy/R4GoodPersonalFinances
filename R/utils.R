@@ -16,10 +16,10 @@
 
 format_currency <- function(
   x, 
+  prefix   = "",
   suffix   = "",
   big.mark = ",",
   accuracy = NULL,
-  prefix   = NULL,
   min_length = NULL, 
   ...
 ) {
