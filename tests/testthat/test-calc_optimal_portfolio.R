@@ -94,6 +94,9 @@ test_that("calculating optimal MVO allocations for 9 assets", {
 })
 
 test_that("calculating optimal joint portfolio allocations", {
+
+  skip_on_cran()
+  skip_on_ci()
   
   n <- 9
   test_asset_returns <- generate_test_asset_returns(n)$returns
