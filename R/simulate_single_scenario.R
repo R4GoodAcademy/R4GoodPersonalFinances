@@ -173,7 +173,6 @@ simulate_single_scenario <- function(
         max_age = max_age,
         gompertz_mode = gompertz_mode,
         gompertz_dispersion = gompertz_dispersion,
-        # TODO: life_insurance_premium
         life_insurance_premium = 0
       )
 
@@ -206,7 +205,6 @@ simulate_single_scenario <- function(
         nondiscretionary_consumption = scenario[i, ]$nondiscretionary_spending,
         discretionary_consumption    = scenario[i, ]$discretionary_spending,
         income                       = scenario[i, ]$total_income,
-        # TODO: life_insurance_premium
         life_insurance_premium       = 0,
         human_capital_weights        = portfolio$weights$human_capital,
         liabilities_weights          = portfolio$weights$liabilities,
