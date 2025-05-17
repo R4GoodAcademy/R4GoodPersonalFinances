@@ -17,7 +17,7 @@ badge](https://r4goodacademy.r-universe.dev/badges/R4GoodPersonalFinances)](http
 coverage](https://codecov.io/gh/R4GoodAcademy/R4GoodPersonalFinances/graph/badge.svg)](https://app.codecov.io/gh/R4GoodAcademy/R4GoodPersonalFinances)
 <!-- badges: end -->
 
-> *Make Better Financial Decisions*
+> *Make Optimal Financial Decisions*
 
 The `R4GoodPersonalFinances` R package is a set of tools designed to
 help you plan and make informed, data-driven decisions for your personal
@@ -97,5 +97,5 @@ example:
 The official package documentation can be found here:  
 [r4goodacademy.github.io/R4GoodPersonalFinances](https://r4goodacademy.github.io/R4GoodPersonalFinances/)
 
-> *Make Better Financial Decisions* with the `R4GoodPersonalFinances` R
+> *Make Optimal Financial Decisions* with the `R4GoodPersonalFinances` R
 > package!

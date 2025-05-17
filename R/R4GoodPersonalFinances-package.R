@@ -32,7 +32,7 @@ NULL
   )
 
   packageStartupMessage(
-    "... and Make Better Financial Decisions!"
+    "... and Make Optimal Financial Decisions!"
   )
 
 }

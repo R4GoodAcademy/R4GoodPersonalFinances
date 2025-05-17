@@ -4,7 +4,7 @@
 \name{R4GoodPersonalFinances-package}
 \alias{R4GoodPersonalFinances}
 \alias{R4GoodPersonalFinances-package}
-\title{R4GoodPersonalFinances: Make Better Financial Decisions}
+\title{R4GoodPersonalFinances: Make Optimal Financial Decisions}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
