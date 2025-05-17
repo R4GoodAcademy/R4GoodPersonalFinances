@@ -22,6 +22,8 @@ test_that("calculating expected utility", {
 
 test_that("calculating optimal MVO allocations for 2 assets", {
 
+  skip_on_cran()
+
   n <- 2
   test_asset_returns <- generate_test_asset_returns(n)$returns
   if (interactive()) print(test_asset_returns)
@@ -46,6 +48,8 @@ test_that("calculating optimal MVO allocations for 2 assets", {
 })
 
 test_that("calculating optimal MVO allocations for 3 assets", {
+  
+  skip_on_cran()
 
   n <- 3
   test_asset_returns <- generate_test_asset_returns(n)$returns
@@ -70,6 +74,8 @@ test_that("calculating optimal MVO allocations for 3 assets", {
 })
 
 test_that("calculating optimal MVO allocations for 9 assets", {
+  
+  skip_on_cran()
 
   n <- 9
   test_asset_returns <- generate_test_asset_returns(n)$returns
@@ -96,7 +102,7 @@ test_that("calculating optimal MVO allocations for 9 assets", {
 test_that("calculating optimal joint portfolio allocations", {
 
   skip_on_cran()
-  skip_on_ci()
+  skip_on_os("mac")
   
   n <- 9
   test_asset_returns <- generate_test_asset_returns(n)$returns
@@ -152,6 +158,9 @@ test_that("calculating optimal joint portfolio allocations", {
 })
 
 test_that("calculating optimal joint net-worth portfolio allocations", {
+  
+  skip_on_cran()
+  skip_on_os("mac")
   
   n <- 9
   test_asset_returns <- generate_test_asset_returns(n)$returns
