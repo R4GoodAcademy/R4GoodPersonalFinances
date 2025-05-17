@@ -49,7 +49,7 @@ generate_cashflow_streams <- function(
     
     return(streams)
   }) |>
-  tibble::as_tibble()
+  dplyr::as_tibble()
   
   return(result)
 }

@@ -74,7 +74,7 @@ simulate_single_scenario <- function(
 
     returns <- t(portfolio$expected_return) 
     colnames(returns) <-portfolio$name
-    returns <- tibble::as_tibble(returns) 
+    returns <- dplyr::as_tibble(returns) 
     returns <- returns[rep(1, NROW(scenario)), ]
   }
   
@@ -89,7 +89,7 @@ simulate_single_scenario <- function(
         cashflow      = nondiscretionary_spending,
         discount_rate = liabilities_discount_rate
       ),
-      portfolio = tibble::tibble(
+      portfolio = dplyr::tibble(
         allocation = rep(list(NA_real_), NROW(scenario)),
         returns    = returns,
       ),
@@ -122,7 +122,7 @@ simulate_single_scenario <- function(
       scenario[i, ]$financial_wealth <- financial_wealth
 
       scenario[i, ]$portfolio$allocation <- list(
-        tibble::tibble(
+        dplyr::tibble(
           asset         = portfolio$name,
           taxable       = weights$taxable,
           taxadvantaged = weights$taxadvantaged,

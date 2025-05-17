@@ -120,9 +120,10 @@ calc_delta <- function(
   growth_rate,
   discount_rate
 ) {
+  survival_prob <- rescheduling_factor <- index <- NULL
 
   delta <- 
-    tibble::tibble(
+    dplyr::tibble(
       index               = seq_len(length(survival_probabilities)) - 1,
       survival_prob       = survival_probabilities,
       rescheduling_factor = survival_prob ^ smooth_consumption_preference,

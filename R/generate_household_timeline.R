@@ -7,7 +7,7 @@ generate_household_timeline <- function(
   max_lifespan <- household$get_lifespan(current_date = current_date)
 
   timeline <-
-    tibble::tibble(
+    dplyr::tibble(
       index         = seq_len(max_lifespan + 1) - 1,
       years_left    = max_lifespan - index,
       date          = current_date + lubridate::years(index),
@@ -21,7 +21,7 @@ generate_household_timeline <- function(
     purrr::map(function(member) {
       
       member_specific <- 
-        tibble::tibble(
+        dplyr::tibble(
           age = member$calc_age(current_date = timeline$date) |>  round(0)
         ) 
       
@@ -36,7 +36,7 @@ generate_household_timeline <- function(
               member_specific$age >= events[[event_name]]$start_age &
               member_specific$age <= events[[event_name]]$end_age
 
-            tibble::tibble(
+            dplyr::tibble(
               on        = on,
               off       = !on,
               start_age = events[[event_name]]$start_age,
@@ -45,7 +45,7 @@ generate_household_timeline <- function(
             ) 
           }) |> 
           purrr::set_names(names(events)) |> 
-          tibble::as_tibble() 
+          dplyr::as_tibble() 
 
         member_specific <- 
           member_specific |>
@@ -53,7 +53,7 @@ generate_household_timeline <- function(
       }
       member_specific
     }) |> 
-    tibble::as_tibble()
+    dplyr::as_tibble()
 
   timeline |> 
     dplyr::mutate(members = members)

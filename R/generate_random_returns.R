@@ -44,5 +44,5 @@ generate_random_returns <- function(
   simulated_returns[, which_sd_is_0] <- portfolio$expected_return[which_sd_is_0]
   
   simulated_returns |> 
-    tibble::as_tibble()
+    dplyr::as_tibble()
 }

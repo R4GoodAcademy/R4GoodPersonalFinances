@@ -185,7 +185,7 @@ calc_optimal_portfolio <- function(
   if (is.null(effective_tax_rates)) {
     
     allocations <- 
-      tibble::tibble(
+      dplyr::tibble(
         total = optimal_allocations
       )
 
@@ -198,7 +198,7 @@ calc_optimal_portfolio <- function(
       get_allocations_taxadvantaged(optimal_allocations)
     
     allocations <-
-      tibble::tibble(
+      dplyr::tibble(
         taxable       = optimal_taxable_allocations,
         taxadvantaged = optimal_taxadvantaged_allocations
       ) |>

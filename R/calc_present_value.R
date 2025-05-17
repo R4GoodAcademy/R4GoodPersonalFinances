@@ -11,7 +11,7 @@ calc_present_value <- function(
     future_income <- cashflow[i:n_years]
 
     data <-
-      tibble::tibble(
+      dplyr::tibble(
         cashflow = future_income,
         v      = seq_len(length(future_income)) - 1
       ) |>

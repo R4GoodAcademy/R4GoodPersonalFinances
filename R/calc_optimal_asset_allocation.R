@@ -54,7 +54,7 @@ calc_optimal_asset_allocation <- function(
   portfolio <-
     portfolio |>
     dplyr::mutate(
-      allocations = tibble::tibble(
+      allocations = dplyr::tibble(
         name = optimal_joint_networth_portfolio$allocations$asset_class,
         optimal = 
           optimal_joint_networth_portfolio$allocations |> 

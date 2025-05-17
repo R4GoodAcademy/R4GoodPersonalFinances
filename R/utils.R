@@ -123,14 +123,14 @@ generate_test_asset_returns <- function(n = 3) {
   if (n == 3) {
 
     test_asset_returns <- 
-      tibble::tribble(
+      dplyr::tribble(
         ~asset_class,          ~expected_return, ~standard_deviation,
         "DomesticStocks",      0.0472,           0.1588, 
         "InternationalStocks", 0.0504,           0.1718,
         "Bonds",               0.0275,           0.0562
       )
 
-    test_asset_correlations <- tibble::tribble(
+    test_asset_correlations <- dplyr::tribble(
       ~DomesticStocks, ~InternationalStocks, ~Bonds,
       1.00,            0.87,                 0.21,
       0.87,            1.00,                 0.37,
@@ -140,18 +140,18 @@ generate_test_asset_returns <- function(n = 3) {
   } else if (n == 2) {
     
     portfolio <- 
-      tibble::tribble(
+      dplyr::tribble(
         ~name,        ~expected_return, ~standard_deviation, 
         "GlobalStock", 0.0449,          0.15,                
         "EDOBonds",    0.02,            0,                  
       ) |> 
       dplyr::mutate(
-        accounts = tibble::tribble(
+        accounts = dplyr::tribble(
           ~taxable, ~taxadvantaged,
           200000,   50000,
           100000,   25000,
         ),
-        weights = tibble::tribble(
+        weights = dplyr::tribble(
           ~human_capital, ~liabilities, 
           0.5,            0.5,          
           0.5,            0.5,          
@@ -166,7 +166,7 @@ generate_test_asset_returns <- function(n = 3) {
             rownames(matrix) <- portfolio$name
             matrix
           },
-          aftertax = tibble::tibble(
+          aftertax = dplyr::tibble(
             effective_tax_rate = rep(0.19, NROW(portfolio))
           )
         )
@@ -177,7 +177,7 @@ generate_test_asset_returns <- function(n = 3) {
   } else if (n == 9) {
 
     test_asset_returns <- 
-      tibble::tribble(
+      dplyr::tribble(
         ~name,                  ~expected_return, ~standard_deviation, 
         "USLargeCapStocks",     0.0468,           0.1542,
         "USMidSmallCapStocks",  0.0501,           0.1795, 
@@ -193,7 +193,7 @@ generate_test_asset_returns <- function(n = 3) {
       test_asset_returns <- 
         test_asset_returns |> 
         dplyr::mutate(
-          pretax = tibble::tibble(
+          pretax = dplyr::tibble(
             capital_gains    = c(0.0349, 0.0387, 0.0336, 0.0388, rep(0, 5)),
             income           = expected_return - capital_gains,
             turnover         = c(0.3300, 0.3652, 0.1800, 0.3300, rep(1, 5)),
@@ -204,11 +204,11 @@ generate_test_asset_returns <- function(n = 3) {
           )
         )|> 
         dplyr::mutate(
-          accounts = tibble::tibble(
+          accounts = dplyr::tibble(
             taxable       = rep(1000, n), 
             taxadvantaged = rep(1000, n)
           ),
-          weights = tibble::tibble(
+          weights = dplyr::tibble(
             human_capital = 1 / n, 
             liabilities   = 1 / n, 
           )

@@ -54,7 +54,7 @@ calc_gompertz_mode <- function(
       return(calculated_life_expectancy - life_expectancy )
     }
   
-    result <- uniroot(
+    result <- stats::uniroot(
       f               = objective_function,
       interval        = mode_interval,
       current_age     = current_age,

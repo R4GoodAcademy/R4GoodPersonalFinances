@@ -6,7 +6,7 @@ create_portfolio_template <- function() {
   # browseURL("https://www.obligacjeskarbowe.pl/oferta-obligacji/obligacje-10-letnie-edo/")
   
     portfolio <- 
-      tibble::tribble(
+      dplyr::tribble(
         ~name,                     ~expected_return, ~standard_deviation,
         "GlobalStocksIndexFound",  0.0506,           0.15,
         "InflationProtectedBonds", 0.02,             0,
@@ -17,7 +17,7 @@ create_portfolio_template <- function() {
     colnames(correlations) <- portfolio$name
   
     pretax <- 
-      tibble::tibble(
+      dplyr::tibble(
         turnover                = 0.04,
         income_qualified        = 0,
         capital_gains_long_term = 1,
@@ -29,11 +29,11 @@ create_portfolio_template <- function() {
     portfolio <- 
       portfolio |> 
       dplyr::mutate(
-        accounts = tibble::tibble(
+        accounts = dplyr::tibble(
           taxable       = rep(0, NROW(portfolio)),
           taxadvantaged = rep(0, NROW(portfolio))
         ),
-        weights = tibble::tibble(
+        weights = dplyr::tibble(
           human_capital = 1 / NROW(portfolio),
           liabilities   = 1 / NROW(portfolio)
         ),

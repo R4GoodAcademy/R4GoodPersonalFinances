@@ -4,6 +4,7 @@ calc_effective_tax_rate <- function(
   tax_rate_ltcg,
   tax_rate_ordinary_income
 ) {
+  income_qualified <- capital_gains_long_term <- blended_tax_rate_income <- blended_tax_rate_capital_gains <- income <- capital_gains <- turnover <- cost_basis <- initial_value <- preliquidation_aftertax_expected_return <- investment_years <- preliquidation_value <- capital_gain_taxed <- capital_gain_tax_paid <- postliquidation_value <- postliquidation_aftertax_expected_return <- effective_tax_rate <- NULL
 
   aftertax <- 
     portfolio$pretax |> 

@@ -32,7 +32,6 @@ test_that("simulating single scenario with expected returns", {
       ),
     times = ifelse(interactive(), 1, 10)
   )
-
   if (interactive()) print(results)
   
   expect_equal(
