@@ -1,4 +1,8 @@
-# R4GoodPersonalFinances (development version)
+# R4GoodPersonalFinances 1.0.0
+
+TODO:
+This major release introduces first implementation
+of multilevel modeling of a household lifetime. 
 
 # R4GoodPersonalFinances 0.2.0
 
