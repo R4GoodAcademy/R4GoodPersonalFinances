@@ -39,10 +39,20 @@ Imports:
     fs,
     purrr,
     stringr,
-    withr,
-    nloptr
+    nloptr,
+    cli,
+    furrr,
+    future,
+    progressr,
+    lubridate,
+    memoise,
+    cachem,
+    rlang
 Suggests: 
     spelling,
+    tibble,
+    withr,
+    microbenchmark,
     testthat (>= 3.0.0),
     vdiffr
 Config/testthat/edition: 3

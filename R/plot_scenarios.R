@@ -4,6 +4,13 @@ plot_scenarios <- function(
   period = c("yearly", "monthly")
 ) {
 
+  scenario_id <- discretionary_spending_utility_weighted <- survival_prob <- 
+    time_value_discount <- smooth_consumption_preference <- utility_expected <- 
+    constant_expected <- utility <- constant <- 
+    positive_discretionary_spending <- negative_discretionary_spending <- 
+    risk_tolerance <- discretionary_spending <- utility_normalized_expected <- 
+    utility_normalized <- metric <- value <- NULL
+
   period        <- rlang::arg_match(period)
   period_factor <- if (period == "yearly") 1 else 12
     
@@ -61,7 +68,7 @@ plot_scenarios <- function(
       ) |> 
       dplyr::group_by(scenario_id) |> 
       dplyr::summarise(
-        utility         = median(utility),
+        utility = stats::median(utility),
         constant = 
           calc_inverse_utility(
             mean(
@@ -73,9 +80,9 @@ plot_scenarios <- function(
             parameter = unique(risk_tolerance)
           ) / period_factor,
         positive_discretionary_spending = 
-          median(positive_discretionary_spending) / period_factor,
+          stats::median(positive_discretionary_spending) / period_factor,
         negative_discretionary_spending = 
-          median(negative_discretionary_spending) / period_factor
+          stats::median(negative_discretionary_spending) / period_factor
       ) 
   }
   

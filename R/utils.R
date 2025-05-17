@@ -119,7 +119,8 @@ normalize <- function(x, min = 0, max = 1) {
 
 
 generate_test_asset_returns <- function(n = 3) {
-  
+  expected_return <- capital_gains <- NULL
+
   if (n == 3) {
 
     test_asset_returns <- 

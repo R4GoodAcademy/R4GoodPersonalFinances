@@ -3,6 +3,8 @@
 plot_expected_capital <- function(
   scenario
 ) {
+  index <- financial_wealth <- human_capital <- liabilities <- amount <- 
+    type <- NULL
 
   colors <- PrettyCols::prettycols("Bold")
   color_values <- c(

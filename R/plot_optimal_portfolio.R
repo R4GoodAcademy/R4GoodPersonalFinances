@@ -3,6 +3,8 @@ plot_optimal_portfolio <- function(
   portfolio
 ) {
 
+  account <- name <- allocation <- total_allocation <- NULL
+
   allocations <- portfolio$allocations
  
   allocations_long <- 
@@ -94,4 +96,3 @@ plot_optimal_portfolio <- function(
       )
     )
 }
-

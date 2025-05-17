@@ -4,6 +4,7 @@ calc_optimal_asset_allocation <- function(
   portfolio,
   current_date = get_current_date()
 ) {
+  asset_class <- NULL
 
   scenario <- 
     simulate_scenario(

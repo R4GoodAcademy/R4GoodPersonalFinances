@@ -18,6 +18,7 @@ calc_optimal_portfolio <- function(
   initial_allocation           = NULL,
   maxeval                      = 2000
 ) {
+  taxable <- taxadvantaged <- asset_class <- NULL
 
   covariance_matrix <- calc_covariance_matrix(
     standard_deviations = standard_deviations,
@@ -110,20 +111,20 @@ calc_optimal_portfolio <- function(
     total_assets <- assets_number
     
     # Equality constraint: sum(allocations) = 1
-    equality_constraint <- function(allocations) {
-      return(sum(allocations) - 1)
+    equality_constraint <- function(params) {
+      return(sum(params) - 1)
     }
     # Jacobian of the equality constraint
-    equality_jacobian <- function(allocations) {
+    equality_jacobian <- function(params) {
       return(rep(1, assets_number))
     }
 
     # Inequality constraint: allocation_i >= 0
-    inequality_constraint <- function(allocations) {
-      return(allocations)
+    inequality_constraint <- function(params) {
+      return(params)
     }
     # Jacobian of the inequality constraint
-    inequality_jacobian <- function(allocations) {
+    inequality_jacobian <- function(params) {
       return(diag(assets_number))
     }
 

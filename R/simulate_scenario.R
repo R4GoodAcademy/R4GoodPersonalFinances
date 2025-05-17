@@ -11,6 +11,8 @@ simulate_scenario <- function(
   ...
 ) {
   
+  index <- NULL
+
   progress_handler <- progressr::handler_tkprogressbar()
 
   cli::cli_h3("Simulating scenario: {.field {scenario_id}}")

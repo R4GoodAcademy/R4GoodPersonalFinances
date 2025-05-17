@@ -2,6 +2,7 @@ generate_household_timeline <- function(
   household, 
   current_date
 ) {
+  index <- end_age <- start_age <- NULL
 
   current_date <- lubridate::as_date(current_date)
   max_lifespan <- household$get_lifespan(current_date = current_date)

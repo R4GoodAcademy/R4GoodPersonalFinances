@@ -3,6 +3,7 @@ plot_expected_allocation <- function(
   scenario,
   accounts = c("all", "taxable", "taxadvantaged")
 ) {
+  index <- asset <- allocation <- NULL
 
   accounts     <- rlang::arg_match(accounts)
   account_type <- ifelse(accounts == "all", "total", accounts)

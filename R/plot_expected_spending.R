@@ -5,6 +5,9 @@ plot_expected_spending <- function(
   y_limits                        = c(NA, NA)
 ) {
   
+  index <- discretionary_spending <- nondiscretionary_spending <- spending <- 
+    NULL
+  
   stopifnot(
     length(unique(scenario$scenario_id)) == 1
   )
@@ -89,7 +92,7 @@ plot_expected_spending <- function(
     data_to_plot |> 
     dplyr::group_by(type) |>
     dplyr::summarise(
-      median_spending = median(spending),
+      median_spending = stats::median(spending),
       max_spending    = max(spending),
       min_spending    = min(spending)
     )

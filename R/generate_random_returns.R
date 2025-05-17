@@ -25,7 +25,7 @@ generate_random_returns <- function(
 
   independent_normal_draws <- 
     matrix(
-      rnorm(n_assets * n), 
+      stats::rnorm(n_assets * n), 
       nrow = n, 
       ncol = n_assets
     )

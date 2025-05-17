@@ -48,6 +48,10 @@ create_portfolio_template <- function() {
 #' @export
 print.Portfolio <- function(x, ...) {
 
+  name <- expected_return <- standard_deviation <- initital_value <- 
+    investment_years <- preliquidation_value <- capital_gain_tax_paid <-
+    postliquidation_value <- initial_value <- NULL
+
   args <- list(...)
   if (!is.null(args$width)) {
     class(x) <- setdiff(class(x), "Portfolio")

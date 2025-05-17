@@ -9,6 +9,11 @@ simulate_single_scenario <- function(
   debug          = FALSE
 ) {
 
+  income <- spending <- total_income <- nondiscretionary_spending <- 
+    consumption_impatience_preference <- index <- 
+    smooth_consumption_preference <- survival_prob <- time_value_discount <- 
+    discretionary_spending_utility <- NULL
+
   current_date <- lubridate::as_date(current_date)
 
   timeline <- 

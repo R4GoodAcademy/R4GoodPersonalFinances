@@ -2,6 +2,7 @@ calc_present_value <- function(
   cashflow,
   discount_rate
 ) {
+  v <- time_value_discount <- NULL
 
   n_years        <- length(cashflow)
   present_values <- vector("numeric", n_years)

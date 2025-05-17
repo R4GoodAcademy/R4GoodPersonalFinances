@@ -7,6 +7,8 @@ plot_future_spending <- function(
   y_limits                        = c(NA, NA)
 ) {
   
+  index <- discretionary_spending <- nondiscretionary_spending <- NULL
+  
   period <- rlang::arg_match(period)
   type   <- rlang::arg_match(type, multiple = TRUE)
 
@@ -51,6 +53,9 @@ plot_simulated_spending <- function(
   period   = c("yearly", "monthly"),
   y_limits = c(NA, NA)
 ) {
+
+  index <- discretionary_spending <- min_quantiles <- max_quantiles <- 
+    quantile_group <- NULL
   
   min_alpha     <- 0.15
   period        <- rlang::arg_match(period)
@@ -70,11 +75,11 @@ plot_simulated_spending <- function(
     dplyr::group_by(index) |>
     dplyr::summarize(
       min_quantiles = list(
-        quantile(
+        stats::quantile(
           discretionary_spending, 
           probs = seq(0, 0.9, 0.1)
         ) |>
-          setNames(1:10)
+          stats::setNames(1:10)
       )
     ) |>
     tidyr::unnest_longer(
@@ -90,11 +95,11 @@ plot_simulated_spending <- function(
     dplyr::group_by(index) |>
     dplyr::summarize(
       max_quantiles = list(
-        quantile(
+        stats::quantile(
           discretionary_spending, 
           probs = seq(0.1, 1, 0.1)
         ) |>
-          setNames(1:10)
+          stats::setNames(1:10)
       )
     ) |>
     tidyr::unnest_longer(
@@ -151,9 +156,9 @@ plot_simulated_spending <- function(
     ggplot2::scale_alpha_manual(
       values = c(
         seq(min_alpha, 1, length.out = n_groups/2) |> 
-          setNames(group_names[1:(n_groups/2)]),
+          stats::setNames(group_names[1:(n_groups/2)]),
         seq(1, min_alpha, length.out = n_groups/2) |> 
-          setNames(group_names[(n_groups/2 + 1):n_groups])
+          stats::setNames(group_names[(n_groups/2 + 1):n_groups])
       )
     ) +
     ggplot2::theme_minimal() +
@@ -177,10 +182,10 @@ plot_simulated_spending <- function(
           dplyr::filter(sample != 0) |> 
           dplyr::group_by(index) |>
           dplyr::summarize(
-            discretionary_spending = median(discretionary_spending) 
+            discretionary_spending = stats::median(discretionary_spending) 
           ),
       ggplot2::aes(
-        y = discretionary_spending / period_factor,
+        y = discretionary_spending / period_factor
       ),
       color     = colors[1],
       linewidth = 1

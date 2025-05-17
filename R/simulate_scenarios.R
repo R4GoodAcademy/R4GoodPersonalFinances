@@ -11,10 +11,12 @@ simulate_scenarios <- function(
   ...
 ) {
 
+  scenario_id <- index <- NULL
+
   current_date <- lubridate::as_date(current_date)
 
   if (!is.null(monte_carlo_samples)) {
-    seeds <- runif(monte_carlo_samples, min = 0, max = 1e6)
+    seeds <- stats::runif(monte_carlo_samples, min = 0, max = 1e6)
   }
 
   scenarios_ids <- unique(scenarios_parameters$scenario_id)

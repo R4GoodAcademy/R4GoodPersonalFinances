@@ -3,6 +3,8 @@ plot_life_expectancy <- function(
   household
 ) {
 
+  id <- density <- age <- life_expectancy <- NULL
+
   if ("Household" %in% class(household)) {
 
     members <- household$get_members()

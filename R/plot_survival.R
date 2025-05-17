@@ -5,6 +5,8 @@ plot_survival <- function(
   current_date = get_current_date()
 ) {
 
+  id <- value <- year <- name <- type <- NULL
+
   current_date   <- lubridate::as_date(current_date)
   members        <- household$get_members()
   members_params <- purrr::map(members, function(member) {
@@ -22,7 +24,7 @@ plot_survival <- function(
   bold_colors     <- PrettyCols::prettycols("Bold")
   num_individual  <- length(members_params)
   required_colors <- num_individual + 2 
-  
+   
   all_colors <- bold_colors[1:required_colors]
   individual_names <- names(members_params)
   individual_colors <- all_colors[1:num_individual]

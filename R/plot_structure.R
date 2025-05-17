@@ -5,6 +5,8 @@ plot_structure <- function(
   y_limits      = c(NA, NA)
 ) {
 
+  index <- category <- amount <- presence_count <- NULL
+
   period        <- rlang::arg_match(period)
   period_factor <- if (period == "yearly") 1 else 12
   structure_of  <- rlang::arg_match(structure_of)
