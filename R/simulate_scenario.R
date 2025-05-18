@@ -14,7 +14,7 @@ simulate_scenario <- function(
   index <- NULL
 
   if (
-    capabilities("tcltk") && requireNamespace("tcltk1", quietly = TRUE) &&
+    capabilities("tcltk") && requireNamespace("tcltk", quietly = TRUE) &&
     (!identical(.Platform$OS.type, "unix") || nzchar(Sys.getenv("DISPLAY")))
   ) {
     progress_handler <- progressr::handler_tkprogressbar()
