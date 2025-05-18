@@ -1,15 +1,32 @@
-#' @export
+#' Household class
+#' 
+#' @description
+#' The `Household` class aggregates information about 
+#' a household and its members.
+#' 
+#' @returns An object of class `Household`.
+#' 
+#' @examples
+#' household <- Household$new()
+#' household$risk_tolerance
+#' household$consumption_impatience_preference
+#' household$smooth_consumption_preference
+#' @export 
 Household <- R6::R6Class(
   classname = "Household",
 
   public = list(
 
-    initialize = function() {},
-
+    #' @description 
+    #' Getting members of the household
     get_members = function() {
       private$.household_members
     },
 
+    #' @description 
+    #' Adding a member to the household
+    #' It will fail if a member with the same name already exists.
+    #' @param household_member A `HouseholdMember` object.
     add_member = function(household_member) {
 
       if (household_member$get_name() %in% 
@@ -24,15 +41,25 @@ Household <- R6::R6Class(
       self$set_member(member = household_member)
     },
 
+    #' @description 
+    #' Setting a member of the household
+    #' If a member already exists, it will be overwritten.
+    #' @param member A `HouseholdMember` object.
     set_member = function(member) {
-
       private$.household_members[[member$get_name()]] <- member
     },
 
+    #' @description 
+    #' Setting an arbitrary lifespan of the household
+    #' @param value A number of years.
     set_lifespan = function(value) {
       private$.lifespan <- value
     },
 
+    #' @description 
+    #' Getting a lifespan of the household
+    #' If not set, it will be calculated based on the members' lifespans.
+    #' @param current_date A date in the format "YYYY-MM-DD".
     get_lifespan = function(current_date = get_current_date()) {
       
       current_date <- lubridate::as_date(current_date)
@@ -56,6 +83,10 @@ Household <- R6::R6Class(
         ceiling()
     },
 
+    #' @description 
+    #' Calculating a survival rate of the household
+    #' based on its members' parameters of the Gompertz model.
+    #' @param current_date A date in the format "YYYY-MM-DD".
     calc_survival = function(current_date = get_current_date()) {
 
       current_date       <- lubridate::as_date(current_date)
@@ -181,6 +212,9 @@ Household <- R6::R6Class(
       )
     },
 
+    #' @description 
+    #' Calculating a minimum age of the household members.
+    #' @param current_date A date in the format "YYYY-MM-DD".
     get_min_age = function(current_date = get_current_date()) {
 
       current_date <- lubridate::as_date(current_date)
@@ -195,6 +229,7 @@ Household <- R6::R6Class(
 
   active = list(
 
+    #' @field expected_income Expected income triggers 
     expected_income = function(value) {
       if (missing(value)) {
         return(private$.expected_income)
@@ -202,6 +237,7 @@ Household <- R6::R6Class(
       private$.expected_income <- value
     },
 
+    #' @field expected_spending Expected spending triggers
     expected_spending = function(value) {
       if (missing(value)) {
         return(private$.expected_spending)
@@ -209,6 +245,7 @@ Household <- R6::R6Class(
       private$.expected_spending <- value
     },
 
+    #' @field risk_tolerance Risk tolerance of the household
     risk_tolerance = function(value) {
       if (missing(value)) {
         return(private$.risk_tolerance)
@@ -216,6 +253,8 @@ Household <- R6::R6Class(
       private$.risk_tolerance <- value
     },
 
+    #' @field consumption_impatience_preference Consumption 
+    #' impatience preference of the household
     consumption_impatience_preference = function(value) {
       if (missing(value)) {
         return(private$.consumption_impatience_preference)
@@ -223,6 +262,8 @@ Household <- R6::R6Class(
       private$.consumption_impatience_preference <- value
     },
 
+    #' @field smooth_consumption_preference Smooth consumption 
+    #' preference of the household
     smooth_consumption_preference = function(value) {
       if (missing(value)) {
         return(private$.smooth_consumption_preference)
@@ -253,4 +294,5 @@ Household <- R6::R6Class(
 
   )
 )
+
 

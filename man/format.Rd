@@ -33,6 +33,9 @@ difference between adjacent values.
 
 Applied to rescaled data.}
 
+\item{min_length}{A numeric. Minimum number of characters
+of the string with the formatted value.}
+
 \item{...}{Other arguments passed on to \code{\link[base:format]{base::format()}}.}
 }
 \value{

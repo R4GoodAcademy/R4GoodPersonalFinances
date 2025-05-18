@@ -6,6 +6,8 @@
 #' 
 #' @inheritParams scales::dollar
 #' @inheritParams scales::percent
+#' @param min_length A numeric. Minimum number of characters 
+#' of the string with the formatted value.
 #' @rdname format
 #' 
 #' @return A character. Formatted value.

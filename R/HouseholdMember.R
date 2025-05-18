@@ -1,3 +1,19 @@
+#' HouseholdMember class
+#' 
+#' @description
+#' The `HouseholdMember` class aggregates information about
+#' a single member of a household.
+#' 
+#' @returns An object of class `HouseholdMember`.
+#' @examples
+#' member <- HouseholdMember$new(
+#'   name       = "Isabela",
+#'   birth_date = "1980-07-15",
+#'   mode       = 91,
+#'   dispersion = 8.88
+#' )
+#' member$calc_age()
+#' member$calc_life_expectancy()
 #' @export
 HouseholdMember <- R6::R6Class(
   classname = "HouseholdMember",
