@@ -30,7 +30,7 @@ test_that("simulating multiple scenarios", {
       "TRUE ~ 6000 * 12"
     )
   )
-  
+
   portfolio <- generate_test_asset_returns(2)$returns
 
   start_ages <- c(60, 65, 70, 75, 80)

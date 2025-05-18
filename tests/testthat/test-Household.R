@@ -358,54 +358,52 @@ test_that("getting min_age - age of the youngest member", {
 
 test_that("cloning works", {
 
-  # skip_on_cran()
-  # skip_if_not(interactive())
+  local({
 
-  test_birth_date   <- "1955-07-15"
-  members <- HouseholdMember$new(
-    name       = "test_name",
-    birth_date = test_birth_date
-  )
-  members$set_event("retirement", 65)
-  household <- Household$new()
-  household$add_member(members)
-  expect_equal(
-    household$get_members()$test_name$get_events()$retirement$start_age,
-    65
-  )
+    
 
-  household_hash <- rlang::hash(household)
-  expect_equal(
-    rlang::hash(household), 
-    household_hash
-  )
+    test_birth_date   <- "1955-07-15"
+    members <- HouseholdMember$new(
+      name       = "test_name",
+      birth_date = test_birth_date
+    )
+    members$set_event("retirement", 65)
+    household <- Household$new()
+    household$add_member(members)
+    expect_equal(
+      household$get_members()$test_name$get_events()$retirement$start_age,
+      65
+    )
 
-  test_path <- file.path(tempdir(), "household.rds")
-  saveRDS(household, test_path)
-  household_bis <- readRDS(test_path)
-  expect_equal(
-    rlang::hash(household_bis), 
-    household_hash
-  )
+    household_hash <- rlang::hash(household)
+    expect_equal(
+      rlang::hash(household), 
+      household_hash
+    )
 
-  # cloned_household <- household_bis$clone(deep = TRUE)
-  household_bis$get_members()$test_name$set_event("retirement", 100)
-  expect_equal(
-    household_bis$get_members()$test_name$get_events()$retirement$start_age,
-    100
-  )
-  # cloned_household$get_members()$test_name$set_event("retirement", 100)
-  # expect_equal(
-  #   cloned_household$get_members()$test_name$get_events()$retirement$start_age,
-  #   100
-  # )
-  expect_equal(
-    household$get_members()$test_name$get_events()$retirement$start_age,
-    65
-  )
+    test_path <- file.path(tempdir(), "household.rds")
+    saveRDS(household, test_path)
+    household_bis <- readRDS(test_path)
+    expect_equal(
+      rlang::hash(household_bis), 
+      household_hash
+    )
+    expect_equal(
+      rlang::hash(household), 
+      household_hash
+    )
 
-  expect_equal(
-    rlang::hash(household), 
-    household_hash
-  )
+    household_bis$get_members()$test_name$set_event("retirement", 100)
+    expect_equal(
+      household_bis$get_members()$test_name$get_events()$retirement$start_age,
+      100
+    )
+    expect_equal(
+      household$get_members()$test_name$get_events()$retirement$start_age,
+      65
+    )
+
+    expect_equal(rlang::hash(household), household_hash)
+    
+  })
 })

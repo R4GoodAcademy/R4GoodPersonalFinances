@@ -13,11 +13,15 @@ simulate_scenario <- function(
   
   index <- NULL
 
-  if (capabilities("tcltk") && requireNamespace("tcltk", quietly = TRUE)) {
+  if (
+    capabilities("tcltk") && requireNamespace("tcltk1", quietly = TRUE) &&
+    (!identical(.Platform$OS.type, "unix") || nzchar(Sys.getenv("DISPLAY")))
+  ) {
     progress_handler <- progressr::handler_tkprogressbar()
   } else {
     progress_handler <- progressr::handler_cli()
   }
+
 
   cli::cli_h3("Simulating scenario: {.field {scenario_id}}")
   cli::cli_alert_info("Current date: {.field {current_date}}")

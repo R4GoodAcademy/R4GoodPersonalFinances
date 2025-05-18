@@ -59,10 +59,8 @@ simulate_scenarios <- function(
         
       scenario_events   <- scenario_params$events[[1]]
 
-      temp_file <- file.path(tempdir(), "household.rds")
+      temp_file <- tempfile(fileext = ".rds")
       saveRDS(household, temp_file)
-      # household <- readRDS(temp_file)
-      # household_cloned <- household$clone(deep = TRUE)
       household_cloned <- readRDS(temp_file)
 
       for (i in NROW(scenario_events)) {

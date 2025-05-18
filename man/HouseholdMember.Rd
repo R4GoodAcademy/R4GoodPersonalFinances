@@ -20,6 +20,17 @@ member <- HouseholdMember$new(
 member$calc_age()
 member$calc_life_expectancy()
 }
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{max_age}}{The maximum age of the household member}
+
+\item{\code{mode}}{The Gompertz mode parameter}
+
+\item{\code{dispersion}}{The Gompertz dispersion parameter}
+}
+\if{html}{\out{</div>}}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
@@ -39,15 +50,31 @@ member$calc_life_expectancy()
 \if{html}{\out{<a id="method-HouseholdMember-new"></a>}}
 \if{latex}{\out{\hypertarget{method-HouseholdMember-new}{}}}
 \subsection{Method \code{new()}}{
+Creating a new object of class \code{HouseholdMember}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{HouseholdMember$new(name, birth_date, mode = NULL, dispersion = NULL)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{The name of the member.}
+
+\item{\code{birth_date}}{The birth date of the household member
+in the format \code{YYYY-MM-DD}.}
+
+\item{\code{mode}}{The Gompertz mode parameter.}
+
+\item{\code{dispersion}}{The Gompertz dispersion parameter.}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-HouseholdMember-get_name"></a>}}
 \if{latex}{\out{\hypertarget{method-HouseholdMember-get_name}{}}}
 \subsection{Method \code{get_name()}}{
+Getting the name of the household member
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{HouseholdMember$get_name()}\if{html}{\out{</div>}}
 }
@@ -57,6 +84,7 @@ member$calc_life_expectancy()
 \if{html}{\out{<a id="method-HouseholdMember-get_birth_date"></a>}}
 \if{latex}{\out{\hypertarget{method-HouseholdMember-get_birth_date}{}}}
 \subsection{Method \code{get_birth_date()}}{
+Getting the birth date of the household member
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{HouseholdMember$get_birth_date()}\if{html}{\out{</div>}}
 }
@@ -66,33 +94,58 @@ member$calc_life_expectancy()
 \if{html}{\out{<a id="method-HouseholdMember-calc_age"></a>}}
 \if{latex}{\out{\hypertarget{method-HouseholdMember-calc_age}{}}}
 \subsection{Method \code{calc_age()}}{
+Calculating the age of the household member
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{HouseholdMember$calc_age(current_date = get_current_date())}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{current_date}}{A date in the format "YYYY-MM-DD".}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-HouseholdMember-get_lifespan"></a>}}
 \if{latex}{\out{\hypertarget{method-HouseholdMember-get_lifespan}{}}}
 \subsection{Method \code{get_lifespan()}}{
+Calculating a lifespan of the household member
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{HouseholdMember$get_lifespan(current_date = get_current_date())}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{current_date}}{A date in the format "YYYY-MM-DD".}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-HouseholdMember-calc_life_expectancy"></a>}}
 \if{latex}{\out{\hypertarget{method-HouseholdMember-calc_life_expectancy}{}}}
 \subsection{Method \code{calc_life_expectancy()}}{
+Calculating a life expectancy of the household member
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{HouseholdMember$calc_life_expectancy(current_date = get_current_date())}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{current_date}}{A date in the format "YYYY-MM-DD".}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-HouseholdMember-calc_survival_probability"></a>}}
 \if{latex}{\out{\hypertarget{method-HouseholdMember-calc_survival_probability}{}}}
 \subsection{Method \code{calc_survival_probability()}}{
+Calculating a survival probability of the household member
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{HouseholdMember$calc_survival_probability(
   target_age,
@@ -100,11 +153,21 @@ member$calc_life_expectancy()
 )}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{target_age}}{A target age in the format "YYYY-MM-DD".}
+
+\item{\code{current_date}}{A date in the format "YYYY-MM-DD".}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-HouseholdMember-get_events"></a>}}
 \if{latex}{\out{\hypertarget{method-HouseholdMember-get_events}{}}}
 \subsection{Method \code{get_events()}}{
+Getting the events related to the household member
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{HouseholdMember$get_events()}\if{html}{\out{</div>}}
 }
@@ -114,10 +177,24 @@ member$calc_life_expectancy()
 \if{html}{\out{<a id="method-HouseholdMember-set_event"></a>}}
 \if{latex}{\out{\hypertarget{method-HouseholdMember-set_event}{}}}
 \subsection{Method \code{set_event()}}{
+Setting an event related to the household member
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{HouseholdMember$set_event(event, start_age, end_age = Inf, years = Inf)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{event}}{The name of the event.}
+
+\item{\code{start_age}}{The age of the household member when the event starts.}
+
+\item{\code{end_age}}{The age of the household member when the event ends.}
+
+\item{\code{years}}{The number of years the event lasts.}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-HouseholdMember-clone"></a>}}
