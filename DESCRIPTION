@@ -1,21 +1,33 @@
 Package: R4GoodPersonalFinances
 Title: Make Optimal Financial Decisions
-Version: 1.0.0
+Version: 0.2.0.9001
 Authors@R: c(
-    person("Kamil", "Wais", , "kamil.wais@gmail.com", role = c("aut", "cre", "cph", "fnd"),
-           comment = c(ORCID = "0000-0002-4062-055X")),
-    person("Olesia", "Wais", , "olesia.wais@gmail.com", role = "aut",
-           comment = c(ORCID = "0000-0002-8741-8674"))
+    person("Kamil", "Wais", , "kamil.wais@gmail.com", 
+        role = c("aut", "cre", "cph", "fnd"),
+        comment = c(ORCID = "0000-0002-4062-055X")
+        ),
+    person("Olesia", "Wais", , "olesia.wais@gmail.com", 
+        role = "aut",
+        comment = c(ORCID = "0000-0002-8741-8674")
+        )
   )
-Description: Make informed, data-driven decisions for your personal or
+Description: Make optimal decisions for your personal or
     household finances. Use tools and methods that are selected carefully
     to align with academic consensus, bridging the gap between theoretical
-    knowledge and practical application. They assist you in finding
-    optimal asset allocation, preparing for retirement or financial
-    independence, calculating optimal spending, and more. 
+    knowledge and practical application. They help you find
+    your own personalized optimal discretionary spending or
+    optimal asset allocation, and prepare you for retirement 
+    or financial independence.
+    The optimal solution to this problems is extremely complex,
+    and we only have a single lifetime to get it right.
+    Fortunately, we now have the user-friendly tools implemented,
+    that integrate life-cycle models 
+    with single-period net-worth Markowitz optimization models. 
+    Those tools can be used by anyone who wants to see 
+    what highly-personalized optimal decisions can look like.
     For more details see: 
-    Haghani V., White J. (2023, ISBN:978-1-119-74791-8),
-    Idzorek T., Kaplan P. (2024, ISBN:9781952927379).
+    Idzorek T., Kaplan P. (2024, ISBN:9781952927379),
+    Haghani V., White J. (2023, ISBN:9781119747918).
 License: MIT + file LICENSE
 URL: https://www.r4good.academy/,
     https://r4goodacademy.github.io/R4GoodPersonalFinances/,
@@ -57,6 +69,7 @@ Suggests:
     vdiffr
 Config/testthat/edition: 3
 Config/testthat/parallel: true
+Config/testthat/start-first: plot_*, simulate_*
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
