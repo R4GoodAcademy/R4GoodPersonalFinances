@@ -1,8 +1,31 @@
-# R4GoodPersonalFinances 1.0.0
+# R4GoodPersonalFinances (development version)
 
-TODO:
-This major release introduces first implementation
-of multilevel modeling of a household lifetime. 
+This major release introduces probably first in the world (open-sourced) implementation of a new multilevel life-cycle modeling of a household finances. 
+It connects life-cycle models with single-period net-worth Markowitz 
+optimization models and allows for high degree of personalization.
+The implementation is based on a novel theoretical framework, 
+described by Thomas M. Idzorek and Paul D. Kaplan in 
+"Lifetime Financial Advice: A Personalized Optimal Multilevel Approach" (2024).
+
+## Major changes
+
+* Added `Household` R6 class that aggregates information about a household 
+and its members and  `HouseholdMember` class that aggregates information 
+about a single member of a household.
+* Added functions responsible for setting, resetting and getting information about disk cache for caching the results of the simulations: `set_cache()`, `reset_cache()` and `get_cache()`.
+* Added `calc_life_expectancy()` function to calculate the life expectancy of a person based on the Gompertz model.
+* Added `plot_life_expectancy()` function to visualize the probability of dying and life expectancy of every member of a `Household` object and similar `plot_survival()` function for visualizing the probability of survival of each of the members of a `Household` and the probability of at least one member of a `Household` to survive.
+* Added `create_portfolio_template()` function to create an exemplary `Portoflio` object - a template for default portfolio with two asset classes: `GlobalStocksIndexFund` and `InflationProtectedBonds` and with some reasonable default values that should be updated and customised further.
+* Added `calc_portfolio_parameters()` function to calculate the parameters of a `Portfolio` object like current value, weights of assets, expected return and standard deviation of the whole portfolio.
+* Added `calc_optimal_asset_allocation()` function to calculate optimal allocation for a particular `Household` and `Portfolio` objects.
+* Added `plot_optimal_portfolio()` function to visualize the current and optimal allocation to assets for a particular `Portfolio` object.
+* Added `simulate_scenario()` function to simulate a single scenario of cash flows for a particular `Household` and `Portfolio` objects using expected returns of the assets in portfolio or random returns in multiple Monte Carlo samples.
+* Added `simulate_scenarios()` function to simulate multiple scenarios of cash flows for a particular `Household` and `Portfolio` objects. The scenarios parameters can triggered by different events like different years of retirement.
+* Added `plot_scenarios()` function to visualize the scenarios metrics that help with choosing the optimal parameters for the best scenario, e.g. the optimal year for retirement.
+* Added `plot_expected_allocation()` function to visualize the expected allocation of assets for a particular scenario over the household life cycle.
+* Added `plot_expected_capital()` function to visualize the expected financial, human, and total capital, as well as liabilities for a particular scenario over the household life cycle.
+* Added `plot_future_income()` and `plot_future_spending()` functions to visualize the future income and spending for a particular scenario over the household life cycle. The `plot_future_spending()` function allows to plot the relation of discretionary and non-discretionary spending, structure of non-discretionary spending and possible levels of discretionary spending over time based on Monte Carlo simulations.
+
 
 # R4GoodPersonalFinances 0.2.0
 
