@@ -1,14 +1,72 @@
+#' Create Portfolio Template
+#' 
+#' @description
+#' Creates a template for default portfolio with 
+#' two asset classes:
+#' * `GlobalStocksIndexFund`
+#' * `InflationProtectedBonds`
+#' 
+#' @details
+#' The template is used as a starting point for creating a portfolio.
+#' The asset classes have some reasonable default values of 
+#' expected returns and standard deviations of returns.
+#' The template assumes no correlations between asset classes in 
+#' the `correlations` matrix.
+#' Please check and update the template assumptions if necessary.
+#' 
+#' The nested `pretax` columns contain default values for
+#' parameters needed for calculating effective tax rates.
+#' The template assumes only capital gains tax is paid.
+#' Please customise this template to your individual situation.
+#' 
+#' The `accounts` nested columns have zero values for all assets 
+#' by default in both taxable and tax-advantaged accounts.
+#' The template assumes that there is currently no financial 
+#' wealth allocated to those accounts.
+#' Please customise this template to your individual situation.
+#' 
+#' The `weights` nested columns define weights of assets in 
+#' portfolios representative of the household human capital and liabilities.
+#' The template assumes equal weights for all assets for both portfolios.
+#' Please customise this template to your individual situation.
+#' 
+#' @seealso
+#' Possible sources of market assumptions:
+#' * \url{https://elmwealth.com/capital-market-assumptions/}  
+#' * \url{https://www.obligacjeskarbowe.pl/oferta-obligacji/obligacje-10-letnie-edo/}
+#' * \url{https://www.msci.com/indexes/index/664204}
+#' * (PDF) https://research.ftserussell.com/Analytics/FactSheets/Home/DownloadSingleIssue?issueName=AWORLDS&isManual=False
+#' 
+#' @return A nested `tibble` of class 'Portfolio' with columns:
+#' * `name`
+#' * `expected_return`
+#' * `standard_deviation`
+#' * `accounts`
+#'   * `taxable`
+#'   * `taxadvantaged`
+#' * `weights`
+#'   * `human_capital`
+#'   * `liabilities`
+#' * `correlations`
+#' * `pretax`
+#'   * `turnover`
+#'   * `income_qualified`
+#'   * `capital_gains_long_term`
+#'   * `income`
+#'   * `capital_gains`
+#'   * `cost_basis`
+#' 
+#' @examples
+#'   portfolio <- create_portfolio_template()
+#'   portfolio$accounts$taxable <- c(10000, 30000)
+#'   portfolio
 #' @export
 create_portfolio_template <- function() {
-  # browseURL("https://curvo.eu/backtest/pl/indeks/msci-world?currency=usd")
-  # browseURL("https://curvo.eu/backtest/en/market-index/ftse-all-world?currency=usd")
-  # browseURL("https://elmwealth.com/capital-market-assumptions/")  
-  # browseURL("https://www.obligacjeskarbowe.pl/oferta-obligacji/obligacje-10-letnie-edo/")
-  
+
     portfolio <- 
       dplyr::tribble(
         ~name,                     ~expected_return, ~standard_deviation,
-        "GlobalStocksIndexFound",  0.0506,           0.15,
+        "GlobalStocksIndexFund",  0.0506,           0.15,
         "InflationProtectedBonds", 0.02,             0,
       )
     

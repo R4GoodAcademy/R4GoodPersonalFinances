@@ -1,3 +1,18 @@
+#' Calculate Life Expectancy
+#' 
+#' @param current_age A numeric. Current age.
+#' @param mode A numeric. Mode of the Gompertz distribution.
+#' @param dispersion A numeric. Dispersion of the Gompertz distribution.
+#' @param max_age A numeric. Maximum age. Defaults to 120.
+#' 
+#' @return A numeric. Total life expectancy in years.
+#' 
+#' @examples
+#' calc_life_expectancy(
+#'   current_age = 65, 
+#'   mode        = 80, 
+#'   dispersion  = 10
+#' )
 #' @export
 calc_life_expectancy <- function(
   current_age,

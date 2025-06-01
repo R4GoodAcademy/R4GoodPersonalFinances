@@ -91,7 +91,7 @@ HouseholdMember <- R6::R6Class(
 
     #' @description 
     #' Calculating a survival probability of the household member
-    #' @param target_age A target age in the format "YYYY-MM-DD".
+    #' @param target_age Target age (numeric, in years).
     #' @param current_date A date in the format "YYYY-MM-DD".
     calc_survival_probability = function(
       target_age, 
@@ -129,6 +129,9 @@ HouseholdMember <- R6::R6Class(
       end_age = Inf,
       years   = Inf
     ) {
+
+      if (!is.infinite(years) && !is.infinite(end_age))
+        stop("Provide either 'end_age' or 'years', not both", call. = FALSE)
 
       if (!is.infinite(years)) {
         end_age <- start_age + years - 1

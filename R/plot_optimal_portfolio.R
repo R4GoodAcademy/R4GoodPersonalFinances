@@ -1,3 +1,51 @@
+#' Plot optimal portfolio allocations
+#' 
+#' @description
+#' The function plots current versus optimal 
+#' portfolio allocations for each asset class 
+#' and for taxable and tax-advantaged accounts.
+#' 
+#' @inheritParams simulate_scenario
+#' @returns A [ggplot2::ggplot()] object.
+#' @examples
+#' older_member <- HouseholdMember$new(
+#'   name       = "older",  
+#'   birth_date = "1980-02-15",
+#'   mode       = 80,
+#'   dispersion = 10
+#' )  
+#' household <- Household$new()
+#' household$add_member(older_member)  
+#' 
+#' household$expected_income <- list(
+#'   "income" = c(
+#'     "members$older$age <= 65 ~ 7000 * 12"
+#'   )
+#' )
+#' household$expected_spending <- list(
+#'   "spending" = c(
+#'     "TRUE ~ 5000 * 12"
+#'   )
+#' )
+#' 
+#' portfolio <- create_portfolio_template() 
+#' portfolio$accounts$taxable <- c(10000, 30000)
+#' portfolio$accounts$taxadvantaged <- c(0, 20000)
+#' portfolio <- 
+#'   portfolio |> 
+#'   calc_effective_tax_rate(
+#'     tax_rate_ltcg = 0.20, 
+#'     tax_rate_ordinary_income = 0.40
+#'   )
+#' 
+#' portfolio <- 
+#'   calc_optimal_asset_allocation(
+#'    household = household,
+#'    portfolio = portfolio,
+#'    current_date = "2020-07-15"
+#'   )
+#' 
+#' plot_optimal_portfolio(portfolio)
 #' @export
 plot_optimal_portfolio <- function(
   portfolio
@@ -59,8 +107,9 @@ plot_optimal_portfolio <- function(
       ggplot2::aes(
         label = ifelse(allocation < 0.001, "", format_percent(allocation))
       ),
-      position = ggplot2::position_stack(vjust = 0.5),
-      size = 3
+      position      = ggplot2::position_stack(vjust = 0.5),
+      size          = 3,
+      check_overlap = TRUE
     ) + 
     ggplot2::geom_label(
       data = sums,

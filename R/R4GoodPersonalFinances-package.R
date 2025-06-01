@@ -1,4 +1,5 @@
-#' @keywords internal
+#' @docType package
+#' @name R4GoodPersonalFinances-package
 "_PACKAGE"
 
 ## usethis namespace: start

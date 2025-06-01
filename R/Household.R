@@ -229,7 +229,8 @@ Household <- R6::R6Class(
 
   active = list(
 
-    #' @field expected_income Expected income triggers 
+    #' @field expected_income Set of rules that are used to 
+    #' generate streams of expected income 
     expected_income = function(value) {
       if (missing(value)) {
         return(private$.expected_income)
@@ -237,7 +238,8 @@ Household <- R6::R6Class(
       private$.expected_income <- value
     },
 
-    #' @field expected_spending Expected spending triggers
+    #' @field expected_spending Set of rules that are used to
+    #' generate streams of expected spending
     expected_spending = function(value) {
       if (missing(value)) {
         return(private$.expected_spending)
@@ -254,7 +256,10 @@ Household <- R6::R6Class(
     },
 
     #' @field consumption_impatience_preference Consumption 
-    #' impatience preference of the household
+    #' impatience preference of the household - 
+    #' subjective discount rate (rho).
+    #' Higher values indicate a stronger preference for consumption today 
+    #' versus in the future.
     consumption_impatience_preference = function(value) {
       if (missing(value)) {
         return(private$.consumption_impatience_preference)
@@ -263,7 +268,11 @@ Household <- R6::R6Class(
     },
 
     #' @field smooth_consumption_preference Smooth consumption 
-    #' preference of the household
+    #' preference of the household - 
+    #' Elasticity of Intertemporal Substitution (EOIS) (eta).
+    #' Higher values indicate more flexibility and a lower preference 
+    #' for smooth consumption.
+    # Usually between 0 (no flexibility) and 1 (high level of flexibility).
     smooth_consumption_preference = function(value) {
       if (missing(value)) {
         return(private$.smooth_consumption_preference)

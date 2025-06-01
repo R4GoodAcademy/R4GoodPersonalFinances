@@ -1,8 +1,74 @@
+#' Plot future spending structure over household life cycle
+#' 
+#' @description 
+#' Plot future spending structure over household life cycle,
+#' including discretionary and non-discretionary spending.
+#' You can also plot discretionary and non-discretionary spending separately,
+#' to see structure of non-discretionary spending and
+#' possible levels of discretionary spending over time 
+#' based on Monte Carlo simulations.
+#' 
+#' 
+#' @inheritParams plot_future_income
+#' @param type A character. Type of spending to plot:
+#' discretionary, non-discretionary, or both (default).
+#' @param discretionary_spending_position A character.
+#' Position of discretionary spending in plot. 
+#' Bottom is the default.
+#' @returns A [ggplot2::ggplot()] object
+#' @examples
+#' older_member <- HouseholdMember$new(
+#'   name       = "older",  
+#'   birth_date = "1980-02-15",
+#'   mode       = 80,
+#'   dispersion = 10
+#' )  
+#' household <- Household$new()
+#' household$add_member(older_member)  
+#' 
+#' household$expected_income <- list(
+#'   "income" = c(
+#'     "members$older$age <= 65 ~ 9000 * 12"
+#'   )
+#' )
+#' household$expected_spending <- list(
+#'   "spending" = c(
+#'     "members$older$age <= 65 ~ 5000 * 12",
+#'     "TRUE ~ 4000 * 12"
+#'   )
+#' )
+#' 
+#' portfolio <- create_portfolio_template() 
+#' portfolio$accounts$taxable <- c(10000, 30000)
+#' portfolio <- 
+#'   portfolio |> 
+#'   calc_effective_tax_rate(
+#'     tax_rate_ltcg = 0.20, 
+#'     tax_rate_ordinary_income = 0.40
+#'   )
+#' 
+#' scenario <- 
+#'   simulate_scenario(
+#'    household = household,
+#'    portfolio = portfolio,
+#'    # monte_carlo_samples = 100,
+#'    current_date = "2020-07-15"
+#'   )
+#' 
+#' plot_future_spending(scenario, "monthly")
+#' plot_future_spending(
+#'   scenario, 
+#'   "monthly", 
+#'   discretionary_spending_position = "top"
+#' )
+#' plot_future_spending(scenario, "monthly", "non-discretionary")
+#' # If Monte Carlo samples are present: 
+#' # plot_future_spending(scenario, "monthly", "discretionary")
 #' @export
 plot_future_spending <- function(
   scenario,
   period                          = c("yearly", "monthly"),
-  type                            = c("discretionary", "non-discretionary"),
+  type                            = c("both", "discretionary", "non-discretionary"),
   discretionary_spending_position = c("bottom", "top"),
   y_limits                        = c(NA, NA)
 ) {
@@ -10,7 +76,11 @@ plot_future_spending <- function(
   index <- discretionary_spending <- nondiscretionary_spending <- NULL
   
   period <- rlang::arg_match(period)
-  type   <- rlang::arg_match(type, multiple = TRUE)
+  type   <- rlang::arg_match(type)
+
+  if (type == "both") {
+    type <- c("discretionary", "non-discretionary")
+  }
 
   discretionary_spending_position <- 
     rlang::arg_match(discretionary_spending_position)
@@ -118,7 +188,7 @@ plot_simulated_spending <- function(
       !quantile_group %in% c(1, 2, 9, 10)
     )   
 
-  y_max <- max(abs(min(quantile_data$min)), abs(max(quantile_data$max)))
+  y_max <- max(abs(quantile_data$min), abs(quantile_data$max)) 
   if (y_max > 10000) {
     y_breaks_factor <- 10000
   } else if (y_max > 1000) {

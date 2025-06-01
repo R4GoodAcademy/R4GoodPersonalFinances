@@ -48,13 +48,23 @@ simulate_single_scenario <- function(
   financial_wealth <- sum(portfolio$accounts)
 
   weights <- list()
-  weights$taxable <- 
-    portfolio$accounts$taxable / financial_wealth
-  weights$taxadvantaged <- 
-    portfolio$accounts$taxadvantaged / financial_wealth
-  weights$financial_wealth <- 
-    weights$taxable + weights$taxadvantaged
 
+  if (financial_wealth > 0) {
+
+    weights$taxable <- 
+      portfolio$accounts$taxable / financial_wealth
+    weights$taxadvantaged <- 
+      portfolio$accounts$taxadvantaged / financial_wealth
+    weights$financial_wealth <- 
+      weights$taxable + weights$taxadvantaged
+
+  } else {
+
+    weights$taxable          <- 0
+    weights$taxadvantaged    <- 0
+    weights$financial_wealth <- 0
+  }
+    
   human_capital_discount_rate <- 
     calc_portfolio_expected_return(
       weights = portfolio$weights$human_capital,
@@ -101,7 +111,6 @@ simulate_single_scenario <- function(
       financial_wealth       = NA_real_,
       net_worth              = NA_real_,
       discretionary_spending = NA_real_,
-      negative_discretionary_spending = NA_real_,
       total_spending         = NA_real_,
       financial_wealth_end   = NA_real_,
       risk_tolerance         = household$risk_tolerance,

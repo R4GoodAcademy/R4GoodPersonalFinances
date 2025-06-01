@@ -1,13 +1,3 @@
-
-  # discount_rate (k) - certainty equivalent return for net-worth (h)
-  # consumption_impatience_preference - subjective discount rate (rho)
-    # Higher values indicate a stronger preference for consumption today versus in the future.
-  # smooth_consumption_preference - EOIS (eta)
-    # Higher values indicate more flexibility and a lower preference for smooth consumption.
-    # usually between 0% (no flexibility) and 100% (high level of flexibility)
-
-#' @export
-
 calc_discretionary_spending <- function(
   allocations_taxable,
   allocations_taxadvantaged,
@@ -33,10 +23,6 @@ calc_discretionary_spending <- function(
   net_worth     = financial_wealth + human_capital - liabilities, 
   discount_rate = NULL
 ) {
-
-  # h   <- discount_rate
-  # rho <- consumption_impatience_preference
-  # eta <- smooth_consumption_preference
 
   if (is.null(discount_rate)) {
 

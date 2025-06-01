@@ -1,3 +1,50 @@
+#' Plot expected allocation over household life cycle
+#' 
+#' @param scenario A `tibble` with nested columns -
+#' the result of [simulate_scenario()]. Data for a single scenario.
+#' @param accounts A character. 
+#' Plot allocation for specified types of accounts.
+#' @returns A [ggplot2::ggplot()] object. 
+#' @examples
+#' older_member <- HouseholdMember$new(
+#'   name       = "older",  
+#'   birth_date = "2000-02-15",
+#'   mode       = 80,
+#'   dispersion = 10
+#' )  
+#' household <- Household$new()
+#' household$add_member(older_member)  
+#' 
+#' household$expected_income <- list(
+#'   "income" = c(
+#'     "members$older$age <= 65 ~ 10000 * 12"
+#'   )
+#' )
+#' household$expected_spending <- list(
+#'   "spending" = c(
+#'     "TRUE ~ 5000 * 12"
+#'   )
+#' )
+#' 
+#' portfolio <- create_portfolio_template() 
+#' portfolio$accounts$taxable <- c(10000, 30000)
+#' portfolio$weights$human_capital <- c(0.2, 0.8)
+#' portfolio$weights$liabilities <- c(0.1, 0.9)
+#' portfolio <- 
+#'   portfolio |> 
+#'   calc_effective_tax_rate(
+#'     tax_rate_ltcg            = 0.20, 
+#'     tax_rate_ordinary_income = 0.40
+#'   )
+#' 
+#' scenario <- 
+#'   simulate_scenario(
+#'    household    = household,
+#'    portfolio    = portfolio,
+#'    current_date = "2020-07-15"
+#'   )
+#' 
+#' plot_expected_allocation(scenario)
 #' @export
 plot_expected_allocation <- function(
   scenario,
@@ -35,9 +82,13 @@ plot_expected_allocation <- function(
     ggplot2::geom_area() +
     ggplot2::scale_fill_manual(values = colors) +
     ggplot2::scale_x_continuous(
-      breaks = seq(0, max(scenario$index), by = 10),
-      labels = function(breaks) paste_labels(breaks, scenario = scenario)
-    ) +
+      breaks = function(limits) {
+        max_index <- max(scenario$index)
+        interval <- ifelse(max_index > 50, 10, ifelse(max_index > 20, 5, 2))
+        seq(0, max_index, by = interval)
+      },
+       labels = function(breaks) paste_labels(breaks, scenario = scenario)
+     ) +
     ggplot2::scale_y_continuous(labels = scales::percent) + 
     ggplot2::theme_minimal() +
     ggplot2::theme(

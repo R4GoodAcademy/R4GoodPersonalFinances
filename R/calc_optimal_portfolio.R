@@ -114,19 +114,6 @@ calc_optimal_portfolio <- function(
     equality_constraint <- function(params) {
       return(sum(params) - 1)
     }
-    # Jacobian of the equality constraint
-    equality_jacobian <- function(params) {
-      return(rep(1, assets_number))
-    }
-
-    # Inequality constraint: allocation_i >= 0
-    inequality_constraint <- function(params) {
-      return(params)
-    }
-    # Jacobian of the inequality constraint
-    inequality_jacobian <- function(params) {
-      return(diag(assets_number))
-    }
 
   } else {
 
@@ -140,26 +127,7 @@ calc_optimal_portfolio <- function(
       allocations_taxadvantaged <- get_allocations_taxadvantaged(params)
       return(c(sum(allocations_taxable) - in_taxable_accounts, sum(allocations_taxadvantaged) - (1 - in_taxable_accounts)))
     }
-    # Jacobian of the equality constraints
-    equality_jacobian <- function(params) {
-      jacobian <- matrix(0, nrow = 2, ncol = total_assets)
-      # Derivative of sum(taxable) - 1 w.r.t. taxable allocations
-      jacobian[1, 1:assets_number] <- 1 
-      # Derivative of sum(tax-advantaged) - 1 w.r.t. tax-advantaged allocations
-      jacobian[2, (assets_number + 1):total_assets] <- 1 
-      return(jacobian)
-    }
-
-    # Inequality constraint: allocation_i >= 0 for all assets in both accounts
-    inequality_constraint <- function(params) {
-      return(params)
-    }
-    # Jacobian of the inequality constraint
-    inequality_jacobian <- function(params) {
-      return(diag(total_assets))
-    }
   }
-
 
   if (is.null(initial_allocation)) {
     initial_allocation <- rep(1 / total_assets, total_assets)
@@ -357,10 +325,7 @@ calc_joint_networth_portfolio_variance <- function(
   params,
   covariance_matrix,
   tax_matrix,
-  financial_wealth_frac,
-  human_capital_frac,
   human_capital_weights,
-  liabilities_frac,
   liabilities_weights,
   financial_wealth,
   human_capital,

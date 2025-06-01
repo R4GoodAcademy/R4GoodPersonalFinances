@@ -22,7 +22,7 @@ plot_structure <- function(
       values_to = "amount"
     ) |>
     dplyr::group_by(index, category) |>
-    dplyr::summarise(amount = sum(amount / 12)) |>
+    dplyr::summarise(amount = sum(amount)) |>
     dplyr::ungroup() |>
     dplyr::group_by(category) |>
     dplyr::mutate(presence_count = sum(amount > 0)) |>
@@ -35,9 +35,9 @@ plot_structure <- function(
       dplyr::pull(amount) |> 
       max()
 
-  if (y_max > 10000) {
+  if (y_max >= 10000) {
     y_max_factor <- 10000
-  } else if (y_max > 1000) {
+  } else if (y_max >= 1000) {
     y_max_factor <- 1000
   } else {
     y_max_factor <- 100
@@ -49,7 +49,6 @@ plot_structure <- function(
     to   = ceiling(y_max / y_max_factor) * y_max_factor, 
     by   = y_max_factor
   )
-  print(y_breaks)
 
   scale_fill <- 
     switch(

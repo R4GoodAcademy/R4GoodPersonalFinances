@@ -9,10 +9,10 @@ generate_household_timeline <- function(
 
   timeline <-
     dplyr::tibble(
-      index         = seq_len(max_lifespan + 1) - 1,
-      years_left    = max_lifespan - index,
+      index         = as.integer(seq_len(max_lifespan + 1) - 1),
+      years_left    = as.integer(max_lifespan - index),
       date          = current_date + lubridate::years(index),
-      year          = lubridate::year(date),
+      year          = as.integer(lubridate::year(date)),
       survival_prob = 
         household$calc_survival(current_date = current_date)$data$gompertz
     )

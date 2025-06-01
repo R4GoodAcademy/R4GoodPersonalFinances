@@ -35,7 +35,7 @@ generate_cashflow_streams <- function(
         member_data$events[[event]]$on
       }
 
-      eval_env$is_off <- function(member, event) {
+      eval_env$is_not_on <- function(member, event) {
         !eval_env$is_on(member, event)
       }
       
@@ -52,15 +52,4 @@ generate_cashflow_streams <- function(
   dplyr::as_tibble()
   
   return(result)
-}
-
-#' @export
-is_on <- function(member, event) {
-
-  stop("This function should only be called within generate_cashflow_streams")
-}
-#' @export
-is_off <- function(member, event) {
-
-  stop("This function should only be called within generate_cashflow_streams")
 }

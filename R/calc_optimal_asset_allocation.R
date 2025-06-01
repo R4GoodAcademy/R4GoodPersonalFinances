@@ -1,3 +1,48 @@
+#' Calculate optimal asset allocation
+#' 
+#' @inheritParams simulate_scenario
+#' @returns The `portfolio` with additional nested columns:
+#' * `allocations$optimal` - optimal joint net-worth portfolio allocations
+#' * `allocations$current` - current allocations
+#' @examples 
+#' older_member <- HouseholdMember$new(
+#'   name       = "older",  
+#'   birth_date = "1980-02-15",
+#'   mode       = 80,
+#'   dispersion = 10
+#' )  
+#' household <- Household$new()
+#' household$add_member(older_member)  
+#' 
+#' household$expected_income <- list(
+#'   "income" = c(
+#'     "members$older$age <= 65 ~ 7000 * 12"
+#'   )
+#' )
+#' household$expected_spending <- list(
+#'   "spending" = c(
+#'     "TRUE ~ 5000 * 12"
+#'   )
+#' )
+#' 
+#' portfolio <- create_portfolio_template() 
+#' portfolio$accounts$taxable <- c(10000, 30000)
+#' 
+#' portfolio <- 
+#'   portfolio |> 
+#'   calc_effective_tax_rate(
+#'     tax_rate_ltcg = 0.20, 
+#'     tax_rate_ordinary_income = 0.40
+#'   )
+#' 
+#' portfolio <- 
+#'   calc_optimal_asset_allocation(
+#'    household = household,
+#'    portfolio = portfolio,
+#'    current_date = "2020-07-15"
+#'   )
+#' 
+#' portfolio$allocations
 #' @export
 calc_optimal_asset_allocation <- function(
   household,
@@ -21,7 +66,11 @@ calc_optimal_asset_allocation <- function(
   nondiscretionary_consumption <- scenario$nondiscretionary_spending[1]
 
   fraction_in_taxable_accounts <- 
-    sum(portfolio$accounts$taxable) / sum(portfolio$accounts)
+    if (sum(portfolio$accounts) > 0) {
+      sum(portfolio$accounts$taxable) / sum(portfolio$accounts)
+    } else {
+      0 
+    }
   
   discretionary_spending <- scenario$discretionary_spending[1]
   income                 <- scenario$total_income[1]

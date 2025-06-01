@@ -1,3 +1,88 @@
+#' Plot scenarios metrics
+#' 
+#' @description
+#' The plot allows to compare metrics for multiple scenarios.
+#' 
+#' If scenarios are simulated without Monte Carlo samples,
+#' so they are based only on expected returns of portfolio,
+#' two metrics are available for each scenario:
+#' * constant discretionary spending - certainty equivalent constant
+#' level of consumption that would result in the same lifetime utility 
+#' as a given series of future consumption in a given scenario
+#' (the higher, the better).
+#' * utility of discretionary spending - normalized
+#' to minimum and maximum values of constant discretionary spending
+#' (the higher, the better).
+#' 
+#' If scenarios are simulated with additional Monte Carlo samples,
+#' there are four more metrics available per scenario:
+#' * constant discretionary spending (for Monte Carlo samples),
+#' * normalized median utility of discretionary spending 
+#' (for Monte Carlo samples),
+#' * median of missing funds that need additional income 
+#' or additional savings at the expense of non-discretionary spending,
+#' (of yearly averages of Monte Carlo samples),
+#' * median of discretionary spending 
+#' (of yearly averages of Monte Carlo samples).
+#' 
+#' 
+#' @param scenarios A `tibble` with nested columns - 
+#' the result of [simulate_scenarios()].
+#' @param period A character. The amounts can be shown
+#' as yearly values (default) or averaged per month values.
+#' @returns A [ggplot2::ggplot()] object. 
+#' @examples
+#' older_member <- HouseholdMember$new(
+#'   name       = "older",  
+#'   birth_date = "1980-02-15",
+#'   mode       = 80,
+#'   dispersion = 10
+#' )  
+#' household <- Household$new()
+#' household$add_member(older_member)  
+#' 
+#' household$expected_income <- list(
+#'   "income" = c(
+#'     "is_not_on('older', 'retirement') ~ 7000 * 12"
+#'   )
+#' )
+#' household$expected_spending <- list(
+#'   "spending" = c(
+#'     "TRUE ~ 4000 * 12"
+#'   )
+#' )
+#' 
+#' portfolio <- create_portfolio_template() 
+#' portfolio$accounts$taxable <- c(100000, 300000)
+#' portfolio <- 
+#'   portfolio |> 
+#'   calc_effective_tax_rate(
+#'     tax_rate_ltcg = 0.20, 
+#'     tax_rate_ordinary_income = 0.40
+#'   )
+#' 
+#' start_ages <- c(60, 65, 75)
+#' scenarios_parameters <- 
+#'   tibble::tibble(
+#'     member    = "older",
+#'     event      = "retirement",
+#'     start_age = start_ages,
+#'     years     = Inf,
+#'     end_age   = Inf
+#'    ) |> 
+#'   dplyr::mutate(scenario_id = start_age) |> 
+#'   tidyr::nest(events = -scenario_id)
+#' 
+#' scenarios <- 
+#'   simulate_scenarios(
+#'     scenarios_parameters = scenarios_parameters,
+#'     household            = household,
+#'     portfolio            = portfolio,
+#'     maxeval              = 100,
+#'     current_date         = "2020-07-15"
+#'   )
+#' 
+#' plot_scenarios(scenarios, "monthly")
 #' @export
 plot_scenarios <- function(
   scenarios,
@@ -26,8 +111,10 @@ plot_scenarios <- function(
             sum(discretionary_spending_utility_weighted) / 
             sum(survival_prob * time_value_discount),
           parameter = unique(smooth_consumption_preference)
-        ) / period_factor,
+        ) / period_factor
     )
+  
+
   
   monte_carlo_scenarios <-
     scenarios |> 
@@ -92,7 +179,7 @@ plot_scenarios <- function(
         utility_normalized_expected = 
           normalize(
             utility_expected, 
-            min = min(
+            min_val = min(
               constant_expected, 
               ifelse(
                 NROW(monte_carlo_scenarios) == 0,
@@ -101,7 +188,7 @@ plot_scenarios <- function(
               ),
               na.rm = TRUE
             ), 
-            max = max(
+            max_val = max(
               constant_expected, 
               ifelse(
                 NROW(monte_carlo_scenarios) == 0,
@@ -120,12 +207,12 @@ plot_scenarios <- function(
         utility_normalized = 
           normalize(
             utility, 
-            min = min(
+            min_val = min(
               constant, 
               expected_returns_scenario$constant_expected,
               na.rm = TRUE
             ), 
-            max = max(
+            max_val = max(
               constant, 
               expected_returns_scenario$constant_expected,
               na.rm = TRUE
@@ -183,10 +270,6 @@ plot_scenarios <- function(
       )
     ) +
     ggplot2::geom_line(
-      data    = expected_returns_scenario_long,
-      linetype = "dashed"
-    ) +
-    ggplot2::geom_line(
       data     = expected_returns_scenario_long,
       linetype = "dashed"
     ) +
@@ -219,7 +302,7 @@ plot_scenarios <- function(
       values = colors,
       labels = c(
         "negative_discretionary_spending" = 
-          "median of means\nof missing founds\nin Monte Carlo samples",
+          "median of means\nof missing funds\nin Monte Carlo samples",
         "positive_discretionary_spending" = 
           "median of means\nof discretionary spending\nin Monte Carlo samples",
         "constant" = 
@@ -227,7 +310,7 @@ plot_scenarios <- function(
         "constant_expected" = 
           "constant (certainty equivalent)\ndiscretionary spending\n based on expected returns",
         "utility_normalized_expected" = 
-          "normalized median utility\nof discretionary spending\nbased on expected returns",
+          "normalized utility\nof discretionary spending\nbased on expected returns",
         "utility_normalized" = 
           "normalized median utility\nof discretionary spending\nin Monte Carlo samples"
       )

@@ -96,27 +96,15 @@ plot_expected_spending <- function(
       max_spending    = max(spending),
       min_spending    = min(spending)
     )
-
-  median_spending <- summarized_data$median_spending
-  original_names_median <- as.character(summarized_data$type)
-  colored_names_median <- glue::glue(
-    "<span style='color: {type_colors[original_names_median]};'>**{original_names_median}**</span>"
-  )
-  names(median_spending) <- colored_names_median
   
-  max_spending <- summarized_data$max_spending
-  original_names_max <- as.character(summarized_data$type)
-  colored_names_max <- glue::glue(
-    "<span style='color: {type_colors[original_names_max]};'>**{original_names_max}**</span>"
-  )
-  names(max_spending) <- colored_names_max
-  
-  min_spending <- summarized_data$min_spending
-  original_names_min <- as.character(summarized_data$type)
-  colored_names_min <- glue::glue(
-    "<span style='color: {type_colors[original_names_min]};'>**{original_names_min}**</span>"
-  )
-  names(min_spending) <- colored_names_min
+ median_spending <- summarized_data$median_spending
+ names(median_spending) <- format_colored_names(summarized_data, type_colors)
+ 
+ max_spending <- summarized_data$max_spending
+ names(max_spending) <- format_colored_names(summarized_data, type_colors)
+ 
+ min_spending <- summarized_data$min_spending
+ names(min_spending) <- format_colored_names(summarized_data, type_colors)
 
   max_y <- 
     ceiling(max(
@@ -126,8 +114,32 @@ plot_expected_spending <- function(
         dplyr::pull(spending) |> 
         max()
     ) / 1000) * 1000 
+  
+  min_y <- 
+    ceiling(min(
+      data_to_plot |> 
+        dplyr::group_by(index, type) |>
+        dplyr::summarise(spending = sum(spending)) |>
+        dplyr::pull(spending) |> 
+        min()
+    ) / 1000) * 1000 
 
   min_length <- max(nchar(max_y)) + 2
+
+  if (max_y > 10000) {
+    y_breaks_factor <- 10000
+  } else if (max_y > 1000) {
+    y_breaks_factor <- 1000
+  } else {  
+    y_breaks_factor <- 100
+  }
+  
+  y_breaks <- 
+    seq(
+      min_y, 
+      max_y, 
+      by = y_breaks_factor
+    )
   
   data_to_plot |> 
     ggplot2::ggplot(
@@ -151,12 +163,7 @@ plot_expected_spending <- function(
     ) +
     ggplot2::scale_y_continuous(
       labels = format_currency,
-      breaks = 
-        seq(
-          from = 0, 
-          to   = max_y, 
-          by   = 1000
-        )
+      breaks = y_breaks
     ) +
     ggplot2::labs(
       title = glue::glue("Expected Spending"),

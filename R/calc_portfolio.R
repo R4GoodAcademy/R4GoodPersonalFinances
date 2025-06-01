@@ -1,7 +1,30 @@
+#' Calculate Portfolio Parameters
+#' 
+#' @param portfolio A `tibble` of class `Portfolio`. 
+#' Usually created using `create_portfolio_template` and customised.
+#' 
+#' @return 
+#' A list with the following elements:
+#' * `value`: The value of the portfolio.
+#' * `weights`: The weights of assets in the portfolio.
+#' * `expected_return`: The expected return of the portfolio.
+#' * `standard_deviation`: The standard deviation of the portfolio.
+#'
+#' @examples
+#'  portfolio <- create_portfolio_template()
+#'  portfolio$accounts$taxable <- c(10000, 30000)
+#'  calc_portfolio_parameters(portfolio)
 #' @export
 calc_portfolio_parameters <- function(
   portfolio
 ) {
+
+  if (sum(portfolio$accounts) == 0) {
+    cli::cli_abort(
+      call = NULL,
+      "No amount allocated to any asset class in any account."
+    )
+  }
 
   weights <- rowSums(portfolio$accounts) / sum(portfolio$accounts)
   names(weights) <- portfolio$name
@@ -32,7 +55,7 @@ calc_portfolio_expected_return <- function(
 ) {
 
   stopifnot(length(weights) == length(returns))
-  stopifnot(sum(weights) - 1 < 0.001)
+  stopifnot(abs(sum(weights) - 1) < 0.001)
 
   sum(weights * returns)
 }
@@ -43,9 +66,8 @@ calc_portfolio_sd <- function(
   correlations
 ) {
 
-  stopifnot(sum(weights) - 1 < 1e-10)
+  stopifnot(abs(sum(weights) - 1) < 1e-10)
   stopifnot(length(weights) == length(standard_deviations))
-  stopifnot(length(weights) == NROW(standard_deviations))
 
   weights <- matrix(weights, nrow = 1)
 

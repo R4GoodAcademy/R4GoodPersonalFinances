@@ -107,16 +107,30 @@ format_percent <- function(x,
   percents
 }
 
+#' Get current date
+#' 
+#' If `R4GPF.current_date` option is not set, the current system date is used.
+#' 
+#' @return A date.
+#' @examples
+#' get_current_date()
+#' # Setting custom date using `R4GPF.current_date` option
+#' options(R4GPF.current_date = as.Date("2023-01-01"))
+#' get_current_date()
+#' options(R4GPF.current_date = NULL) # Reset default date#' Working with cache
+#' 
+#' get_current_date()
 #' @export
 get_current_date <- function() {
-  current_data <- getOption("R4GPF.current_date", default = Sys.Date())
-  lubridate::as_date(current_data)
+  current_date <- getOption("R4GPF.current_date", default = Sys.Date())
+  lubridate::as_date(current_date)
 }
 
-normalize <- function(x, min = 0, max = 1) {
-
-  (x - min(x, na.rm = TRUE)) /
-    (max(x, na.rm = TRUE) - min(x, na.rm = TRUE)) * (max - (min)) + (min)
+normalize <- function(x, min_val = 0, max_val = 1) {
+  
+  (x - base::min(x, na.rm = TRUE)) /
+    (base::max(x, na.rm = TRUE) - base::min(x, na.rm = TRUE)) *
+    (max_val - min_val) + min_val
 }
 
 
@@ -189,7 +203,7 @@ generate_test_asset_returns <- function(n = 3) {
         "USBonds",              0.0269,           0.0379,
         "InflationLinkedBonds", 0.0288,           0.0581,
         "MuniBonds",            0.0190,           0.03138274,
-        "GlobalBondsxUS",       0.0329,           0.0833,
+        "GlobalBondExUS",       0.0329,           0.0833,
         "Cash",                 0.0250,           0.0055
       )
     
@@ -241,6 +255,19 @@ generate_test_asset_returns <- function(n = 3) {
 
 }
 
+#' Working with cache
+#' 
+#' Get information about the cache
+#' 
+#' @rdname cache
+#' @returns Invisibly returns the path to the cache directory 
+#' or a list containing:
+#' \item{path}{The path to the cache directory.} 
+#' \item{files}{The number of files in the cache.}
+#' @examples
+#' \dontrun{
+#'   get_cache_info()
+#' }
 #' @export
 get_cache_info <- function() {
 
@@ -250,12 +277,34 @@ get_cache_info <- function() {
   )
 }
 
+#' Working with cache
+#' 
+#' Reset the cache
+#' 
+#' @rdname cache
+#' @examples
+#' \dontrun{
+#'   reset_cache()
+#' }
 #' @export
 reset_cache <- function() {
 
   .pkg_env$cache$reset()
+  invisible(.pkg_env$cache_directory)
 }
 
+#' Working with cache
+#' 
+#' Set the cache directory
+#' 
+#' @param path The path to the cache directory.
+#' Defaults to the '.cache' folder in the current working directory.
+#' 
+#' @rdname cache
+#' @examples
+#' \dontrun{
+#'   set_cache()
+#' }
 #' @export
 set_cache <- function(
   path = file.path(getwd(), ".cache")
@@ -323,3 +372,11 @@ paste_scenario_id <- function(scenario) {
     ""
   }
 }
+
+  format_colored_names <- function(data, type_colors) {
+    original_names <- as.character(data$type)
+    colored_names <- glue::glue(
+      "<span style='color: {type_colors[original_names]};'>**{original_names}**</span>"
+    )
+    return(colored_names)
+  }
