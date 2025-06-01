@@ -25,6 +25,10 @@ R4GoodPersonalFinances::run_app("retirement-ruin", shinylive = TRUE)
 R4GoodPersonalFinances::run_app("purchasing-power", shinylive = TRUE)
 R4GoodPersonalFinances::run_app("risk-adjusted-returns", shinylive = TRUE)
 
+badgecreatr::badge_lifecycle("experimental")
+badgecreatr::badge_projectstatus("active")
+
+
 devtools::document()
 devtools::build_readme()
 pkgdown::build_site(preview = FALSE)
