@@ -17,6 +17,7 @@ get_current_date()
 # Setting custom date using `R4GPF.current_date` option
 options(R4GPF.current_date = as.Date("2023-01-01"))
 get_current_date()
-options(R4GPF.current_date = NULL) # Reset default date
+options(R4GPF.current_date = NULL) # Reset default date#' Working with cache
+
 get_current_date()
 }

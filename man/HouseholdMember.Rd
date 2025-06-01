@@ -156,7 +156,7 @@ Calculating a survival probability of the household member
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{target_age}}{A target age in the format "YYYY-MM-DD".}
+\item{\code{target_age}}{Target age (numeric, in years).}
 
 \item{\code{current_date}}{A date in the format "YYYY-MM-DD".}
 }

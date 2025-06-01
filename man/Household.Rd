@@ -19,17 +19,25 @@ household$smooth_consumption_preference
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{expected_income}}{Expected income triggers}
+\item{\code{expected_income}}{Set of rules that are used to
+generate streams of expected income}
 
-\item{\code{expected_spending}}{Expected spending triggers}
+\item{\code{expected_spending}}{Set of rules that are used to
+generate streams of expected spending}
 
 \item{\code{risk_tolerance}}{Risk tolerance of the household}
 
 \item{\code{consumption_impatience_preference}}{Consumption
-impatience preference of the household}
+impatience preference of the household -
+subjective discount rate (rho).
+Higher values indicate a stronger preference for consumption today
+versus in the future.}
 
 \item{\code{smooth_consumption_preference}}{Smooth consumption
-preference of the household}
+preference of the household -
+Elasticity of Intertemporal Substitution (EOIS) (eta).
+Higher values indicate more flexibility and a lower preference
+for smooth consumption.}
 }
 \if{html}{\out{</div>}}
 }
