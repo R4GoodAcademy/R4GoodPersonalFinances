@@ -142,8 +142,8 @@ test_that("simulating single scenario with event and id_on helper functions", {
     "income_older_negative" = c(
       "!is_on('older', 'retirement') ~ 3000"
     ),
-    "income_older_is_off" = c(
-      "is_off('older', 'retirement') ~ 3000"
+    "income_older_is_not_on" = c(
+      "is_not_on('older', 'retirement') ~ 3000"
     )
   )
   household$expected_spending <- list(
@@ -175,7 +175,56 @@ test_that("simulating single scenario with event and id_on helper functions", {
     18000
   )
   expect_equal(
-    sum(scenario$income$income_older_is_off),
+    sum(scenario$income$income_older_is_not_on),
     sum(scenario$income$income_older_negative)
   )
+})
+
+test_that("benchmarking of simulating single scenario", {
+
+  skip_on_cran()
+  skip_on_ci()
+  # skip_if_not(interactive())
+  
+  older_member <- HouseholdMember$new(
+    name       = "older",  
+    birth_date = "1980-02-15"
+  )  
+  older_member$mode       <- 80
+  older_member$dispersion <- 10
+
+  household <- Household$new()
+  household$add_member(older_member)  
+  
+  household$expected_income <- list(
+    "income_older" = c(
+      "members$older$age >= 46 ~ 3000"
+    )
+  )
+  household$expected_spending <- list(
+    "spending1" = c(
+      "TRUE ~ 6000 * 12"
+    )
+  )
+  test_current_date <- "2020-07-15"
+  portfolio <- generate_test_asset_returns(2)$returns
+
+  set.seed(123)
+
+  benchmark <- microbenchmark::microbenchmark(
+    times = 10L,
+    unit = "seconds",
+
+    scenario <- 
+      simulate_single_scenario(
+        household    = household,
+        portfolio    = portfolio,
+        current_date = test_current_date
+      )
+  )
+  expect_snapshot(print(scenario, n = Inf, width = Inf))
+
+  benchmark |> print()
+  time_in_seconds <- median(benchmark$time / 1e9) 
+  time_in_seconds |> round(2) |> print()
 })

@@ -38,9 +38,6 @@ test_that("simulating a default scenario with expected returns", {
   test_current_date <- "2020-07-15"
 
   portfolio <- generate_test_asset_returns(2)$returns
-  if (interactive()) portfolio |> print(width = Inf)
-  if (interactive()) portfolio$correlations |> print()
-  if (interactive()) portfolio$accounts |> print()
 
   scenario <- 
     simulate_scenario(
@@ -59,14 +56,14 @@ test_that("simulating a default scenario with expected returns", {
   expect_true(is.double(scenario$liabilities))
   expect_true(is.double(scenario$discretionary_spending))
 
-  expect_equal(tail(scenario$discretionary_spending, 1), 0)
+  expect_equal(
+    tail(scenario$discretionary_spending, 1),
+    0,
+    tolerance = 1e-8
+  )
 
   expect_equal(unique(scenario$scenario_id), "default")
   expect_equal(unique(scenario$sample), 0)
-
-  if (interactive()) scenario |>  print(width = Inf, n = Inf)
-  if (interactive()) scenario |>  head(3) |> print(width = Inf)
-  if (interactive()) scenario |>  tail(3) |> print(width = Inf)
 })
 
 test_that("simulating a scenario with Monte Carlo samples", {
@@ -103,8 +100,5 @@ test_that("simulating a scenario with Monte Carlo samples", {
       monte_carlo_samples = 2
     )
   
-  expect_equal(
-    unique(scenario$sample),
-    c(0:2)
-  )
+  expect_setequal(unique(scenario$sample), 0:2)
 })

@@ -1,4 +1,4 @@
-test_that("calculate gompertz surival probability", {
+test_that("calculate gompertz survival probability", {
 
   # Test based on: Milevsky, M. A., Robinson, C. (2000). Self-annuitization and ruin in retirement. North American Actuarial Journal, 4(4), p. 114.
   

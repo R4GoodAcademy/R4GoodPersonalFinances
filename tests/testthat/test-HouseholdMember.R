@@ -2,26 +2,26 @@ test_that("setting birth date", {
 
   test_birth_date <- "1980-07-15"
   
-  members <- HouseholdMember$new(
+  member <- HouseholdMember$new(
     name       = "test_name",
     birth_date = test_birth_date
   )
   
   expect_true(
-    inherits(members, "HouseholdMember")
+    inherits(member, "HouseholdMember")
   )
   
   expect_true(
-    inherits(members$get_birth_date(), "Date")
+    inherits(member$get_birth_date(), "Date")
   )
   
   expect_equal(
-    as.character(members$get_birth_date()), 
+    as.character(member$get_birth_date()), 
     test_birth_date
   )
 
   expect_equal(
-    members$get_name(),
+    member$get_name(),
     "test_name"
   )
 })

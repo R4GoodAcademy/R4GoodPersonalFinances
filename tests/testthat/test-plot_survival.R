@@ -27,10 +27,10 @@ test_that("plotting household survival", {
   household$add_member(hm2)
   household$add_member(hm3) 
   
-  hs <- function() plot_survival(
+  plot1 <- function() plot_survival(
     household    = household, 
     current_date = test_current_date
   )
-  if (interactive()) print(hs())
-  vdiffr::expect_doppelganger("hs", hs)
+  if (interactive()) print(plot1())
+  vdiffr::expect_doppelganger("plot1", plot1)
 })

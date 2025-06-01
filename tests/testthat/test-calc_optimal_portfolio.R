@@ -126,7 +126,7 @@ test_that("calculating optimal joint portfolio allocations", {
   in_taxadvantage_accounts <- 20500
   in_accounts <- in_taxable_accounts + in_taxadvantage_accounts
   fraction_in_taxable_accounts <- in_taxable_accounts / in_accounts
-  fraction_in_taxable_accounts
+  if (interactive()) print(fraction_in_taxable_accounts)
   
   risk_tolerance <- 0.35
   
@@ -137,7 +137,7 @@ test_that("calculating optimal joint portfolio allocations", {
     correlations        = test_asset_correlations,
     effective_tax_rates = effective_tax_rates,
     in_taxable_accounts = fraction_in_taxable_accounts,
-    maxeval = 10000
+    maxeval             = 10000
   )$allocations 
   expect_equal(
     ignore_attr = TRUE,

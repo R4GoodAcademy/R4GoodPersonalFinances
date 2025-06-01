@@ -108,5 +108,23 @@ test_that("calculating portfolio standard deviation", {
     round(portfolio_sd, 3),
     round(0.0851, 3)
   )
+})
 
+test_that("calculating portfolio parameters", {
+
+  portfolio <- create_portfolio_template()
+  expect_error(calc_portfolio_parameters(portfolio))
+
+  portfolio$accounts$taxable <- c(10000, 30000)
+  portfolio_parameters <- calc_portfolio_parameters(portfolio)
+
+  expect_true(is.list(portfolio_parameters))
+  expect_true("value" %in% names(portfolio_parameters))
+  expect_true("weights" %in% names(portfolio_parameters))
+  expect_true("expected_return" %in% names(portfolio_parameters))
+  expect_true("standard_deviation" %in% names(portfolio_parameters))
+
+  expect_snapshot(
+    portfolio_parameters
+  )
 })

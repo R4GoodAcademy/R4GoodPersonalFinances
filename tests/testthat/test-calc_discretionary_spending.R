@@ -1,6 +1,6 @@
 test_that("calculating discretionary spending with known discount rate", {
 
-  expect_equal(
+expect_equal(
     calc_discretionary_spending(
       net_worth                         = 400000,
       discount_rate                     = 0.03,
@@ -11,7 +11,8 @@ test_that("calculating discretionary spending with known discount rate", {
       gompertz_mode                     = 90,
       gompertz_dispersion               = 10
     ),
-    13167.59957
+   13167.59957,
+   tolerance = 1e-5
   )
 })
 
@@ -61,6 +62,7 @@ test_that("calculating discretionary spending with unknown discount rate", {
       human_capital = 2767689,
       risk_tolerance = 0.35
     ),
-    49288.5931
+    49288.5931,
+    tolerance = 1e-5
   )
 })

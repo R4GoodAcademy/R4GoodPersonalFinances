@@ -1,4 +1,3 @@
-
 test_that("plotting life expectancy", {
 
   params <- list(

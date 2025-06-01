@@ -92,3 +92,9 @@ test_that("getting custom current date", {
     lubridate::as_date(test_current_date)
   )
 })
+
+test_that("normalizing value", {
+
+  expect_snapshot(normalize(1:10))
+  expect_snapshot(normalize(1:10, 10, 20))
+})
