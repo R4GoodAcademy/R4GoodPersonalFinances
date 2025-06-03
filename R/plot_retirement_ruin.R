@@ -90,12 +90,12 @@ the_plot <-
     breaks = scales::breaks_extended(n = 10),
     labels = function(x) {
       paste0(
-        print_currency(x / 1000, suffix = "k", accuracy = 0.1
+        format_currency(x / 1000, suffix = "k", accuracy = 0.1
       ),
         "<br><span style='color: grey60;'>(",
-        print_currency(x / 1000 * 12, suffix = "k"),
-        " / ",
-        print_percent(x * 12 / portfolio_value),
+        format_currency(x / 1000 * 12, suffix = "k"),
+        "/",
+        format_percent(x * 12 / portfolio_value),
         ")</span>"
       )
     }
@@ -127,15 +127,15 @@ the_plot <-
     x = "Monthly spendings in thousands (yearly spendings / initial year withdrawal rate)",
     y = "Probability of Retirement Ruin",
     caption = glue::glue(paste(
-      "*Mean of portfolio returns*: <span style='color: {value_colour};'>**{print_percent(portfolio_return_mean)}**</span>;",
-      "*Standard deviation of portfolio returns*: <span style='color: {value_colour};'>**{print_percent(portfolio_return_sd)}**</span>.",
+      "*Mean of portfolio returns*: <span style='color: {value_colour};'>**{format_percent(portfolio_return_mean)}**</span>;",
+      "*Standard deviation of portfolio returns*: <span style='color: {value_colour};'>**{format_percent(portfolio_return_sd)}**</span>.",
       "<br>",
       "*Gompertz mode*: <span style='color: {value_colour};'>**{round(gompertz_mode, 1)}**</span>;",
       "*Gompertz dispersion*: <span style='color: {value_colour};'>**{round(gompertz_dispersion, 1)}**</span>."
     )),
     subtitle = glue::glue(paste0(
       "*Current age*: <span style='color: {value_colour};'>**{age}**</span>;",
-      " *Initial portfolio value*: <span style='color: {value_colour};'>**{print_currency(portfolio_value)}**</span>."
+      " *Initial portfolio value*: <span style='color: {value_colour};'>**{format_currency(portfolio_value)}**</span>."
     ))
   ) 
       
@@ -169,14 +169,14 @@ the_plot <-
         x     = monthly_spendings_to_annotate,
         y     = max(retirement_ruin) * 0.95,
         label = paste0(
-          print_currency(monthly_spendings_to_annotate, accuracy = 1),
+          format_currency(monthly_spendings_to_annotate, accuracy = 1),
           "\n(", 
-          print_currency(
+          format_currency(
             monthly_spendings_to_annotate * 12 / 1000, 
             suffix = "k"
           ),
           " / ",
-          print_percent(monthly_spendings_to_annotate * 12 / portfolio_value), 
+          format_percent(monthly_spendings_to_annotate * 12 / portfolio_value), 
           ")"
         ),
         color = PrettyCols::prettycols("Bold")[1]
@@ -185,7 +185,7 @@ the_plot <-
         geom  = "label",
         x     = min(monthly_spendings),
         y     = retirement_ruin_to_annotate,
-        label = print_percent(retirement_ruin_to_annotate),
+        label = format_percent(retirement_ruin_to_annotate),
         color = PrettyCols::prettycols("Bold")[1]
       )
   }

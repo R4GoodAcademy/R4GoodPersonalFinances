@@ -7,3 +7,4 @@ README.html
 devel/sandbox_ignored.R
 devel/gitignored/
 README_files/
+/.cache/

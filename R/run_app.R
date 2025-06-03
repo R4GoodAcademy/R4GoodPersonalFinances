@@ -31,13 +31,14 @@ run_app <- function(
   shinylive = FALSE
 ) {
 
+  if (!requireNamespace("shiny", quietly = TRUE)) {
+    cli::cli_abort("The 'shiny' package is required but not installed.")
+  }
+
   which <- match.arg(which)
 
-  withr::local_options(
-    list(
-      R4GPF.plot_res = res
-    )
-  )
+  old_options <- options(R4GPF.plot_res = res)
+  on.exit(options(old_options))
 
   if (shinylive) {
 

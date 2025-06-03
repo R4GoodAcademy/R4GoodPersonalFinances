@@ -1,9 +1,17 @@
-#' @keywords internal
+#' @docType package
+#' @name R4GoodPersonalFinances-package
 "_PACKAGE"
 
 ## usethis namespace: start
 ## usethis namespace: end
 NULL
+
+.pkg_env <- new.env(parent = emptyenv())
+.pkg_env$memoised <- list()
+
+.onLoad <- function(libname, pkgname) {
+  set_cache(path = file.path(tempdir(), ".cache"))
+}
 
 .onAttach <- function(libname, pkgname) {
 
@@ -25,8 +33,9 @@ NULL
   )
 
   packageStartupMessage(
-    "... and Make Better Financial Decisions!"
+    "... and Make Optimal Financial Decisions!"
   )
+
 }
 
 ignore_unused_imports <- function() {
