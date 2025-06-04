@@ -3,7 +3,7 @@
 #' Plots financial capital, human capital, total capital, and liabilities.
 #' @inheritParams plot_expected_allocation
 #' @returns A [ggplot2::ggplot()] object.
-#' @examples
+#' @examplesIf !as.logical(Sys.getenv("ON_CRAN", "FALSE"))
 #' older_member <- HouseholdMember$new(
 #'   name       = "older",  
 #'   birth_date = "2000-02-15",

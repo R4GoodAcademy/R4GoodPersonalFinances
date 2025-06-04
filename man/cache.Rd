@@ -30,13 +30,13 @@ Reset the cache
 Set the cache directory
 }
 \examples{
-\dontrun{
-  get_cache_info()
-}
-\dontrun{
-  reset_cache()
-}
-\dontrun{
-  set_cache()
-}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+get_cache_info()
+\dontshow{\}) # examplesIf}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+reset_cache()
+\dontshow{\}) # examplesIf}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+set_cache()
+\dontshow{\}) # examplesIf}
 }

@@ -53,6 +53,7 @@ A \code{tibble} with nested columns.
 Simulate multiple scenarios of household lifetime finances
 }
 \examples{
+\dontshow{if (!as.logical(Sys.getenv("ON_CRAN", "FALSE"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 older_member <- HouseholdMember$new(
   name       = "older",  
   birth_date = "1980-02-15",
@@ -103,4 +104,5 @@ scenarios <-
     current_date         = "2020-07-15"
   )
 scenarios$scenario_id |> unique()
+\dontshow{\}) # examplesIf}
 }

@@ -264,10 +264,8 @@ generate_test_asset_returns <- function(n = 3) {
 #' or a list containing:
 #' \item{path}{The path to the cache directory.} 
 #' \item{files}{The number of files in the cache.}
-#' @examples
-#' \dontrun{
-#'   get_cache_info()
-#' }
+#' @examplesIf interactive()
+#' get_cache_info()
 #' @export
 get_cache_info <- function() {
 
@@ -282,10 +280,8 @@ get_cache_info <- function() {
 #' Reset the cache
 #' 
 #' @rdname cache
-#' @examples
-#' \dontrun{
-#'   reset_cache()
-#' }
+#' @examplesIf interactive()
+#' reset_cache()
 #' @export
 reset_cache <- function() {
 
@@ -301,10 +297,8 @@ reset_cache <- function() {
 #' Defaults to the '.cache' folder in the current working directory.
 #' 
 #' @rdname cache
-#' @examples
-#' \dontrun{
-#'   set_cache()
-#' }
+#' @examplesIf interactive()
+#' set_cache()
 #' @export
 set_cache <- function(
   path = file.path(getwd(), ".cache")
