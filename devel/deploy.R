@@ -75,6 +75,7 @@ devtools::dev_sitrep()
 
 
 devtools::check_win_devel()
+
 devtools::submit_cran()
 
 usethis::use_github_release()
