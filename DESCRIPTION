@@ -22,7 +22,7 @@ Description: Make optimal decisions for your personal or
     and we only have a single lifetime to get it right.
     Fortunately, we now have the user-friendly tools implemented,
     that integrate life-cycle models 
-    with single-period net-worth Markowitz optimization models. 
+    with single-period net-worth mean-variance optimization models. 
     Those tools can be used by anyone who wants to see 
     what highly-personalized optimal decisions can look like.
     For more details see: 

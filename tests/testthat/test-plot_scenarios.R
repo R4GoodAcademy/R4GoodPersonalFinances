@@ -1,5 +1,7 @@
 test_that("plotting scenarios metrics without Monte Carlo samples", {
 
+  skip_on_cran()
+
   older_member <- HouseholdMember$new(
     name       = "older",  
     birth_date = "1980-02-15"
@@ -71,6 +73,8 @@ test_that("plotting scenarios metrics without Monte Carlo samples", {
 })
 
 test_that("plotting scenarios metrics with Monte Carlo samples", {
+
+  skip_on_cran()
 
   older_member <- HouseholdMember$new(
     name       = "older",  
