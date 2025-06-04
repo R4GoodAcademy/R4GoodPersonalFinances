@@ -31,7 +31,7 @@
 #' @param period A character. The amounts can be shown
 #' as yearly values (default) or averaged per month values.
 #' @returns A [ggplot2::ggplot()] object. 
-#' @examples
+#' @examplesIf interactive()
 #' older_member <- HouseholdMember$new(
 #'   name       = "older",  
 #'   birth_date = "1980-02-15",

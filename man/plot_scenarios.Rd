@@ -46,6 +46,7 @@ or additional savings at the expense of non-discretionary spending,
 }
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 older_member <- HouseholdMember$new(
   name       = "older",  
   birth_date = "1980-02-15",
@@ -97,4 +98,5 @@ scenarios <-
   )
 
 plot_scenarios(scenarios, "monthly")
+\dontshow{\}) # examplesIf}
 }

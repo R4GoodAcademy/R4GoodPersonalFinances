@@ -7,7 +7,7 @@
 #' 
 #' @inheritParams simulate_scenario
 #' @returns A [ggplot2::ggplot()] object.
-#' @examples
+#' @examplesIf interactive()
 #' older_member <- HouseholdMember$new(
 #'   name       = "older",  
 #'   birth_date = "1980-02-15",

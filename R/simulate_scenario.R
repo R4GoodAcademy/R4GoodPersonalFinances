@@ -53,7 +53,7 @@
 #' * `time_value_discount` - (double) time value discount based on consumption impatience of the household
 #' * `discretionary_spending_utility` - (double) discretionary spending utility of the household based on the smooth consumption preference
 #' * `discretionary_spending_utility_weighted` - (double) discretionary spending utility of the household weighted by survival probability and time value discount.
-#' @examples
+#' @examplesIf interactive()
 #' older_member <- HouseholdMember$new(
 #'   name       = "older",  
 #'   birth_date = "1980-02-15",
