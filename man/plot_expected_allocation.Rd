@@ -23,6 +23,7 @@ A \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} object.
 Plot expected allocation over household life cycle
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 older_member <- HouseholdMember$new(
   name       = "older",  
   birth_date = "2000-02-15",
@@ -62,4 +63,5 @@ scenario <-
   )
 
 plot_expected_allocation(scenario)
+\dontshow{\}) # examplesIf}
 }

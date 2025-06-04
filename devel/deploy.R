@@ -5,7 +5,7 @@ renv::update()
 renv::snapshot()
 
 devtools::dev_sitrep()
-
+usethis::use_release_issue()
 usethis::use_version()
 # usethis::use_version(which = "patch")
 # usethis::use_version(which = "minor")
@@ -66,7 +66,8 @@ usethis::use_cran_comments()
 
 devtools::check(remote = TRUE, manual = TRUE)
 
-# usethis::use_release_issue()
+# usethis::use_release_issue(version = "1.0.0")
+
 
 R4GoodPersonalFinances:::apps$package_version == packageVersion("R4GoodPersonalFinances")
 
@@ -74,6 +75,7 @@ devtools::dev_sitrep()
 
 
 devtools::check_win_devel()
+
 devtools::submit_cran()
 
 usethis::use_github_release()

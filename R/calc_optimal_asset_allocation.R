@@ -4,7 +4,7 @@
 #' @returns The `portfolio` with additional nested columns:
 #' * `allocations$optimal` - optimal joint net-worth portfolio allocations
 #' * `allocations$current` - current allocations
-#' @examples 
+#' @examplesIf interactive() 
 #' older_member <- HouseholdMember$new(
 #'   name       = "older",  
 #'   birth_date = "1980-02-15",

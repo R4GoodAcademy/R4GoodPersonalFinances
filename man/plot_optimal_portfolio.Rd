@@ -18,6 +18,7 @@ portfolio allocations for each asset class
 and for taxable and tax-advantaged accounts.
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 older_member <- HouseholdMember$new(
   name       = "older",  
   birth_date = "1980-02-15",
@@ -56,4 +57,5 @@ portfolio <-
   )
 
 plot_optimal_portfolio(portfolio)
+\dontshow{\}) # examplesIf}
 }

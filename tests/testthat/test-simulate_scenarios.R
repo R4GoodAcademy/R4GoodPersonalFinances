@@ -1,5 +1,7 @@
 test_that("simulating multiple scenarios", {
 
+  skip_on_cran()
+
   older_member <- HouseholdMember$new(
     name       = "older",  
     birth_date = "1980-02-15"

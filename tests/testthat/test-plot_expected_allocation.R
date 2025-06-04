@@ -1,4 +1,6 @@
 test_that("plotting expected allocation", {
+
+  skip_on_cran()
   
   older_member <- HouseholdMember$new(
     name       = "older",  

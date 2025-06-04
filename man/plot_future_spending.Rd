@@ -40,6 +40,7 @@ possible levels of discretionary spending over time
 based on Monte Carlo simulations.
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 older_member <- HouseholdMember$new(
   name       = "older",  
   birth_date = "1980-02-15",
@@ -87,4 +88,5 @@ plot_future_spending(
 plot_future_spending(scenario, "monthly", "non-discretionary")
 # If Monte Carlo samples are present: 
 # plot_future_spending(scenario, "monthly", "discretionary")
+\dontshow{\}) # examplesIf}
 }

@@ -26,6 +26,7 @@ A \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} object.
 Plot future income structure over household life cycle
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 older_member <- HouseholdMember$new(
   name       = "older",  
   birth_date = "1980-02-15",
@@ -64,4 +65,5 @@ scenario <-
   )
 
 plot_future_income(scenario, "monthly")
+\dontshow{\}) # examplesIf}
 }
