@@ -29,6 +29,7 @@ The \code{portfolio} with additional nested columns:
 Calculate optimal asset allocation
 }
 \examples{
+\dontshow{if (interactive() ) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 older_member <- HouseholdMember$new(
   name       = "older",  
   birth_date = "1980-02-15",
@@ -67,4 +68,5 @@ portfolio <-
   )
 
 portfolio$allocations
+\dontshow{\}) # examplesIf}
 }

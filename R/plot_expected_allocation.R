@@ -5,7 +5,7 @@
 #' @param accounts A character. 
 #' Plot allocation for specified types of accounts.
 #' @returns A [ggplot2::ggplot()] object. 
-#' @examplesIf !as.logical(Sys.getenv("ON_CRAN", "FALSE"))
+#' @examplesIf interactive()
 #' older_member <- HouseholdMember$new(
 #'   name       = "older",  
 #'   birth_date = "2000-02-15",

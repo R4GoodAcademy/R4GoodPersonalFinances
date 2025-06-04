@@ -11,7 +11,7 @@
 #' The results are cached in the folder set by [set_cache()].
 #' 
 #' @returns A `tibble` with nested columns.
-#' @examplesIf !as.logical(Sys.getenv("ON_CRAN", "FALSE"))
+#' @examplesIf interactive()
 #' older_member <- HouseholdMember$new(
 #'   name       = "older",  
 #'   birth_date = "1980-02-15",
