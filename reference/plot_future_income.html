@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">R4GoodPersonalFinances</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,7 +70,8 @@ as yearly values (default) or averaged per month values.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">older_member</span> <span class="op">&lt;-</span> <span class="va"><a href="HouseholdMember.html">HouseholdMember</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
+<span class="r-in"><span><span class="va">older_member</span> <span class="op">&lt;-</span> <span class="va"><a href="HouseholdMember.html">HouseholdMember</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  name       <span class="op">=</span> <span class="st">"older"</span>,  </span></span>
 <span class="r-in"><span>  birth_date <span class="op">=</span> <span class="st">"1980-02-15"</span>,</span></span>
 <span class="r-in"><span>  mode       <span class="op">=</span> <span class="fl">80</span>,</span></span>
@@ -106,16 +107,9 @@ as yearly values (default) or averaged per month values.</p></dd>
 <span class="r-in"><span>   portfolio <span class="op">=</span> <span class="va">portfolio</span>,</span></span>
 <span class="r-in"><span>   current_date <span class="op">=</span> <span class="st">"2020-07-15"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Simulating scenario: <span style="color: #00BB00;">default</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Current date: <span style="color: #00BB00;">2020-07-15</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> <span style="color: #BBBB00;">Caching is NOT enabled.</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> → Simulating a scenario based on expected returns (sample_id==<span style="color: #00BB00;">0</span>)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Simulating a scenario based on expected returns (sample_id==<span style="color: #00BB00;">0</span>) <span style="color: #B2B2B2;">[3.8s]</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">plot_future_income</span><span class="op">(</span><span class="va">scenario</span>, <span class="st">"monthly"</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="plot_future_income-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
