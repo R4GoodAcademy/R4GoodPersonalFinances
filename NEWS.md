@@ -1,3 +1,5 @@
+# R4GoodPersonalFinances (development version)
+
 # R4GoodPersonalFinances 1.0.0
 
 This major release introduces probably first in the world (open-sourced) implementation of a new multilevel life-cycle modeling of a household finances. 
