@@ -181,7 +181,7 @@ simulate_scenario <- function(
               "Sample {sample_id} out of {n_samples}"
             )
           )
-        
+
           simulate_single_scenario(
             household      = household,
             portfolio      = portfolio,

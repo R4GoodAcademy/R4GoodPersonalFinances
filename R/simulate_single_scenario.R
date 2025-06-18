@@ -4,9 +4,9 @@ simulate_single_scenario <- function(
   scenario_id    = "default",
   current_date   = get_current_date(),
   random_returns = FALSE,
-  maxeval        = 2000,
   seed           = NULL,
-  debug          = FALSE
+  debug          = FALSE,
+  ...
 ) {
 
   income <- spending <- total_income <- nondiscretionary_spending <- 
@@ -204,8 +204,8 @@ simulate_single_scenario <- function(
       scenario[i, ]$total_income -
       scenario[i, ]$total_spending
       
-    optimal_joint_networth_portfolio <- tryCatch(
-      
+    optimal_joint_networth_portfolio <- tryCatch({
+
       calc_optimal_portfolio(
         risk_tolerance               = household$risk_tolerance,
         expected_returns             = portfolio$expected_return,
@@ -224,8 +224,9 @@ simulate_single_scenario <- function(
         liabilities_weights          = portfolio$weights$liabilities,
         asset_names                  = portfolio$name,
         initial_allocation           = initial_allocation,
-        maxeval                      = maxeval
-        ),
+        ...
+        )
+    },
 
         error = function(e) {
           if (debug) {
@@ -247,10 +248,12 @@ simulate_single_scenario <- function(
           dplyr::rename("asset" = "asset_class")
       )
 
-    } else {
+    } else if (i > 1){
 
       scenario[i, ]$portfolio$allocation <- scenario[i - 1, ]$portfolio$allocation
-    }
+    } else (
+      return(NULL)
+    )
 
     financial_wealth_end <- 
       sum(

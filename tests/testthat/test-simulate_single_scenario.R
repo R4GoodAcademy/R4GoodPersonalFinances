@@ -212,7 +212,7 @@ test_that("benchmarking of simulating single scenario", {
   set.seed(123)
 
   benchmark <- microbenchmark::microbenchmark(
-    times = 10L,
+    times = ifelse(!interactive(), 1, 10L),
     unit = "seconds",
 
     scenario <- 

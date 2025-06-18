@@ -1,3 +1,5 @@
+# TODO: nloptr::nloptr.print.options()
+
 calc_optimal_portfolio <- function(
   risk_tolerance,
   expected_returns,
@@ -16,8 +18,12 @@ calc_optimal_portfolio <- function(
   income                       = NULL,
   life_insurance_premium       = NULL,
   initial_allocation           = NULL,
-  maxeval                      = 2000
+  opts = list(
+    algorithm = "NLOPT_LD_SLSQP",
+    maxeval   = 100
+  )
 ) {
+
   taxable <- taxadvantaged <- asset_class <- NULL
 
   covariance_matrix <- calc_covariance_matrix(
@@ -115,6 +121,12 @@ calc_optimal_portfolio <- function(
       return(sum(params) - 1)
     }
 
+    equality_constraint_jacobian <- function(params) {
+      n   <- length(params)
+      jac <- matrix(1, nrow = 1, ncol = n)
+      jac
+    }
+
   } else {
 
     total_assets <- assets_number * 2 
@@ -127,6 +139,14 @@ calc_optimal_portfolio <- function(
       allocations_taxadvantaged <- get_allocations_taxadvantaged(params)
       return(c(sum(allocations_taxable) - in_taxable_accounts, sum(allocations_taxadvantaged) - (1 - in_taxable_accounts)))
     }
+
+    equality_constraint_jacobian <- function(params) {
+      n   <- length(params)
+      jac <- matrix(0, nrow = 2, ncol = n)
+      jac[1, get_taxable_indices(params)] <- 1
+      jac[2, get_taxadvantaged_indices(params)] <- 1
+      jac
+    }
   }
 
   if (is.null(initial_allocation)) {
@@ -136,18 +156,21 @@ calc_optimal_portfolio <- function(
   # Set lower bounds for allocations (non-negativity)
   lower_bounds <- rep(0, total_assets)
 
+  eq_constraint_grad <- function(w, ...) rep(1, length(w))
+
   optimization_result <- nloptr::nloptr(
     x0          = initial_allocation,
     eval_f      = objective_function,
-    opts        = list(
-      algorithm = "NLOPT_LN_COBYLA", 
-      xtol_rel  = 1e-15,
-      ftol_rel  = 1e-15,
-      maxeval   = maxeval
-    ),
-    eval_g_eq   = equality_constraint,
-    lb          = lower_bounds
+    eval_grad_f = 
+      function(initial_allocation) 
+        nloptr::nl.grad(initial_allocation, objective_function), 
+    opts          = opts,
+    eval_g_eq     = equality_constraint,
+    eval_jac_g_eq = equality_constraint_jacobian,
+    lb            = lower_bounds
   )
+
+  # TODO: optimization_result |> print()
 
   optimal_allocations <- optimization_result$solution
 
@@ -205,13 +228,13 @@ calc_expected_utility <- function(
       (risk_tolerance / (risk_tolerance - 1)) * 
       (1 + expected_return) ^ ((risk_tolerance - 1) / risk_tolerance)
   }
-
+  
   crra_utility_second_derivative <- 
     -1 / (
       risk_tolerance * 
         (1 + expected_return) ^ ((1 + risk_tolerance) / risk_tolerance)
     )
-
+  
   expected_utility <- 
     crra_utility + 1/2 * crra_utility_second_derivative * variance
 
@@ -224,6 +247,14 @@ get_allocations_taxable <- function(params) {
 
 get_allocations_taxadvantaged <- function(params) {
   params[(length(params)/2 + 1):length(params)]
+}
+
+get_taxable_indices <- function(params) {
+  seq_len(length(params) / 2)
+}
+
+get_taxadvantaged_indices <- function(params) {
+  seq((length(params) / 2 + 1), length(params))
 }
 
 calc_mvo_portfolio_expected_return <- function(
