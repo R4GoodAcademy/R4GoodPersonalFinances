@@ -1,5 +1,12 @@
 # R4GoodPersonalFinances (development version)
 
+## Minor changes
+
+* Changed default portfolio optimization algorithm to `NLOPT_LD_SLSQP`
+(Sequential Least-Squares Quadratic Programming). The optimization is no more robust and faster. 
+* Added ability to pass `opts` list with optimization parameters `nloptr` optimization function and thus changing algorithm or its options.
+The list of possible options and their default values can be obtain with `nloptr::nloptr.print.options()`. 
+
 # R4GoodPersonalFinances 1.0.0
 
 This major release introduces probably first in the world (open-sourced) implementation of a new multilevel life-cycle modeling of a household finances. 

@@ -170,8 +170,6 @@ calc_optimal_portfolio <- function(
     lb            = lower_bounds
   )
 
-  # TODO: optimization_result |> print()
-
   optimal_allocations <- optimization_result$solution
 
   if (is.null(effective_tax_rates)) {
