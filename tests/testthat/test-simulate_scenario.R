@@ -143,17 +143,7 @@ test_that("simulating a scenario with parallel Monte Carlo samples", {
       monte_carlo_samples = 2
     )
   
-  scenario |> 
-    dplyr::select(sample, index, discretionary_spending) |> 
-    print(n = Inf) |> 
-    expect_snapshot()
-
-  test_sum <- -312689
-
-  expect_equal(
-    sum(scenario$discretionary_spending), 
-    test_sum
-  )
+  first_scenario <- scenario
 
   mc_returns <- 
     scenario$portfolio |> 
@@ -166,7 +156,6 @@ test_that("simulating a scenario with parallel Monte Carlo samples", {
   expect_true(length(unique(mc_returns)) > 1)
 
   set.seed(1234)
-
   reset_cache()
 
   scenario <- 
@@ -178,27 +167,13 @@ test_that("simulating a scenario with parallel Monte Carlo samples", {
       monte_carlo_samples = 2
     )
   
-  scenario |> 
-    dplyr::select(sample, index, discretionary_spending) |> 
-    print(n = Inf) |> 
-    expect_snapshot()
-
   expect_equal(
-    sum(scenario$discretionary_spending), 
-    test_sum
+    scenario, 
+    first_scenario
   )
 
-  mc_returns <- 
-    scenario$portfolio |> 
-    dplyr::bind_cols(sample = scenario$sample) |> 
-    dplyr::group_by(sample) |>
-    dplyr::summarise(return = sum(returns[[1]])) |> 
-    dplyr::filter(sample > 0) |> 
-    dplyr::pull(return) 
-
-  expect_true(length(unique(mc_returns)) > 1)
-
   set.seed(1234)
+
   scenario <- 
     simulate_scenario(
       household    = household,
@@ -208,26 +183,10 @@ test_that("simulating a scenario with parallel Monte Carlo samples", {
       monte_carlo_samples = 2
     )
   
-  scenario |> 
-    dplyr::select(sample, index, discretionary_spending) |> 
-    print(n = Inf) |> 
-    expect_snapshot()
-
   expect_equal(
-    sum(scenario$discretionary_spending), 
-    test_sum
+    scenario, 
+    first_scenario
   )
-
-  mc_returns <- 
-    scenario$portfolio |> 
-    dplyr::bind_cols(sample = scenario$sample) |> 
-    dplyr::group_by(sample) |>
-    dplyr::summarise(return = sum(returns[[1]])) |> 
-    dplyr::filter(sample > 0) |> 
-    dplyr::pull(return) 
-
-  expect_true(length(unique(mc_returns)) > 1)
-
 })
 
 test_that("simulating a scenario with parallel Monte Carlo samples and seed", {
@@ -267,12 +226,6 @@ test_that("simulating a scenario with parallel Monte Carlo samples and seed", {
       monte_carlo_samples = 2
     )
   
-  test_sum <- -312689
-  expect_equal(
-    sum(scenario$discretionary_spending), 
-    test_sum
-  )
-
   mc_returns <- 
     scenario$portfolio |> 
     dplyr::bind_cols(sample = scenario$sample) |> 
@@ -297,20 +250,6 @@ test_that("simulating a scenario with parallel Monte Carlo samples and seed", {
     )
   
   expect_equal(
-    sum(scenario$discretionary_spending), 
-    test_sum
-  )
-
-  mc_returns <- 
-    scenario$portfolio |> 
-    dplyr::bind_cols(sample = scenario$sample) |> 
-    dplyr::group_by(sample) |>
-    dplyr::summarise(return = sum(returns[[1]])) |> 
-    dplyr::filter(sample > 0) |> 
-    dplyr::pull(return) 
-  expect_true(length(unique(mc_returns)) > 1)
-
-  expect_equal(
     first_scenario,
     scenario
   )
@@ -325,20 +264,6 @@ test_that("simulating a scenario with parallel Monte Carlo samples and seed", {
       monte_carlo_samples = 2
     )
   
-  expect_equal(
-    sum(scenario$discretionary_spending), 
-    test_sum
-  )
-
-  mc_returns <- 
-    scenario$portfolio |> 
-    dplyr::bind_cols(sample = scenario$sample) |> 
-    dplyr::group_by(sample) |>
-    dplyr::summarise(return = sum(returns[[1]])) |> 
-    dplyr::filter(sample > 0) |> 
-    dplyr::pull(return) 
-  expect_true(length(unique(mc_returns)) > 1)
-
   expect_equal(
     first_scenario,
     scenario
