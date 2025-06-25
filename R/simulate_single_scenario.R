@@ -232,8 +232,7 @@ simulate_single_scenario <- function(
           if (debug) {
             cli::cli_alert_warning(
               cli::col_yellow(
-                "{e}Optimal allocation not found for year index {i} / {n_rows}. 
-                Using optimal allocation from previous period..."
+                "{e}Optimal allocation not found for year index {i}/{n_rows}." 
               )
             )
           }
@@ -241,17 +240,31 @@ simulate_single_scenario <- function(
         }
     )
       
-    if (!is.null(optimal_joint_networth_portfolio$allocations$total)) {
+    if (
+      !is.null(optimal_joint_networth_portfolio$allocations$total) && 
+        i < n_rows
+    ) {
 
       scenario[i, ]$portfolio$allocation <- list(
         optimal_joint_networth_portfolio$allocations |> 
           dplyr::rename("asset" = "asset_class")
       )
 
-    } else if (i > 1){
+    } else if (i > 1) {
 
-      scenario[i, ]$portfolio$allocation <- scenario[i - 1, ]$portfolio$allocation
+      if (debug) {
+        cli::cli_alert_warning(
+          cli::col_yellow(
+            "For year index {i}/{n_rows} using optimal allocation from previous period ({i - 1})."
+          )
+        )
+      }
+
+      scenario[i, ]$portfolio$allocation <- 
+        scenario[i - 1, ]$portfolio$allocation
+
     } else (
+
       return(NULL)
     )
 

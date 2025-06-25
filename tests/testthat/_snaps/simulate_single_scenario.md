@@ -340,7 +340,7 @@
       58              200409.            0.5                             1
       59              136627.            0.5                             1
       60               69485.            0.5                             1
-      61                 503.            0.5                             1
+      61                 505.            0.5                             1
          consumption_impatience_preference time_value_discount
                                      <dbl>               <dbl>
        1                              0.04              1     

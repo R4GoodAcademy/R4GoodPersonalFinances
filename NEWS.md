@@ -4,8 +4,11 @@
 
 * Changed default portfolio optimization algorithm to `NLOPT_LD_SLSQP`
 (Sequential Least-Squares Quadratic Programming). The optimization is no more robust and faster. 
-* Added ability to pass `opts` list with optimization parameters `nloptr` optimization function and thus changing algorithm or its options.
-The list of possible options and their default values can be obtain with `nloptr::nloptr.print.options()`. 
+* Added ability to pass `opts` list to `simulate_scenario()` function with optimization parameters `nloptr` optimization function and thus changing algorithm or its options. The list of possible options and their default values can be obtain with `nloptr::nloptr.print.options()`. 
+* Changed the reordering behavior in the `plot_scenarios()` which does not reorder scenarios anymore.
+* Changed optimal allocation for the last year of a simulation. 
+It is now overwritten with the optimal allocation from the previous year,
+to avoid the edge case when net-worth is going to zero.
 
 # R4GoodPersonalFinances 1.0.0
 
