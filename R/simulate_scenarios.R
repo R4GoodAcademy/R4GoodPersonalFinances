@@ -106,6 +106,19 @@ simulate_scenarios <- function(
     } 
   }
 
+  if (use_cache) {
+
+    cli::cli_alert_info("Caching is enabled!")
+
+    memoised_functions       <- .pkg_env$memoised
+    simulate_scenario <- memoised_functions$simulate_scenario
+    
+  } else {
+
+    cli::cli_alert_warning(cli::col_yellow("Caching is NOT enabled."))
+
+  }
+
   scenarios_ids |> 
     purrr::map(function(scenario_id) {
 

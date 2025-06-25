@@ -109,8 +109,8 @@ simulate_scenario <- function(
   current_date        = get_current_date(),
   monte_carlo_samples = NULL,
   seeds               = NULL,
-  auto_parallel       = FALSE,
   use_cache           = FALSE,
+  auto_parallel       = FALSE,
   debug               = FALSE,
   ...
 ) {

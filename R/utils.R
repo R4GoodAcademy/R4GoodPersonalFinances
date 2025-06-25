@@ -319,6 +319,13 @@ set_cache <- function(
       omit_args = c("debug", "verbose", "auto_parallel")
     )
 
+  .pkg_env$memoised$simulate_scenario <- 
+    memoise::memoise(
+      f         = simulate_scenario,
+      cache     = .pkg_env$cache,
+      omit_args = c("debug", "verbose", "auto_parallel")
+    )
+
   invisible(.pkg_env$cache_directory)
 }
 

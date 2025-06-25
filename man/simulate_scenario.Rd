@@ -12,6 +12,7 @@ simulate_scenario(
   monte_carlo_samples = NULL,
   seeds = NULL,
   use_cache = FALSE,
+  auto_parallel = FALSE,
   debug = FALSE,
   ...
 )
@@ -40,6 +41,11 @@ a vector of random seeds for each Monte Carlo sample.}
 \item{use_cache}{A logical. If \code{TRUE}, the function uses memoised functions
 to speed up the simulation. The results are cached in the folder
 set by \code{\link[=set_cache]{set_cache()}}.}
+
+\item{auto_parallel}{A logical. If \code{TRUE}, the function
+automatically detects the number of cores and uses parallel processing
+to speed up the Monte Carlo simulations.
+The results are cached in the folder set by \code{\link[=set_cache]{set_cache()}}.}
 
 \item{debug}{A logical. If \code{TRUE}, additional information is printed
 during the simulation.}
