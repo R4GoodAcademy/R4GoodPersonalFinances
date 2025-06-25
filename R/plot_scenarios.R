@@ -223,7 +223,6 @@ plot_scenarios <- function(
 
   ordered_scenario_levels <- 
     expected_returns_scenario |>
-    dplyr::arrange(utility_normalized_expected) |> 
     dplyr::pull(scenario_id) |> 
     unique()
 
@@ -284,13 +283,13 @@ plot_scenarios <- function(
       ggplot2::aes(
         label = 
           ifelse(
-            round(value / 1000)  == 0, 
+            round(value / 1000, 1)  == 0, 
             "",
             paste0(round(value / 1000, 1), "k")
           )
       ),
       nudge_x     = -0.5,
-      nudge_y     = +0.5,
+      nudge_y     = +1.5,
       na.rm       = TRUE,
       show.legend = FALSE
     ) +
@@ -326,6 +325,10 @@ plot_scenarios <- function(
       legend.position  = "bottom",
       legend.title     = ggplot2::element_blank(),
       panel.grid.minor = ggplot2::element_blank(),
+      axis.text.x      = ggplot2::element_text(
+        angle = 70, 
+        hjust = 1
+      ),
       plot.caption = 
         ggtext::element_markdown(
           color = "grey60", 
