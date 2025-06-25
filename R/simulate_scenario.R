@@ -23,6 +23,10 @@
 #' If `NULL` (default), random seed is generated automatically.
 #' If a single integer is provided, it is used to generate
 #' a vector of random seeds for each Monte Carlo sample.
+#' @param auto_parallel A logical. If `TRUE`, the function 
+#' automatically detects the number of cores and uses parallel processing
+#' to speed up the Monte Carlo simulations. 
+#' The results are cached in the folder set by [set_cache()].
 #' @param use_cache A logical. If `TRUE`, the function uses memoised functions
 #' to speed up the simulation. The results are cached in the folder
 #' set by [set_cache()].
@@ -105,6 +109,7 @@ simulate_scenario <- function(
   current_date        = get_current_date(),
   monte_carlo_samples = NULL,
   seeds               = NULL,
+  auto_parallel       = FALSE,
   use_cache           = FALSE,
   debug               = FALSE,
   ...
@@ -129,6 +134,22 @@ simulate_scenario <- function(
       monte_carlo_samples = monte_carlo_samples, 
       seeds = seeds
     )
+  
+  if (auto_parallel) {
+
+    if (!is.null(monte_carlo_samples)) {
+
+      n_workers <- future::availableCores()
+
+      old_plan <- future::plan(future::multisession, workers = n_workers)
+
+      cli::cli_alert_info(
+        "Auto-parallelization enabled with {.field {n_workers}} workers."
+      )
+      
+      on.exit(future::plan(old_plan))
+    } 
+  }
 
   if (use_cache) {
 

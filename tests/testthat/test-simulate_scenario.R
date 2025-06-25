@@ -219,10 +219,11 @@ test_that("simulating a scenario with parallel Monte Carlo samples and seed", {
 
   scenario <- 
     simulate_scenario(
-      household    = household,
-      portfolio    = portfolio,
-      current_date = test_current_date,
-      seeds = 1234,
+      household           = household,
+      portfolio           = portfolio,
+      current_date        = test_current_date,
+      auto_parallel       = ifelse(interactive(), TRUE, FALSE),
+      seeds               = 1234,
       monte_carlo_samples = 2
     )
   
@@ -241,11 +242,11 @@ test_that("simulating a scenario with parallel Monte Carlo samples and seed", {
 
   scenario <- 
     simulate_scenario(
-      household    = household,
-      portfolio    = portfolio,
-      current_date = test_current_date,
-      use_cache = TRUE,
-      seeds = 1234,
+      household           = household,
+      portfolio           = portfolio,
+      current_date        = test_current_date,
+      use_cache           = TRUE,
+      seeds               = 1234,
       monte_carlo_samples = 2
     )
   
@@ -256,11 +257,11 @@ test_that("simulating a scenario with parallel Monte Carlo samples and seed", {
 
   scenario <- 
     simulate_scenario(
-      household    = household,
-      portfolio    = portfolio,
-      current_date = test_current_date,
-      use_cache = TRUE,
-      seeds = 1234,
+      household           = household,
+      portfolio           = portfolio,
+      current_date        = test_current_date,
+      use_cache           = TRUE,
+      seeds               = 1234,
       monte_carlo_samples = 2
     )
   

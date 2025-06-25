@@ -5,10 +5,6 @@
 #' `scenario_id` and nested column `events`.
 #' Each scenario has defined one or more events in the tibbles 
 #' that are stored in as a list in the `events` column. 
-#' @param auto_parallel A logical. If `TRUE`, the function 
-#' automatically detects the number of cores and uses parallel processing
-#' to speed up the Monte Carlo simulations. 
-#' The results are cached in the folder set by [set_cache()].
 #' 
 #' @returns A `tibble` with nested columns.
 #' @examplesIf interactive()
