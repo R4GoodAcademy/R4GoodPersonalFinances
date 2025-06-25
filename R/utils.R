@@ -374,3 +374,34 @@ paste_scenario_id <- function(scenario) {
     )
     return(colored_names)
   }
+
+generate_random_seed_vector <- function(n) {
+
+  stats::runif(n = n, min = 0, max = 1e8) |> 
+    as.integer()
+}
+
+generate_random_seeds <- function(monte_carlo_samples, seeds) {
+
+  if (!is.null(monte_carlo_samples)) {
+
+    if (is.null(seeds)) {
+
+      cli::cli_alert_info("Generating random seeds for Monte Carlo samples")
+      seeds <- generate_random_seed_vector(n = monte_carlo_samples)
+
+    } else if (length(seeds) == monte_carlo_samples) {
+
+      cli::cli_alert_info("Using provided random seeds for Monte Carlo samples")
+      
+    } else if (length(seeds) == 1) {
+
+      cli::cli_alert_info("Setting random seed to {.field {seeds}}")
+      set.seed(seeds)
+
+      cli::cli_alert_info("Generating random seeds for Monte Carlo samples")
+      seeds <- generate_random_seed_vector(n = monte_carlo_samples)
+    }
+  }
+  seeds
+}

@@ -16,9 +16,13 @@
 #' By default, it is the output of [get_current_date()].
 #' @param monte_carlo_samples An integer. Number of Monte Carlo samples.
 #' If `NULL` (default), no Monte Carlo samples are generated.
-#' @param seeds An integer vector. Seeds for the random number generator
+#' @param seeds An integer or integer vector. 
+#' If integer vector, it is a vector of random seeds 
+#' for the random number generator
 #' used to generate random portfolio returns for each Monte Carlo sample.
 #' If `NULL` (default), random seed is generated automatically.
+#' If a single integer is provided, it is used to generate
+#' a vector of random seeds for each Monte Carlo sample.
 #' @param use_cache A logical. If `TRUE`, the function uses memoised functions
 #' to speed up the simulation. The results are cached in the folder
 #' set by [set_cache()].
@@ -114,9 +118,14 @@ simulate_scenario <- function(
     progress_handler <- progressr::handler_cli()
   }
 
-
   cli::cli_h3("Simulating scenario: {.field {scenario_id}}")
   cli::cli_alert_info("Current date: {.field {current_date}}")
+
+  seeds <- 
+    generate_random_seeds(
+      monte_carlo_samples = monte_carlo_samples, 
+      seeds = seeds
+    )
 
   if (use_cache) {
 

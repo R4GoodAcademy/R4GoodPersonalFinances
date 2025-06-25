@@ -69,6 +69,7 @@ simulate_scenarios <- function(
   portfolio,
   current_date        = get_current_date(),
   monte_carlo_samples = NULL,
+  seeds               = NULL,
   auto_parallel       = FALSE,
   use_cache           = FALSE,
   debug               = FALSE,
@@ -78,13 +79,7 @@ simulate_scenarios <- function(
   scenario_id <- index <- NULL
 
   current_date <- lubridate::as_date(current_date)
-
-  if (!is.null(monte_carlo_samples)) {
-    seeds <- stats::runif(monte_carlo_samples, min = 0, max = 1e6)
-  } else {
-    seeds <- NULL
-  }
-
+    
   scenarios_ids <- unique(scenarios_parameters$scenario_id)
 
   cli::cli_h1(glue::glue(
@@ -92,6 +87,12 @@ simulate_scenarios <- function(
   ))
 
   cli::cli_alert_info("Cache directory: {.file {(.pkg_env$cache_directory)}}")
+
+  seeds <- 
+    generate_random_seeds(
+      monte_carlo_samples = monte_carlo_samples, 
+      seeds = seeds
+    )
 
   if (auto_parallel) {
 
