@@ -1,5 +1,3 @@
-# TODO: nloptr::nloptr.print.options()
-
 calc_optimal_portfolio <- function(
   risk_tolerance,
   expected_returns,

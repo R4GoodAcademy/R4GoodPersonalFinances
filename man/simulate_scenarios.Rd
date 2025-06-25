@@ -53,7 +53,10 @@ set by \code{\link[=set_cache]{set_cache()}}.}
 \item{debug}{A logical. If \code{TRUE}, additional information is printed
 during the simulation.}
 
-\item{...}{Additional arguments passed simulation functions.}
+\item{...}{Additional arguments passed to simulation and optimization
+functions. You can pass a list named \code{opts} as parameter to the optimization
+function to select the optimization algorithm and its parameters.
+See \code{\link[nloptr:nloptr]{nloptr::nloptr()}} and \code{\link[nloptr:nloptr.print.options]{nloptr::nloptr.print.options()}} for more information.}
 }
 \value{
 A \code{tibble} with nested columns.

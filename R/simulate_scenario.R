@@ -28,7 +28,10 @@
 #' set by [set_cache()].
 #' @param debug A logical. If `TRUE`, additional information is printed
 #' during the simulation.
-#' @param ... Additional arguments passed simulation functions.
+#' @param ... Additional arguments passed to simulation and optimization 
+#' functions. You can pass a list named `opts` as parameter to the optimization
+#' function to select the optimization algorithm and its parameters.
+#' See [nloptr::nloptr()] and [nloptr::nloptr.print.options()] for more information. 
 #' 
 #' @returns A `tibble` with nested columns including:
 #' * `scenario_id` - (character) ID of the scenario
