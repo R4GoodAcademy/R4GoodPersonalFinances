@@ -8,7 +8,9 @@ test_that("adding household members", {
   h$add_member(
     HouseholdMember$new(
       name       = "test_member_1",  
-      birth_date = "1980-07-15"
+      birth_date = "1980-07-15",
+        mode       = 80,
+        dispersion = 10
     )
   )
   expect_equal(
@@ -44,6 +46,8 @@ test_that("adding household members", {
   expect_true(
     inherits(h$get_members()[["test_member_2"]], "HouseholdMember")
   )
+
+  if (interactive()) print(h)
 })
 
 test_that("calculating household max lifespan", {
