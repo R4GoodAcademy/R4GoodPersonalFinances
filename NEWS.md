@@ -13,6 +13,8 @@ to caching also all data of all Monte Carlo samples for a scenario (not only eac
 * Changed optimal allocation for the last year of a simulation. 
 It is now overwritten with the optimal allocation from the previous year,
 to avoid the edge case when net-worth is going to zero.
+* Added `plot_future_saving_rates()` for plotting the future saving rates
+in a scenario.
 
 # R4GoodPersonalFinances 1.0.0
 
