@@ -48,6 +48,8 @@
 #' @export
 plot_future_saving_rates <- function(scenario) {
 
+  index <- total_income <- total_spending <- savings <- saving_rate <- NULL
+
   colors <- PrettyCols::prettycols("Bold")
 
   data_to_plot <-
