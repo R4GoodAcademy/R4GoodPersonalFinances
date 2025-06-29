@@ -212,13 +212,14 @@ test_that("benchmarking of simulating single scenario", {
   set.seed(123)
 
   benchmark <- microbenchmark::microbenchmark(
-    times = 10L,
+    times = ifelse(!interactive(), 1, 10L),
     unit = "seconds",
 
     scenario <- 
       simulate_single_scenario(
         household    = household,
         portfolio    = portfolio,
+        debug        = ifelse(interactive(), TRUE, FALSE),
         current_date = test_current_date
       )
   )

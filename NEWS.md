@@ -1,5 +1,21 @@
 # R4GoodPersonalFinances (development version)
 
+## Minor changes
+
+* Changed default portfolio optimization algorithm to `NLOPT_LD_SLSQP`
+(Sequential Least-Squares Quadratic Programming). The optimization is no more robust and faster. 
+* Added ability to pass `opts` list to `simulate_scenario()` function with optimization parameters `nloptr` optimization function and thus changing algorithm or its options. The list of possible options and their default values can be obtain with `nloptr::nloptr.print.options()`. 
+* Added ability to pass a single seed value or vector of seeds `simulate_scenario()` function to reproduce the same results for the same scenario, also for Monte Carlo samples.
+* Added `auto_parallel` argument to `simulate_scenario()` function to automatically parallelize the Monte Carlo simulations.
+* Changed behavior of `use_cache` argument in `simulate_scenarios()` function 
+to caching also all data of all Monte Carlo samples for a scenario (not only each sample separately). 
+* Changed the reordering behavior in the `plot_scenarios()` which does not reorder scenarios anymore.
+* Changed optimal allocation for the last year of a simulation. 
+It is now overwritten with the optimal allocation from the previous year,
+to avoid the edge case when net-worth is going to zero.
+* Added `plot_future_saving_rates()` for plotting the future saving rates
+in a scenario.
+
 # R4GoodPersonalFinances 1.0.0
 
 This major release introduces probably first in the world (open-sourced) implementation of a new multilevel life-cycle modeling of a household finances. 

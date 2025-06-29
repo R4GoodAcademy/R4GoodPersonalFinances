@@ -43,12 +43,15 @@ plot_life_expectancy <- function(
     params <- purrr::map(members, function(member) {
       list(
         mode       = member$mode,
-        dispersion = member$dispersion
+        dispersion = member$dispersion,
+        life_expectancy = member$calc_life_expectancy()
       )
     })
   } else {
     params <- household
   }
+
+  print(params)
 
   colors <- 
     grDevices::colorRampPalette(
@@ -84,18 +87,27 @@ plot_life_expectancy <- function(
     dplyr::ungroup() |> 
     dplyr::summarise(min_age = min(age), max_age = max(age)) 
 
-  life_expectancies <- 
-    do.call(
-      rbind, 
-      lapply(split(densities, densities$id), 
-      function(df) {
-        data.frame(
-          id               = unique(df$id),
-          life_expectancy  = sum(df$age * df$density) * dx
-        )
-      })
-    )
-  
+  if ("Household" %in% class(household)) {
+
+    life_expectancies <- 
+      params |> 
+      dplyr::bind_rows(.id = "id") 
+
+  } else {
+
+    life_expectancies <- 
+      do.call(
+        rbind, 
+        lapply(split(densities, densities$id), 
+        function(df) {
+          data.frame(
+            id               = unique(df$id),
+            life_expectancy  = sum(df$age * df$density) * dx
+          )
+        })
+      )
+    }
+
   max_density <- max(densities$density, na.rm = TRUE)
   label_y     <- max_density * 0.9
   

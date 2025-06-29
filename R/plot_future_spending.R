@@ -268,7 +268,8 @@ plot_simulated_spending <- function(
       title = "Future Simulated Discretionary Spending",
       subtitle = glue::glue(paste0(
         paste_scenario_id(scenario),
-        "Based on {max(scenario$sample)} Monte Carlo samples."
+        "Based on <strong>{max(scenario$sample)}</strong> Monte Carlo samples. ",
+        "Median spending at year 0 is <strong>{format_currency(scenario$discretionary_spending[1] / period_factor)}</strong>."
       )),
       caption = "Yellow dashed line shows discretionary spending based on portfolio expected returns.<br>Solid teal line shows median of discretionary spending in Monte Carlo samples.<br>Teal bands show middle six decile groups of spending without top 2 and bottom 2 deciles.",
       x = "Year Index",

@@ -18,6 +18,30 @@ Household <- R6::R6Class(
   public = list(
 
     #' @description 
+    #' Printing the household object
+    #' @param current_date A date in the format "YYYY-MM-DD".
+    print = function(current_date = get_current_date()) {
+
+      cli::cli_h1("Household")
+
+      cli::cli_bullets(c(
+        "i" = "Current date: {.val {current_date}}",
+        "i" = "Household lifespan: {.val {self$get_lifespan(current_date = current_date)}} years",
+        "i" = "Consumption impatience preference: {.val {self$consumption_impatience_preference}}",
+        "i" = "Smooth consumption preference: {.val {self$smooth_consumption_preference}}",
+        "i" = "Risk tolerance: {.val {self$risk_tolerance}}"
+      ))
+
+      cli::cli_h2("Household members")
+      
+      self$get_members() |> 
+        purrr::walk(function(member) {
+          print(member)
+        })
+      
+    },
+
+    #' @description 
     #' Getting members of the household
     get_members = function() {
       private$.household_members

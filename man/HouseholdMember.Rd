@@ -35,6 +35,7 @@ member$calc_life_expectancy()
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-HouseholdMember-new}{\code{HouseholdMember$new()}}
+\item \href{#method-HouseholdMember-print}{\code{HouseholdMember$print()}}
 \item \href{#method-HouseholdMember-get_name}{\code{HouseholdMember$get_name()}}
 \item \href{#method-HouseholdMember-get_birth_date}{\code{HouseholdMember$get_birth_date()}}
 \item \href{#method-HouseholdMember-calc_age}{\code{HouseholdMember$calc_age()}}
@@ -66,6 +67,23 @@ in the format \code{YYYY-MM-DD}.}
 \item{\code{mode}}{The Gompertz mode parameter.}
 
 \item{\code{dispersion}}{The Gompertz dispersion parameter.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-HouseholdMember-print"></a>}}
+\if{latex}{\out{\hypertarget{method-HouseholdMember-print}{}}}
+\subsection{Method \code{print()}}{
+Printing the household member object
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{HouseholdMember$print(current_date = get_current_date())}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{current_date}}{A date in the format "YYYY-MM-DD".}
 }
 \if{html}{\out{</div>}}
 }

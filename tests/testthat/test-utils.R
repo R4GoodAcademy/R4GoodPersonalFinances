@@ -94,7 +94,27 @@ test_that("getting custom current date", {
 })
 
 test_that("normalizing value", {
-
+  
   expect_snapshot(normalize(1:10))
   expect_snapshot(normalize(1:10, 10, 20))
+})
+
+test_that("generating multiple random seeds", {
+
+  withr::local_seed(1234)
+
+  seeds <- generate_random_seed_vector(5) 
+  if (interactive()) print(seeds)
+  
+  expect_true(is.integer(seeds) |> all())
+
+  expect_equal(
+    length(seeds), 
+    5
+  )
+
+  expect_equal(
+    unique(seeds) |> length(),
+    5
+  )
 })

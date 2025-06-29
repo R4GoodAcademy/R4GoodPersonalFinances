@@ -44,6 +44,7 @@ for smooth consumption.}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
+\item \href{#method-Household-print}{\code{Household$print()}}
 \item \href{#method-Household-get_members}{\code{Household$get_members()}}
 \item \href{#method-Household-add_member}{\code{Household$add_member()}}
 \item \href{#method-Household-set_member}{\code{Household$set_member()}}
@@ -52,6 +53,23 @@ for smooth consumption.}
 \item \href{#method-Household-calc_survival}{\code{Household$calc_survival()}}
 \item \href{#method-Household-get_min_age}{\code{Household$get_min_age()}}
 \item \href{#method-Household-clone}{\code{Household$clone()}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Household-print"></a>}}
+\if{latex}{\out{\hypertarget{method-Household-print}{}}}
+\subsection{Method \code{print()}}{
+Printing the household object
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Household$print(current_date = get_current_date())}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{current_date}}{A date in the format "YYYY-MM-DD".}
+}
+\if{html}{\out{</div>}}
 }
 }
 \if{html}{\out{<hr>}}

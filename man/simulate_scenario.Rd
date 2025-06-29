@@ -12,6 +12,7 @@ simulate_scenario(
   monte_carlo_samples = NULL,
   seeds = NULL,
   use_cache = FALSE,
+  auto_parallel = FALSE,
   debug = FALSE,
   ...
 )
@@ -29,18 +30,30 @@ By default, it is the output of \code{\link[=get_current_date]{get_current_date(
 \item{monte_carlo_samples}{An integer. Number of Monte Carlo samples.
 If \code{NULL} (default), no Monte Carlo samples are generated.}
 
-\item{seeds}{An integer vector. Seeds for the random number generator
+\item{seeds}{An integer or integer vector.
+If integer vector, it is a vector of random seeds
+for the random number generator
 used to generate random portfolio returns for each Monte Carlo sample.
-If \code{NULL} (default), random seed is generated automatically.}
+If \code{NULL} (default), random seed is generated automatically.
+If a single integer is provided, it is used to generate
+a vector of random seeds for each Monte Carlo sample.}
 
 \item{use_cache}{A logical. If \code{TRUE}, the function uses memoised functions
 to speed up the simulation. The results are cached in the folder
 set by \code{\link[=set_cache]{set_cache()}}.}
 
+\item{auto_parallel}{A logical. If \code{TRUE}, the function
+automatically detects the number of cores and uses parallel processing
+to speed up the Monte Carlo simulations.
+The results are cached in the folder set by \code{\link[=set_cache]{set_cache()}}.}
+
 \item{debug}{A logical. If \code{TRUE}, additional information is printed
 during the simulation.}
 
-\item{...}{Additional arguments passed simulation functions.}
+\item{...}{Additional arguments passed to simulation and optimization
+functions. You can pass a list named \code{opts} as parameter to the optimization
+function to select the optimization algorithm and its parameters.
+See \code{\link[nloptr:nloptr]{nloptr::nloptr()}} and \code{\link[nloptr:nloptr.print.options]{nloptr::nloptr.print.options()}} for more information.}
 }
 \value{
 A \code{tibble} with nested columns including:

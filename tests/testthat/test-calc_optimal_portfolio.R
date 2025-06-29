@@ -94,7 +94,7 @@ test_that("calculating optimal MVO allocations for 9 assets", {
 
   expect_equal(
     round(optimal_allocations$total, 3),
-    c(0.247, 0.221, 0.26, 0.187, 0, 0, 0, 0.085, 0)
+    c(0.247, 0.221, 0.26, 0.187, 0, 0, 0, 0.084, 0)
   )
   expect_equal(sum(optimal_allocations), 1)
 })
@@ -136,8 +136,7 @@ test_that("calculating optimal joint portfolio allocations", {
     standard_deviations = test_asset_returns$standard_deviation,
     correlations        = test_asset_correlations,
     effective_tax_rates = effective_tax_rates,
-    in_taxable_accounts = fraction_in_taxable_accounts,
-    maxeval             = 10000
+    in_taxable_accounts = fraction_in_taxable_accounts
   )$allocations 
   expect_equal(
     ignore_attr = TRUE,
@@ -249,7 +248,7 @@ test_that("calculating optimal joint net-worth portfolio allocations", {
   )
   expect_equal(
     round(optimal_joint_networth_portfolio$taxable, 3),
-    c(0.132, 0.021, 0.151, 0.620, rep(0, 5))
+    c(0.133, 0.021, 0.151, 0.620, rep(0, 5))
   )
   expect_equal(
     round(optimal_joint_networth_portfolio$taxadvantaged, 3),
