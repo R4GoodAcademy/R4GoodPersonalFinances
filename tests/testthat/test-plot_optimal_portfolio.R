@@ -31,8 +31,8 @@ household <- Household$new()
       current_date = current_date
     )
   
-  plot1 <- function() plot_optimal_portfolio(
+  plot <- plot_optimal_portfolio(
     portfolio = optimal_portfolio
-  ); if (interactive()) print(plot1())
-  vdiffr::expect_doppelganger("plot1", plot1)
+  ); if (interactive()) print(plot)
+  vdiffr::expect_doppelganger("plot1", plot)
 })

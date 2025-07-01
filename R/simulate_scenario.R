@@ -200,6 +200,15 @@ simulate_scenario <- function(
     class = ".alert"
   )
 
+  if (debug) {
+    
+    conditions <- "condition"
+      
+  } else {
+      
+    conditions <- structure("condition", exclude = "message")
+  }
+
   progressr::with_progress(
     handlers = progress_handler,
     expr     = {
@@ -227,7 +236,10 @@ simulate_scenario <- function(
           ) |> 
             dplyr::mutate(sample = as.integer(sample_id))
         }, 
-        .options = furrr::furrr_options(seed = NULL)
+        .options = furrr::furrr_options(
+          seed       = NULL,
+          conditions = conditions
+        )
       ) |> 
           dplyr::bind_rows() 
   })

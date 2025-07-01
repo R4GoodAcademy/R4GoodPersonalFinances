@@ -53,7 +53,7 @@ HouseholdMember <- R6::R6Class(
         "i" = "Birth date: {.val {private$.birth_date}}",
         "i" = "Current age: {.val {
           self$calc_age(current_date) |> round(1)}} years",
-        "i" = "Max age: {.val {private$.max_age}} years",
+        "i" = "Max age: {.val {private$.max_age |> round(1)}} years",
         "i" = "Max lifespan: {.val {
           self$get_lifespan(current_date) |> round(1)}} years",
         "i" = "Gompertz mode: {.val {mode}}",

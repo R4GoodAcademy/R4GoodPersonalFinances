@@ -45,20 +45,20 @@ test_that("plotting expected allocation", {
       current_date = test_current_date
     )
   
-  plot1 <- function() plot_expected_allocation(
+  plot <- plot_expected_allocation(
     scenario = scenario
-  ); if (interactive()) print(plot1())
-  vdiffr::expect_doppelganger("plot1", plot1)
+  ); if (interactive()) print(plot)
+  vdiffr::expect_doppelganger("plot1", plot)
 
-  plot2 <- function() plot_expected_allocation(
+  plot <- plot_expected_allocation(
     scenario = scenario,
     accounts = "taxable"
-  ); if (interactive()) print(plot2())
-  vdiffr::expect_doppelganger("plot2", plot2)
+  ); if (interactive()) print(plot)
+  vdiffr::expect_doppelganger("plot2", plot)
 
-  plot3 <- function() plot_expected_allocation(
+  plot <- plot_expected_allocation(
     scenario = scenario,
     accounts = "taxadvantaged"
-  ); if (interactive()) print(plot3())
-  vdiffr::expect_doppelganger("plot3", plot3)
+  ); if (interactive()) print(plot)
+  vdiffr::expect_doppelganger("plot3", plot)
 })

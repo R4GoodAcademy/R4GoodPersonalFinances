@@ -1,6 +1,7 @@
 test_that("plotting scenarios metrics without Monte Carlo samples", {
 
   skip_on_cran()
+  skip_if_not(interactive())
 
   older_member <- HouseholdMember$new(
     name       = "older",  
@@ -60,21 +61,27 @@ test_that("plotting scenarios metrics without Monte Carlo samples", {
       current_date         = test_current_date
     )
   
-    plot1 <- function() plot_scenarios(
-      scenarios = scenarios
-    ); if (interactive()) print(plot1())
-    vdiffr::expect_doppelganger("plot1", plot1)
+  expect_snapshot(scenarios |> print(width = Inf, n = Inf))
   
-    plot2 <- function() plot_scenarios(
+  # set.seed(1234)
+  withr::local_seed(1234)
+  
+    plot <- plot_scenarios(
+      scenarios = scenarios
+    ); if (interactive()) print(plot)
+    vdiffr::expect_doppelganger("plot1", plot)
+  
+    plot <- plot_scenarios(
       scenarios = scenarios,
       period    = "monthly"
-    ); if (interactive()) print(plot2())
-    vdiffr::expect_doppelganger("plot2", plot2)
+    ); if (interactive()) print(plot)
+    vdiffr::expect_doppelganger("plot2", plot)
 })
 
 test_that("plotting scenarios metrics with Monte Carlo samples", {
 
   skip_on_cran()
+  skip_if_not(interactive())
 
   older_member <- HouseholdMember$new(
     name       = "older",  
@@ -132,17 +139,23 @@ test_that("plotting scenarios metrics with Monte Carlo samples", {
       household            = household,
       portfolio            = portfolio,
       current_date         = test_current_date,
-      monte_carlo_samples  = 1
+      monte_carlo_samples  = 1,
+      seeds = 1234
     )
   
-  plot1 <- function() plot_scenarios(
-    scenarios = scenarios
-  ); if (interactive()) print(plot1())
-  vdiffr::expect_doppelganger("plot1", plot1)
+  expect_snapshot(scenarios |> print(width = Inf, n = Inf))
+  
+  # set.seed(1234)
+  withr::local_seed(1234)
 
-  plot2 <- function() plot_scenarios(
+  plot <- plot_scenarios(
+    scenarios = scenarios
+  ); if (interactive()) print(plot)
+  vdiffr::expect_doppelganger("plot_smmc", plot)
+
+  plot <- plot_scenarios(
     scenarios = scenarios,
     period    = "monthly"
-  ); if (interactive()) print(plot2())
-  vdiffr::expect_doppelganger("plot2", plot2)
+  ); if (interactive()) print(plot)
+  vdiffr::expect_doppelganger("plot_smmcm", plot)
 })

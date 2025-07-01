@@ -46,7 +46,7 @@ simulate_single_scenario <- function(
     sum(portfolio$accounts$taxable) / sum(portfolio$accounts)
   
   financial_wealth <- sum(portfolio$accounts)
-
+  
   weights <- list()
 
   if (financial_wealth > 0) {
@@ -60,11 +60,11 @@ simulate_single_scenario <- function(
 
   } else {
 
-    weights$taxable          <- 0
-    weights$taxadvantaged    <- 0
-    weights$financial_wealth <- 0
+    weights$taxable          <- rep(0, NROW(portfolio))
+    weights$taxadvantaged    <- rep(0, NROW(portfolio))
+    weights$financial_wealth <- rep(0, NROW(portfolio))
   }
-    
+
   human_capital_discount_rate <- 
     calc_portfolio_expected_return(
       weights = portfolio$weights$human_capital,

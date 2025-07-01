@@ -51,8 +51,6 @@ plot_life_expectancy <- function(
     params <- household
   }
 
-  print(params)
-
   colors <- 
     grDevices::colorRampPalette(
       PrettyCols::prettycols("Bold")
@@ -125,11 +123,11 @@ plot_life_expectancy <- function(
       data = life_expectancies,
       ggplot2::aes(
         xintercept = life_expectancy, 
-        color = id
+        color = id,
+        linetype = "Life Expectancy"
       ),
-      linetype = "dashed", 
       linewidth = 0.8,
-      show.legend = FALSE
+      show.legend = TRUE
     ) +
     ggplot2::geom_text(
       data = life_expectancies,
@@ -159,6 +157,7 @@ plot_life_expectancy <- function(
       y     = "Density (probability of dying)",
       title = "Probability Distribution of Age of Death and Life Expectancy"
     ) +
+    ggplot2::scale_linetype_manual(values = c("Life Expectancy" = "dashed")) +
     ggplot2::theme_minimal() +
     ggplot2::theme(
       legend.position  = "bottom",

@@ -89,6 +89,13 @@ plot_future_saving_rates <- function(scenario) {
         paste_scenario_id(scenario),
         "Saving rate at year 0 is <strong>{format_percent(data_to_plot$saving_rate[1])}</strong>."
       )),
+      caption = glue::glue(
+        ifelse(
+          max(scenario$sample) > 0,
+          "Expected saving rates and from <strong>{max(scenario$sample)}</strong> Monte Carlo sample(s).",
+          ""
+        )
+      ),
       x = "Year Index",
       y = glue::glue("Saving rate"),
     ) +

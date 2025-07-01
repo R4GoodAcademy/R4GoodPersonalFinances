@@ -24,6 +24,10 @@ calc_optimal_portfolio <- function(
 
   taxable <- taxadvantaged <- asset_class <- NULL
 
+  if (!is.null(in_taxable_accounts) && is.nan(in_taxable_accounts)) {
+    in_taxable_accounts <- 0
+  }
+
   covariance_matrix <- calc_covariance_matrix(
     standard_deviations = standard_deviations,
     correlations        = correlations
@@ -133,12 +137,20 @@ calc_optimal_portfolio <- function(
     # 1. sum(allocations_taxable) = in_taxable_accounts
     # 2. sum(allocations_taxadvantaged) = 1 - in_taxable_accounts
     equality_constraint <- function(params) {
+
       allocations_taxable <- get_allocations_taxable(params)
       allocations_taxadvantaged <- get_allocations_taxadvantaged(params)
-      return(c(sum(allocations_taxable) - in_taxable_accounts, sum(allocations_taxadvantaged) - (1 - in_taxable_accounts)))
-    }
 
+      equality_constraint <- c(
+        sum(allocations_taxable) - in_taxable_accounts, 
+        sum(allocations_taxadvantaged) - (1 - in_taxable_accounts)
+      )
+
+      equality_constraint
+    }
+    
     equality_constraint_jacobian <- function(params) {
+
       n   <- length(params)
       jac <- matrix(0, nrow = 2, ncol = n)
       jac[1, get_taxable_indices(params)] <- 1
