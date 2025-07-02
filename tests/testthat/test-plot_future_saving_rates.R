@@ -94,7 +94,7 @@ test_that("plotting future saving rates for multiple samples", {
       household    = household,
       portfolio    = portfolio,
       current_date = test_current_date,
-      monte_carlo_samples = 1,
+      monte_carlo_samples = 2,
       seeds = 1234
     )
   
@@ -102,4 +102,16 @@ test_that("plotting future saving rates for multiple samples", {
     scenario = scenario
   ); if (interactive()) print(plot)
   vdiffr::expect_doppelganger("plot_fsrmc", plot)
+
+  plot <- plot_future_saving_rates(
+    scenario = scenario,
+    aggregation_function = median
+  ); if (interactive()) print(plot)
+  vdiffr::expect_doppelganger("fsrmc_median", plot)
+
+  plot <- plot_future_saving_rates(
+    scenario = scenario,
+    aggregation_function = mean
+  ); if (interactive()) print(plot)
+  vdiffr::expect_doppelganger("fsrmc_mean", plot)
 })

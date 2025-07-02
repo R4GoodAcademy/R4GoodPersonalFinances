@@ -3,6 +3,10 @@
 #' This function plots the future saving rates from a scenario object.
 #' 
 #' @inheritParams plot_expected_allocation
+#' @param aggregation_function A function used to aggregate the saving rates
+#' for multiple Monte Carlo samples. Default is `NULL` (no aggregation).
+#' You can use functions like `median`.
+#' 
 #' 
 #' @returns A [ggplot2::ggplot()] object. 
 #' @examples 
@@ -46,7 +50,10 @@
 #' 
 #' plot_future_saving_rates(scenario)
 #' @export
-plot_future_saving_rates <- function(scenario) {
+plot_future_saving_rates <- function(
+  scenario,
+  aggregation_function = NULL
+) {
 
   index <- total_income <- total_spending <- savings <- saving_rate <- NULL
 
@@ -60,6 +67,18 @@ plot_future_saving_rates <- function(scenario) {
       saving_rate = savings / total_income,
       saving_rate = dplyr::if_else(saving_rate < 0, 0, saving_rate)
     ) 
+  
+  if (!is.null(aggregation_function)) {
+
+    data_to_plot <- 
+      data_to_plot |>
+      dplyr::group_by(index) |>
+      dplyr::summarise(
+        saving_rate = aggregation_function(saving_rate)
+      )
+    
+    aggregation_function_name <- deparse(substitute(aggregation_function))
+  }
   
   data_to_plot |> 
     ggplot2::ggplot(
@@ -93,6 +112,15 @@ plot_future_saving_rates <- function(scenario) {
         ifelse(
           max(scenario$sample) > 0,
           "Expected saving rates and from <strong>{max(scenario$sample)}</strong> Monte Carlo sample(s).",
+          ""
+        ),
+        ifelse(
+          !is.null(aggregation_function),
+          paste0(
+            "Aggregated by function: <strong>", 
+            aggregation_function_name, 
+            "</strong>"
+          ),
           ""
         )
       ),

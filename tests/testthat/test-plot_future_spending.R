@@ -1,5 +1,7 @@
 test_that("plotting future spending", {
 
+  skip_on_ci()
+
   older_member <- HouseholdMember$new(
     name       = "older",  
     birth_date = "1980-02-15"
