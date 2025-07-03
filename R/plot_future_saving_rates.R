@@ -55,7 +55,8 @@ plot_future_saving_rates <- function(
   aggregation_function = NULL
 ) {
 
-  index <- total_income <- total_spending <- savings <- saving_rate <- NULL
+  index <- total_income <- total_spending <- savings <- saving_rate <- 
+    is_mc_sample <- NULL
 
   colors <- PrettyCols::prettycols("Bold")
 
@@ -67,7 +68,6 @@ plot_future_saving_rates <- function(
 
     data_to_plot <- 
       data_to_plot |>
-      # dplyr::mutate(is_mc_sample = sample > 0) |> 
       dplyr::group_by(index, is_mc_sample) |>
       dplyr::summarise(
         saving_rate = aggregation_function(saving_rate)

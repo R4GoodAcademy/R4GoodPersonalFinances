@@ -54,7 +54,7 @@ plot_expected_allocation <- function(
   accounts = c("all", "taxable", "taxadvantaged")
 ) {
 
-  index <- asset <- allocation <- NULL
+  index <- asset <- allocation <- portfolio <- NULL
 
   accounts     <- rlang::arg_match(accounts)
   account_type <- ifelse(accounts == "all", "total", accounts)
@@ -83,7 +83,7 @@ plot_expected_allocation <- function(
     ) |> 
     dplyr::group_by(index, asset) |>
     dplyr::summarise(
-      allocation = median(allocation)
+      allocation = stats::median(allocation)
     ) |> 
     dplyr::group_by(index) |> 
     dplyr::mutate(allocation = allocation / sum(allocation)) 
