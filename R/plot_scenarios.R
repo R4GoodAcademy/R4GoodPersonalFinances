@@ -114,8 +114,6 @@ plot_scenarios <- function(
         ) / period_factor
     )
   
-
-  
   monte_carlo_scenarios <-
     scenarios |> 
     dplyr::filter(sample != 0) 
@@ -276,7 +274,7 @@ plot_scenarios <- function(
       data = expected_returns_scenario_long,
       size = 2
     ) +
-    ggrepel::geom_text_repel(
+    ggplot2::geom_label(
       data = 
         expected_returns_scenario_long |> 
         dplyr::filter(metric == "constant_expected"),
@@ -288,8 +286,7 @@ plot_scenarios <- function(
             paste0(round(value / 1000, 1), "k")
           )
       ),
-      nudge_x     = -0.5,
-      nudge_y     = +1.5,
+      nudge_x     = -0.2,
       na.rm       = TRUE,
       show.legend = FALSE
     ) +

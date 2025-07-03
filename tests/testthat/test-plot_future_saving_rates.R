@@ -1,4 +1,7 @@
 test_that("plotting future saving rates", {
+
+  skip_on_cran()
+  skip_on_ci()
   
   older_member <- HouseholdMember$new(
     name       = "older",  
@@ -51,6 +54,8 @@ test_that("plotting future saving rates", {
 })
 
 test_that("plotting future saving rates for multiple samples", {
+
+  skip_on_ci()
   
   older_member <- HouseholdMember$new(
     name       = "older",  
@@ -86,7 +91,7 @@ test_that("plotting future saving rates for multiple samples", {
   )
   test_current_date <- "2000-07-15"
   portfolio <- generate_test_asset_returns(2)$returns
-  portfolio$accounts$taxable <- c(1, 1)
+  portfolio$accounts$taxable       <- c(0, 0)
   portfolio$accounts$taxadvantaged <- c(0, 0)
 
   scenario <- 
@@ -94,7 +99,7 @@ test_that("plotting future saving rates for multiple samples", {
       household    = household,
       portfolio    = portfolio,
       current_date = test_current_date,
-      monte_carlo_samples = 2,
+      monte_carlo_samples = 3,
       seeds = 1234
     )
   

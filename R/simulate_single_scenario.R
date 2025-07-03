@@ -296,10 +296,22 @@ simulate_single_scenario <- function(
       discretionary_spending_utility_weighted = 
         survival_prob * time_value_discount * discretionary_spending_utility,
       scenario_id = scenario_id,
+      savings     = dplyr::if_else(
+        total_income > 0 & total_spending > 0,
+        total_income - total_spending,
+        0
+      ),
+      savings = dplyr::if_else(savings < 0, 0, savings),
+      saving_rate = dplyr::if_else(
+        total_income > 0,
+        savings / total_income,
+        0
+      ),
+      saving_rate = dplyr::if_else(saving_rate < 0, 0, saving_rate)
     ) |> 
-      dplyr::select(
-        scenario_id, 
-        index, 
-        dplyr::everything()
-      )
+    dplyr::select(
+      scenario_id, 
+      index, 
+      dplyr::everything()
+    )
 }

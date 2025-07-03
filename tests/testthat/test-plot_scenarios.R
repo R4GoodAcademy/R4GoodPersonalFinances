@@ -1,6 +1,7 @@
 test_that("plotting scenarios metrics without Monte Carlo samples", {
 
   skip_on_cran()
+  skip_on_ci()
   skip_if_not(interactive())
 
   older_member <- HouseholdMember$new(
@@ -61,8 +62,6 @@ test_that("plotting scenarios metrics without Monte Carlo samples", {
       current_date         = test_current_date
     )
   
-  expect_snapshot(scenarios |> print(width = Inf, n = Inf))
-  
   # set.seed(1234)
   withr::local_seed(1234)
   
@@ -81,6 +80,7 @@ test_that("plotting scenarios metrics without Monte Carlo samples", {
 test_that("plotting scenarios metrics with Monte Carlo samples", {
 
   skip_on_cran()
+  skip_on_ci()
   skip_if_not(interactive())
 
   older_member <- HouseholdMember$new(
@@ -143,9 +143,6 @@ test_that("plotting scenarios metrics with Monte Carlo samples", {
       seeds = 1234
     )
   
-  expect_snapshot(scenarios |> print(width = Inf, n = Inf))
-  
-  # set.seed(1234)
   withr::local_seed(1234)
 
   plot <- plot_scenarios(

@@ -59,23 +59,21 @@ plot_future_saving_rates <- function(
 
   colors <- PrettyCols::prettycols("Bold")
 
-  data_to_plot <-
+  data_to_plot <- 
     scenario |> 
-    dplyr::select(index, total_income, total_spending) |> 
-    dplyr::mutate(
-      savings     = total_income - total_spending,
-      saving_rate = savings / total_income,
-      saving_rate = dplyr::if_else(saving_rate < 0, 0, saving_rate)
-    ) 
+    dplyr::mutate(is_mc_sample = sample > 0) 
   
   if (!is.null(aggregation_function)) {
 
     data_to_plot <- 
       data_to_plot |>
-      dplyr::group_by(index) |>
+      # dplyr::mutate(is_mc_sample = sample > 0) |> 
+      dplyr::group_by(index, is_mc_sample) |>
       dplyr::summarise(
         saving_rate = aggregation_function(saving_rate)
-      )
+      ) |> 
+      dplyr::ungroup() 
+    
     
     aggregation_function_name <- deparse(substitute(aggregation_function))
   }
@@ -85,7 +83,8 @@ plot_future_saving_rates <- function(
       ggplot2::aes(
         x      = index, 
         y      = saving_rate,
-        color  = saving_rate
+        color  = saving_rate,
+        shape = is_mc_sample
       )
     ) +
     ggplot2::geom_point() +
@@ -95,7 +94,7 @@ plot_future_saving_rates <- function(
       limits  = c(0, max(data_to_plot$saving_rate, na.rm = TRUE)),
     ) +
     ggplot2::scale_y_continuous(
-      labels = function(x) format_percent(x, accuracy = 1),
+      labels = scales::percent,
       limits = c(0, NA)
     ) +
     ggplot2::scale_x_continuous(
@@ -111,13 +110,13 @@ plot_future_saving_rates <- function(
       caption = glue::glue(
         ifelse(
           max(scenario$sample) > 0,
-          "Expected saving rates and from <strong>{max(scenario$sample)}</strong> Monte Carlo sample(s).",
+          "Expected saving rates (round points) and from <strong>{max(scenario$sample)}</strong> Monte Carlo samples (triangles).",
           ""
         ),
         ifelse(
           !is.null(aggregation_function),
           paste0(
-            "Aggregated by function: <strong>", 
+            " Aggregated by function: <strong>", 
             aggregation_function_name, 
             "</strong>"
           ),

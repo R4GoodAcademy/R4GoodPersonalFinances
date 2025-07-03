@@ -184,7 +184,6 @@ test_that("benchmarking of simulating single scenario", {
 
   skip_on_cran()
   skip_on_ci()
-  # skip_if_not(interactive())
   
   older_member <- HouseholdMember$new(
     name       = "older",  
