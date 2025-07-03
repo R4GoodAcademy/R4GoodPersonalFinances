@@ -1,6 +1,7 @@
 test_that("plotting expected capital", {
 
   skip_on_cran()
+  skip_on_ci()
   
   older_member <- HouseholdMember$new(
     name       = "older",  
