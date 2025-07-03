@@ -27,7 +27,8 @@ get_default_gompertz_parameters <- function(
   sex     = c("both", "male", "female")
 ) {
 
-  life_tables <- year <- NULL
+  life_tables <- life_tables 
+  year <- NULL
 
   country <- rlang::arg_match(country)
   sex     <- rlang::arg_match(sex)
