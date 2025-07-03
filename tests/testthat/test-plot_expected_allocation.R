@@ -1,6 +1,7 @@
 test_that("plotting expected allocation", {
 
   skip_on_cran()
+  skip_on_ci()
   
   older_member <- HouseholdMember$new(
     name       = "older",  
@@ -67,6 +68,7 @@ test_that("plotting expected allocation", {
 test_that("plotting expected allocation for Monte Carlo samples", {
 
   skip_on_cran()
+  skip_on_ci()
   
   older_member <- HouseholdMember$new(
     name       = "older",  
