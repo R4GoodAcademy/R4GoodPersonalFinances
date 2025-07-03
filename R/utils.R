@@ -158,9 +158,9 @@ generate_test_asset_returns <- function(n = 3) {
     
     portfolio <- 
       dplyr::tribble(
-        ~name,        ~expected_return, ~standard_deviation, 
-        "GlobalStock", 0.0449,          0.15,                
-        "EDOBonds",    0.02,            0,                  
+        ~name,                     ~expected_return, ~standard_deviation, 
+        "GlobalStockIndexFund",    0.0449,           0.15,                
+        "InflationProtectedBonds", 0.02,             0,                  
       ) |> 
       dplyr::mutate(
         accounts = dplyr::tribble(

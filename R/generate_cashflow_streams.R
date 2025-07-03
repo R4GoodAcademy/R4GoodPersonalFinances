@@ -38,6 +38,16 @@ generate_cashflow_streams <- function(
       eval_env$is_not_on <- function(member, event) {
         !eval_env$is_on(member, event)
       }
+
+      eval_env$age <- function(member) {
+        
+        members_data <- get("members", envir = eval_env)
+        if (!member %in% names(members_data)) {
+          stop(paste("Member", member, "not found"))
+        }
+        
+        members_data[[member]]$age
+      }
       
       row_result <- rlang::eval_tidy(
         rlang::expr(dplyr::case_when(!!!formulas)),

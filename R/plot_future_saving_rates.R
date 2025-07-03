@@ -4,8 +4,8 @@
 #' 
 #' @inheritParams plot_expected_allocation
 #' @param aggregation_function A function used to aggregate the saving rates
-#' for multiple Monte Carlo samples. Default is `NULL` (no aggregation).
-#' You can use functions like `median`.
+#' for multiple Monte Carlo samples. Default is `median`.
+#' If `NULL`, no aggregation is performed.
 #' 
 #' 
 #' @returns A [ggplot2::ggplot()] object. 
@@ -52,7 +52,7 @@
 #' @export
 plot_future_saving_rates <- function(
   scenario,
-  aggregation_function = NULL
+  aggregation_function = stats::median
 ) {
 
   index <- total_income <- total_spending <- savings <- saving_rate <- 
@@ -114,7 +114,7 @@ plot_future_saving_rates <- function(
           ""
         ),
         ifelse(
-          !is.null(aggregation_function),
+          max(scenario$sample) > 0 & !is.null(aggregation_function),
           paste0(
             " Aggregated by function: <strong>", 
             aggregation_function_name, 

@@ -282,7 +282,7 @@ plot_scenarios <- function(
         label = 
           ifelse(
             round(value / 1000, 1)  == 0, 
-            "",
+            "0k",
             paste0(round(value / 1000, 1), "k")
           )
       ),

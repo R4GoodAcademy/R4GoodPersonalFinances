@@ -136,8 +136,16 @@ plot_expected_spending <- function(
   
   y_breaks <- 
     seq(
-      min_y, 
-      max_y, 
+      from = min(
+        y_limits[1],
+        min_y, 
+        na.rm = TRUE
+      ), 
+      to = max(
+        max_y,
+        y_limits[2],
+        na.rm = TRUE
+      ), 
       by = y_breaks_factor
     )
   

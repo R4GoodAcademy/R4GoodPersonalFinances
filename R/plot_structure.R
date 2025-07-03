@@ -44,11 +44,19 @@ plot_structure <- function(
   }
 
   y_breaks <- 
-  seq(
-    from = 0, 
-    to   = ceiling(y_max / y_max_factor) * y_max_factor, 
-    by   = y_max_factor
-  )
+    seq(
+      from = min(
+        y_limits[1],
+        0, 
+        na.rm = TRUE
+      ), 
+      to = max(
+        ceiling(y_max / y_max_factor) * y_max_factor,
+        y_limits[2],
+        na.rm = TRUE
+      ), 
+      by = y_max_factor
+    )
 
   scale_fill <- 
     switch(

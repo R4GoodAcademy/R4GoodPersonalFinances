@@ -104,13 +104,13 @@ test_that("plotting future saving rates for multiple samples", {
     )
   
   plot <- plot_future_saving_rates(
-    scenario = scenario
+    scenario = scenario,
+    aggregation_function = NULL
   ); if (interactive()) print(plot)
   vdiffr::expect_doppelganger("plot_fsrmc", plot)
 
   plot <- plot_future_saving_rates(
-    scenario = scenario,
-    aggregation_function = median
+    scenario = scenario
   ); if (interactive()) print(plot)
   vdiffr::expect_doppelganger("fsrmc_median", plot)
 

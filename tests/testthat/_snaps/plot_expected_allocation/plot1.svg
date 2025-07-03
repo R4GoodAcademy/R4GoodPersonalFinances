@@ -62,10 +62,10 @@
 <text x='683.50' y='516.90' text-anchor='middle' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='54.80px' lengthAdjust='spacingAndGlyphs'>younger (100)</text>
 <text x='380.02' y='529.04' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='184.68px' lengthAdjust='spacingAndGlyphs'>Year index / household member (age)</text>
 <text transform='translate(13.05,262.51) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='47.70px' lengthAdjust='spacingAndGlyphs'>Allocation</text>
-<rect x='309.48' y='548.47' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #CD1076;' />
-<rect x='385.18' y='548.47' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #6497B1;' />
-<text x='331.53' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='47.46px' lengthAdjust='spacingAndGlyphs'>GlobalStock</text>
-<text x='407.23' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='44.04px' lengthAdjust='spacingAndGlyphs'>EDOBonds</text>
+<rect x='263.98' y='548.47' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #CD1076;' />
+<rect x='381.26' y='548.47' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #6497B1;' />
+<text x='286.03' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='89.05px' lengthAdjust='spacingAndGlyphs'>GlobalStockIndexFund</text>
+<text x='403.31' y='559.43' style='font-size: 8.80px; font-family: sans;' textLength='93.45px' lengthAdjust='spacingAndGlyphs'>InflationProtectedBonds</text>
 <text x='45.51' y='30.35' style='font-size: 11.00px; fill: #999999; font-family: sans;' textLength='46.48px' lengthAdjust='spacingAndGlyphs'>Scenario:</text>
 <text x='95.05' y='30.35' style='font-size: 11.00px; font-weight: bold; fill: #7F7F7F; font-family: sans;' textLength='33.03px' lengthAdjust='spacingAndGlyphs'>default</text>
 <text x='128.07' y='30.35' style='font-size: 11.00px; fill: #999999; font-family: sans;' textLength='3.06px' lengthAdjust='spacingAndGlyphs'>.</text>

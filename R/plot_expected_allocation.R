@@ -100,7 +100,7 @@ plot_expected_allocation <- function(
     ggplot2::aes(
       x    = index, 
       y    = allocation, 
-      fill = factor(asset, levels = rev(unique(asset))))
+      fill = factor(asset, levels = unique(asset)))
       ) +
     ggplot2::geom_area() +
     ggplot2::scale_fill_manual(values = colors) +

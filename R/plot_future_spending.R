@@ -112,7 +112,8 @@ plot_future_spending <- function(
       plot_structure(
         scenario, 
         structure_of = "spending",
-        period = period
+        period = period,
+        y_limits = y_limits
       )
     )
   }

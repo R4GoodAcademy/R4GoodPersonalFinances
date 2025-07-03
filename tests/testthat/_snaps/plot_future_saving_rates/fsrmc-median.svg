@@ -283,21 +283,21 @@
 <text x='244.86' y='30.35' style='font-size: 11.00px; font-weight: bold; fill: #999999; font-family: sans;' textLength='31.19px' lengthAdjust='spacingAndGlyphs'>11.4%</text>
 <text x='276.05' y='30.35' style='font-size: 11.00px; fill: #999999; font-family: sans;' textLength='3.06px' lengthAdjust='spacingAndGlyphs'>.</text>
 <text x='40.62' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='120.34px' lengthAdjust='spacingAndGlyphs'>Future Saving Rates</text>
-<text x='209.75' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='41.71px' lengthAdjust='spacingAndGlyphs'>Expected</text>
-<text x='254.23' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='28.91px' lengthAdjust='spacingAndGlyphs'>saving</text>
-<text x='285.92' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='22.24px' lengthAdjust='spacingAndGlyphs'>rates</text>
-<text x='310.94' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='28.91px' lengthAdjust='spacingAndGlyphs'>(round</text>
-<text x='342.62' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='30.02px' lengthAdjust='spacingAndGlyphs'>points)</text>
-<text x='375.42' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='16.69px' lengthAdjust='spacingAndGlyphs'>and</text>
-<text x='394.88' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='20.00px' lengthAdjust='spacingAndGlyphs'>from</text>
-<text x='417.66' y='568.44' style='font-size: 10.00px; font-weight: bold; fill: #999999; font-family: sans;' textLength='5.56px' lengthAdjust='spacingAndGlyphs'>3</text>
-<text x='426.00' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='27.80px' lengthAdjust='spacingAndGlyphs'>Monte</text>
-<text x='456.58' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='23.90px' lengthAdjust='spacingAndGlyphs'>Carlo</text>
-<text x='483.26' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='37.25px' lengthAdjust='spacingAndGlyphs'>samples</text>
-<text x='523.28' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='47.24px' lengthAdjust='spacingAndGlyphs'>(triangles).</text>
-<text x='573.30' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='51.71px' lengthAdjust='spacingAndGlyphs'>Aggregated</text>
-<text x='627.79' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='10.57px' lengthAdjust='spacingAndGlyphs'>by</text>
-<text x='641.13' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='37.81px' lengthAdjust='spacingAndGlyphs'>function:</text>
-<text x='681.72' y='568.44' style='font-size: 10.00px; font-weight: bold; fill: #999999; font-family: sans;' textLength='32.80px' lengthAdjust='spacingAndGlyphs'>median</text>
+<text x='183.06' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='41.71px' lengthAdjust='spacingAndGlyphs'>Expected</text>
+<text x='227.55' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='28.91px' lengthAdjust='spacingAndGlyphs'>saving</text>
+<text x='259.24' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='22.24px' lengthAdjust='spacingAndGlyphs'>rates</text>
+<text x='284.25' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='28.91px' lengthAdjust='spacingAndGlyphs'>(round</text>
+<text x='315.94' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='30.02px' lengthAdjust='spacingAndGlyphs'>points)</text>
+<text x='348.74' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='16.69px' lengthAdjust='spacingAndGlyphs'>and</text>
+<text x='368.20' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='20.00px' lengthAdjust='spacingAndGlyphs'>from</text>
+<text x='390.98' y='568.44' style='font-size: 10.00px; font-weight: bold; fill: #999999; font-family: sans;' textLength='5.56px' lengthAdjust='spacingAndGlyphs'>3</text>
+<text x='399.32' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='27.80px' lengthAdjust='spacingAndGlyphs'>Monte</text>
+<text x='429.90' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='23.90px' lengthAdjust='spacingAndGlyphs'>Carlo</text>
+<text x='456.57' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='37.25px' lengthAdjust='spacingAndGlyphs'>samples</text>
+<text x='496.60' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='47.24px' lengthAdjust='spacingAndGlyphs'>(triangles).</text>
+<text x='546.62' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='51.71px' lengthAdjust='spacingAndGlyphs'>Aggregated</text>
+<text x='601.11' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='10.57px' lengthAdjust='spacingAndGlyphs'>by</text>
+<text x='614.45' y='568.44' style='font-size: 10.00px; fill: #999999; font-family: sans;' textLength='37.81px' lengthAdjust='spacingAndGlyphs'>function:</text>
+<text x='655.04' y='568.44' style='font-size: 10.00px; font-weight: bold; fill: #999999; font-family: sans;' textLength='59.48px' lengthAdjust='spacingAndGlyphs'>stats::median</text>
 </g>
 </svg>
