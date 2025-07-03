@@ -4,11 +4,15 @@
 \alias{plot_future_saving_rates}
 \title{Plotting future saving rates}
 \usage{
-plot_future_saving_rates(scenario)
+plot_future_saving_rates(scenario, aggregation_function = NULL)
 }
 \arguments{
 \item{scenario}{A \code{tibble} with nested columns -
 the result of \code{\link[=simulate_scenario]{simulate_scenario()}}. Data for a single scenario.}
+
+\item{aggregation_function}{A function used to aggregate the saving rates
+for multiple Monte Carlo samples. Default is \code{NULL} (no aggregation).
+You can use functions like \code{median}.}
 }
 \value{
 A \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} object.

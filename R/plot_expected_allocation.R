@@ -1,5 +1,8 @@
 #' Plot expected allocation over household life cycle
 #' 
+#' If multiple Monte Carlo samples are provided in the `scenario` argument,
+#' the normalized median of expected allocation is plotted.
+#' 
 #' @param scenario A `tibble` with nested columns -
 #' the result of [simulate_scenario()]. Data for a single scenario.
 #' @param accounts A character. 
@@ -50,20 +53,40 @@ plot_expected_allocation <- function(
   scenario,
   accounts = c("all", "taxable", "taxadvantaged")
 ) {
+
   index <- asset <- allocation <- NULL
 
   accounts     <- rlang::arg_match(accounts)
   account_type <- ifelse(accounts == "all", "total", accounts)
   
   data_to_plot <- 
-    scenario$portfolio$allocation |> 
-    dplyr::bind_rows(.id = "index") |> 
-    dplyr::mutate(index = as.integer(index) - 1) |>
-    dplyr::select(
+    scenario |> 
+    dplyr::transmute(
+      sample, 
       index, 
-      asset, 
+      portfolio = portfolio$allocation
+    ) |> 
+    tidyr::unnest_longer(portfolio) |>
+    dplyr::transmute(
+      sample,
+      index, 
+      asset = portfolio$asset, 
+      taxable = portfolio$taxable,
+      taxadvantaged = portfolio$taxadvantaged,
+      total = portfolio$total,
+    ) |> 
+    dplyr::select(
+      sample,
+      index, 
+      asset,
       allocation = dplyr::all_of(account_type)
-    )
+    ) |> 
+    dplyr::group_by(index, asset) |>
+    dplyr::summarise(
+      allocation = median(allocation)
+    ) |> 
+    dplyr::group_by(index) |> 
+    dplyr::mutate(allocation = allocation / sum(allocation)) 
   
   colors <- 
     grDevices::colorRampPalette(
@@ -77,7 +100,7 @@ plot_expected_allocation <- function(
     ggplot2::aes(
       x    = index, 
       y    = allocation, 
-      fill = factor(asset, levels = unique(asset)))
+      fill = factor(asset, levels = rev(unique(asset))))
       ) +
     ggplot2::geom_area() +
     ggplot2::scale_fill_manual(values = colors) +
