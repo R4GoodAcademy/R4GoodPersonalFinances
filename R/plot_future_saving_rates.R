@@ -116,7 +116,7 @@ plot_future_saving_rates <- function(
         ifelse(
           max(scenario$sample) > 0 & !is.null(aggregation_function),
           paste0(
-            " Aggregated by function: <strong>", 
+            "<br>Aggregated by function: <strong>", 
             aggregation_function_name, 
             "</strong>"
           ),
