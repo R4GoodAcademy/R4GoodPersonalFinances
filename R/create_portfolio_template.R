@@ -66,8 +66,8 @@ create_portfolio_template <- function() {
     portfolio <- 
       dplyr::tribble(
         ~name,                     ~expected_return, ~standard_deviation,
-        "GlobalStocksIndexFund",  0.0506,           0.15,
-        "InflationProtectedBonds", 0.02,             0,
+        "GlobalStocksIndexFund",   0.0461,           0.15,
+        "InflationProtectedBonds", 0.0200,           0,
       )
     
     correlations <- diag(1, nrow = nrow(portfolio))
