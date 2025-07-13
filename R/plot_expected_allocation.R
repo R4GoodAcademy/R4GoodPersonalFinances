@@ -137,6 +137,15 @@ plot_expected_allocation <- function(
           ""
         )
       )), 
-      subtitle = paste_scenario_id(scenario)
+      subtitle = glue::glue(paste0(
+        paste_scenario_id(scenario),
+        "Based on expected returns",
+        ifelse(
+          max(scenario$sample) == 0, 
+          ".",
+          " and <strong>{max(scenario$sample)}</strong> Monte Carlo samples. "
+        )
+        
+      ))
     )
 }
