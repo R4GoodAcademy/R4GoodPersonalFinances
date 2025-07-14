@@ -190,18 +190,22 @@ plot_simulated_spending <- function(
     )   
 
   y_max <- max(abs(quantile_data$min), abs(quantile_data$max)) 
-  if (y_max > 10000) {
+  if (y_max > 10000 * 3) {
     y_breaks_factor <- 10000
-  } else if (y_max > 1000) {
+  } else if (y_max > 1000 * 3) {
     y_breaks_factor <- 1000
   } else {  
     y_breaks_factor <- 100
   }
-  
+
   y_breaks <- 
     seq(
-      round(min(quantile_data$min) / y_breaks_factor) * y_breaks_factor, 
-      round(max(quantile_data$max) / y_breaks_factor) * y_breaks_factor, 
+      round(
+        min(quantile_data$min, y_limits[1], na.rm = TRUE) / y_breaks_factor
+      ) * y_breaks_factor, 
+      round(
+        max(quantile_data$max, y_limits[2], na.rm = TRUE) / y_breaks_factor
+      ) * y_breaks_factor, 
       by = y_breaks_factor
     )
 
@@ -283,7 +287,7 @@ plot_simulated_spending <- function(
     ggplot2::scale_y_continuous(
       labels = format_currency,
       breaks = y_breaks,
-      expand = c(0, NA)
+      # expand = c(0, NA)
     ) + 
     ggplot2::coord_cartesian(ylim = c(y_limits[1], y_limits[2])) 
 

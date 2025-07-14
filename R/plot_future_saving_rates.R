@@ -3,6 +3,7 @@
 #' This function plots the future saving rates from a scenario object.
 #' 
 #' @inheritParams plot_expected_allocation
+#' @inheritParams plot_future_income
 #' @param aggregation_function A function used to aggregate the saving rates
 #' for multiple Monte Carlo samples. Default is `median`.
 #' If `NULL`, no aggregation is performed.
@@ -52,7 +53,8 @@
 #' @export
 plot_future_saving_rates <- function(
   scenario,
-  aggregation_function = stats::median
+  aggregation_function = stats::median,
+  y_limits             = c(NA, NA)
 ) {
 
   index <- total_income <- total_spending <- savings <- saving_rate <- 
@@ -135,6 +137,7 @@ plot_future_saving_rates <- function(
           size  = 10
         ),
       plot.subtitle = ggtext::element_markdown(color = "grey60")
-    )
+    ) + 
+    ggplot2::coord_cartesian(ylim = c(y_limits[1], y_limits[2])) 
 }
 

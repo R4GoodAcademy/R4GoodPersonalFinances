@@ -69,6 +69,10 @@
 <text x='45.51' y='30.35' style='font-size: 11.00px; fill: #999999; font-family: sans;' textLength='46.48px' lengthAdjust='spacingAndGlyphs'>Scenario:</text>
 <text x='95.05' y='30.35' style='font-size: 11.00px; font-weight: bold; fill: #7F7F7F; font-family: sans;' textLength='33.03px' lengthAdjust='spacingAndGlyphs'>default</text>
 <text x='128.07' y='30.35' style='font-size: 11.00px; fill: #999999; font-family: sans;' textLength='3.06px' lengthAdjust='spacingAndGlyphs'>.</text>
+<text x='134.18' y='30.35' style='font-size: 11.00px; fill: #999999; font-family: sans;' textLength='31.20px' lengthAdjust='spacingAndGlyphs'>Based</text>
+<text x='168.44' y='30.35' style='font-size: 11.00px; fill: #999999; font-family: sans;' textLength='12.24px' lengthAdjust='spacingAndGlyphs'>on</text>
+<text x='183.73' y='30.35' style='font-size: 11.00px; fill: #999999; font-family: sans;' textLength='44.66px' lengthAdjust='spacingAndGlyphs'>expected</text>
+<text x='231.44' y='30.35' style='font-size: 11.00px; fill: #999999; font-family: sans;' textLength='37.30px' lengthAdjust='spacingAndGlyphs'>returns.</text>
 <text x='45.51' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='333.85px' lengthAdjust='spacingAndGlyphs'>Optimal Asset Allocation Over Time (in taxable accounts)</text>
 </g>
 </svg>

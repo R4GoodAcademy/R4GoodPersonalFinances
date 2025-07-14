@@ -4,7 +4,11 @@
 \alias{plot_future_saving_rates}
 \title{Plotting future saving rates}
 \usage{
-plot_future_saving_rates(scenario, aggregation_function = stats::median)
+plot_future_saving_rates(
+  scenario,
+  aggregation_function = stats::median,
+  y_limits = c(NA, NA)
+)
 }
 \arguments{
 \item{scenario}{A \code{tibble} with nested columns -
@@ -13,6 +17,8 @@ the result of \code{\link[=simulate_scenario]{simulate_scenario()}}. Data for a 
 \item{aggregation_function}{A function used to aggregate the saving rates
 for multiple Monte Carlo samples. Default is \code{median}.
 If \code{NULL}, no aggregation is performed.}
+
+\item{y_limits}{A numeric vector of two values. Y-axis limits.}
 }
 \value{
 A \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} object.
