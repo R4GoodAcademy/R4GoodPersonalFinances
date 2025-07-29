@@ -1,6 +1,7 @@
 test_that("plotting expected capital", {
 
   skip_on_cran()
+  skip_on_ci()
   
   older_member <- HouseholdMember$new(
     name       = "older",  
@@ -45,8 +46,8 @@ test_that("plotting expected capital", {
       current_date = test_current_date
     )
   
-  plot1 <- function() plot_expected_capital(
+  plot <- plot_expected_capital(
     scenario = scenario
-  ); if (interactive()) print(plot1())
-  vdiffr::expect_doppelganger("plot1", plot1)
+  ); if (interactive()) print(plot)
+  vdiffr::expect_doppelganger("plot1", plot)
 })

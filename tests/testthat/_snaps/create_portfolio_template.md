@@ -13,7 +13,7 @@
       # A tibble: 2 x 3
         name                    expected_return standard_deviation
         <chr>                             <dbl>              <dbl>
-      1 GlobalStocksIndexFund            0.0506               0.15
+      1 GlobalStocksIndexFund            0.0461               0.15
       2 InflationProtectedBonds          0.02                 0   
     Message
       
@@ -53,7 +53,7 @@
       2 InflationProtectedBonds     0.04                0                       1
         income capital_gains cost_basis
          <dbl>         <dbl>      <dbl>
-      1      0        0.0506      0.610
+      1      0        0.0461      0.637
       2      0        0.02        0.820
       
     Message

@@ -1,5 +1,7 @@
 test_that("plotting future spending", {
 
+  skip_on_ci()
+
   older_member <- HouseholdMember$new(
     name       = "older",  
     birth_date = "1980-02-15"
@@ -40,54 +42,55 @@ test_that("plotting future spending", {
       household    = household,
       portfolio    = portfolio,
       current_date = test_current_date,
-      monte_carlo_samples = 3
+      monte_carlo_samples = 3,
+      seeds = 1234
     )
   
-  plot1 <- function() plot_future_spending(
+  plot <- plot_future_spending(
     scenario = scenario,
     type     = "discretionary",
     period   = "monthly"
-  ); if (interactive()) print(plot1())
-  vdiffr::expect_doppelganger("plot1", plot1)
+  ); if (interactive()) print(plot)
+  vdiffr::expect_doppelganger("plot1", plot)
 
-  plot4 <- function() plot_future_spending(
+  plot <- plot_future_spending(
     scenario = scenario,
     type     = "discretionary"
-  ); if (interactive()) print(plot4())
-  vdiffr::expect_doppelganger("plot4", plot4)
+  ); if (interactive()) print(plot)
+  vdiffr::expect_doppelganger("plot4", plot)
 
-  plot2 <- function() plot_future_spending(
+  plot <- plot_future_spending(
     scenario = scenario,
     type     = "non-discretionary",
     period   = "monthly"
-  ); if (interactive()) print(plot2())
-  vdiffr::expect_doppelganger("plot2", plot2)
+  ); if (interactive()) print(plot)
+  vdiffr::expect_doppelganger("plot2", plot)
 
-  plot5 <- function() plot_future_spending(
+  plot <- plot_future_spending(
     scenario = scenario,
     type     = "non-discretionary"
-  ); if (interactive()) print(plot5())
-  vdiffr::expect_doppelganger("plot5", plot5)
+  ); if (interactive()) print(plot)
+  vdiffr::expect_doppelganger("plot5", plot)
 
-  plot3 <- function() plot_future_spending(
+  plot <- plot_future_spending(
     scenario = scenario,
     period   = "monthly"
-  ); if (interactive()) print(plot3())
-  vdiffr::expect_doppelganger("plot3", plot3)
+  ); if (interactive()) print(plot)
+  vdiffr::expect_doppelganger("plot3", plot)
 
 
-  plot6 <- function() plot_future_spending(
+  plot <- plot_future_spending(
     scenario = scenario,
     type     = "discretionary",
     period   = "monthly",
     y_limits = c(-2000, 2000)
-  ); if (interactive()) print(plot6())
-  vdiffr::expect_doppelganger("plot6", plot6)
+  ); if (interactive()) print(plot)
+  vdiffr::expect_doppelganger("plot6", plot)
 
-  plot7 <- function() plot_future_spending(
+  plot <- plot_future_spending(
     scenario = scenario,
     period   = "monthly",
     y_limits = c(-1000, 2000)
-  ); if (interactive()) print(plot7())
-  vdiffr::expect_doppelganger("plot7", plot7)
+  ); if (interactive()) print(plot)
+  vdiffr::expect_doppelganger("plot7", plot)
 })

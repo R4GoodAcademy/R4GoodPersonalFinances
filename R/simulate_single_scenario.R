@@ -4,15 +4,16 @@ simulate_single_scenario <- function(
   scenario_id    = "default",
   current_date   = get_current_date(),
   random_returns = FALSE,
-  maxeval        = 2000,
   seed           = NULL,
-  debug          = FALSE
+  debug          = FALSE,
+  ...
 ) {
 
   income <- spending <- total_income <- nondiscretionary_spending <- 
     consumption_impatience_preference <- index <- 
     smooth_consumption_preference <- survival_prob <- time_value_discount <- 
-    discretionary_spending_utility <- NULL
+    discretionary_spending_utility <- total_spending <- 
+    savings <- saving_rate <- NULL
 
   current_date <- lubridate::as_date(current_date)
 
@@ -46,7 +47,7 @@ simulate_single_scenario <- function(
     sum(portfolio$accounts$taxable) / sum(portfolio$accounts)
   
   financial_wealth <- sum(portfolio$accounts)
-
+  
   weights <- list()
 
   if (financial_wealth > 0) {
@@ -60,11 +61,11 @@ simulate_single_scenario <- function(
 
   } else {
 
-    weights$taxable          <- 0
-    weights$taxadvantaged    <- 0
-    weights$financial_wealth <- 0
+    weights$taxable          <- rep(0, NROW(portfolio))
+    weights$taxadvantaged    <- rep(0, NROW(portfolio))
+    weights$financial_wealth <- rep(0, NROW(portfolio))
   }
-    
+
   human_capital_discount_rate <- 
     calc_portfolio_expected_return(
       weights = portfolio$weights$human_capital,
@@ -204,8 +205,8 @@ simulate_single_scenario <- function(
       scenario[i, ]$total_income -
       scenario[i, ]$total_spending
       
-    optimal_joint_networth_portfolio <- tryCatch(
-      
+    optimal_joint_networth_portfolio <- tryCatch({
+
       calc_optimal_portfolio(
         risk_tolerance               = household$risk_tolerance,
         expected_returns             = portfolio$expected_return,
@@ -224,15 +225,15 @@ simulate_single_scenario <- function(
         liabilities_weights          = portfolio$weights$liabilities,
         asset_names                  = portfolio$name,
         initial_allocation           = initial_allocation,
-        maxeval                      = maxeval
-        ),
+        ...
+        )
+    },
 
         error = function(e) {
           if (debug) {
             cli::cli_alert_warning(
               cli::col_yellow(
-                "{e}Optimal allocation not found for year index {i} / {n_rows}. 
-                Using optimal allocation from previous period..."
+                "{e}Optimal allocation not found for year index {i}/{n_rows}." 
               )
             )
           }
@@ -240,17 +241,33 @@ simulate_single_scenario <- function(
         }
     )
       
-    if (!is.null(optimal_joint_networth_portfolio$allocations$total)) {
+    if (
+      !is.null(optimal_joint_networth_portfolio$allocations$total) && 
+        i < n_rows
+    ) {
 
       scenario[i, ]$portfolio$allocation <- list(
         optimal_joint_networth_portfolio$allocations |> 
           dplyr::rename("asset" = "asset_class")
       )
 
-    } else {
+    } else if (i > 1) {
 
-      scenario[i, ]$portfolio$allocation <- scenario[i - 1, ]$portfolio$allocation
-    }
+      if (debug) {
+        cli::cli_alert_warning(
+          cli::col_yellow(
+            "For year index {i}/{n_rows} using optimal allocation from previous period ({i - 1})."
+          )
+        )
+      }
+
+      scenario[i, ]$portfolio$allocation <- 
+        scenario[i - 1, ]$portfolio$allocation
+
+    } else (
+
+      return(NULL)
+    )
 
     financial_wealth_end <- 
       sum(
@@ -280,10 +297,22 @@ simulate_single_scenario <- function(
       discretionary_spending_utility_weighted = 
         survival_prob * time_value_discount * discretionary_spending_utility,
       scenario_id = scenario_id,
+      savings     = dplyr::if_else(
+        total_income > 0 & total_spending > 0,
+        total_income - total_spending,
+        0
+      ),
+      savings = dplyr::if_else(savings < 0, 0, savings),
+      saving_rate = dplyr::if_else(
+        total_income > 0,
+        savings / total_income,
+        0
+      ),
+      saving_rate = dplyr::if_else(saving_rate < 0, 0, saving_rate)
     ) |> 
-      dplyr::select(
-        scenario_id, 
-        index, 
-        dplyr::everything()
-      )
+    dplyr::select(
+      scenario_id, 
+      index, 
+      dplyr::everything()
+    )
 }

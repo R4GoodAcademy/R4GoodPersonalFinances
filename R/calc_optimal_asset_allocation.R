@@ -66,11 +66,7 @@ calc_optimal_asset_allocation <- function(
   nondiscretionary_consumption <- scenario$nondiscretionary_spending[1]
 
   fraction_in_taxable_accounts <- 
-    if (sum(portfolio$accounts) > 0) {
-      sum(portfolio$accounts$taxable) / sum(portfolio$accounts)
-    } else {
-      0 
-    }
+    sum(portfolio$accounts$taxable) / sum(portfolio$accounts)
   
   discretionary_spending <- scenario$discretionary_spending[1]
   income                 <- scenario$total_income[1]

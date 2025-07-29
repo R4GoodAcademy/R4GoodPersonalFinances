@@ -46,15 +46,15 @@ test_that("plotting future income", {
       current_date = test_current_date
     )
   
-  plot1 <- function() plot_future_income(
+  plot <- plot_future_income(
     scenario = scenario,
     period   = "monthly"
-  ); if (interactive()) print(plot1())
-  vdiffr::expect_doppelganger("plot1", plot1)
+  ); if (interactive()) print(plot)
+  vdiffr::expect_doppelganger("plot1", plot)
   
-  plot2 <- function() plot_future_income(
+  plot <- plot_future_income(
     scenario = scenario
-  ); if (interactive()) print(plot2())
-  vdiffr::expect_doppelganger("plot2", plot2)
+  ); if (interactive()) print(plot)
+  vdiffr::expect_doppelganger("plot2", plot)
 
 })

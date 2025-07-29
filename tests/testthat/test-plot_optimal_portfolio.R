@@ -22,6 +22,8 @@ household <- Household$new()
   current_date <- "2020-07-15"
 
   portfolio <- generate_test_asset_returns(2)$returns
+  portfolio$accounts$taxable <- 
+    portfolio$accounts$taxable + 0.66
   if (interactive()) print(portfolio, width = Inf)
 
   optimal_portfolio <- 
@@ -31,8 +33,8 @@ household <- Household$new()
       current_date = current_date
     )
   
-  plot1 <- function() plot_optimal_portfolio(
+  plot <- plot_optimal_portfolio(
     portfolio = optimal_portfolio
-  ); if (interactive()) print(plot1())
-  vdiffr::expect_doppelganger("plot1", plot1)
+  ); if (interactive()) print(plot)
+  vdiffr::expect_doppelganger("plot1", plot)
 })

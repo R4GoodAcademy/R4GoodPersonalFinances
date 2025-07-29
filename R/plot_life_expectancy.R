@@ -43,7 +43,8 @@ plot_life_expectancy <- function(
     params <- purrr::map(members, function(member) {
       list(
         mode       = member$mode,
-        dispersion = member$dispersion
+        dispersion = member$dispersion,
+        life_expectancy = member$calc_life_expectancy()
       )
     })
   } else {
@@ -84,18 +85,27 @@ plot_life_expectancy <- function(
     dplyr::ungroup() |> 
     dplyr::summarise(min_age = min(age), max_age = max(age)) 
 
-  life_expectancies <- 
-    do.call(
-      rbind, 
-      lapply(split(densities, densities$id), 
-      function(df) {
-        data.frame(
-          id               = unique(df$id),
-          life_expectancy  = sum(df$age * df$density) * dx
-        )
-      })
-    )
-  
+  if ("Household" %in% class(household)) {
+
+    life_expectancies <- 
+      params |> 
+      dplyr::bind_rows(.id = "id") 
+
+  } else {
+
+    life_expectancies <- 
+      do.call(
+        rbind, 
+        lapply(split(densities, densities$id), 
+        function(df) {
+          data.frame(
+            id               = unique(df$id),
+            life_expectancy  = sum(df$age * df$density) * dx
+          )
+        })
+      )
+    }
+
   max_density <- max(densities$density, na.rm = TRUE)
   label_y     <- max_density * 0.9
   
@@ -113,11 +123,11 @@ plot_life_expectancy <- function(
       data = life_expectancies,
       ggplot2::aes(
         xintercept = life_expectancy, 
-        color = id
+        color = id,
+        linetype = "Life Expectancy"
       ),
-      linetype = "dashed", 
       linewidth = 0.8,
-      show.legend = FALSE
+      show.legend = TRUE
     ) +
     ggplot2::geom_text(
       data = life_expectancies,
@@ -147,6 +157,7 @@ plot_life_expectancy <- function(
       y     = "Density (probability of dying)",
       title = "Probability Distribution of Age of Death and Life Expectancy"
     ) +
+    ggplot2::scale_linetype_manual(values = c("Life Expectancy" = "dashed")) +
     ggplot2::theme_minimal() +
     ggplot2::theme(
       legend.position  = "bottom",

@@ -16,15 +16,26 @@
 #' By default, it is the output of [get_current_date()].
 #' @param monte_carlo_samples An integer. Number of Monte Carlo samples.
 #' If `NULL` (default), no Monte Carlo samples are generated.
-#' @param seeds An integer vector. Seeds for the random number generator
+#' @param seeds An integer or integer vector. 
+#' If integer vector, it is a vector of random seeds 
+#' for the random number generator
 #' used to generate random portfolio returns for each Monte Carlo sample.
 #' If `NULL` (default), random seed is generated automatically.
+#' If a single integer is provided, it is used to generate
+#' a vector of random seeds for each Monte Carlo sample.
+#' @param auto_parallel A logical. If `TRUE`, the function 
+#' automatically detects the number of cores and uses parallel processing
+#' to speed up the Monte Carlo simulations. 
+#' The results are cached in the folder set by [set_cache()].
 #' @param use_cache A logical. If `TRUE`, the function uses memoised functions
 #' to speed up the simulation. The results are cached in the folder
 #' set by [set_cache()].
 #' @param debug A logical. If `TRUE`, additional information is printed
 #' during the simulation.
-#' @param ... Additional arguments passed simulation functions.
+#' @param ... Additional arguments passed to simulation and optimization 
+#' functions. You can pass a list named `opts` as parameter to the optimization
+#' function to select the optimization algorithm and its parameters.
+#' See [nloptr::nloptr()] and [nloptr::nloptr.print.options()] for more information. 
 #' 
 #' @returns A `tibble` with nested columns including:
 #' * `scenario_id` - (character) ID of the scenario
@@ -99,6 +110,7 @@ simulate_scenario <- function(
   monte_carlo_samples = NULL,
   seeds               = NULL,
   use_cache           = FALSE,
+  auto_parallel       = FALSE,
   debug               = FALSE,
   ...
 ) {
@@ -114,9 +126,30 @@ simulate_scenario <- function(
     progress_handler <- progressr::handler_cli()
   }
 
-
   cli::cli_h3("Simulating scenario: {.field {scenario_id}}")
   cli::cli_alert_info("Current date: {.field {current_date}}")
+
+  seeds <- 
+    generate_random_seeds(
+      monte_carlo_samples = monte_carlo_samples, 
+      seeds = seeds
+    )
+  
+  if (auto_parallel) {
+
+    if (!is.null(monte_carlo_samples)) {
+
+      n_workers <- future::availableCores()
+
+      old_plan <- future::plan(future::multisession, workers = n_workers)
+
+      cli::cli_alert_info(
+        "Auto-parallelization enabled with {.field {n_workers}} workers."
+      )
+      
+      on.exit(future::plan(old_plan))
+    } 
+  }
 
   if (use_cache) {
 
@@ -167,6 +200,15 @@ simulate_scenario <- function(
     class = ".alert"
   )
 
+  if (debug) {
+    
+    conditions <- "condition"
+      
+  } else {
+      
+    conditions <- structure("condition", exclude = "message")
+  }
+
   progressr::with_progress(
     handlers = progress_handler,
     expr     = {
@@ -181,7 +223,7 @@ simulate_scenario <- function(
               "Sample {sample_id} out of {n_samples}"
             )
           )
-        
+
           simulate_single_scenario(
             household      = household,
             portfolio      = portfolio,
@@ -194,7 +236,10 @@ simulate_scenario <- function(
           ) |> 
             dplyr::mutate(sample = as.integer(sample_id))
         }, 
-        .options = furrr::furrr_options(seed = NULL)
+        .options = furrr::furrr_options(
+          seed       = NULL,
+          conditions = conditions
+        )
       ) |> 
           dplyr::bind_rows() 
   })

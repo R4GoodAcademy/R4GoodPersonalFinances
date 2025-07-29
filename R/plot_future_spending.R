@@ -112,7 +112,8 @@ plot_future_spending <- function(
       plot_structure(
         scenario, 
         structure_of = "spending",
-        period = period
+        period = period,
+        y_limits = y_limits
       )
     )
   }
@@ -189,18 +190,22 @@ plot_simulated_spending <- function(
     )   
 
   y_max <- max(abs(quantile_data$min), abs(quantile_data$max)) 
-  if (y_max > 10000) {
+  if (y_max > 10000 * 3) {
     y_breaks_factor <- 10000
-  } else if (y_max > 1000) {
+  } else if (y_max > 1000 * 3) {
     y_breaks_factor <- 1000
   } else {  
     y_breaks_factor <- 100
   }
-  
+
   y_breaks <- 
     seq(
-      round(min(quantile_data$min) / y_breaks_factor) * y_breaks_factor, 
-      round(max(quantile_data$max) / y_breaks_factor) * y_breaks_factor, 
+      round(
+        min(quantile_data$min, y_limits[1], na.rm = TRUE) / y_breaks_factor
+      ) * y_breaks_factor, 
+      round(
+        max(quantile_data$max, y_limits[2], na.rm = TRUE) / y_breaks_factor
+      ) * y_breaks_factor, 
       by = y_breaks_factor
     )
 
@@ -268,7 +273,8 @@ plot_simulated_spending <- function(
       title = "Future Simulated Discretionary Spending",
       subtitle = glue::glue(paste0(
         paste_scenario_id(scenario),
-        "Based on {max(scenario$sample)} Monte Carlo samples."
+        "Based on <strong>{max(scenario$sample)}</strong> Monte Carlo samples. ",
+        "Median spending at year 0 is <strong>{format_currency(scenario$discretionary_spending[1] / period_factor)}</strong>."
       )),
       caption = "Yellow dashed line shows discretionary spending based on portfolio expected returns.<br>Solid teal line shows median of discretionary spending in Monte Carlo samples.<br>Teal bands show middle six decile groups of spending without top 2 and bottom 2 deciles.",
       x = "Year Index",
@@ -281,7 +287,7 @@ plot_simulated_spending <- function(
     ggplot2::scale_y_continuous(
       labels = format_currency,
       breaks = y_breaks,
-      expand = c(0, NA)
+      # expand = c(0, NA)
     ) + 
     ggplot2::coord_cartesian(ylim = c(y_limits[1], y_limits[2])) 
 

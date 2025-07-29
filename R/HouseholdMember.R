@@ -38,6 +38,31 @@ HouseholdMember <- R6::R6Class(
       private$.dispersion <- dispersion
     },
 
+    #' @description
+    #' Printing the household member object
+    #' @param current_date A date in the format "YYYY-MM-DD".
+    print = function(current_date = get_current_date()) {
+
+      mode <- 
+        ifelse(is.null(self$mode), NA, self$mode |> round(2))
+      dispersion <- 
+        ifelse(is.null(self$dispersion), NA, self$dispersion |> round(2))
+
+      cli::cli_h3("{.val {private$.name}}")
+      cli::cli_bullets(c(
+        "i" = "Birth date: {.val {private$.birth_date}}",
+        "i" = "Current age: {.val {
+          self$calc_age(current_date) |> round(1)}} years",
+        "i" = "Max age: {.val {private$.max_age |> round(1)}} years",
+        "i" = "Max lifespan: {.val {
+          self$get_lifespan(current_date) |> round(1)}} years",
+        "i" = "Gompertz mode: {.val {mode}}",
+        "i" = "Gompertz dispersion: {.val {dispersion}}",
+        "i" = "Life expectancy: {.val {
+          self$calc_life_expectancy(current_date) |> round(1)}} years"
+      ))
+    },
+
     #' @description 
     #' Getting the name of the household member
     get_name = function() {

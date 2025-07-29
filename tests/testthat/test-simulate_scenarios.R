@@ -55,13 +55,28 @@ test_that("simulating multiple scenarios", {
     
   test_current_date <- "2020-07-15"
 
+  if (interactive()) reset_cache()
+
   scenarios <- 
     simulate_scenarios(
       scenarios_parameters = scenarios_parameters,
       household            = household,
       portfolio            = portfolio,
+      use_cache            = ifelse(interactive(), TRUE, FALSE), 
       current_date         = test_current_date
     )
+  
+  if (interactive()) {
+
+    scenarios <- 
+      simulate_scenarios(
+        scenarios_parameters = scenarios_parameters,
+        household            = household,
+        portfolio            = portfolio,
+        use_cache            = ifelse(interactive(), TRUE, FALSE), 
+        current_date         = test_current_date
+      )
+  }
   
   expect_equal(
     unique(scenarios$scenario_id),

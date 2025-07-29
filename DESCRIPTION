@@ -1,6 +1,6 @@
 Package: R4GoodPersonalFinances
 Title: Make Optimal Financial Decisions
-Version: 1.0.0.9000
+Version: 1.1.0
 Authors@R: c(
     person("Kamil", "Wais", , "kamil.wais@gmail.com", 
         role = c("aut", "cre", "cph", "fnd"),
@@ -42,6 +42,7 @@ Imports:
     ggplot2,
     ggrepel,
     ggtext,
+    gt,
     glue,
     PrettyCols,
     scales,

@@ -158,9 +158,9 @@ generate_test_asset_returns <- function(n = 3) {
     
     portfolio <- 
       dplyr::tribble(
-        ~name,        ~expected_return, ~standard_deviation, 
-        "GlobalStock", 0.0449,          0.15,                
-        "EDOBonds",    0.02,            0,                  
+        ~name,                     ~expected_return, ~standard_deviation, 
+        "GlobalStockIndexFund",    0.0449,           0.15,                
+        "InflationProtectedBonds", 0.02,             0,                  
       ) |> 
       dplyr::mutate(
         accounts = dplyr::tribble(
@@ -319,6 +319,13 @@ set_cache <- function(
       omit_args = c("debug", "verbose", "auto_parallel")
     )
 
+  .pkg_env$memoised$simulate_scenario <- 
+    memoise::memoise(
+      f         = simulate_scenario,
+      cache     = .pkg_env$cache,
+      omit_args = c("debug", "verbose", "auto_parallel")
+    )
+
   invisible(.pkg_env$cache_directory)
 }
 
@@ -374,3 +381,34 @@ paste_scenario_id <- function(scenario) {
     )
     return(colored_names)
   }
+
+generate_random_seed_vector <- function(n) {
+
+  stats::runif(n = n, min = 0, max = 1e8) |> 
+    as.integer()
+}
+
+generate_random_seeds <- function(monte_carlo_samples, seeds) {
+
+  if (!is.null(monte_carlo_samples)) {
+
+    if (is.null(seeds)) {
+
+      cli::cli_alert_info("Generating random seeds for Monte Carlo samples")
+      seeds <- generate_random_seed_vector(n = monte_carlo_samples)
+
+    } else if (length(seeds) == monte_carlo_samples) {
+
+      cli::cli_alert_info("Using provided random seeds for Monte Carlo samples")
+      
+    } else if (length(seeds) == 1) {
+
+      cli::cli_alert_info("Setting random seed to {.field {seeds}}")
+      set.seed(seeds)
+
+      cli::cli_alert_info("Generating random seeds for Monte Carlo samples")
+      seeds <- generate_random_seed_vector(n = monte_carlo_samples)
+    }
+  }
+  seeds
+}

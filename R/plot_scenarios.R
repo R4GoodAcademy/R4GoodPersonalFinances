@@ -114,8 +114,6 @@ plot_scenarios <- function(
         ) / period_factor
     )
   
-
-  
   monte_carlo_scenarios <-
     scenarios |> 
     dplyr::filter(sample != 0) 
@@ -223,7 +221,6 @@ plot_scenarios <- function(
 
   ordered_scenario_levels <- 
     expected_returns_scenario |>
-    dplyr::arrange(utility_normalized_expected) |> 
     dplyr::pull(scenario_id) |> 
     unique()
 
@@ -277,20 +274,19 @@ plot_scenarios <- function(
       data = expected_returns_scenario_long,
       size = 2
     ) +
-    ggrepel::geom_text_repel(
+    ggplot2::geom_label(
       data = 
         expected_returns_scenario_long |> 
         dplyr::filter(metric == "constant_expected"),
       ggplot2::aes(
         label = 
           ifelse(
-            round(value / 1000)  == 0, 
-            "",
+            round(value / 1000, 1)  == 0, 
+            "0k",
             paste0(round(value / 1000, 1), "k")
           )
       ),
-      nudge_x     = -0.5,
-      nudge_y     = +0.5,
+      nudge_x     = -0.2,
       na.rm       = TRUE,
       show.legend = FALSE
     ) +
@@ -308,7 +304,7 @@ plot_scenarios <- function(
         "constant" = 
           "constant (certainty equivalent)\ndiscretionary spending\n in Monte Carlo samples",
         "constant_expected" = 
-          "constant (certainty equivalent)\ndiscretionary spending\n based on expected returns",
+          "constant (certainty equivalent)\ndiscretionary spending\nbased on expected returns",
         "utility_normalized_expected" = 
           "normalized utility\nof discretionary spending\nbased on expected returns",
         "utility_normalized" = 
@@ -326,6 +322,10 @@ plot_scenarios <- function(
       legend.position  = "bottom",
       legend.title     = ggplot2::element_blank(),
       panel.grid.minor = ggplot2::element_blank(),
+      axis.text.x      = ggplot2::element_text(
+        angle = 70, 
+        hjust = 1
+      ),
       plot.caption = 
         ggtext::element_markdown(
           color = "grey60", 

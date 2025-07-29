@@ -51,9 +51,12 @@ plot_optimal_portfolio <- function(
   portfolio
 ) {
 
-  account <- name <- allocation <- total_allocation <- NULL
+  account <- name <- allocation <- total_allocation <- value <- total_value <- 
+    portfolio_label <- NULL
 
   allocations <- portfolio$allocations
+
+  accounts <- portfolio$accounts
  
   allocations_long <- 
     allocations |> 
@@ -71,12 +74,25 @@ plot_optimal_portfolio <- function(
     dplyr::filter(account != "total") |>
     dplyr::mutate(
       portfolio = factor(portfolio, levels = c("optimal", "current"))
+    ) |> 
+    dplyr::mutate(
+      value = allocation * sum(accounts)
     )
 
   sums <- 
     allocations_long |>
     dplyr::group_by(name, portfolio) |>
-    dplyr::summarise(total_allocation = sum(allocation), .groups = "drop")
+    dplyr::summarise(total_allocation = sum(allocation), .groups = "drop") 
+
+  total_values <- 
+    allocations_long |>
+    dplyr::group_by(portfolio) |>
+    dplyr::summarise(total_value = sum(value), .groups = "drop")
+
+  total_values_per_asset <- 
+    allocations_long |>
+    dplyr::group_by(name, portfolio) |>
+    dplyr::summarise(total_value = sum(value), .groups = "drop")
 
   colors <- PrettyCols::prettycols("Bold")
   color_values <- c(
@@ -84,10 +100,28 @@ plot_optimal_portfolio <- function(
     "taxadvantaged" = colors[4]
   )
 
+  allocations_with_labels <- 
+    allocations_long |>
+    dplyr::left_join(
+      total_values_per_asset |>
+        dplyr::mutate(
+          portfolio_label = paste0(
+            portfolio, "<br>", 
+            format_currency(total_value, accuracy = 1)
+          )
+        ) |>
+        dplyr::select(name, portfolio, portfolio_label),
+      by = c("name", "portfolio")
+    ) |>
+    dplyr::mutate(
+      portfolio_label = factor(portfolio_label, 
+                              levels = unique(portfolio_label[order(portfolio)]))
+    )
+
   ggplot2::ggplot(
-    allocations_long,
+    allocations_with_labels,
     ggplot2::aes(
-      x     = portfolio, 
+      x     = portfolio_label, 
       y     = allocation, 
       fill  = account
     )
@@ -112,9 +146,21 @@ plot_optimal_portfolio <- function(
       check_overlap = TRUE
     ) + 
     ggplot2::geom_label(
-      data = sums,
+      data = sums |>
+        dplyr::left_join(
+          total_values_per_asset |>
+            dplyr::mutate(
+              portfolio_label = 
+                paste0(
+                  portfolio, "<br>", 
+                  format_currency(total_value, accuracy = 1)
+                )
+            ) |>
+            dplyr::select(name, portfolio, portfolio_label),
+          by = c("name", "portfolio")
+        ),
       ggplot2::aes(
-        x = portfolio,
+        x = portfolio_label,
         y = total_allocation,
         label = format_percent(total_allocation)
       ),
