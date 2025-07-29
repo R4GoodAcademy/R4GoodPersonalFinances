@@ -1,5 +1,12 @@
 # R4GoodPersonalFinances (development version)
 
+This version improve the performance of portfolio optimization algorithms,
+ability to parallelize the Monte Carlo simulations, and simulation caching.
+It brings also new useful functions as `render_scenario_snapshot()`,  `plot_future_saving_rates()`, and `get_default_gompertz_parameters()`.
+With `render_scenario_snapshot()` function, it is possible to get a table with cash flow and net worth statements for a given year in a simulated scenario.
+The result of new features in this version can be seen in the blog post: [Can Juliet manage without Romeo? How much she should spend, save, and invest to achieve that?](https://www.r4good.academy/en/blog/financial-report-individual-minimal-example/index.en.html).
+
+
 ## Minor changes
 
 * Changed default portfolio optimization algorithm to `NLOPT_LD_SLSQP`
@@ -13,8 +20,15 @@ to caching also all data of all Monte Carlo samples for a scenario (not only eac
 * Changed optimal allocation for the last year of a simulation. 
 It is now overwritten with the optimal allocation from the previous year,
 to avoid the edge case when net-worth is going to zero.
-* Added `plot_future_saving_rates()` for plotting the future saving rates
-in a scenario.
+* Added `render_scenario_snapshot()` function to render a table with cash flow and net worth statements for a given year (first by default) in a simulated scenario.
+* Added `plot_future_saving_rates()` for plotting the future saving rates.
+* Added print methods for `Household` and `HouseholdMember` objects.
+* Added ability to plot expected allocations based on the aggregated results from Monte Carlo samples with `plot_expected_allocation()`.
+* Added `age()` function as convenient wrapper for getting age of a household member when defining triggers for expected income or spending streams.
+* Added `get_default_gompertz_parameters()` function to get default parameters for the Gompertz model for a given country, sex, and age.
+* Added, changed, or fixed multiple minor details in plots.
+* Updated default capital market assumptions.
+
 
 # R4GoodPersonalFinances 1.0.0
 
