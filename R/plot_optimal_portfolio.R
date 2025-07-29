@@ -51,7 +51,8 @@ plot_optimal_portfolio <- function(
   portfolio
 ) {
 
-  account <- name <- allocation <- total_allocation <- NULL
+  account <- name <- allocation <- total_allocation <- value <- total_value <- 
+    portfolio_label <- NULL
 
   allocations <- portfolio$allocations
 

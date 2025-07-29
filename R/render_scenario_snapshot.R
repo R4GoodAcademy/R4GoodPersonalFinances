@@ -53,6 +53,8 @@ render_scenario_snapshot <- function(
   big_mark = " "
 ) {
 
+  value <- NULL
+
   scenario_at_index <- 
     scenario |> 
     dplyr::filter(index == !!index)
