@@ -1,4 +1,4 @@
-# R4GoodPersonalFinances (development version)
+# R4GoodPersonalFinances 1.1.0
 
 This version improve the performance of portfolio optimization algorithms,
 ability to parallelize the Monte Carlo simulations, and simulation caching.
