@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">R4GoodPersonalFinances</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,15 +28,18 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/R4GoodAcademy/R4GoodPersonalFinances/blob/v1.1.0/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/R4GoodAcademy/R4GoodPersonalFinances/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="development version" id="r4goodpersonalfinances-development-version">R4GoodPersonalFinances (development version)<a class="anchor" aria-label="anchor" href="#r4goodpersonalfinances-development-version"></a></h2>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.0" id="r4goodpersonalfinances-110">R4GoodPersonalFinances 1.1.0<a class="anchor" aria-label="anchor" href="#r4goodpersonalfinances-110"></a></h2>
 <p>This version improve the performance of portfolio optimization algorithms, ability to parallelize the Monte Carlo simulations, and simulation caching. It brings also new useful functions as <code><a href="../reference/render_scenario_snapshot.html">render_scenario_snapshot()</a></code>, <code><a href="../reference/plot_future_saving_rates.html">plot_future_saving_rates()</a></code>, and <code><a href="../reference/get_default_gompertz_parameters.html">get_default_gompertz_parameters()</a></code>. With <code><a href="../reference/render_scenario_snapshot.html">render_scenario_snapshot()</a></code> function, it is possible to get a table with cash flow and net worth statements for a given year in a simulated scenario. The result of new features in this version can be seen in the blog post: <a href="https://www.r4good.academy/en/blog/financial-report-individual-minimal-example/index.en.html" class="external-link">Can Juliet manage without Romeo? How much she should spend, save, and invest to achieve that?</a>.</p>
 <div class="section level3">
 <h3 id="minor-changes-1-1-0">Minor changes<a class="anchor" aria-label="anchor" href="#minor-changes-1-1-0"></a></h3>
-<ul><li>Changed default portfolio optimization algorithm to <code>NLOPT_LD_SLSQP</code> (Sequential Least-Squares Quadratic Programming). The optimization is no more robust and faster.</li>
+<ul><li>Changed default portfolio optimization algorithm to <code>NLOPT_LD_SLSQP</code> (Sequential Least-Squares Quadratic Programming). The optimization is now more robust and faster.</li>
 <li>Added ability to pass <code>opts</code> list to <code><a href="../reference/simulate_scenario.html">simulate_scenario()</a></code> function with optimization parameters <code>nloptr</code> optimization function and thus changing algorithm or its options. The list of possible options and their default values can be obtain with <code><a href="https://astamm.github.io/nloptr/reference/nloptr.print.options.html" class="external-link">nloptr::nloptr.print.options()</a></code>.</li>
 <li>Added ability to pass a single seed value or vector of seeds <code><a href="../reference/simulate_scenario.html">simulate_scenario()</a></code> function to reproduce the same results for the same scenario, also for Monte Carlo samples.</li>
 <li>Added <code>auto_parallel</code> argument to <code><a href="../reference/simulate_scenario.html">simulate_scenario()</a></code> function to automatically parallelize the Monte Carlo simulations.</li>
