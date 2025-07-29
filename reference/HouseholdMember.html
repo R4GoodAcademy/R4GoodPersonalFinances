@@ -9,7 +9,7 @@ a single member of a household."><meta property="og:image" content="https://r4go
 
     <a class="navbar-brand me-2" href="../index.html">R4GoodPersonalFinances</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,6 +67,7 @@ a single member of a household.</p>
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
 <ul><li><p><a href="#method-HouseholdMember-new"><code>HouseholdMember$new()</code></a></p></li>
+<li><p><a href="#method-HouseholdMember-print"><code>HouseholdMember$print()</code></a></p></li>
 <li><p><a href="#method-HouseholdMember-get_name"><code>HouseholdMember$get_name()</code></a></p></li>
 <li><p><a href="#method-HouseholdMember-get_birth_date"><code>HouseholdMember$get_birth_date()</code></a></p></li>
 <li><p><a href="#method-HouseholdMember-calc_age"><code>HouseholdMember$calc_age()</code></a></p></li>
@@ -105,27 +106,11 @@ in the format <code>YYYY-MM-DD</code>.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-HouseholdMember-get_name"></a><div class="section">
-<h3 id="method-get-name-">Method <code>get_name()</code><a class="anchor" aria-label="anchor" href="#method-get-name-"></a></h3>
-<p>Getting the name of the household member</p><div class="section">
+</div><p></p><hr><a id="method-HouseholdMember-print"></a><div class="section">
+<h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
+<p>Printing the household member object</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">HouseholdMember</span><span class="op">$</span><span class="fu">get_name</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-
-</div><p></p><hr><a id="method-HouseholdMember-get_birth_date"></a><div class="section">
-<h3 id="method-get-birth-date-">Method <code>get_birth_date()</code><a class="anchor" aria-label="anchor" href="#method-get-birth-date-"></a></h3>
-<p>Getting the birth date of the household member</p><div class="section">
-<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">HouseholdMember</span><span class="op">$</span><span class="fu">get_birth_date</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-
-</div><p></p><hr><a id="method-HouseholdMember-calc_age"></a><div class="section">
-<h3 id="method-calc-age-">Method <code>calc_age()</code><a class="anchor" aria-label="anchor" href="#method-calc-age-"></a></h3>
-<p>Calculating the age of the household member</p><div class="section">
-<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">HouseholdMember</span><span class="op">$</span><span class="fu">calc_age</span><span class="op">(</span>current_date <span class="op">=</span> <span class="fu"><a href="../reference/get_current_date.html">get_current_date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">HouseholdMember</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span>current_date <span class="op">=</span> <span class="fu"><a href="../reference/get_current_date.html">get_current_date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -137,11 +122,27 @@ in the format <code>YYYY-MM-DD</code>.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-HouseholdMember-get_lifespan"></a><div class="section">
-<h3 id="method-get-lifespan-">Method <code>get_lifespan()</code><a class="anchor" aria-label="anchor" href="#method-get-lifespan-"></a></h3>
-<p>Calculating a lifespan of the household member</p><div class="section">
+</div><p></p><hr><a id="method-HouseholdMember-get_name"></a><div class="section">
+<h3 id="method-get-name-">Method <code>get_name()</code><a class="anchor" aria-label="anchor" href="#method-get-name-"></a></h3>
+<p>Getting the name of the household member</p><div class="section">
+<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">HouseholdMember</span><span class="op">$</span><span class="fu">get_name</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+
+</div><p></p><hr><a id="method-HouseholdMember-get_birth_date"></a><div class="section">
+<h3 id="method-get-birth-date-">Method <code>get_birth_date()</code><a class="anchor" aria-label="anchor" href="#method-get-birth-date-"></a></h3>
+<p>Getting the birth date of the household member</p><div class="section">
+<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">HouseholdMember</span><span class="op">$</span><span class="fu">get_birth_date</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+
+</div><p></p><hr><a id="method-HouseholdMember-calc_age"></a><div class="section">
+<h3 id="method-calc-age-">Method <code>calc_age()</code><a class="anchor" aria-label="anchor" href="#method-calc-age-"></a></h3>
+<p>Calculating the age of the household member</p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">HouseholdMember</span><span class="op">$</span><span class="fu">get_lifespan</span><span class="op">(</span>current_date <span class="op">=</span> <span class="fu"><a href="../reference/get_current_date.html">get_current_date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">HouseholdMember</span><span class="op">$</span><span class="fu">calc_age</span><span class="op">(</span>current_date <span class="op">=</span> <span class="fu"><a href="../reference/get_current_date.html">get_current_date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -153,11 +154,11 @@ in the format <code>YYYY-MM-DD</code>.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-HouseholdMember-calc_life_expectancy"></a><div class="section">
-<h3 id="method-calc-life-expectancy-">Method <code><a href="calc_life_expectancy.html">calc_life_expectancy()</a></code><a class="anchor" aria-label="anchor" href="#method-calc-life-expectancy-"></a></h3>
-<p>Calculating a life expectancy of the household member</p><div class="section">
+</div><p></p><hr><a id="method-HouseholdMember-get_lifespan"></a><div class="section">
+<h3 id="method-get-lifespan-">Method <code>get_lifespan()</code><a class="anchor" aria-label="anchor" href="#method-get-lifespan-"></a></h3>
+<p>Calculating a lifespan of the household member</p><div class="section">
 <h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">HouseholdMember</span><span class="op">$</span><span class="fu">calc_life_expectancy</span><span class="op">(</span>current_date <span class="op">=</span> <span class="fu"><a href="../reference/get_current_date.html">get_current_date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">HouseholdMember</span><span class="op">$</span><span class="fu">get_lifespan</span><span class="op">(</span>current_date <span class="op">=</span> <span class="fu"><a href="../reference/get_current_date.html">get_current_date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -169,10 +170,26 @@ in the format <code>YYYY-MM-DD</code>.</p></dd>
 </dl><p></p></div>
 </div>
 
+</div><p></p><hr><a id="method-HouseholdMember-calc_life_expectancy"></a><div class="section">
+<h3 id="method-calc-life-expectancy-">Method <code><a href="calc_life_expectancy.html">calc_life_expectancy()</a></code><a class="anchor" aria-label="anchor" href="#method-calc-life-expectancy-"></a></h3>
+<p>Calculating a life expectancy of the household member</p><div class="section">
+<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">HouseholdMember</span><span class="op">$</span><span class="fu">calc_life_expectancy</span><span class="op">(</span>current_date <span class="op">=</span> <span class="fu"><a href="../reference/get_current_date.html">get_current_date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>current_date</code></dt>
+<dd><p>A date in the format "YYYY-MM-DD".</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
 </div><p></p><hr><a id="method-HouseholdMember-calc_survival_probability"></a><div class="section">
 <h3 id="method-calc-survival-probability-">Method <code>calc_survival_probability()</code><a class="anchor" aria-label="anchor" href="#method-calc-survival-probability-"></a></h3>
 <p>Calculating a survival probability of the household member</p><div class="section">
-<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
+<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">HouseholdMember</span><span class="op">$</span><span class="fu">calc_survival_probability</span><span class="op">(</span></span>
 <span>  <span class="va">target_age</span>,</span>
 <span>  current_date <span class="op">=</span> <span class="fu"><a href="../reference/get_current_date.html">get_current_date</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -180,7 +197,7 @@ in the format <code>YYYY-MM-DD</code>.</p></dd>
 </div>
 
 <div class="section">
-<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
+<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>target_age</code></dt>
 <dd><p>Target age (numeric, in years).</p></dd>
 
@@ -195,7 +212,7 @@ in the format <code>YYYY-MM-DD</code>.</p></dd>
 </div><p></p><hr><a id="method-HouseholdMember-get_events"></a><div class="section">
 <h3 id="method-get-events-">Method <code>get_events()</code><a class="anchor" aria-label="anchor" href="#method-get-events-"></a></h3>
 <p>Getting the events related to the household member</p><div class="section">
-<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
+<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">HouseholdMember</span><span class="op">$</span><span class="fu">get_events</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -203,12 +220,12 @@ in the format <code>YYYY-MM-DD</code>.</p></dd>
 </div><p></p><hr><a id="method-HouseholdMember-set_event"></a><div class="section">
 <h3 id="method-set-event-">Method <code>set_event()</code><a class="anchor" aria-label="anchor" href="#method-set-event-"></a></h3>
 <p>Setting an event related to the household member</p><div class="section">
-<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
+<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">HouseholdMember</span><span class="op">$</span><span class="fu">set_event</span><span class="op">(</span><span class="va">event</span>, <span class="va">start_age</span>, end_age <span class="op">=</span> <span class="cn">Inf</span>, years <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
+<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>event</code></dt>
 <dd><p>The name of the event.</p></dd>
 
@@ -231,12 +248,12 @@ in the format <code>YYYY-MM-DD</code>.</p></dd>
 </div><p></p><hr><a id="method-HouseholdMember-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
+<h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">HouseholdMember</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
+<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 
@@ -257,9 +274,9 @@ in the format <code>YYYY-MM-DD</code>.</p></dd>
 <span class="r-in"><span>  dispersion <span class="op">=</span> <span class="fl">8.88</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">member</span><span class="op">$</span><span class="fu">calc_age</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 44.8898</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 45.03765</span>
 <span class="r-in"><span><span class="va">member</span><span class="op">$</span><span class="fu">calc_life_expectancy</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 86.15234</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 86.15619</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

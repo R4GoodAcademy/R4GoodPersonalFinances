@@ -9,7 +9,7 @@ a household and its members."><meta property="og:image" content="https://r4gooda
 
     <a class="navbar-brand me-2" href="../index.html">R4GoodPersonalFinances</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,7 +84,8 @@ for smooth consumption.</p></dd>
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
-<ul><li><p><a href="#method-Household-get_members"><code>Household$get_members()</code></a></p></li>
+<ul><li><p><a href="#method-Household-print"><code>Household$print()</code></a></p></li>
+<li><p><a href="#method-Household-get_members"><code>Household$get_members()</code></a></p></li>
 <li><p><a href="#method-Household-add_member"><code>Household$add_member()</code></a></p></li>
 <li><p><a href="#method-Household-set_member"><code>Household$set_member()</code></a></p></li>
 <li><p><a href="#method-Household-set_lifespan"><code>Household$set_lifespan()</code></a></p></li>
@@ -92,10 +93,26 @@ for smooth consumption.</p></dd>
 <li><p><a href="#method-Household-calc_survival"><code>Household$calc_survival()</code></a></p></li>
 <li><p><a href="#method-Household-get_min_age"><code>Household$get_min_age()</code></a></p></li>
 <li><p><a href="#method-Household-clone"><code>Household$clone()</code></a></p></li>
-</ul></div><p></p><hr><a id="method-Household-get_members"></a><div class="section">
+</ul></div><p></p><hr><a id="method-Household-print"></a><div class="section">
+<h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
+<p>Printing the household object</p><div class="section">
+<h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Household</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span>current_date <span class="op">=</span> <span class="fu"><a href="../reference/get_current_date.html">get_current_date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>current_date</code></dt>
+<dd><p>A date in the format "YYYY-MM-DD".</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-Household-get_members"></a><div class="section">
 <h3 id="method-get-members-">Method <code>get_members()</code><a class="anchor" aria-label="anchor" href="#method-get-members-"></a></h3>
 <p>Getting members of the household</p><div class="section">
-<h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
+<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Household</span><span class="op">$</span><span class="fu">get_members</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -104,12 +121,12 @@ for smooth consumption.</p></dd>
 <h3 id="method-add-member-">Method <code>add_member()</code><a class="anchor" aria-label="anchor" href="#method-add-member-"></a></h3>
 <p>Adding a member to the household
 It will fail if a member with the same name already exists.</p><div class="section">
-<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
+<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Household</span><span class="op">$</span><span class="fu">add_member</span><span class="op">(</span><span class="va">household_member</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
+<h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>household_member</code></dt>
 <dd><p>A <code>HouseholdMember</code> object.</p></dd>
 
@@ -121,12 +138,12 @@ It will fail if a member with the same name already exists.</p><div class="secti
 <h3 id="method-set-member-">Method <code>set_member()</code><a class="anchor" aria-label="anchor" href="#method-set-member-"></a></h3>
 <p>Setting a member of the household
 If a member already exists, it will be overwritten.</p><div class="section">
-<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
+<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Household</span><span class="op">$</span><span class="fu">set_member</span><span class="op">(</span><span class="va">member</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
+<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>member</code></dt>
 <dd><p>A <code>HouseholdMember</code> object.</p></dd>
 
@@ -137,12 +154,12 @@ If a member already exists, it will be overwritten.</p><div class="section">
 </div><p></p><hr><a id="method-Household-set_lifespan"></a><div class="section">
 <h3 id="method-set-lifespan-">Method <code>set_lifespan()</code><a class="anchor" aria-label="anchor" href="#method-set-lifespan-"></a></h3>
 <p>Setting an arbitrary lifespan of the household</p><div class="section">
-<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
+<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Household</span><span class="op">$</span><span class="fu">set_lifespan</span><span class="op">(</span><span class="va">value</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
+<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>value</code></dt>
 <dd><p>A number of years.</p></dd>
 
@@ -154,25 +171,8 @@ If a member already exists, it will be overwritten.</p><div class="section">
 <h3 id="method-get-lifespan-">Method <code>get_lifespan()</code><a class="anchor" aria-label="anchor" href="#method-get-lifespan-"></a></h3>
 <p>Getting a lifespan of the household
 If not set, it will be calculated based on the members' lifespans.</p><div class="section">
-<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Household</span><span class="op">$</span><span class="fu">get_lifespan</span><span class="op">(</span>current_date <span class="op">=</span> <span class="fu"><a href="../reference/get_current_date.html">get_current_date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>current_date</code></dt>
-<dd><p>A date in the format "YYYY-MM-DD".</p></dd>
-
-
-</dl><p></p></div>
-</div>
-
-</div><p></p><hr><a id="method-Household-calc_survival"></a><div class="section">
-<h3 id="method-calc-survival-">Method <code>calc_survival()</code><a class="anchor" aria-label="anchor" href="#method-calc-survival-"></a></h3>
-<p>Calculating a survival rate of the household
-based on its members' parameters of the Gompertz model.</p><div class="section">
 <h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Household</span><span class="op">$</span><span class="fu">calc_survival</span><span class="op">(</span>current_date <span class="op">=</span> <span class="fu"><a href="../reference/get_current_date.html">get_current_date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Household</span><span class="op">$</span><span class="fu">get_lifespan</span><span class="op">(</span>current_date <span class="op">=</span> <span class="fu"><a href="../reference/get_current_date.html">get_current_date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -184,11 +184,12 @@ based on its members' parameters of the Gompertz model.</p><div class="section">
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-Household-get_min_age"></a><div class="section">
-<h3 id="method-get-min-age-">Method <code>get_min_age()</code><a class="anchor" aria-label="anchor" href="#method-get-min-age-"></a></h3>
-<p>Calculating a minimum age of the household members.</p><div class="section">
+</div><p></p><hr><a id="method-Household-calc_survival"></a><div class="section">
+<h3 id="method-calc-survival-">Method <code>calc_survival()</code><a class="anchor" aria-label="anchor" href="#method-calc-survival-"></a></h3>
+<p>Calculating a survival rate of the household
+based on its members' parameters of the Gompertz model.</p><div class="section">
 <h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Household</span><span class="op">$</span><span class="fu">get_min_age</span><span class="op">(</span>current_date <span class="op">=</span> <span class="fu"><a href="../reference/get_current_date.html">get_current_date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Household</span><span class="op">$</span><span class="fu">calc_survival</span><span class="op">(</span>current_date <span class="op">=</span> <span class="fu"><a href="../reference/get_current_date.html">get_current_date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -200,15 +201,31 @@ based on its members' parameters of the Gompertz model.</p><div class="section">
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-Household-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
-<p>The objects of this class are cloneable with this method.</p><div class="section">
+</div><p></p><hr><a id="method-Household-get_min_age"></a><div class="section">
+<h3 id="method-get-min-age-">Method <code>get_min_age()</code><a class="anchor" aria-label="anchor" href="#method-get-min-age-"></a></h3>
+<p>Calculating a minimum age of the household members.</p><div class="section">
 <h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Household</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Household</span><span class="op">$</span><span class="fu">get_min_age</span><span class="op">(</span>current_date <span class="op">=</span> <span class="fu"><a href="../reference/get_current_date.html">get_current_date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>current_date</code></dt>
+<dd><p>A date in the format "YYYY-MM-DD".</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-Household-clone"></a><div class="section">
+<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+<p>The objects of this class are cloneable with this method.</p><div class="section">
+<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Household</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">R4GoodPersonalFinances</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,6 +44,7 @@
 <span>  <span class="va">portfolio</span>,</span>
 <span>  current_date <span class="op">=</span> <span class="fu"><a href="get_current_date.html">get_current_date</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  monte_carlo_samples <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  seeds <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  auto_parallel <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  use_cache <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  debug <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -80,6 +81,16 @@ By default, it is the output of <code><a href="get_current_date.html">get_curren
 If <code>NULL</code> (default), no Monte Carlo samples are generated.</p></dd>
 
 
+<dt id="arg-seeds">seeds<a class="anchor" aria-label="anchor" href="#arg-seeds"></a></dt>
+<dd><p>An integer or integer vector.
+If integer vector, it is a vector of random seeds
+for the random number generator
+used to generate random portfolio returns for each Monte Carlo sample.
+If <code>NULL</code> (default), random seed is generated automatically.
+If a single integer is provided, it is used to generate
+a vector of random seeds for each Monte Carlo sample.</p></dd>
+
+
 <dt id="arg-auto-parallel">auto_parallel<a class="anchor" aria-label="anchor" href="#arg-auto-parallel"></a></dt>
 <dd><p>A logical. If <code>TRUE</code>, the function
 automatically detects the number of cores and uses parallel processing
@@ -99,7 +110,10 @@ during the simulation.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments passed simulation functions.</p></dd>
+<dd><p>Additional arguments passed to simulation and optimization
+functions. You can pass a list named <code>opts</code> as parameter to the optimization
+function to select the optimization algorithm and its parameters.
+See <code><a href="https://astamm.github.io/nloptr/reference/nloptr.html" class="external-link">nloptr::nloptr()</a></code> and <code><a href="https://astamm.github.io/nloptr/reference/nloptr.print.options.html" class="external-link">nloptr::nloptr.print.options()</a></code> for more information.</p></dd>
 
 </dl></div>
     <div class="section level2">
