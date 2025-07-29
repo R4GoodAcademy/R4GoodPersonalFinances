@@ -141,8 +141,12 @@ render_scenario_snapshot <- function(
       ) 
     ) |> 
     gt::data_color(
-      rows = dplyr::starts_with(c("Spending", "Discretionary")),
+      rows = dplyr::starts_with(c("Discretionary")),
       palette = PrettyCols::prettycols("Bold")[c(1)]
+    ) |> 
+    gt::data_color(
+      rows = dplyr::starts_with(c("Savings")),
+      palette = PrettyCols::prettycols("Bold")[c(4)]
     ) |> 
     gt::cols_align(columns = value, align = "right")
 }

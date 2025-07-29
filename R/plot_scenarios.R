@@ -304,7 +304,7 @@ plot_scenarios <- function(
         "constant" = 
           "constant (certainty equivalent)\ndiscretionary spending\n in Monte Carlo samples",
         "constant_expected" = 
-          "constant (certainty equivalent)\ndiscretionary spending\n based on expected returns",
+          "constant (certainty equivalent)\ndiscretionary spending\nbased on expected returns",
         "utility_normalized_expected" = 
           "normalized utility\nof discretionary spending\nbased on expected returns",
         "utility_normalized" = 

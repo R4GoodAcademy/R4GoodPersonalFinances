@@ -78,6 +78,7 @@ plot_structure <- function(
     ) +
     ggplot2::theme_minimal() +
     ggplot2::theme(
+      legend.position  = "bottom",
       plot.caption  = ggtext::element_markdown(color = "grey60"),
       plot.subtitle = ggtext::element_markdown(color = "grey60")
     ) +
