@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">R4GoodPersonalFinances</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,9 +33,20 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="r4goodpersonalfinances-development-version">R4GoodPersonalFinances (development version)<a class="anchor" aria-label="anchor" href="#r4goodpersonalfinances-development-version"></a></h2>
+<div class="section level3">
+<h3 id="minor-changes-development-version">Minor changes<a class="anchor" aria-label="anchor" href="#minor-changes-development-version"></a></h3>
+<ul><li>Changed implementation of formula for expected utility in the <code>calc_expected_utility()</code> internal function. Now the Constant Relative Risk Aversion (CRRA) utility and the second derivative of the CRRA utility are implemented in a way that provide more stable gradient for calculating optimal portfolio allocation. As a result of this change, the optimal allocation no longer jumps unexpectedly and is more stable over time.</li>
+<li>Added new and improved existing debug messages visible when <code>debug = TRUE</code> argument is passed to <code><a href="../reference/simulate_scenario.html">simulate_scenario()</a></code> function.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<ul><li>Fixed discretionary spending dropping unexpectedly to zero in some edge cases caused by division by zero while calculating ratio in the <code>calc_discretionary_spending()</code> function. Now, if the ratio is undefined, it it set to 1.</li>
+<li>Fixed undefined Gompertz survival probability in a case when <code>current_age</code> equals <code>target_age</code> and <code>max_age</code>. Now, in such cases, the survival probability is set explicitly to 0.</li>
+<li>Fixed discretionary spending at the last year of a simulation. Now the discretionary spending is set to net-worth at the last year of a simulation which results in zero of financial wealth at the end of the last year.</li>
+</ul></div>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.1.0" id="r4goodpersonalfinances-110">R4GoodPersonalFinances 1.1.0<a class="anchor" aria-label="anchor" href="#r4goodpersonalfinances-110"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.1.0" id="r4goodpersonalfinances-110">R4GoodPersonalFinances 1.1.0<a class="anchor" aria-label="anchor" href="#r4goodpersonalfinances-110"></a></h2><p class="text-muted">CRAN release: 2025-07-29</p>
 <p>This version improve the performance of portfolio optimization algorithms, ability to parallelize the Monte Carlo simulations, and simulation caching. It brings also new useful functions as <code><a href="../reference/render_scenario_snapshot.html">render_scenario_snapshot()</a></code>, <code><a href="../reference/plot_future_saving_rates.html">plot_future_saving_rates()</a></code>, and <code><a href="../reference/get_default_gompertz_parameters.html">get_default_gompertz_parameters()</a></code>. With <code><a href="../reference/render_scenario_snapshot.html">render_scenario_snapshot()</a></code> function, it is possible to get a table with cash flow and net worth statements for a given year in a simulated scenario. The result of new features in this version can be seen in the blog post: <a href="https://www.r4good.academy/en/blog/financial-report-individual-minimal-example/index.en.html" class="external-link">Can Juliet manage without Romeo? How much she should spend, save, and invest to achieve that?</a>.</p>
 <div class="section level3">
 <h3 id="minor-changes-1-1-0">Minor changes<a class="anchor" aria-label="anchor" href="#minor-changes-1-1-0"></a></h3>
@@ -114,7 +125,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
