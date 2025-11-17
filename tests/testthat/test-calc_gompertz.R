@@ -161,3 +161,14 @@ test_that("calibrating joint gompertz model", {
   if (interactive()) print(jsg())
   vdiffr::expect_doppelganger("jsg", jsg)
 })
+
+test_that("survival probability is not NaN", {
+
+  calc_gompertz_survival_probability(
+    current_age = 100,
+    target_age  = 100,
+    mode        = 80,
+    dispersion  = 10,
+    max_age     = 100
+  ) |> expect_equal(0)
+})

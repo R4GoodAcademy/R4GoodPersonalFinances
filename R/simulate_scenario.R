@@ -164,12 +164,10 @@ simulate_scenario <- function(
 
   }
 
-
-  cli::cli_progress_step(
-    "Simulating a scenario based on expected returns (sample_id=={.field {0}})",
-    class = ".alert"
+  cli::cli_alert(
+    "Simulating scenario based on expected returns (sample_id == {.field {0}})"
   )
-  
+
   scenario <- 
     simulate_single_scenario(
       household      = household,
@@ -195,9 +193,8 @@ simulate_scenario <- function(
 
   n_samples <- monte_carlo_samples
 
-  cli::cli_progress_step(
+  cli::cli_alert(
     "Simulating {.field {n_samples}} Monte Carlo samples",
-    class = ".alert"
   )
 
   if (debug) {

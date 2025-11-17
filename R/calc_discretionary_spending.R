@@ -58,14 +58,14 @@ calc_discretionary_spending <- function(
       life_insurance_premium       = life_insurance_premium,
       income                       = income
     )
-    
+
     discount_rate <- calc_certainty_equivalent_return(
       expected_return = portfolio_expected_return,
       variance        = portfolio_variance,
       risk_tolerance  = risk_tolerance
     )
   }
-  
+
   survival_probabilities <- calc_gompertz_survival_probability(
     current_age = current_age,
     target_age  = current_age:max_age,
@@ -73,7 +73,7 @@ calc_discretionary_spending <- function(
     mode        = gompertz_mode,
     dispersion  = gompertz_dispersion
   )
-  
+
   growth_rate <- calc_growth_rate(
     discount_rate                     = discount_rate,
     consumption_impatience_preference = consumption_impatience_preference,
@@ -86,7 +86,7 @@ calc_discretionary_spending <- function(
     growth_rate                   = growth_rate,
     discount_rate                 = discount_rate
   )
-
+  
   discretionary_spending <- net_worth / delta
   discretionary_spending
 }
@@ -97,8 +97,11 @@ calc_growth_rate <- function(
   smooth_consumption_preference
 ) {
 
-  ((1 + discount_rate) / (1 + consumption_impatience_preference)) ^ smooth_consumption_preference - 1
+  (
+    ((1 + discount_rate) / (1 + consumption_impatience_preference)) ^ smooth_consumption_preference
+  ) - 1
 }
+
 
 calc_delta <- function(
   survival_probabilities,
@@ -107,6 +110,12 @@ calc_delta <- function(
   discount_rate
 ) {
   survival_prob <- rescheduling_factor <- index <- NULL
+ 
+  ratio <- (1 + growth_rate) / (1 + discount_rate)
+
+  if (is.nan(ratio) | is.infinite(ratio)) {
+    ratio <- 1
+  }
 
   delta <- 
     dplyr::tibble(
@@ -114,9 +123,7 @@ calc_delta <- function(
       survival_prob       = survival_probabilities,
       rescheduling_factor = survival_prob ^ smooth_consumption_preference,
       rescheduled = 
-        rescheduling_factor * (
-          (1 + growth_rate) / (1 + discount_rate)
-        )^(index)
+        rescheduling_factor * (ratio)^(index)
     ) 
   
   sum(delta$rescheduled)

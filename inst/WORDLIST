@@ -4,6 +4,7 @@ Blanchet
 Bugfixes
 CFA
 CMD
+CRRA
 Codecov
 DownloadSingleIssue
 Drawdowns
@@ -25,7 +26,6 @@ Springer
 WASM
 WebR
 YYYY
-cloneable
 customise
 customised
 ftserussell
@@ -40,7 +40,6 @@ lifecycle
 memoised
 metacran
 personalization
-rescaled
 spendings
 tibble
 tibbles

@@ -166,14 +166,12 @@ calc_optimal_portfolio <- function(
   # Set lower bounds for allocations (non-negativity)
   lower_bounds <- rep(0, total_assets)
 
-  eq_constraint_grad <- function(w, ...) rep(1, length(w))
-
   optimization_result <- nloptr::nloptr(
     x0          = initial_allocation,
     eval_f      = objective_function,
-    eval_grad_f = 
-      function(initial_allocation) 
-        nloptr::nl.grad(initial_allocation, objective_function), 
+    eval_grad_f = function(initial_allocation) {
+      nloptr::nl.grad(initial_allocation, objective_function)
+    },
     opts          = opts,
     eval_g_eq     = equality_constraint,
     eval_jac_g_eq = equality_constraint_jacobian,
@@ -232,15 +230,35 @@ calc_expected_utility <- function(
   if (risk_tolerance == 1) {
     crra_utility <- log(1 + expected_return)
   } else {
+
+    # orginal formula
+    # crra_utility <- 
+    #   (risk_tolerance / (risk_tolerance - 1)) * 
+    #   (1 + expected_return) ^ ((risk_tolerance - 1) / risk_tolerance)
+
+    # stable gradient version
     crra_utility <- 
       (risk_tolerance / (risk_tolerance - 1)) * 
-      (1 + expected_return) ^ ((risk_tolerance - 1) / risk_tolerance)
+      (pmax(1 + expected_return, 1e-8)) ^ (
+        (risk_tolerance - 1) / risk_tolerance
+      )
+
   }
   
+  # orginal formula
+  # crra_utility_second_derivative <- 
+  #   -1 / (
+  #     risk_tolerance * 
+  #       (1 + expected_return) ^ ((1 + risk_tolerance) / risk_tolerance)
+  #   )
+  
+  # stable gradient version
   crra_utility_second_derivative <- 
     -1 / (
       risk_tolerance * 
-        (1 + expected_return) ^ ((1 + risk_tolerance) / risk_tolerance)
+        (pmax(1 + expected_return, 1e-8)) ^ (
+          (1 + risk_tolerance) / risk_tolerance
+        )
     )
   
   expected_utility <- 

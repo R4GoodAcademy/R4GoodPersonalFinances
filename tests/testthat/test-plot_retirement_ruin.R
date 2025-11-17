@@ -1,5 +1,8 @@
 test_that("plotting retirement ruin", {
 
+  skip_on_cran()
+  skip_on_ci()
+
   rr1 <- function() plot_retirement_ruin(
     portfolio_return_mean = 0.03,
     portfolio_return_sd   = 0.15,

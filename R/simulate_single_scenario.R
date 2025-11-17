@@ -71,6 +71,7 @@ simulate_single_scenario <- function(
       weights = portfolio$weights$human_capital,
       returns = portfolio$expected_return
     )
+  
   liabilities_discount_rate <- 
     calc_portfolio_expected_return(
       weights = portfolio$weights$liabilities,
@@ -132,6 +133,12 @@ simulate_single_scenario <- function(
 
   for (i in seq_len(n_rows)) {
 
+    if (debug) {
+      cli::cli_alert(
+        "Index year: {i}/{n_rows}." 
+      )
+    }
+
     if (i == 1) {
 
       scenario[i, ]$financial_wealth <- financial_wealth
@@ -181,19 +188,30 @@ simulate_single_scenario <- function(
         risk_tolerance               = scenario[i, ]$risk_tolerance,
         consumption_impatience_preference = 
           scenario[i, ]$consumption_impatience_preference,
-        smooth_consumption_preference     = 
+        smooth_consumption_preference = 
           scenario[i, ]$smooth_consumption_preference,
-        current_age = 
-          household_min_age + scenario[i, ]$index,
-        max_age = max_age,
-        gompertz_mode = gompertz_mode,
-        gompertz_dispersion = gompertz_dispersion,
+        current_age = household_min_age + scenario[i, ]$index,
+        max_age                = max_age,
+        gompertz_mode          = gompertz_mode,
+        gompertz_dispersion    = gompertz_dispersion,
         life_insurance_premium = 0
       )
+    
+    if (is.infinite(discretionary_spending)) {
 
-    if (is.nan(discretionary_spending)) {
-      discretionary_spending <- 0
+      if (debug) {
+        cli::cli_alert_warning(
+          cli::col_yellow(paste(
+            "Discretionary spending is infinite.",
+            "Setting it to this period net-worth."
+          ))
+        )
+      }
+
+      discretionary_spending <- 
+        scenario[i, ]$net_worth
     }
+
     scenario[i, ]$discretionary_spending <- discretionary_spending
 
     scenario[i, ]$total_spending <- 
@@ -233,7 +251,7 @@ simulate_single_scenario <- function(
           if (debug) {
             cli::cli_alert_warning(
               cli::col_yellow(
-                "{e}Optimal allocation not found for year index {i}/{n_rows}." 
+                "Optimal allocation not found." 
               )
             )
           }
@@ -256,7 +274,7 @@ simulate_single_scenario <- function(
       if (debug) {
         cli::cli_alert_warning(
           cli::col_yellow(
-            "For year index {i}/{n_rows} using optimal allocation from previous period ({i - 1})."
+            "Using optimal allocation from previous period ({i - 1})."
           )
         )
       }

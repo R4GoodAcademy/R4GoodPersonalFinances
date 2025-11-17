@@ -112,7 +112,7 @@ plot_expected_spending <- function(
         dplyr::group_by(index) |>
         dplyr::summarise(spending = sum(spending)) |>
         dplyr::pull(spending) |> 
-        max()
+        max(na.rm = TRUE)
     ) / 1000) * 1000 
   
   min_y <- 
@@ -121,7 +121,7 @@ plot_expected_spending <- function(
         dplyr::group_by(index, type) |>
         dplyr::summarise(spending = sum(spending)) |>
         dplyr::pull(spending) |> 
-        min()
+        min(na.rm = TRUE)
     ) / 1000) * 1000 
 
   min_length <- max(nchar(max_y)) + 2

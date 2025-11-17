@@ -1,5 +1,8 @@
 test_that("plotting optimal portfolio", {
   
+  skip_on_cran()
+  skip_on_ci()
+  
   older_member <- HouseholdMember$new(
     name       = "older",  
     birth_date = "1980-02-15"

@@ -60,8 +60,8 @@ calc_gompertz_survival_probability <- function(
         )
     )
 
-  probabilities[target_age > max_age] <- 0
-  
+  probabilities[target_age > max_age]  <- 0
+  probabilities[is.nan(probabilities)] <- 0
   probabilities
 }
 

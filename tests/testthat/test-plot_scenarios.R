@@ -2,7 +2,6 @@ test_that("plotting scenarios metrics without Monte Carlo samples", {
 
   skip_on_cran()
   skip_on_ci()
-  skip_if_not(interactive())
 
   older_member <- HouseholdMember$new(
     name       = "older",  
@@ -81,7 +80,6 @@ test_that("plotting scenarios metrics with Monte Carlo samples", {
 
   skip_on_cran()
   skip_on_ci()
-  skip_if_not(interactive())
 
   older_member <- HouseholdMember$new(
     name       = "older",  

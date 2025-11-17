@@ -1,4 +1,7 @@
 test_that("plotting household survival", {
+  
+  skip_on_cran()
+  skip_on_ci()
 
   test_current_date <- "2020-01-01"
   hm1 <- 

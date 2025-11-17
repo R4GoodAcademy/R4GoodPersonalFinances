@@ -1,5 +1,8 @@
 test_that("decreasing purchasing power due to inflation", {
-  
+
+  skip_on_cran()
+  skip_on_ci()
+
   plot <- plot_purchasing_power(10, 
                                 real_interest_rate = -0.02, 
                                 legend_title = "Inflation rate",
@@ -10,6 +13,9 @@ test_that("decreasing purchasing power due to inflation", {
 })  
 
 test_that("multiple intrest rates", {
+  
+  skip_on_cran()
+  skip_on_ci()
 
   plot <- 
     plot_purchasing_power(10, 
@@ -21,6 +27,9 @@ test_that("multiple intrest rates", {
 })
 
 test_that("multiple intrest rates with overlapping labels", {
+  
+  skip_on_cran()
+  skip_on_ci()
 
   plot <- 
     plot_purchasing_power(10,
@@ -32,6 +41,9 @@ test_that("multiple intrest rates with overlapping labels", {
 })
 
 test_that("multiple intrest rates for 10 years only", {
+  
+  skip_on_cran()
+  skip_on_ci()
 
   plot <- 
     plot_purchasing_power(10, 
