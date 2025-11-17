@@ -58,15 +58,15 @@ test_that("simulating a default scenario with expected returns", {
 
   expect_equal(
     tail(scenario$discretionary_spending, 1),
-    0,
-    tolerance = 1e-8
+    13.125,
+    tolerance = 1e-3
   )
 
   expect_equal(unique(scenario$scenario_id), "default")
   expect_equal(unique(scenario$sample), 0)
 })
 
-test_that("simulating a scenario with Monte Carlo samples", {
++test_that("simulating a scenario with Monte Carlo samples", {
 
   older_member <- HouseholdMember$new(
     name       = "older",  
@@ -187,7 +187,7 @@ test_that("simulating a scenario with parallel Monte Carlo samples", {
     scenario, 
     first_scenario
   )
-})
+}) 
 
 test_that("simulating a scenario with parallel Monte Carlo samples and seed", {
 
@@ -269,4 +269,67 @@ test_that("simulating a scenario with parallel Monte Carlo samples and seed", {
     first_scenario,
     scenario
   )
+})
+
+
+test_that("test discontinuity of discretionary spending and allocation", {
+
+  skip_on_cran()
+  skip_on_ci()
+
+  older_member <- HouseholdMember$new(
+    name       = "older",
+    birth_date = "2000-02-15",
+    mode       = 80,
+    dispersion = 10
+  )
+  older_member$set_event("retirement", start_age = 65)
+
+  household <- Household$new()
+  household$add_member(older_member)
+
+  household$expected_income <- list(
+    "income" = c(
+      "is_not_on('older', 'retirement') ~ 7000 * 12 "
+    )
+  )
+  household$expected_spending <- list(
+    "spending" = c(
+      "TRUE ~ 5000 * 12"
+    )
+  )
+
+  portfolio <- create_portfolio_template()
+  portfolio$accounts$taxable <- c(10000, 0)
+  portfolio$weights$liabilities <- c(0.2, 0.8)
+  portfolio$weights$human_capital <- c(0.2, 0.8)
+  portfolio <-
+    portfolio |>
+    calc_effective_tax_rate(
+      tax_rate_ltcg            = 0.19,
+      tax_rate_ordinary_income = 0.19
+    )
+  
+  household$consumption_impatience_preference <- 0.04
+  household$smooth_consumption_preference     <- 1
+
+  scenario <- 
+    simulate_scenario(
+      household    = household,
+      portfolio    = portfolio,
+      current_date = "2020-07-15",
+      debug        = FALSE
+    )
+  
+  plot <- plot_expected_allocation(
+    scenario = scenario
+  ); if (interactive()) print(plot)
+  vdiffr::expect_doppelganger("plot1", plot)
+  
+  plot <- plot_expected_spending(
+    discretionary_spending_position = "top", 
+    period   = "monthly",
+    scenario = scenario
+  ); if (interactive()) print(plot)
+  vdiffr::expect_doppelganger("plot2", plot)
 })

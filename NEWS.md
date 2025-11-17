@@ -1,5 +1,17 @@
 # R4GoodPersonalFinances (development version)
 
+## Minor changes
+
+* Changed implementation of formula for expected uitility in the `calc_expected_utility()` internal function. Now the CRRA utility and the second derivative of CRRA utility are implemented in a way that provide more stable gradient for calculating optimal portfolio allocation.
+As a result of this change, the optimal allocation no longer jumps unexpectedly and is more stable over time.
+* Added new and improved existing debug messages visible when `debug = TRUE` argument is passed to `simulate_scenario()` function.
+
+## Bug fixes
+
+* Fixed discretionary spending dropping unexpectedly to zero in some edge cases casued by division by zero while calculating ratio in the `calc_discretionary_spending()` function. Now, if the ratio is undefined, it it set to 1.
+* Fixed undefined Gompertz survival probability in a case when `current_age` equals `target_age` and `max_age`. Now, in such cases, the survival probability is set explicitely to 0.
+
+
 # R4GoodPersonalFinances 1.1.0
 
 This version improve the performance of portfolio optimization algorithms,
