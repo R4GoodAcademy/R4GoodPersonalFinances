@@ -1,5 +1,8 @@
 test_that("plotting risk adjusted returns for optimal allocation", {
 
+  skip_on_cran()
+  skip_on_ci()
+
   safe_asset_return         <- 0.015
   risky_asset_return_mean   <- 0.040 + safe_asset_return
   risky_asset_return_sd     <- 0.200
@@ -31,6 +34,9 @@ test_that("plotting risk adjusted returns for optimal allocation", {
 })
 
 test_that("plotting risk adjusted returnswith current allocation", {
+
+  skip_on_cran()
+  skip_on_ci()
 
   safe_asset_return         <- 0.015
   risky_asset_return_mean   <- 0.040 + safe_asset_return

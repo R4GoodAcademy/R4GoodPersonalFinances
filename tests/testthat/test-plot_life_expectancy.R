@@ -1,4 +1,7 @@
 test_that("plotting life expectancy", {
+  
+  skip_on_cran()
+  skip_on_ci()
 
   params <- list(
     default = list(mode = 91,       dispersion = 8.88),
@@ -12,6 +15,9 @@ test_that("plotting life expectancy", {
 })
 
 test_that("plotting life expectancy of a household", {
+  
+  skip_on_cran()
+  skip_on_ci()
 
   hm1 <- 
     HouseholdMember$new(

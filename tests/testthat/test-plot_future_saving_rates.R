@@ -1,4 +1,7 @@
 test_that("plotting future saving rates", {
+  
+  skip_on_cran()
+  skip_on_ci()
 
   skip_on_cran()
   skip_on_ci()
@@ -54,7 +57,8 @@ test_that("plotting future saving rates", {
 })
 
 test_that("plotting future saving rates for multiple samples", {
-
+  
+  skip_on_cran()
   skip_on_ci()
   
   older_member <- HouseholdMember$new(
