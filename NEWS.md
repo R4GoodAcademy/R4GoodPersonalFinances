@@ -1,3 +1,5 @@
+# R4GoodPersonalFinances (development version)
+
 # R4GoodPersonalFinances 1.2.0
 
 ## Minor changes
