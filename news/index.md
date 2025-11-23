@@ -2,6 +2,8 @@
 
 ## R4GoodPersonalFinances 1.2.0
 
+CRAN release: 2025-11-23
+
 ### Minor changes
 
 - Changed implementation of formula for expected utility in the
