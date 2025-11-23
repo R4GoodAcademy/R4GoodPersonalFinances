@@ -10,7 +10,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/R4GoodAcademy/R4GoodPersonalFinances/blob/v1.2.0/inst/CITATION)
+[`inst/CITATION`](https://github.com/R4GoodAcademy/R4GoodPersonalFinances/blob/main/inst/CITATION)
 
 Wais K, Wais O (2025). *R4GoodPersonalFinances: Make Optimal Financial
 Decisions*.

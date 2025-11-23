@@ -1,5 +1,7 @@
 # Changelog
 
+## R4GoodPersonalFinances (development version)
+
 ## R4GoodPersonalFinances 1.2.0
 
 CRAN release: 2025-11-23
