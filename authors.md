@@ -15,7 +15,7 @@ Source:
 Wais K, Wais O (2025). *R4GoodPersonalFinances: Make Optimal Financial
 Decisions*.
 [doi:10.32614/CRAN.package.R4GoodPersonalFinances](https://doi.org/10.32614/CRAN.package.R4GoodPersonalFinances),
-R package version 1.1.0,
+R package version 1.2.0,
 https://r4goodacademy.github.io/R4GoodPersonalFinances/,
 <https://www.r4good.academy/>.
 
@@ -23,7 +23,7 @@ https://r4goodacademy.github.io/R4GoodPersonalFinances/,
       title = {R4GoodPersonalFinances: Make Optimal Financial Decisions},
       author = {Kamil Wais and Olesia Wais},
       year = {2025},
-      note = {R package version 1.1.0, https://r4goodacademy.github.io/R4GoodPersonalFinances/},
+      note = {R package version 1.2.0, https://r4goodacademy.github.io/R4GoodPersonalFinances/},
       url = {https://www.r4good.academy/},
       doi = {10.32614/CRAN.package.R4GoodPersonalFinances},
     }
