@@ -40,6 +40,23 @@ calc_life_expectancy <- function(
   life_expectancy
 }
 
+#' Calculate Gompertz mode for a given life expectancy
+#' 
+#' @param life_expectancy A numeric. Desired life expectancy.
+#' @param current_age A numeric. Current age.
+#' @param dispersion A numeric. Dispersion of the Gompertz distribution.
+#' @param max_age A numeric. Maximum age. Defaults to 120.
+#' 
+#' @return A numeric. Mode of the Gompertz distribution.
+#' 
+#' @examples
+#' calc_gompertz_mode(
+#'  life_expectancy = 86,
+#'   current_age    = 25,
+#'   dispersion     = 8.88,
+#'   max_age        = 115
+#' )
+#' @export
 calc_gompertz_mode <- function(
   life_expectancy,
   current_age,
