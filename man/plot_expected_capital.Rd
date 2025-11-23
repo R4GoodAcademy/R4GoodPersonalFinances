@@ -17,7 +17,7 @@ A \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} object.
 Plots financial capital, human capital, total capital, and liabilities.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 older_member <- HouseholdMember$new(
   name       = "older",  
   birth_date = "2000-02-15",
