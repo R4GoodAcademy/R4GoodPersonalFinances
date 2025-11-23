@@ -4,15 +4,6 @@ usethis::use_version(which = "dev")
 {devtools::load_all("../../CoeditorAI/CoeditorAI-RStudio/"); coedit_text();}
 
 
-withr::with_envvar(
-  c(
-    NOT_CRAN = "true",   # prevents skip_on_cran()
-    CI = "false"         # prevents skip_on_ci()
-  ),
-  covr::package_coverage(quiet = FALSE, type = "tests")
-)
-
-
 testthat::snapshot_review("plot_life_expectancy/")
 testthat::snapshot_review("plot_purchasing_power/")
 testthat::snapshot_review("plot_life_expectancy/")

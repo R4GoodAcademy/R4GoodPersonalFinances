@@ -45,7 +45,15 @@ urlchecker::url_check()
 
 # usethis::use_tidy_description()
 
-devtools::test_coverage()
+# devtools::test_coverage()
+withr::with_envvar(
+  c(
+    NOT_CRAN = "true",   # prevents skip_on_cran()
+    CI = "false"         # prevents skip_on_ci()
+  ),
+  covr::package_coverage(quiet = FALSE, type = "tests")
+)
+# R4GoodPersonalFinances Coverage: 93.94%
 
 # usethis::use_github_action()
 # usethis::use_pkgdown_github_pages()
