@@ -106,7 +106,7 @@ plot_optimal_portfolio <- function(
       total_values_per_asset |>
         dplyr::mutate(
           portfolio_label = paste0(
-            portfolio, "<br>", 
+            portfolio, "\n", 
             format_currency(total_value, accuracy = 1)
           )
         ) |>
@@ -150,9 +150,10 @@ plot_optimal_portfolio <- function(
         dplyr::left_join(
           total_values_per_asset |>
             dplyr::mutate(
-              portfolio_label = 
+
+              portfolio_label =
                 paste0(
-                  portfolio, "<br>", 
+                  portfolio, "\n",
                   format_currency(total_value, accuracy = 1)
                 )
             ) |>

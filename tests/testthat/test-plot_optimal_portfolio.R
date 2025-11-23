@@ -10,7 +10,7 @@ test_that("plotting optimal portfolio", {
   older_member$mode       <- 80
   older_member$dispersion <- 10
 
-household <- Household$new()
+  household <- Household$new()
   household$add_member(older_member)  
   household$risk_tolerance <- 0.1
   

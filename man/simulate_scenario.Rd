@@ -96,7 +96,7 @@ If the additional Monte Carlo samples are generated, they have
 consecutive IDs starting from 1 in the \code{sample} column.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 older_member <- HouseholdMember$new(
   name       = "older",  
   birth_date = "1980-02-15",

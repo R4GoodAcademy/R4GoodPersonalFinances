@@ -1,6 +1,6 @@
 Package: R4GoodPersonalFinances
 Title: Make Optimal Financial Decisions
-Version: 1.1.0.9001
+Version: 1.1.0.9003
 Authors@R: c(
     person("Kamil", "Wais", , "kamil.wais@gmail.com", 
         role = c("aut", "cre", "cph", "fnd"),
@@ -74,5 +74,5 @@ Config/testthat/start-first: plot_*, simulate_*
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 LazyData: true

@@ -5,6 +5,7 @@
 * Changed implementation of formula for expected utility in the `calc_expected_utility()` internal function. Now the Constant Relative Risk Aversion (CRRA) utility and the second derivative of the CRRA utility are implemented in a way that provide more stable gradient for calculating optimal portfolio allocation.
 As a result of this change, the optimal allocation no longer jumps unexpectedly and is more stable over time.
 * Added new and improved existing debug messages visible when `debug = TRUE` argument is passed to `simulate_scenario()` function.
+* The function `calc_gompertz_mode()` is now exported and it can be used to calculate the mode of the Gompertz distribution based on expected `life_expectancy`.
 
 ## Bug fixes
 

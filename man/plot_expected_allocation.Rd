@@ -24,7 +24,7 @@ If multiple Monte Carlo samples are provided in the \code{scenario} argument,
 the normalized median of expected allocation is plotted.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 older_member <- HouseholdMember$new(
   name       = "older",  
   birth_date = "2000-02-15",

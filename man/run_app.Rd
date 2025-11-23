@@ -32,7 +32,7 @@ Runs the app if \code{shinylive} is \code{FALSE} with \code{\link[shiny:runApp]{
 Run a package app
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 run_app("risk-adjusted-returns")
 run_app("purchasing-power")
 run_app("retirement-ruin")
