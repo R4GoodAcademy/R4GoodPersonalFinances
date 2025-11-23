@@ -15,6 +15,10 @@
   `debug = TRUE` argument is passed to
   [`simulate_scenario()`](https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/simulate_scenario.md)
   function.
+- The function
+  [`calc_gompertz_mode()`](https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/calc_gompertz_mode.md)
+  is now exported and it can be used to calculate the mode of the
+  Gompertz distribution based on expected `life_expectancy`.
 
 ### Bug fixes
 

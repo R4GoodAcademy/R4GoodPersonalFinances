@@ -246,7 +246,7 @@ member <- HouseholdMember$new(
   dispersion = 8.88
 )
 member$calc_age()
-#> [1] 45.34155
+#> [1] 45.35797
 member$calc_life_expectancy()
-#> [1] 86.16425
+#> [1] 86.16469
 ```

@@ -17,6 +17,8 @@
   : Calculate Effective Tax Rate
 - [`calc_gompertz_joint_parameters()`](https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/calc_gompertz_joint_parameters.md)
   : Calculating the Gompertz model parameters for joint survival
+- [`calc_gompertz_mode()`](https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/calc_gompertz_mode.md)
+  : Calculate Gompertz mode for a given life expectancy
 - [`calc_gompertz_parameters()`](https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/calc_gompertz_parameters.md)
   : Calculating Gompertz model parameters
 - [`calc_gompertz_survival_probability()`](https://r4goodacademy.github.io/R4GoodPersonalFinances/reference/calc_gompertz_survival_probability.md)
